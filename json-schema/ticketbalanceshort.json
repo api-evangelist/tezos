@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TicketBalanceShort",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  \n**[sortable]**",
+      "format": "int64"
+    },
+    "ticket": {
+      "description": "Ticket info.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/TicketInfoShort"
+        }
+      ]
+    },
+    "account": {
+      "description": "Owner account.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "balance": {
+      "type": "string",
+      "description": "Balance.  "
+    }
+  }
+}

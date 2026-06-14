@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EntrypointInterface",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Entrypoint name"
+    },
+    "parameterSchema": {
+      "description": "JSON Schema of the entrypoint parameter in humanified format (as returned by API)",
+      "nullable": true
+    }
+  }
+}

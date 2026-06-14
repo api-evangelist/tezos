@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigMapKeyUpdate",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal Id, can be used for pagination",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level of the block where the bigmap key was updated",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of the block where the bigmap key was updated",
+      "format": "date-time"
+    },
+    "action": {
+      "type": "string",
+      "description": "Action with the key (`add_key`, `update_key`, `remove_key`)"
+    },
+    "value": {
+      "description": "Value in JSON or Micheline format, depending on the `micheline` query parameter.\nNote, if the action is `remove_key` it will contain the last non-null value."
+    }
+  }
+}

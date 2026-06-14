@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TicketTransfer",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  \n**[sortable]**",
+      "format": "int64"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level of the block, at which the transfer was made.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of the block, at which the transfer was made.",
+      "format": "date-time"
+    },
+    "ticket": {
+      "description": "Ticket info.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/TicketInfo"
+        }
+      ]
+    },
+    "from": {
+      "description": "Sender account.  \nClick on the field to expand more details.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "to": {
+      "description": "Recipient account.  \nClick on the field to expand more details.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "amount": {
+      "type": "string",
+      "description": "Amount of tickets transferred.  \n**[sortable]**"
+    },
+    "transactionId": {
+      "type": "integer",
+      "description": "Internal TzKT id of the transaction operation, caused the ticket transfer.",
+      "format": "int64",
+      "nullable": true
+    },
+    "transferTicketId": {
+      "type": "integer",
+      "description": "Internal TzKT id of the transfer_ticket operation, caused the ticket transfer.",
+      "format": "int64",
+      "nullable": true
+    },
+    "smartRollupExecuteId": {
+      "type": "integer",
+      "description": "Internal TzKT id of the smart_rollup_execute operation, caused the ticket transfer.",
+      "format": "int64",
+      "nullable": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnstakeRequestStatusParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \\\nSpecify an unstake request status to get items where the specified field is equal to the specified value.\n\nExample: `?status=pending`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify an unstake request status to get items where the specified field is not equal to the specified value.\n\nExample: `?status.ne=finalized`.",
+      "nullable": true
+    }
+  },
+  "x-tzkt-extension": "query-parameter",
+  "x-tzkt-query-parameter": "pending,finalizable,finalized"
+}

@@ -1,0 +1,36 @@
+{
+  "operation": "Tickets_GetTicketsCount",
+  "method": "GET",
+  "path": "/v1/tickets/count",
+  "tags": [
+    "Tickets"
+  ],
+  "summary": "Get tickets count",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "ticketer",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "rawType",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "rawContent",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "content",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

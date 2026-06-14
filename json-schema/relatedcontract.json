@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RelatedContract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Kind of the contract (`delegator_contract` or `smart_contract`),\nwhere `delegator_contract` - manager.tz smart contract for delegation purpose only"
+    },
+    "alias": {
+      "type": "string",
+      "description": "Name of the project behind the contract or contract description",
+      "nullable": true
+    },
+    "address": {
+      "type": "string",
+      "description": "Public key hash of the contract"
+    },
+    "balance": {
+      "type": "integer",
+      "description": "Contract balance (micro tez)",
+      "format": "int64"
+    },
+    "delegate": {
+      "description": "Information about the current delegate of the contract. `null` if it's not delegated",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/DelegateInfo"
+        }
+      ]
+    },
+    "creationLevel": {
+      "type": "integer",
+      "description": "Height of the block where the contract was created",
+      "format": "int32"
+    },
+    "creationTime": {
+      "type": "string",
+      "description": "Datetime of the block where the contract was created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "format": "date-time",
+      "nullable": true
+    }
+  }
+}

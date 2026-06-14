@@ -1,0 +1,10 @@
+{
+  "operation": "Protocols_GetCount",
+  "method": "GET",
+  "path": "/v1/protocols/count",
+  "tags": [
+    "Protocols"
+  ],
+  "summary": "Get protocols count",
+  "parameters": []
+}

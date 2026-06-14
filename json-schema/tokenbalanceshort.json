@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TokenBalanceShort",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "account": {
+      "description": "Owner account.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "token": {
+      "description": "Token info.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/TokenInfoShort"
+        }
+      ]
+    },
+    "balance": {
+      "type": "string",
+      "description": "Balance (raw value, not divided by `decimals`).  \n**[sortable]**"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BakingRight",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of the right:\n- `baking` - right to bake (produce) a block;\n- `attestation` - right to attest (validate) a block."
+    },
+    "cycle": {
+      "type": "integer",
+      "description": "Cycle on which the right can be realized.",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level at which a block must be baked or an attestation must be sent.",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Time (estimated, in case of future rights) when a block must be baked or an attestation must be sent.",
+      "format": "date-time"
+    },
+    "round": {
+      "type": "integer",
+      "description": "Round (0 - \u221e) at which the baker can propose/produce a block.\nIf a baker at round  `0` doesn't produce a block within the given time interval, then the right goes to a baker at round` 1`, etc.\nFor `attestation` rights this field is always `null`.",
+      "format": "int32",
+      "nullable": true
+    },
+    "slots": {
+      "type": "integer",
+      "description": "Number of slots to be attested. For `baking` rights this field is always `null`.",
+      "format": "int32",
+      "nullable": true
+    },
+    "baker": {
+      "description": "Baker to which baking or attestation right has been given.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the baking or attestation right:\n- `future` - the right is not realized yet;\n- `realized` - the right was successfully realized;\n- `missed` - the right was not realized."
+    }
+  }
+}

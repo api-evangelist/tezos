@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MichelinePrim",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "prim": {
+      "$ref": "#/components/schemas/PrimType"
+    },
+    "args": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/IMicheline"
+      }
+    },
+    "annots": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/IAnnotation"
+      }
+    }
+  }
+}

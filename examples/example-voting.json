@@ -1,0 +1,10 @@
+{
+  "operation": "Voting_GetProposalsCount",
+  "method": "GET",
+  "path": "/v1/voting/proposals/count",
+  "tags": [
+    "Voting"
+  ],
+  "summary": "Get proposals count",
+  "parameters": []
+}

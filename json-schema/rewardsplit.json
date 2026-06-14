@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RewardSplit",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/BakerRewards"
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "delegators": {
+          "type": "array",
+          "description": "List of delegators, forming baker's baking power.\nThis list includes \"unstakers\" (delegators who left the baker, but still had locked unstaked balance delegated to the baker),\ntherefore its length shouldn't necessarily match the `delegatorsCount` value.",
+          "items": {
+            "$ref": "#/components/schemas/SplitDelegator"
+          }
+        },
+        "stakers": {
+          "type": "array",
+          "description": "List of stakers, forming baker's baking power.",
+          "items": {
+            "$ref": "#/components/schemas/SplitStaker"
+          }
+        },
+        "actualStakers": {
+          "type": "array",
+          "description": "List of actual stakers, receiving staking rewards regardless of contribution to the baker's baking power.",
+          "items": {
+            "$ref": "#/components/schemas/SplitActualStaker"
+          }
+        }
+      }
+    }
+  ]
+}

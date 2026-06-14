@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Commitment",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "type": "string",
+      "description": "Blinded address of the account"
+    },
+    "balance": {
+      "type": "integer",
+      "description": "Account balance to be activated",
+      "format": "int64"
+    },
+    "activated": {
+      "type": "boolean",
+      "description": "Flag showing whether the account has been activated or not."
+    },
+    "activationLevel": {
+      "type": "integer",
+      "description": "Level of the block at which the account has been activated. `null` if the account is not activated yet.",
+      "format": "int32",
+      "nullable": true
+    },
+    "activationTime": {
+      "type": "string",
+      "description": "Datetime of the block at which the account has been activated (ISO 8601, e.g. `2020-02-20T02:40:57Z`). `null` if the account is not activated yet.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "activatedAccount": {
+      "description": "Info about activated account. `null` if the account is not activated yet.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    }
+  }
+}

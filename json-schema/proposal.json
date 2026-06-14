@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "hash": {
+      "type": "string",
+      "description": "Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files"
+    },
+    "initiator": {
+      "description": "Information about the baker (delegate) submitted the proposal",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "firstPeriod": {
+      "type": "integer",
+      "description": "The first voting period where the proposal was active",
+      "format": "int32"
+    },
+    "lastPeriod": {
+      "type": "integer",
+      "description": "The last voting period where the proposal was active",
+      "format": "int32"
+    },
+    "epoch": {
+      "type": "integer",
+      "description": "The voting epoch where the proposal was active",
+      "format": "int32"
+    },
+    "upvotes": {
+      "type": "integer",
+      "description": "The total number of upvotes (proposal operations)",
+      "format": "int32"
+    },
+    "votingPower": {
+      "type": "integer",
+      "description": "The total voting power of bakers, upvoted the proposal",
+      "format": "int64"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the proposal\n`active` - the proposal in the active state\n`accepted` - the proposal was accepted\n`rejected` - the proposal was rejected due to too many \"nay\" ballots\n`skipped` - the proposal was skipped due to the quorum was not reached"
+    },
+    "extras": {
+      "description": "Off-chain extras",
+      "nullable": true
+    }
+  }
+}

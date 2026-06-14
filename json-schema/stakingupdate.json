@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StakingUpdate",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT ID.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level of the block where the staking update happened.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of the block where the staking update happened.  ",
+      "format": "date-time"
+    },
+    "cycle": {
+      "type": "integer",
+      "description": "For `unstake`, `restake`, `finalize` and `slash_unstaked` update types it's freezer cycle, otherwise it's cycle of the block.",
+      "format": "int32"
+    },
+    "baker": {
+      "description": "Related baker.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "staker": {
+      "description": "Related staker.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "Staking update type (`stake`, `unstake`, `restake`, `finalize`, `slash_staked`, `slash_unstaked`)."
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount (mutez).",
+      "format": "int64"
+    },
+    "pseudotokens": {
+      "type": "string",
+      "description": "Amount of staking pseudotokens minted or burnt.",
+      "nullable": true
+    },
+    "roundingError": {
+      "type": "integer",
+      "description": "Protocol rounding error, appearing after slashing.",
+      "format": "int64",
+      "nullable": true
+    },
+    "autostakingOpId": {
+      "type": "integer",
+      "description": "Id of the operation, caused the staking update.\nIf all `..OpId` fields are null, then the staking update was produced by the protocol migration.",
+      "format": "int64",
+      "nullable": true
+    },
+    "stakingOpId": {
+      "type": "integer",
+      "description": "Id of the operation, caused the staking update.\nIf all `..OpId` fields are null, then the staking update was produced by the protocol migration.",
+      "format": "int64",
+      "nullable": true
+    },
+    "delegationOpId": {
+      "type": "integer",
+      "description": "Id of the operation, caused the staking update.\nIf all `..OpId` fields are null, then the staking update was produced by the protocol migration.",
+      "format": "int64",
+      "nullable": true
+    },
+    "doubleBakingOpId": {
+      "type": "integer",
+      "description": "Id of the operation, caused the staking update.\nIf all `..OpId` fields are null, then the staking update was produced by the protocol migration.",
+      "format": "int64",
+      "nullable": true
+    },
+    "doubleConsensusOpId": {
+      "type": "integer",
+      "description": "Id of the operation, caused the staking update.\nIf all `..OpId` fields are null, then the staking update was produced by the protocol migration.",
+      "format": "int64",
+      "nullable": true
+    },
+    "doubleEndorsingOpId": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64",
+      "nullable": true
+    },
+    "doublePreendorsingOpId": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64",
+      "nullable": true
+    }
+  }
+}

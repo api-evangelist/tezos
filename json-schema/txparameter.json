@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TxParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "entrypoint": {
+      "type": "string",
+      "description": "Entrypoint called on the target contract"
+    },
+    "value": {
+      "description": "Value passed to the called entrypoint converted to human-readable JSON. Note: you can configure parameters format by setting `micheline` query parameter.",
+      "nullable": true
+    }
+  }
+}

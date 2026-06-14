@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SrMessage",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  \n**[sortable]**",
+      "format": "int64"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level of the block where the message was pushed.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "index": {
+      "type": "integer",
+      "description": "Index of the inbox message within the block.  ",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of the block where the message was pushed.",
+      "format": "date-time"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of the message (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`)."
+    },
+    "predecessorHash": {
+      "type": "string",
+      "description": "For `level_info` messages only. Hash of the predecessor block.",
+      "nullable": true
+    },
+    "predecessorTimestamp": {
+      "type": "string",
+      "description": "For `level_info` messages only. Timestamp of the predecessor block.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "initiator": {
+      "description": "For `transfer` messages only. Account, initiated the operation.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "sender": {
+      "description": "For `transfer` messages only. Smart contract, sent the internal transaction.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "target": {
+      "description": "For `transfer` messages only. Smart rollup to which the internal transaction was sent.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "entrypoint": {
+      "type": "string",
+      "description": "For `transfer` messages only. Entrypoint called in the target rollup",
+      "nullable": true
+    },
+    "parameter": {
+      "description": "For `transfer` messages only. Value passed to the called entrypoint. Note: you can configure parameters format by setting `micheline` query parameter.",
+      "nullable": true
+    },
+    "payload": {
+      "type": "string",
+      "description": "For `external` messages only. Payload bytes (in base64).",
+      "format": "byte",
+      "nullable": true
+    },
+    "protocol": {
+      "type": "string",
+      "description": "For `migration` messages only. Version of the new protocol (e.g. 'nairobi_017').",
+      "nullable": true
+    }
+  }
+}

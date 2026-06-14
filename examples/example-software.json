@@ -1,0 +1,31 @@
+{
+  "operation": "Software_Get",
+  "method": "GET",
+  "path": "/v1/software",
+  "tags": [
+    "Software"
+  ],
+  "summary": "Get baker software",
+  "parameters": [
+    {
+      "name": "select",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "sort",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "offset",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "limit",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SrBondStatusParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \\\nSpecify an sr bond status to get items where the specified field is equal to the specified value.\n\nExample: `?status=active`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify an sr bond status to get items where the specified field is not equal to the specified value.\n\nExample: `?status.ne=active`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of sr bond statuses to get items where the specified field is equal to one of the specified values.\n\nExample: `?status.in=returned,lost`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of sr bond statuses to get items where the specified field is not equal to all the specified values.\n\nExample: `?status.ni=returned,lost`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter",
+  "x-tzkt-query-parameter": "active,returned,lost"
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Contract",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Internal TzKT id.  \n**[sortable]**",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the account, `contract` - smart contract programmable account."
+        },
+        "address": {
+          "type": "string",
+          "description": "Public key hash of the contract"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of the contract (`delegator_contract` or `smart_contract`),\nwhere `delegator_contract` - manager.tz smart contract for delegation purpose only."
+        },
+        "tzips": {
+          "type": "array",
+          "description": "List of implemented standards (TZIPs).",
+          "nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "alias": {
+          "type": "string",
+          "description": "Name of the project behind the contract or contract description.",
+          "nullable": true
+        },
+        "balance": {
+          "type": "integer",
+          "description": "Contract balance (micro tez).  \n**[sortable]**",
+          "format": "int64"
+        },
+        "creator": {
+          "description": "Information about the account, which has deployed the contract to the blockchain.  \nClick on the field to expand more details.",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "delegate": {
+          "description": "Information about the current delegate of the contract. `null` if it's not delegated.  \nClick on the field to expand more details.",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DelegateInfo"
+            }
+          ]
+        },
+        "delegationLevel": {
+          "type": "integer",
+          "description": "Block height of latest delegation. `null` if it's not delegated.",
+          "format": "int32",
+          "nullable": true
+        },
+        "delegationTime": {
+          "type": "string",
+          "description": "Block datetime of latest delegation (ISO 8601, e.g. `2020-02-20T02:40:57Z`). `null` if it's not delegated.",
+          "format": "date-time",
+          "nullable": true
+        },
+        "numContracts": {
+          "type": "integer",
+          "description": "Number of contracts, created (originated) and/or managed by the contract.",
+          "format": "int32"
+        },
+        "tokensCount": {
+          "type": "integer",
+          "description": "Number of tokens minted in the contract.",
+          "format": "int32"
+        },
+        "activeTokensCount": {
+          "type": "integer",
+          "description": "Number of account tokens with non-zero balances.",
+          "format": "int32"
+        },
+        "tokenBalancesCount": {
+          "type": "integer",
+          "description": "Number of tokens the account ever had.",
+          "format": "int32"
+        },
+        "tokenTransfersCount": {
+          "type": "integer",
+          "description": "Number of token transfers from/to the account.",
+          "format": "int32"
+        },
+        "ticketsCount": {
+          "type": "integer",
+          "description": "Number of tickets minted in the contract.",
+          "format": "int32"
+        },
+        "activeTicketsCount": {
+          "type": "integer",
+          "description": "Number of tickets the account owns.",
+          "format": "int32"
+        },
+        "ticketBalancesCount": {
+          "type": "integer",
+          "description": "Number of tickets the account ever owned.",
+          "format": "int32"
+        },
+        "ticketTransfersCount": {
+          "type": "integer",
+          "description": "Number of ticket transfers from/to the account.",
+          "format": "int32"
+        },
+        "numDelegations": {
+          "type": "integer",
+          "description": "Number of delegation operations of the contract.",
+          "format": "int32"
+        },
+        "numOriginations": {
+          "type": "integer",
+          "description": "Number of origination (deployment / contract creation) operations, related the contract.",
+          "format": "int32"
+        },
+        "numTransactions": {
+          "type": "integer",
+          "description": "Number of transaction (transfer) operations, related to the contract.  \n**[sortable]**",
+          "format": "int32"
+        },
+        "numReveals": {
+          "type": "integer",
+          "description": "Number of reveal (is used to reveal the public key associated with an account) operations of the contract.",
+          "format": "int32"
+        },
+        "numMigrations": {
+          "type": "integer",
+          "description": "Number of migration (result of the context (database) migration during a protocol update) operations.\nrelated to the contract (synthetic type).",
+          "format": "int32"
+        },
+        "transferTicketCount": {
+          "type": "integer",
+          "description": "Number of transfer ticket operations related to the contract.",
+          "format": "int32"
+        },
+        "increasePaidStorageCount": {
+          "type": "integer",
+          "description": "Number of `increase_paid_storage` operations related to the contract.",
+          "format": "int32"
+        },
+        "eventsCount": {
+          "type": "integer",
+          "description": "Number of events produced by the contract.",
+          "format": "int32"
+        },
+        "firstActivity": {
+          "type": "integer",
+          "description": "Block height of the contract creation.  \n**[sortable]**",
+          "format": "int32"
+        },
+        "firstActivityTime": {
+          "type": "string",
+          "description": "Block datetime of the contract creation (ISO 8601, e.g. `2020-02-20T02:40:57Z`).",
+          "format": "date-time"
+        },
+        "lastActivity": {
+          "type": "integer",
+          "description": "Height of the block in which the account state was changed last time.  \n**[sortable]**",
+          "format": "int32"
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "description": "Datetime of the block in which the account state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`).",
+          "format": "date-time"
+        },
+        "typeHash": {
+          "type": "integer",
+          "description": "32-bit hash of the contract parameter and storage types.\nThis field can be used for searching similar contracts (which have the same interface).",
+          "format": "int32"
+        },
+        "codeHash": {
+          "type": "integer",
+          "description": "32-bit hash of the contract code.\nThis field can be used for searching same contracts (which have the same script).",
+          "format": "int32"
+        },
+        "metadata": {
+          "description": "TZIP-16 metadata.",
+          "nullable": true
+        },
+        "extras": {
+          "description": "Off-chain extras.",
+          "nullable": true
+        },
+        "storage": {
+          "description": "Contract storage value. Omitted by default. Use `?includeStorage=true` to include it into response.",
+          "nullable": true
+        }
+      }
+    }
+  ]
+}

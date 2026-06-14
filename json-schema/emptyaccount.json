@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmptyAccount",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the account, `empty` - account hasn't appeared in the blockchain yet"
+        },
+        "address": {
+          "type": "string",
+          "description": "Public key hash of the account"
+        },
+        "counter": {
+          "type": "integer",
+          "description": "An account nonce which is used to prevent operation replay",
+          "format": "int32"
+        }
+      }
+    }
+  ]
+}

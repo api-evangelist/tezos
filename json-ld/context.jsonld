@@ -1,0 +1,34 @@
+{
+  "@context": {
+    "@vocab": "https://api.tzkt.io/vocab#",
+    "schema": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "blockchainApi": "https://api.tzkt.io/vocab#",
+    "title": "schema:name",
+    "description": "schema:description",
+    "version": "schema:version",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "Block": "blockchainApi:Block",
+    "Account": "blockchainApi:Account",
+    "Operation": "blockchainApi:Operation",
+    "Contract": "blockchainApi:Contract",
+    "BigMap": "blockchainApi:BigMap",
+    "Token": "blockchainApi:Token",
+    "Delegation": "blockchainApi:Delegation",
+    "Governance": "blockchainApi:Governance",
+    "Protocol": "blockchainApi:Protocol",
+    "baker": "blockchainApi:baker",
+    "level": "blockchainApi:level",
+    "hash": "blockchainApi:hash",
+    "timestamp": {
+      "@id": "blockchainApi:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "balance": "blockchainApi:balance",
+    "address": "blockchainApi:address"
+  }
+}

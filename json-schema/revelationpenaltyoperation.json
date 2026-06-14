@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RevelationPenaltyOperation",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the operation, `revelation_penalty` - is operation, in which rewards were lost due to unrevealed seed nonces by the delegate (synthetic type)"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique ID of the operation, stored in the TzKT indexer database",
+          "format": "int64"
+        },
+        "level": {
+          "type": "integer",
+          "description": "The height of the block from the genesis block, in which the operation was included",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "block": {
+          "type": "string",
+          "description": "Hash of the block, in which the operation was included"
+        },
+        "baker": {
+          "description": "Information about the delegate (baker) who has lost rewards due to unrevealed seed nonces ",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "missedLevel": {
+          "type": "integer",
+          "description": "Height of the block, which contains hash of the seed nonce, which was to be revealed",
+          "format": "int32"
+        },
+        "loss": {
+          "type": "integer",
+          "description": "Reward for baking and gathered fees from the block, which were lost due to unrevealed seed nonces (micro tez)",
+          "format": "int64"
+        },
+        "quote": {
+          "description": "Injected historical quote at the time of operation",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/QuoteShort"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

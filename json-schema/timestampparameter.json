@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TimestampParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a datetime value to get items where the specified field is equal to the specified value.\n\nExample: `?timestamp=2020-02-20T02:40:57Z`.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify a datetime value to get items where the specified field is not equal to the specified value.\n\nExample: `?timestamp.ne=2020-02-20T02:40:57Z`.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "gt": {
+      "type": "string",
+      "description": "**Greater than** filter mode. \\\nSpecify a datetime value to get items where the specified field is greater than the specified value.\n\nExample: `?timestamp.gt=2020-02-20T02:40:57Z`.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "ge": {
+      "type": "string",
+      "description": "**Greater or equal** filter mode. \\\nSpecify a datetime value to get items where the specified field is greater than equal to the specified value.\n\nExample: `?timestamp.ge=2020-02-20T02:40:57Z`.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lt": {
+      "type": "string",
+      "description": "**Less than** filter mode. \\\nSpecify a datetime value to get items where the specified field is less than the specified value.\n\nExample: `?timestamp.lt=2020-02-20T02:40:57Z`.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "le": {
+      "type": "string",
+      "description": "**Less or equal** filter mode. \\\nSpecify a datetime value to get items where the specified field is less than or equal to the specified value.\n\nExample: `?timestamp.le=2020-02-20T02:40:57Z`.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.\n\nExample: `?timestamp.in=2020-02-20,2020-02-21`.",
+      "nullable": true,
+      "items": {
+        "type": "string",
+        "format": "date-time"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.\n\nExample: `?timestamp.ni=2020-02-20,2020-02-21`.",
+      "nullable": true,
+      "items": {
+        "type": "string",
+        "format": "date-time"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

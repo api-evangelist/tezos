@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProtocolParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a protocol hash to get items where the specified field is equal to the specified value.\n\nExample: `?protocol=PsCARTHAGaz...`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify a protocol hash to get items where the specified field is not equal to the specified value.\n\nExample: `?sender.ne=PsBabyM1eUX...`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of protocol hashes to get items where the specified field is equal to one of the specified values.\n\nExample: `?sender.in=PsCARTHAGaz,PsBabyM1eUX`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of protocol hashes to get items where the specified field is not equal to all the specified values.\n\nExample: `?sender.ni=PsCARTHAGaz,PsBabyM1eUX`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

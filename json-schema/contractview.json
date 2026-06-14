@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContractView",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Contract view name"
+    },
+    "jsonParameterType": {
+      "description": "Parameter type in human-readable JSON format",
+      "nullable": true
+    },
+    "jsonReturnType": {
+      "description": "Return type in human-readable JSON format",
+      "nullable": true
+    },
+    "michelineParameterType": {
+      "description": "Parameter type in micheline format",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "michelineReturnType": {
+      "description": "Return type in micheline format",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "michelsonParameterType": {
+      "type": "string",
+      "description": "Parameter type in michelson format",
+      "nullable": true
+    },
+    "michelsonReturnType": {
+      "type": "string",
+      "description": "Return type in michelson format",
+      "nullable": true
+    }
+  }
+}

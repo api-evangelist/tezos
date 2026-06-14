@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpHashParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \\\nSpecify an operation hash to get items where the specified field is equal to the specified value.\n\nExample: `?hash=opQRQbP...`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify an operation hash to get items where the specified field is not equal to the specified value.\n\nExample: `?hash.ne=opQRQbP...`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of operation hashes to get items where the specified field is equal to one of the specified values.\n\nExample: `?hash.in=hash1,hash2,hash3`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of operation hashes to get items where the specified field is not equal to all the specified values.\n\nExample: `?hash.ni=hash1,hash2,hash3`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

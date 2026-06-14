@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "State",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "chain": {
+      "type": "string",
+      "description": "Alias name of the chain (or \"private\" if it's not on the list of known chains)"
+    },
+    "chainId": {
+      "type": "string",
+      "description": "Unique identifier of the chain"
+    },
+    "cycle": {
+      "type": "integer",
+      "description": "Current cycle",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "The height of the last block from the genesis block",
+      "format": "int32"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Block hash"
+    },
+    "protocol": {
+      "type": "string",
+      "description": "Current protocol hash"
+    },
+    "nextProtocol": {
+      "type": "string",
+      "description": "Next block protocol hash"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "The datetime at which the last block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "format": "date-time"
+    },
+    "votingEpoch": {
+      "type": "integer",
+      "description": "Current voting epoch index, starting from zero",
+      "format": "int32"
+    },
+    "votingPeriod": {
+      "type": "integer",
+      "description": "Current voting period index, starting from zero",
+      "format": "int32"
+    },
+    "knownLevel": {
+      "type": "integer",
+      "description": "The height of the last known block from the genesis block",
+      "format": "int32"
+    },
+    "lastSync": {
+      "type": "string",
+      "description": "The datetime of last TzKT indexer synchronization (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "format": "date-time"
+    },
+    "synced": {
+      "type": "boolean",
+      "description": "State of TzKT indexer synchronization"
+    },
+    "quoteLevel": {
+      "type": "integer",
+      "description": "The height of the block where quotes were updated last time",
+      "format": "int32"
+    },
+    "quoteBtc": {
+      "type": "number",
+      "description": "Last known XTZ/BTC price",
+      "format": "double"
+    },
+    "quoteEur": {
+      "type": "number",
+      "description": "Last known XTZ/EUR price",
+      "format": "double"
+    },
+    "quoteUsd": {
+      "type": "number",
+      "description": "Last known XTZ/USD price",
+      "format": "double"
+    },
+    "quoteCny": {
+      "type": "number",
+      "description": "Last known XTZ/CNY price",
+      "format": "double"
+    },
+    "quoteJpy": {
+      "type": "number",
+      "description": "Last known XTZ/JPY price",
+      "format": "double"
+    },
+    "quoteKrw": {
+      "type": "number",
+      "description": "Last known XTZ/KRW price",
+      "format": "double"
+    },
+    "quoteEth": {
+      "type": "number",
+      "description": "Last known XTZ/ETH price",
+      "format": "double"
+    },
+    "quoteGbp": {
+      "type": "number",
+      "description": "Last known XTZ/GBP price",
+      "format": "double"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigMapUpdate",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal Id, can be used for pagination",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level of the block where the bigmap was updated",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of the block where the bigmap was updated",
+      "format": "date-time"
+    },
+    "bigmap": {
+      "type": "integer",
+      "description": "Bigmap ptr",
+      "format": "int32"
+    },
+    "contract": {
+      "description": "Smart contract in which's storage the bigmap is allocated",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "path": {
+      "type": "string",
+      "description": "Path to the bigmap in the contract storage"
+    },
+    "action": {
+      "type": "string",
+      "description": "Action with the bigmap (`allocate`, `add_key`, `update_key`, `remove_key`, `remove`)"
+    },
+    "content": {
+      "description": "Updated key.\nIf the action is `allocate` or `remove` the content will be `null`.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/BigMapKeyShort"
+        }
+      ]
+    }
+  }
+}

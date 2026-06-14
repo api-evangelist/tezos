@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Alias",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "alias": {
+      "type": "string",
+      "description": "Account alias name (off-chain data).",
+      "nullable": true
+    },
+    "address": {
+      "type": "string",
+      "description": "Account address (public key hash)."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SmartRollupParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \\\nSpecify an `sr1` address to get items where the specified field is equal to the specified value.\n\nExample: `?rollup=sr1RouasmcMAsrt4SxgGGVCBT36hzYRJBUrB`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify an `sr1` address to get items where the specified field is not equal to the specified value.\n\nExample: `?rollup.ne=sr1RouasmcMAsrt4SxgGGVCBT36hzYRJBUrB`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of `sr1` addresses to get items where the specified field is equal to one of the specified values.\n\nExample: `?rollup.in=sr1RouasmcMAsrt4SxgGGVCBT36hzYRJBUrB,sr1UsFZWCrnHH5zDfihZpSjYbc1iwLnAbEum`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of `sr1` addresses to get items where the specified field is not equal to all the specified values.\n\nExample: `?rollup.ni=sr1RouasmcMAsrt4SxgGGVCBT36hzYRJBUrB,sr1UsFZWCrnHH5zDfihZpSjYbc1iwLnAbEum`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

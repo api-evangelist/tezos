@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TokenTransferActivity",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Activity type"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Internal TzKT id.  \n**[sortable]**",
+          "format": "int64"
+        },
+        "level": {
+          "type": "integer",
+          "description": "Level of the block, at which the token transfer was made.  \n**[sortable]**",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp of the block, at which the token transfer was made.",
+          "format": "date-time"
+        },
+        "token": {
+          "description": "Token info.  \nClick on the field to expand more details.",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/TokenInfo"
+            }
+          ]
+        },
+        "from": {
+          "description": "Sender account.  \nClick on the field to expand more details.",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "to": {
+          "description": "Target account.  \nClick on the field to expand more details.",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount of tokens transferred (raw value, not divided by `decimals`).  \n**[sortable]**"
+        },
+        "transactionId": {
+          "type": "integer",
+          "description": "Internal TzKT id of the transaction operation, caused the token transfer.",
+          "format": "int64",
+          "nullable": true
+        },
+        "originationId": {
+          "type": "integer",
+          "description": "Internal TzKT id of the origination operation, caused the token transfer.",
+          "format": "int64",
+          "nullable": true
+        },
+        "migrationId": {
+          "type": "integer",
+          "description": "Internal TzKT id of the migration operation, caused the token transfer.",
+          "format": "int64",
+          "nullable": true
+        }
+      }
+    }
+  ]
+}

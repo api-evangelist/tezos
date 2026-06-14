@@ -1,0 +1,10 @@
+{
+  "operation": "Cycles_GetCount",
+  "method": "GET",
+  "path": "/v1/cycles/count",
+  "tags": [
+    "Cycles"
+  ],
+  "summary": "Get cycles count",
+  "parameters": []
+}

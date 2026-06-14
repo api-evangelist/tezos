@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ghost",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Internal TzKT id",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the account, `ghost` - contract that has been met among token holders, but hasn't been originated"
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of the contract"
+        },
+        "alias": {
+          "type": "string",
+          "description": "Name of the ghost contract",
+          "nullable": true
+        },
+        "activeTokensCount": {
+          "type": "integer",
+          "description": "Number of account tokens with non-zero balances",
+          "format": "int32"
+        },
+        "tokenBalancesCount": {
+          "type": "integer",
+          "description": "Number of tokens the account ever had",
+          "format": "int32"
+        },
+        "tokenTransfersCount": {
+          "type": "integer",
+          "description": "Number of token transfers from/to the account",
+          "format": "int32"
+        },
+        "activeTicketsCount": {
+          "type": "integer",
+          "description": "Number of tickets the account owns.",
+          "format": "int32"
+        },
+        "ticketBalancesCount": {
+          "type": "integer",
+          "description": "Number of tickets the account ever owned.",
+          "format": "int32"
+        },
+        "ticketTransfersCount": {
+          "type": "integer",
+          "description": "Number of ticket transfers from/to the account.",
+          "format": "int32"
+        },
+        "firstActivity": {
+          "type": "integer",
+          "description": "Block height at which the ghost contract appeared first time",
+          "format": "int32"
+        },
+        "firstActivityTime": {
+          "type": "string",
+          "description": "Block datetime at which the ghost contract appeared first time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "lastActivity": {
+          "type": "integer",
+          "description": "Height of the block in which the ghost contract state was changed last time",
+          "format": "int32"
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "description": "Datetime of the block in which the ghost contract state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "extras": {
+          "description": "Off-chain extras",
+          "nullable": true
+        }
+      }
+    }
+  ]
+}

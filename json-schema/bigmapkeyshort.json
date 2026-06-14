@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigMapKeyShort",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "hash": {
+      "type": "string",
+      "description": "Key hash"
+    },
+    "key": {
+      "description": "Key in JSON or Micheline format, depending on the `micheline` query parameter."
+    },
+    "value": {
+      "description": "Value in JSON or Micheline format, depending on the `micheline` query parameter.\nNote, if the action is `remove_key` it will contain the last non-null value."
+    }
+  }
+}

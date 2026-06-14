@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SmartRollupAddMessagesOperation",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the operation, `sr_add_messages`"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**",
+          "format": "int64"
+        },
+        "level": {
+          "type": "integer",
+          "description": "The height of the block from the genesis block, in which the operation was included",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Hash of the operation"
+        },
+        "sender": {
+          "description": "Information about the account who has sent the operation",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "counter": {
+          "type": "integer",
+          "description": "An account nonce which is used to prevent operation replay",
+          "format": "int32"
+        },
+        "gasLimit": {
+          "type": "integer",
+          "description": "A cap on the amount of gas a given operation can consume",
+          "format": "int32"
+        },
+        "gasUsed": {
+          "type": "integer",
+          "description": "Amount of gas, consumed by the operation",
+          "format": "int32"
+        },
+        "storageLimit": {
+          "type": "integer",
+          "description": "A cap on the amount of storage a given operation can consume",
+          "format": "int32"
+        },
+        "bakerFee": {
+          "type": "integer",
+          "description": "Fee to the baker, produced block, in which the operation was included (micro tez)",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,\n`failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),\n`backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,\n`skipped` - all operations after the failed one in an operation group)"
+        },
+        "messagesCount": {
+          "type": "integer",
+          "description": "Number of messages added to the smart rollup inbox",
+          "format": "int32"
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors",
+          "nullable": true,
+          "items": {
+            "$ref": "#/components/schemas/OperationError"
+          }
+        },
+        "quote": {
+          "description": "Injected historical quote at the time of operation",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/QuoteShort"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

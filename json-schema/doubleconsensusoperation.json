@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DoubleConsensusOperation",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the operation, `double_consensus` - is used by bakers to provide evidence of double (pre)attestation\n((pre)attestation of two different blocks at the same block height) by a baker"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique ID of the operation, stored in the TzKT indexer database",
+          "format": "int64"
+        },
+        "level": {
+          "type": "integer",
+          "description": "Height of the block from the genesis block, in which the operation was included",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "block": {
+          "type": "string",
+          "description": "Hash of the block, in which the operation was included"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Hash of the operation"
+        },
+        "accusedLevel": {
+          "type": "integer",
+          "description": "Height of the block from the genesis, at which double (pre)attestation occurred ",
+          "format": "int32"
+        },
+        "slashedLevel": {
+          "type": "integer",
+          "description": "Height of the block from the genesis, at which the offender was slashed",
+          "format": "int32"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of misbehaviour (`double_attestation` or `double_preattestation`)"
+        },
+        "accuser": {
+          "description": "Information about the baker, produced the block, in which the accusation was included",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "reward": {
+          "type": "integer",
+          "description": "Reward of the baker, produced the block, in which the accusation was included",
+          "format": "int64"
+        },
+        "offender": {
+          "description": "Information about the baker, accused for producing two different attestations at the same level",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "lostStaked": {
+          "type": "integer",
+          "description": "Amount slashed from baker's own staked balance",
+          "format": "int64"
+        },
+        "lostUnstaked": {
+          "type": "integer",
+          "description": "Amount slashed from baker's own unstaked balance",
+          "format": "int64"
+        },
+        "lostExternalStaked": {
+          "type": "integer",
+          "description": "Amount slashed from baker's external staked balance",
+          "format": "int64"
+        },
+        "lostExternalUnstaked": {
+          "type": "integer",
+          "description": "Amount slashed from baker's external unstaked balance",
+          "format": "int64"
+        },
+        "stakingUpdatesCount": {
+          "type": "integer",
+          "description": "Number of staking updates happened internally",
+          "format": "int32",
+          "nullable": true
+        },
+        "quote": {
+          "description": "Injected historical quote at the time of operation",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/QuoteShort"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

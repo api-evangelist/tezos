@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TicketBalance",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  \n**[sortable]**",
+      "format": "int64"
+    },
+    "ticket": {
+      "description": "Ticket info.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/TicketInfo"
+        }
+      ]
+    },
+    "account": {
+      "description": "Owner account.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "balance": {
+      "type": "string",
+      "description": "Balance.  \n**[sortable]**"
+    },
+    "transfersCount": {
+      "type": "integer",
+      "description": "Total number of transfers, affecting the ticket balance.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Level of the block where the ticket balance was first changed.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "firstTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the ticket balance was first changed.",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Level of the block where the ticket balance was last changed.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "lastTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the ticket balance was last changed.",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Delegator",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Delegator type ('contract' for KT.. address or 'user' for tz.. address)"
+    },
+    "alias": {
+      "type": "string",
+      "description": "Name of the project behind the account or account description",
+      "nullable": true
+    },
+    "address": {
+      "type": "string",
+      "description": "Public key hash of the account"
+    },
+    "balance": {
+      "type": "integer",
+      "description": "Account balance (micro tez)",
+      "format": "int64"
+    },
+    "delegationLevel": {
+      "type": "integer",
+      "description": "Block height of last delegation operation",
+      "format": "int32"
+    },
+    "delegationTime": {
+      "type": "string",
+      "description": "Block datetime of last delegation operation (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigMapKeyHistorical",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal Id, can be used for pagination",
+      "format": "int32"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Bigmap key status (`true` - active, `false` - removed)"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Key hash"
+    },
+    "key": {
+      "description": "Key in JSON or Micheline format, depending on the `micheline` query parameter."
+    },
+    "value": {
+      "description": "Value in JSON or Micheline format, depending on the `micheline` query parameter.\nNote, if the key is inactive (removed) it will contain the last non-null value."
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StakerRewards",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cycle": {
+      "type": "integer",
+      "description": "Cycle in which the rewards were earned.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "baker": {
+      "description": "Staker's baker.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "initialStake": {
+      "type": "integer",
+      "description": "Staked balance at the beginning of the cycle (micro tez).",
+      "format": "int64"
+    },
+    "addedStake": {
+      "type": "integer",
+      "description": "Amount added (staked) during the cycle (micro tez).",
+      "format": "int64"
+    },
+    "removedStake": {
+      "type": "integer",
+      "description": "Amount removed (unstaked) during the cycle (micro tez).",
+      "format": "int64"
+    },
+    "finalStake": {
+      "type": "integer",
+      "description": "Staked balance at the end of the cycle (micro tez).",
+      "format": "int64"
+    },
+    "avgStake": {
+      "type": "integer",
+      "description": "Average (per-block) staked balance (micro tez).",
+      "format": "int64"
+    },
+    "rewards": {
+      "type": "integer",
+      "description": "Staking rewards (or losses if negative) earned during the cycle (micro tez).",
+      "format": "int64"
+    },
+    "bakerRewards": {
+      "description": "Rewards of the staker's baker, from which the staker can understand the source of the rewards/losses.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/BakerRewards"
+        }
+      ]
+    },
+    "quote": {
+      "description": "Injected historical quote at the end of the cycle",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/QuoteShort"
+        }
+      ]
+    }
+  }
+}

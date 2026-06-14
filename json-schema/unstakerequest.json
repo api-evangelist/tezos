@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnstakeRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT ID.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "cycle": {
+      "type": "integer",
+      "description": "Cycle at which the unstake request was created.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "baker": {
+      "description": "Related baker.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "staker": {
+      "description": "Related staker.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "requestedAmount": {
+      "type": "integer",
+      "description": "Initially requested amount (mutez).",
+      "format": "int64"
+    },
+    "restakedAmount": {
+      "type": "integer",
+      "description": "Amount that was restaked back (mutez).",
+      "format": "int64"
+    },
+    "finalizedAmount": {
+      "type": "integer",
+      "description": "Finalized amount (mutez).",
+      "format": "int64"
+    },
+    "slashedAmount": {
+      "type": "integer",
+      "description": "Slashed amount (mutez).",
+      "format": "int64"
+    },
+    "roundingError": {
+      "type": "integer",
+      "description": "Protocol rounding error, appearing after slashing.",
+      "format": "int64",
+      "nullable": true
+    },
+    "actualAmount": {
+      "type": "integer",
+      "description": "Actual amount that was/is/will be available for finalizing. ",
+      "format": "int64"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the unstake request (`pending`, `finalizable`, `finalized`)."
+    },
+    "unlockCycle": {
+      "type": "integer",
+      "description": "Cycle at which the unstake request will become finalizable",
+      "format": "int32"
+    },
+    "unlockLevel": {
+      "type": "integer",
+      "description": "Level of the block at which the unstake request will become finalizable",
+      "format": "int32"
+    },
+    "unlockTime": {
+      "type": "string",
+      "description": "Timestamp of the block at which the unstake request will become finalizable",
+      "format": "date-time"
+    },
+    "updatesCount": {
+      "type": "integer",
+      "description": "Number of staking updates related to the unstake request.",
+      "format": "int32"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Level of the block where the unstake request was created.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "firstTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the unstake request was created.",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Level of the block where the unstake request was last updated.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "lastTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the unstake request was last updated.",
+      "format": "date-time"
+    }
+  }
+}

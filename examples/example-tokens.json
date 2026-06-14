@@ -1,0 +1,36 @@
+{
+  "operation": "Tokens_GetTokensCount",
+  "method": "GET",
+  "path": "/v1/tokens/count",
+  "tags": [
+    "Tokens"
+  ],
+  "summary": "Get tokens count",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "contract",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "tokenId",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "globalId",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "standard",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

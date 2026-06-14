@@ -1,0 +1,16 @@
+{
+  "operation": "Rewards_GetBakerRewardsCount",
+  "method": "GET",
+  "path": "/v1/rewards/bakers/{address}/count",
+  "tags": [
+    "Rewards"
+  ],
+  "summary": "Get baker cycle rewards count",
+  "parameters": [
+    {
+      "name": "address",
+      "in": "path",
+      "required": true
+    }
+  ]
+}

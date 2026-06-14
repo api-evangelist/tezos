@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DalAttestationRewardOperation",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the operation, `dal_attestation_reward`"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique ID of the operation, stored in the TzKT indexer database",
+          "format": "int64"
+        },
+        "level": {
+          "type": "integer",
+          "description": "Height of the block from the genesis",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "block": {
+          "type": "string",
+          "description": "Block hash"
+        },
+        "baker": {
+          "description": "Baker expected to receive dal attestation reward",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "expected": {
+          "type": "integer",
+          "description": "Expected dal attestation reward, based on baker's active stake (micro tez)",
+          "format": "int64"
+        },
+        "rewardDelegated": {
+          "type": "integer",
+          "description": "Reward, corresponding to delegated stake, paid to baker's liquid balance (micro tez)\n(it is not frozen and can be spent immediately).",
+          "format": "int64"
+        },
+        "rewardStakedOwn": {
+          "type": "integer",
+          "description": "Reward, corresponding to baker's own stake, paid to baker's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+          "format": "int64"
+        },
+        "rewardStakedEdge": {
+          "type": "integer",
+          "description": "Reward, corresponding to baker's edge from external stake, paid to baker's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+          "format": "int64"
+        },
+        "rewardStakedShared": {
+          "type": "integer",
+          "description": "Reward, corresponding to baker's external stake, paid to baker's external staked balance (micro tez)\n(it is frozen and belongs to baker's stakers).",
+          "format": "int64"
+        },
+        "quote": {
+          "description": "Injected historical quote at the time of operation",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/QuoteShort"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

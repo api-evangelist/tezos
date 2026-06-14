@@ -1,0 +1,10 @@
+{
+  "operation": "BigMaps_GetBigMapsCount",
+  "method": "GET",
+  "path": "/v1/bigmaps/count",
+  "tags": [
+    "BigMaps"
+  ],
+  "summary": "Get bigmaps count",
+  "parameters": []
+}

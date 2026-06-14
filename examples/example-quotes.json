@@ -1,0 +1,10 @@
+{
+  "operation": "Quotes_GetCount",
+  "method": "GET",
+  "path": "/v1/quotes/count",
+  "tags": [
+    "Quotes"
+  ],
+  "summary": "Get quotes count",
+  "parameters": []
+}

@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SmartRollup",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Internal TzKT id",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the account"
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of the account"
+        },
+        "alias": {
+          "type": "string",
+          "description": "Name of the account",
+          "nullable": true
+        },
+        "creator": {
+          "description": "Information about the account, which has deployed the rollup to the blockchain",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "pvmKind": {
+          "type": "string",
+          "description": "PVM kind: `arith` or `wasm`"
+        },
+        "genesisCommitment": {
+          "type": "string",
+          "description": "Genesis commitment hash"
+        },
+        "lastCommitment": {
+          "type": "string",
+          "description": "The most recent cemented commitment hash"
+        },
+        "inboxLevel": {
+          "type": "integer",
+          "description": "Inbox level of the most recent cemented commitment",
+          "format": "int32"
+        },
+        "totalStakers": {
+          "type": "integer",
+          "description": "Total number of stakers.",
+          "format": "int32"
+        },
+        "activeStakers": {
+          "type": "integer",
+          "description": "Total number of active stakers.",
+          "format": "int32"
+        },
+        "executedCommitments": {
+          "type": "integer",
+          "description": "Number of commitments that were cemented and executed",
+          "format": "int32"
+        },
+        "cementedCommitments": {
+          "type": "integer",
+          "description": "Number of commitments that were cemented (including executed ones)",
+          "format": "int32"
+        },
+        "pendingCommitments": {
+          "type": "integer",
+          "description": "Number of pending commitments",
+          "format": "int32"
+        },
+        "refutedCommitments": {
+          "type": "integer",
+          "description": "Number of commitments that were refuted",
+          "format": "int32"
+        },
+        "orphanCommitments": {
+          "type": "integer",
+          "description": "Number of commitments that became orphan, due to their parent was refuted",
+          "format": "int32"
+        },
+        "smartRollupBonds": {
+          "type": "integer",
+          "description": "Amount of mutez locked as bonds",
+          "format": "int64"
+        },
+        "activeTokensCount": {
+          "type": "integer",
+          "description": "Number of account tokens with non-zero balances",
+          "format": "int32"
+        },
+        "tokenBalancesCount": {
+          "type": "integer",
+          "description": "Number of tokens the account ever had",
+          "format": "int32"
+        },
+        "tokenTransfersCount": {
+          "type": "integer",
+          "description": "Number of token transfers from/to the account",
+          "format": "int32"
+        },
+        "activeTicketsCount": {
+          "type": "integer",
+          "description": "Number of tickets the account owns.",
+          "format": "int32"
+        },
+        "ticketBalancesCount": {
+          "type": "integer",
+          "description": "Number of tickets the account ever owned.",
+          "format": "int32"
+        },
+        "ticketTransfersCount": {
+          "type": "integer",
+          "description": "Number of ticket transfers from/to the account.",
+          "format": "int32"
+        },
+        "numTransactions": {
+          "type": "integer",
+          "description": "Number of transaction operations related to the account",
+          "format": "int32"
+        },
+        "transferTicketCount": {
+          "type": "integer",
+          "description": "Number of transfer ticket operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupCementCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_cement` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupExecuteCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_execute_outbox_message` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupOriginateCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_originate` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupPublishCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_publish` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupRecoverBondCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_recover_bond` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupRefuteCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_refute` operations related to the account",
+          "format": "int32"
+        },
+        "refutationGamesCount": {
+          "type": "integer",
+          "description": "Number of smart rollup refutation games related to the account",
+          "format": "int32"
+        },
+        "activeRefutationGamesCount": {
+          "type": "integer",
+          "description": "Number of active smart rollup refutation games related to the account",
+          "format": "int32"
+        },
+        "firstActivity": {
+          "type": "integer",
+          "description": "Block height at which the ghost contract appeared first time",
+          "format": "int32"
+        },
+        "firstActivityTime": {
+          "type": "string",
+          "description": "Block datetime at which the ghost contract appeared first time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "lastActivity": {
+          "type": "integer",
+          "description": "Height of the block in which the ghost contract state was changed last time",
+          "format": "int32"
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "description": "Datetime of the block in which the ghost contract state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "extras": {
+          "description": "Off-chain extras",
+          "nullable": true
+        }
+      }
+    }
+  ]
+}

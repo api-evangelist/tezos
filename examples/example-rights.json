@@ -1,0 +1,36 @@
+{
+  "operation": "Rights_GetCount",
+  "method": "GET",
+  "path": "/v1/rights/count",
+  "tags": [
+    "Rights"
+  ],
+  "summary": "Get rights count",
+  "parameters": [
+    {
+      "name": "type",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "baker",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "cycle",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "level",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "slots",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

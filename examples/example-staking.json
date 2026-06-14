@@ -1,0 +1,36 @@
+{
+  "operation": "Staking_GetStakingUpdatesCount",
+  "method": "GET",
+  "path": "/v1/staking/updates/count",
+  "tags": [
+    "Staking"
+  ],
+  "summary": "Get staking updates count",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "level",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "cycle",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "baker",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

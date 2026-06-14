@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExpressionAlreadyRegisteredError",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of an error, `Expression_already_registered` - an operation tried to register\nan already existing global constant\nhttps://tezos.gitlab.io/api/errors.html - full list of errors"
+        },
+        "expression": {
+          "type": "string",
+          "description": "Global address of the constant"
+        }
+      }
+    }
+  ]
+}

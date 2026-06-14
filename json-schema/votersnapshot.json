@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VoterSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "delegate": {
+      "description": "Voter identity",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "votingPower": {
+      "type": "integer",
+      "description": "Baker's voting power",
+      "format": "int64"
+    },
+    "status": {
+      "type": "string",
+      "description": "Voter's status:\n`none` - the voter did nothing\n`upvoted` - the voter upvoted at least one proposal\n`voted_yay` - the voter voted \"yay\"\n`voted_nay` - the voter voted \"nay\"\n`voted_pass` - the voter voted \"pass\""
+    }
+  }
+}

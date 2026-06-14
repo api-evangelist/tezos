@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PeriodInfo",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "index": {
+      "type": "integer",
+      "description": "Voting period index, starting from zero",
+      "format": "int32"
+    },
+    "epoch": {
+      "type": "integer",
+      "description": "Voting epoch index, starting from zero",
+      "format": "int32"
+    },
+    "kind": {
+      "type": "string",
+      "description": "Kind of the voting period\n`proposal` - delegates can submit protocol amendment proposals using the proposal operation\n`exploration` -  bakers (delegates) may vote on the top-ranked proposal from the previous Proposal Period using the ballot operation\n`testing` - If the proposal is approved in the Exploration Period, the testing (or 'cooldown') period begins and bakers start testing the new protocol\n`promotion` - delegates can cast one vote to promote or not the tested proposal using the ballot operation\n`adoption` - after the proposal is actually accepted, the ecosystem has some time to prepare to the upgrade"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "The height of the block in which the period starts",
+      "format": "int32"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "The height of the block in which the period ends",
+      "format": "int32"
+    }
+  }
+}

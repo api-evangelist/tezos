@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OffsetParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "el": {
+      "type": "integer",
+      "description": "**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \\\nSkips specified number of elements.\n\nExample: `?offset=100`.",
+      "format": "int32",
+      "nullable": true
+    },
+    "pg": {
+      "type": "integer",
+      "description": "**Page** offset mode. \\\nSkips `page * limit` elements. This is a classic pagination.\n\nExample: `?offset.pg=1`.",
+      "format": "int32",
+      "nullable": true
+    },
+    "cr": {
+      "type": "integer",
+      "description": "**Cursor** offset mode. \\\nSkips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.\nAvoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.\n\nExample: `?offset.cr=45837`.",
+      "format": "int64",
+      "nullable": true
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

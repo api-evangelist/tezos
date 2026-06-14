@@ -1,0 +1,36 @@
+{
+  "operation": "Accounts_Get",
+  "method": "GET",
+  "path": "/v1/accounts",
+  "tags": [
+    "Accounts"
+  ],
+  "summary": "Get accounts",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "address",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "type",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "kind",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "delegate",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

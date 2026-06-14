@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SortParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "asc": {
+      "type": "string",
+      "description": "**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \\\nSpecify a field name to sort by.\n\nExample: `?sort=balance`.",
+      "nullable": true
+    },
+    "desc": {
+      "type": "string",
+      "description": "**Descending** sort mode. \\\nSpecify a field name to sort by descending.\n\nExample: `?sort.desc=id`.",
+      "nullable": true
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

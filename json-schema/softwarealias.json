@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoftwareAlias",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Software version (commit tag)"
+    },
+    "date": {
+      "type": "string",
+      "description": "Date of the commit or when the software was first seen",
+      "format": "date-time"
+    }
+  }
+}

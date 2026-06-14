@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TicketInfoShort",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.",
+      "format": "int64"
+    },
+    "ticketer": {
+      "description": "Contract, issued the ticket.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "rawType": {
+      "description": "Ticket content type in Micheline format.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "rawContent": {
+      "description": "Ticket content in Micheline format.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "content": {
+      "description": "Ticket content in JSON format.",
+      "nullable": true
+    },
+    "typeHash": {
+      "type": "integer",
+      "description": "32-bit hash of the ticket content type.\nThis field can be used for searching similar tickets (which have the same type).",
+      "format": "int32"
+    },
+    "contentHash": {
+      "type": "integer",
+      "description": "32-bit hash of the ticket content.\nThis field can be used for searching same tickets (which have the same content).",
+      "format": "int32"
+    }
+  }
+}

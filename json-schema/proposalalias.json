@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProposalAlias",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "alias": {
+      "type": "string",
+      "description": "Alias of the proposal",
+      "nullable": true
+    },
+    "hash": {
+      "type": "string",
+      "description": "Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files"
+    }
+  }
+}

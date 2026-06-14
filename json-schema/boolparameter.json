@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BoolParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "boolean",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \\\nSpecify a bool flag to get items where the specified field is equal to the specified value.\n\nExample: `?active=true` or `?active=1` or `?active`.",
+      "nullable": true
+    },
+    "null": {
+      "type": "boolean",
+      "description": "**Is null** filter mode. \\\nUse this mode to get items where the specified field is null or not.\n\nExample: `?active.null` or `?active.null=false`.",
+      "nullable": true
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

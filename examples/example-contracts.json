@@ -1,0 +1,36 @@
+{
+  "operation": "Contracts_Get",
+  "method": "GET",
+  "path": "/v1/contracts",
+  "tags": [
+    "Contracts"
+  ],
+  "summary": "Get contracts",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "address",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "kind",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "tzips",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "balance",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

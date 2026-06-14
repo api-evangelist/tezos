@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VotingEpoch",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "index": {
+      "type": "integer",
+      "description": "Index of the voting epoch, starting from zero",
+      "format": "int32"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "The height of the block in which the epoch starts",
+      "format": "int32"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "The timestamp of the block in which the epoch starts",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "The height of the block in which the epoch ends",
+      "format": "int32"
+    },
+    "endTime": {
+      "type": "string",
+      "description": "The timestamp of the block in which the epoch ends",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the voting epoch:\n`no_proposals` - there were no proposals proposed\n`voting` - there was at least one proposal and the voting is in progress\n`completed` - voting successfully completed and the proposal was accepted\n`failed` - voting was not completed due to either quorum or supermajority was not reached"
+    },
+    "periods": {
+      "type": "array",
+      "description": "Voting periods in the epoch",
+      "items": {
+        "$ref": "#/components/schemas/VotingPeriod"
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "description": "Proposals pushed during the voting epoch (null, if there were no proposals).",
+      "items": {
+        "$ref": "#/components/schemas/Proposal"
+      }
+    }
+  }
+}

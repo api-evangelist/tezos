@@ -1,0 +1,36 @@
+{
+  "operation": "Constants_Get",
+  "method": "GET",
+  "path": "/v1/constants",
+  "tags": [
+    "Constants"
+  ],
+  "summary": "Get global constants",
+  "parameters": [
+    {
+      "name": "address",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "creationLevel",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "creationTime",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "creator",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "refs",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

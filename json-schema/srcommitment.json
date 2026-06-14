@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SrCommitment",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  \n**[sortable]**",
+      "format": "int64"
+    },
+    "rollup": {
+      "description": "Smart rollup.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "initiator": {
+      "description": "Account that published the commitment first.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "inboxLevel": {
+      "type": "integer",
+      "description": "Inbox level.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "state": {
+      "type": "string",
+      "description": "State hash."
+    },
+    "hash": {
+      "type": "string",
+      "description": "Commitment hash."
+    },
+    "ticks": {
+      "type": "integer",
+      "description": "Number of ticks.",
+      "format": "int64"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Level of the block where the commitment was first published.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "firstTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the commitment was first published.",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Level of the block where the commitment was last updated.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "lastTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the commitment was last updated.",
+      "format": "date-time"
+    },
+    "stakers": {
+      "type": "integer",
+      "description": "Number of stakers, published this commitment.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "activeStakers": {
+      "type": "integer",
+      "description": "Number of active (not refuted) stakers.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "successors": {
+      "type": "integer",
+      "description": "Number of successor commitments.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "status": {
+      "type": "string",
+      "description": "Commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`)."
+    },
+    "predecessor": {
+      "description": "Predecessor commitment.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/SrCommitmentInfo"
+        }
+      ]
+    }
+  }
+}

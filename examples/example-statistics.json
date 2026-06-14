@@ -1,0 +1,36 @@
+{
+  "operation": "Statistics_Get",
+  "method": "GET",
+  "path": "/v1/statistics",
+  "tags": [
+    "Statistics"
+  ],
+  "summary": "Get statistics",
+  "parameters": [
+    {
+      "name": "level",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "select",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "sort",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "offset",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TokenInfoShort",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id (not the same as `tokenId`).",
+      "format": "int64"
+    },
+    "contract": {
+      "description": "Contract, created the token.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "tokenId": {
+      "type": "string",
+      "description": "Token id, unique within the contract."
+    },
+    "standard": {
+      "type": "string",
+      "description": "Token standard (either `fa1.2` or `fa2`)."
+    },
+    "metadata": {
+      "description": "Token metadata.  \n**[sortable]**",
+      "nullable": true
+    }
+  }
+}

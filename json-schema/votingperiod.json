@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VotingPeriod",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "index": {
+      "type": "integer",
+      "description": "Index of the voting period, starting from zero",
+      "format": "int32"
+    },
+    "epoch": {
+      "type": "integer",
+      "description": "Index of the voting epoch, starting from zero",
+      "format": "int32"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "The height of the block in which the period starts",
+      "format": "int32"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "The timestamp of the block in which the period starts",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "The height of the block in which the period ends",
+      "format": "int32"
+    },
+    "endTime": {
+      "type": "string",
+      "description": "The timestamp of the block in which the period ends",
+      "format": "date-time"
+    },
+    "kind": {
+      "type": "string",
+      "description": "Kind of the voting period:\n`proposal` - delegates can submit protocol amendment proposals using the proposal operation\n`exploration` -  bakers (delegates) may vote on the top-ranked proposal from the previous Proposal Period using the ballot operation\n`testing` - If the proposal is approved in the Exploration Period, the testing (or 'cooldown') period begins and bakers start testing the new protocol\n`promotion` - delegates can cast one vote to promote or not the tested proposal using the ballot operation\n`adoption` - after the proposal is actually accepted, the ecosystem has some time to prepare to the upgrade"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the voting period:\n`active` - means that the voting period is in progress\n`no_proposals` - means that there were no proposals during the voting period\n`no_quorum` - means that there was a voting but the quorum was not reached\n`no_supermajority` - means that there was a voting but the supermajority was not reached\n`no_single_winner` - means that there were multiple winning proposals with the same voting power\n`success` - means that the period was finished with positive voting result"
+    },
+    "dictator": {
+      "type": "string",
+      "description": "Status of the governance dictator:\n`none` - means that there were no actions by the dictator \n`abort` - means that the epoch was aborted by the dictator\n`reset` - means that the period was reset by the dictator\n`submit` - means that the dictator submitted a proposal"
+    },
+    "totalBakers": {
+      "type": "integer",
+      "description": "The number of bakers on the voters list",
+      "format": "int32"
+    },
+    "totalVotingPower": {
+      "type": "integer",
+      "description": "Total voting power of bakers on the voters list",
+      "format": "int64"
+    },
+    "upvotesQuorum": {
+      "type": "number",
+      "description": "Upvotes quorum percentage (only for proposal period)",
+      "format": "double",
+      "nullable": true
+    },
+    "proposalsCount": {
+      "type": "integer",
+      "description": "The number of proposals injected during the voting period (only for proposal period)",
+      "format": "int32",
+      "nullable": true
+    },
+    "topUpvotes": {
+      "type": "integer",
+      "description": "This is how many upvotes (proposal operations) the most upvoted proposal has (only for proposal period)",
+      "format": "int32",
+      "nullable": true
+    },
+    "topVotingPower": {
+      "type": "integer",
+      "description": "This is how much voting power the most upvoted proposal has (only for proposal period)",
+      "format": "int64",
+      "nullable": true
+    },
+    "ballotsQuorum": {
+      "type": "number",
+      "description": "Ballots quorum percentage (only for exploration and promotion periods)",
+      "format": "double",
+      "nullable": true
+    },
+    "supermajority": {
+      "type": "number",
+      "description": "Supermajority percentage (only for exploration and promotion periods)",
+      "format": "double",
+      "nullable": true
+    },
+    "yayBallots": {
+      "type": "integer",
+      "description": "The number of the ballots with \"yay\" vote (only for exploration and promotion periods)",
+      "format": "int32",
+      "nullable": true
+    },
+    "yayVotingPower": {
+      "type": "integer",
+      "description": "Total voting power of the ballots with \"yay\" vote (only for exploration and promotion periods)",
+      "format": "int64",
+      "nullable": true
+    },
+    "nayBallots": {
+      "type": "integer",
+      "description": "The number of the ballots with \"nay\" vote (only for exploration and promotion periods)",
+      "format": "int32",
+      "nullable": true
+    },
+    "nayVotingPower": {
+      "type": "integer",
+      "description": "Total voting power of the ballots with \"nay\" vote (only for exploration and promotion periods)",
+      "format": "int64",
+      "nullable": true
+    },
+    "passBallots": {
+      "type": "integer",
+      "description": "The number of the ballots with \"pass\" vote (only for exploration and promotion periods)",
+      "format": "int32",
+      "nullable": true
+    },
+    "passVotingPower": {
+      "type": "integer",
+      "description": "Total voting power of the ballots with \"pass\" vote (only for exploration and promotion periods)",
+      "format": "int64",
+      "nullable": true
+    }
+  }
+}

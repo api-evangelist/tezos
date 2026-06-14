@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StorageRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Id of the record that can be used for pagination",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level at which the storage value was taken",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp at which the storage value was taken",
+      "format": "date-time"
+    },
+    "operation": {
+      "description": "Operation that caused the storage change",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/SourceOperation"
+        }
+      ]
+    },
+    "value": {
+      "description": "New storage value"
+    }
+  }
+}

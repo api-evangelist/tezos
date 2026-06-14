@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SplitActualStaker",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "type": "string",
+      "description": "Address of the delegator"
+    },
+    "initialStake": {
+      "type": "integer",
+      "description": "Staked balance at the beginning of the cycle (micro tez).",
+      "format": "int64"
+    },
+    "finalStake": {
+      "type": "integer",
+      "description": "Staked balance at the end of the cycle (micro tez).",
+      "format": "int64"
+    },
+    "rewards": {
+      "type": "integer",
+      "description": "Staking rewards (or losses if negative) earned during the cycle (micro tez).",
+      "format": "int64"
+    }
+  }
+}

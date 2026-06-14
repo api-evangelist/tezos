@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Constant",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "type": "string",
+      "description": "Global address (expression hash)"
+    },
+    "value": {
+      "description": "Constant value (either micheline, michelson or bytes, depending on the `format` parameter)"
+    },
+    "size": {
+      "type": "integer",
+      "description": "Constant size in bytes",
+      "format": "int32"
+    },
+    "refs": {
+      "type": "integer",
+      "description": "Number of contracts referencing this constant",
+      "format": "int32"
+    },
+    "creator": {
+      "description": "Account registered this constant",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "creationLevel": {
+      "type": "integer",
+      "description": "Level of the first block baked with this software",
+      "format": "int32"
+    },
+    "creationTime": {
+      "type": "string",
+      "description": "Datetime of the first block baked with this software",
+      "format": "date-time"
+    },
+    "extras": {
+      "description": "Off-chain extras",
+      "nullable": true
+    }
+  }
+}

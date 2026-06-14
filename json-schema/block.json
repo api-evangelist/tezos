@@ -1,0 +1,559 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Block",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cycle": {
+      "type": "integer",
+      "description": "Index of the cycle",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Height of the block from the genesis",
+      "format": "int32"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Block hash"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "format": "date-time"
+    },
+    "proto": {
+      "type": "integer",
+      "description": "Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)",
+      "format": "int32"
+    },
+    "payloadRound": {
+      "type": "integer",
+      "description": "Round at which the block payload was proposed",
+      "format": "int32"
+    },
+    "blockRound": {
+      "type": "integer",
+      "description": "Round at which the block was produced",
+      "format": "int32"
+    },
+    "attestationPower": {
+      "type": "integer",
+      "description": "Recorder attestation power",
+      "format": "int64"
+    },
+    "attestationCommittee": {
+      "type": "integer",
+      "description": "Total attestation committee power",
+      "format": "int64"
+    },
+    "deposit": {
+      "type": "integer",
+      "description": "Security deposit frozen on the baker's account for producing the block (micro tez)",
+      "format": "int64"
+    },
+    "rewardDelegated": {
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to delegated stake, paid to payload proposer's liquid balance (micro tez)\n(it is not frozen and can be spent immediately).",
+      "format": "int64"
+    },
+    "rewardStakedOwn": {
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's own stake, paid to payload proposer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "rewardStakedEdge": {
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's edge from external stake, paid to payload proposer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "rewardStakedShared": {
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's external stake, paid to payload proposer's external staked balance (micro tez)\n(it is frozen and belongs to baker's stakers).",
+      "format": "int64"
+    },
+    "bonusDelegated": {
+      "type": "integer",
+      "description": "Portion of bonus reward, corresponding to delegated stake, paid to block producer's liquid balance (micro tez)\n(it is not frozen and can be spent immediately).",
+      "format": "int64"
+    },
+    "bonusStakedOwn": {
+      "type": "integer",
+      "description": "Portion of bonus reward, corresponding to baker's own stake, paid to block producer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "bonusStakedEdge": {
+      "type": "integer",
+      "description": "Portion of bonus reward, corresponding to baker's edge from external stake, paid to block producer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "bonusStakedShared": {
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's external stake, paid to block producer's external staked balance (micro tez)\n(it is frozen and belongs to baker's stakers).",
+      "format": "int64"
+    },
+    "fees": {
+      "type": "integer",
+      "description": "Total fee gathered from operations, included into the block",
+      "format": "int64"
+    },
+    "nonceRevealed": {
+      "type": "boolean",
+      "description": "Status of the seed nonce revelation\n`true` - seed nonce revealed\n`false` - there's no `seed_nonce_hash` in the block or seed nonce revelation has missed"
+    },
+    "proposer": {
+      "description": "Baker who proposed the block payload",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "producer": {
+      "description": "Baker who produced the block",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "software": {
+      "description": "Information about baker's software",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/SoftwareAlias"
+        }
+      ]
+    },
+    "lbToggle": {
+      "type": "boolean",
+      "description": "Liquidity baking toggle (`true` if enabled, `false` if disabled, or `null` if the baker says 'pass')",
+      "nullable": true
+    },
+    "lbToggleEma": {
+      "type": "integer",
+      "description": "Liquidity baking escape EMA value with precision of 1000000 for integer computation",
+      "format": "int32"
+    },
+    "attestations": {
+      "type": "array",
+      "description": "List of attestation (is operation, which specifies the head of the chain as seen by the attester of a given slot)\noperations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/AttestationOperation"
+      }
+    },
+    "preattestations": {
+      "type": "array",
+      "description": "List of preattestation operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/PreattestationOperation"
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "description": "List of proposal (is used by bakers (delegates) to submit and/or upvote proposals to amend the protocol)\noperations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/ProposalOperation"
+      }
+    },
+    "ballots": {
+      "type": "array",
+      "description": "List of ballot (is used to vote for a proposal in a given voting cycle) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/BallotOperation"
+      }
+    },
+    "activations": {
+      "type": "array",
+      "description": "List of activation (is used to activate accounts that were recommended allocations of\ntezos tokens for donations to the Tezos Foundation\u2019s fundraiser) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/ActivationOperation"
+      }
+    },
+    "dalEntrapmentEvidenceOps": {
+      "type": "array",
+      "description": "List of dal entrapment evidence operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DalEntrapmentEvidenceOperation"
+      }
+    },
+    "doubleBaking": {
+      "type": "array",
+      "description": "List of double baking evidence (is used by bakers to provide evidence of double baking (baking two different\nblocks at the same height) by a baker) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DoubleBakingOperation"
+      }
+    },
+    "doubleConsensus": {
+      "type": "array",
+      "description": "List of double consensus evidence (is used by bakers to provide evidence of double (pre)attestation\n((pre)attestation of two different blocks at the same block height) by a baker) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DoubleConsensusOperation"
+      }
+    },
+    "nonceRevelations": {
+      "type": "array",
+      "description": "List of nonce revelation (used by the blockchain to create randomness) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/NonceRevelationOperation"
+      }
+    },
+    "vdfRevelations": {
+      "type": "array",
+      "description": "List of vdf revelation (used by the blockchain to create randomness) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/VdfRevelationOperation"
+      }
+    },
+    "delegations": {
+      "type": "array",
+      "description": "List of delegation (is used to delegate funds to a delegate (an implicit account registered as a baker))\noperations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DelegationOperation"
+      }
+    },
+    "originations": {
+      "type": "array",
+      "description": "List of origination (deployment / contract creation ) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/OriginationOperation"
+      }
+    },
+    "transactions": {
+      "type": "array",
+      "description": "List of transaction (is a standard operation used to transfer tezos tokens to an account)\noperations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TransactionOperation"
+      }
+    },
+    "reveals": {
+      "type": "array",
+      "description": "List of reveal (is used to reveal the public key associated with an account) operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/RevealOperation"
+      }
+    },
+    "registerConstants": {
+      "type": "array",
+      "description": "List of register global constant operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/RegisterConstantOperation"
+      }
+    },
+    "setDepositsLimits": {
+      "type": "array",
+      "description": "List of set deposits limit operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SetDepositsLimitOperation"
+      }
+    },
+    "transferTicketOps": {
+      "type": "array",
+      "description": "List of transfer ticket operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TransferTicketOperation"
+      }
+    },
+    "txRollupCommitOps": {
+      "type": "array",
+      "description": "List of tx rollup commit operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupCommitOperation"
+      }
+    },
+    "txRollupDispatchTicketsOps": {
+      "type": "array",
+      "description": "List of tx rollup dispatch tickets operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupDispatchTicketsOperation"
+      }
+    },
+    "txRollupFinalizeCommitmentOps": {
+      "type": "array",
+      "description": "List of tx rollup finalize commitment operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupFinalizeCommitmentOperation"
+      }
+    },
+    "txRollupOriginationOps": {
+      "type": "array",
+      "description": "List of tx rollup origination operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupOriginationOperation"
+      }
+    },
+    "txRollupRejectionOps": {
+      "type": "array",
+      "description": "List of tx rollup rejection operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupRejectionOperation"
+      }
+    },
+    "txRollupRemoveCommitmentOps": {
+      "type": "array",
+      "description": "List of tx rollup remove commitment operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupRemoveCommitmentOperation"
+      }
+    },
+    "txRollupReturnBondOps": {
+      "type": "array",
+      "description": "List of tx rollup return bond operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupReturnBondOperation"
+      }
+    },
+    "txRollupSubmitBatchOps": {
+      "type": "array",
+      "description": "List of tx rollup submit batch operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/TxRollupSubmitBatchOperation"
+      }
+    },
+    "increasePaidStorageOps": {
+      "type": "array",
+      "description": "List of increase paid storage operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/IncreasePaidStorageOperation"
+      }
+    },
+    "updateSecondaryKeyOps": {
+      "type": "array",
+      "description": "List of update secondary key operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/UpdateSecondaryKeyOperation"
+      }
+    },
+    "drainDelegateOps": {
+      "type": "array",
+      "description": "List of drain delegate operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DrainDelegateOperation"
+      }
+    },
+    "srAddMessagesOps": {
+      "type": "array",
+      "description": "List of smart rollup add messages operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SmartRollupAddMessagesOperation"
+      }
+    },
+    "srCementOps": {
+      "type": "array",
+      "description": "List of smart rollup cement operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SmartRollupCementOperation"
+      }
+    },
+    "srExecuteOps": {
+      "type": "array",
+      "description": "List of smart rollup execute operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SmartRollupExecuteOperation"
+      }
+    },
+    "srOriginateOps": {
+      "type": "array",
+      "description": "List of smart rollup originate operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SmartRollupOriginateOperation"
+      }
+    },
+    "srPublishOps": {
+      "type": "array",
+      "description": "List of smart rollup publish operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SmartRollupPublishOperation"
+      }
+    },
+    "srRecoverBondOps": {
+      "type": "array",
+      "description": "List of smart rollup recover bond operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SmartRollupRecoverBondOperation"
+      }
+    },
+    "srRefuteOps": {
+      "type": "array",
+      "description": "List of smart rollup refute operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SmartRollupRefuteOperation"
+      }
+    },
+    "stakingOps": {
+      "type": "array",
+      "description": "List of staking operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/StakingOperation"
+      }
+    },
+    "setDelegateParametersOps": {
+      "type": "array",
+      "description": "List of set delegate parameters operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/SetDelegateParametersOperation"
+      }
+    },
+    "dalPublishCommitmentOps": {
+      "type": "array",
+      "description": "List of DAL publish commitment operations, included in the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DalPublishCommitmentOperation"
+      }
+    },
+    "migrations": {
+      "type": "array",
+      "description": "List of migration operations, implicitly applied at the end of the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/MigrationOperation"
+      }
+    },
+    "revelationPenalties": {
+      "type": "array",
+      "description": "List of revelation penalty operations, implicitly applied at the end of the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/RevelationPenaltyOperation"
+      }
+    },
+    "attestationRewards": {
+      "type": "array",
+      "description": "List of attestation rewards, implicitly applied at the end of the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/AttestationRewardOperation"
+      }
+    },
+    "dalAttestationRewards": {
+      "type": "array",
+      "description": "List of dal attestation rewards, implicitly applied at the end of the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DalAttestationRewardOperation"
+      }
+    },
+    "autostakingOps": {
+      "type": "array",
+      "description": "List of autostaking operations, implicitly applied at the end of the block",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/AutostakingOperation"
+      }
+    },
+    "quote": {
+      "description": "Injected historical quote at the time of block",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/QuoteShort"
+        }
+      ]
+    },
+    "validations": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "aiToggle": {
+      "type": "boolean",
+      "description": "**DEPRECATED**",
+      "nullable": true
+    },
+    "aiToggleEma": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "updateConsensusKeyOps": {
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/UpdateSecondaryKeyOperation"
+      }
+    },
+    "endorsements": {
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/AttestationOperation"
+      }
+    },
+    "preendorsements": {
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/PreattestationOperation"
+      }
+    },
+    "doubleEndorsing": {
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DoubleConsensusOperation"
+      }
+    },
+    "doublePreendorsing": {
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/DoubleConsensusOperation"
+      }
+    },
+    "endorsingRewards": {
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/AttestationRewardOperation"
+      }
+    }
+  }
+}

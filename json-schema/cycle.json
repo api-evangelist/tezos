@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cycle",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "index": {
+      "type": "integer",
+      "description": "Cycle index starting from zero",
+      "format": "int32"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Level of the first block in the cycle",
+      "format": "int32"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "Timestamp of the first block in the cycle",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Level of the last block in the cycle",
+      "format": "int32"
+    },
+    "endTime": {
+      "type": "string",
+      "description": "Timestamp of the last block in the cycle",
+      "format": "date-time"
+    },
+    "snapshotLevel": {
+      "type": "integer",
+      "description": "Height of the block where the snapshot was taken",
+      "format": "int32"
+    },
+    "randomSeed": {
+      "type": "string",
+      "description": "Randomly generated seed used by the network for things like baking rights distribution etc."
+    },
+    "totalBakers": {
+      "type": "integer",
+      "description": "Total number of all active in this cycle bakers",
+      "format": "int32"
+    },
+    "totalBakingPower": {
+      "type": "integer",
+      "description": "Total baking power of all active in this cycle bakers",
+      "format": "int64"
+    },
+    "blockReward": {
+      "type": "integer",
+      "description": "Fixed reward paid to the block payload proposer in this cycle (micro tez)",
+      "format": "int64"
+    },
+    "blockBonusPerBlock": {
+      "type": "integer",
+      "description": "Bonus reward paid to the block producer in this cycle (micro tez)",
+      "format": "int64"
+    },
+    "attestationRewardPerBlock": {
+      "type": "integer",
+      "description": "Reward for attestation in this cycle (micro tez)",
+      "format": "int64"
+    },
+    "nonceRevelationReward": {
+      "type": "integer",
+      "description": "Reward for seed nonce revelation in this cycle (micro tez)",
+      "format": "int64"
+    },
+    "vdfRevelationReward": {
+      "type": "integer",
+      "description": "Reward for vdf revelation in this cycle (micro tez)",
+      "format": "int64"
+    },
+    "dalAttestationRewardPerShard": {
+      "type": "integer",
+      "description": "Reward for dal attestation in this cycle (micro tez)",
+      "format": "int64"
+    },
+    "quote": {
+      "description": "Injected historical quote at the end of the cycle",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/QuoteShort"
+        }
+      ]
+    },
+    "blockBonusPerSlot": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "attestationRewardPerSlot": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementRewardPerSlot": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    }
+  }
+}

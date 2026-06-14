@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigMapTagsParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "array",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a comma-separated list of bigmap tags to get bigmaps with exactly the same set of tags.\nAvoid using this mode and use `.any` or `.all` instead, because it may not work as expected due to internal 'hidden' tags.\n\nExample: `?tags=metadata` or `?tags=token_metadata,metadata`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "any": {
+      "type": "array",
+      "description": "**Has any** filter mode. \\\nSpecify a comma-separated list of bigmap tags to get bigmaps where at least one of the specified tags is presented.\n\nExample: `?tags.any=metadata` or `?tags.any=token_metadata,metadata`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "all": {
+      "type": "array",
+      "description": "**Has all** filter mode. \\\nSpecify a comma-separated list of bigmap tags to get bigmaps where all of the specified tags are presented.\n\nExample: `?tags.all=metadata` or `?tags.all=token_metadata,metadata`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter",
+  "x-tzkt-query-parameter": "metadata,token_metadata,ledger"
+}

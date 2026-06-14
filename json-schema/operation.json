@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Operation",
+  "allOf": [
+    {
+      "type": "object",
+      "discriminator": {
+        "propertyName": "type",
+        "mapping": {
+          "autostaking": "#/components/schemas/AutostakingOperation",
+          "baking": "#/components/schemas/BakingOperation",
+          "ballot": "#/components/schemas/BallotOperation",
+          "dal_attestation_reward": "#/components/schemas/DalAttestationRewardOperation",
+          "dal_entrapment_evidence": "#/components/schemas/DalEntrapmentEvidenceOperation",
+          "dal_publish_commitment": "#/components/schemas/DalPublishCommitmentOperation",
+          "delegation": "#/components/schemas/DelegationOperation",
+          "double_baking": "#/components/schemas/DoubleBakingOperation",
+          "double_consensus": "#/components/schemas/DoubleConsensusOperation",
+          "drain_delegate": "#/components/schemas/DrainDelegateOperation",
+          "attestation": "#/components/schemas/AttestationOperation",
+          "attestation_reward": "#/components/schemas/AttestationRewardOperation",
+          "increase_paid_storage": "#/components/schemas/IncreasePaidStorageOperation",
+          "migration": "#/components/schemas/MigrationOperation",
+          "nonce_revelation": "#/components/schemas/NonceRevelationOperation",
+          "origination": "#/components/schemas/OriginationOperation",
+          "preattestation": "#/components/schemas/PreattestationOperation",
+          "proposal": "#/components/schemas/ProposalOperation",
+          "register_constant": "#/components/schemas/RegisterConstantOperation",
+          "reveal": "#/components/schemas/RevealOperation",
+          "revelation_penalty": "#/components/schemas/RevelationPenaltyOperation",
+          "set_delegate_parameters": "#/components/schemas/SetDelegateParametersOperation",
+          "set_deposits_limit": "#/components/schemas/SetDepositsLimitOperation",
+          "sr_add_messages": "#/components/schemas/SmartRollupAddMessagesOperation",
+          "sr_cement": "#/components/schemas/SmartRollupCementOperation",
+          "sr_execute": "#/components/schemas/SmartRollupExecuteOperation",
+          "sr_originate": "#/components/schemas/SmartRollupOriginateOperation",
+          "sr_publish": "#/components/schemas/SmartRollupPublishOperation",
+          "sr_recover_bond": "#/components/schemas/SmartRollupRecoverBondOperation",
+          "sr_refute": "#/components/schemas/SmartRollupRefuteOperation",
+          "staking": "#/components/schemas/StakingOperation",
+          "transaction": "#/components/schemas/TransactionOperation",
+          "transfer_ticket": "#/components/schemas/TransferTicketOperation",
+          "tx_rollup_commit": "#/components/schemas/TxRollupCommitOperation",
+          "tx_rollup_dispatch_tickets": "#/components/schemas/TxRollupDispatchTicketsOperation",
+          "tx_rollup_finalize_commitment": "#/components/schemas/TxRollupFinalizeCommitmentOperation",
+          "tx_rollup_origination": "#/components/schemas/TxRollupOriginationOperation",
+          "tx_rollup_rejection": "#/components/schemas/TxRollupRejectionOperation",
+          "tx_rollup_remove_commitment": "#/components/schemas/TxRollupRemoveCommitmentOperation",
+          "tx_rollup_return_bond": "#/components/schemas/TxRollupReturnBondOperation",
+          "tx_rollup_submit_batch": "#/components/schemas/TxRollupSubmitBatchOperation",
+          "update_secondary_key": "#/components/schemas/UpdateSecondaryKeyOperation",
+          "vdf_revelation": "#/components/schemas/VdfRevelationOperation",
+          "activation": "#/components/schemas/ActivationOperation"
+        }
+      },
+      "x-abstract": true,
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the operation"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Internal ID of the operation",
+          "format": "int64"
+        }
+      }
+    }
+  ]
+}

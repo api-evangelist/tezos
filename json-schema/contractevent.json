@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContractEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level of the block, at which the event was emitted.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of the block, at which the event was emitted.",
+      "format": "date-time"
+    },
+    "contract": {
+      "description": "Contract emitted the event.  \nClick on the field to expand more details.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "codeHash": {
+      "type": "integer",
+      "description": "Hash of the contract code.",
+      "format": "int32"
+    },
+    "tag": {
+      "type": "string",
+      "description": "Event tag.",
+      "nullable": true
+    },
+    "payload": {
+      "description": "Event payload in human-readable JSON format.  \n**[sortable]**",
+      "nullable": true
+    },
+    "transactionId": {
+      "type": "integer",
+      "description": "Internal TzKT id of the transaction operation, caused the event.",
+      "format": "int64"
+    },
+    "type": {
+      "description": "Michelson type of the payload.  \n**Must be explicitly selected**",
+      "nullable": true
+    },
+    "rawPayload": {
+      "description": "Payload in raw Micheline format.  \n**Must be explicitly selected**",
+      "nullable": true
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MigrationKindParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a migration kind to get items where the specified field is equal to the specified value.\n\nExample: `?kind=bootstrap`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify a migration kind to get items where the specified field is not equal to the specified value.\n\nExample: `?type.ne=proposal_invoice`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of migration kinds to get items where the specified field is equal to one of the specified values.\n\nExample: `?sender.in=bootstrap,proposal_invoice`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of migration kinds to get items where the specified field is not equal to all the specified values.\n\nExample: `?sender.ni=airdrop,bootstrap`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter",
+  "x-tzkt-query-parameter": "bootstrap,activate_delegate,airdrop,proposal_invoice,code_change,origination,subsidy,remove_bigmap_key"
+}

@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Statistics",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cycle": {
+      "type": "integer",
+      "description": "Cycle at the end of which the statistics has been calculated. This field is only present in cyclic statistics.",
+      "format": "int32",
+      "nullable": true
+    },
+    "date": {
+      "type": "string",
+      "description": "Day at the end of which the statistics has been calculated. This field is only present in daily statistics.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "level": {
+      "type": "integer",
+      "description": "Level of the block at which the statistics has been calculated",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of the block at which the statistics has been calculated (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "format": "date-time"
+    },
+    "totalSupply": {
+      "type": "integer",
+      "description": "Total supply - all existing tokens (including locked vested funds and frozen funds) plus not yet activated fundraiser tokens",
+      "format": "int64"
+    },
+    "circulatingSupply": {
+      "type": "integer",
+      "description": "Circulating supply - all active tokens which can affect supply and demand (can be spent/transferred)",
+      "format": "int64"
+    },
+    "totalBootstrapped": {
+      "type": "integer",
+      "description": "Total amount of tokens initially created when starting the blockchain",
+      "format": "int64"
+    },
+    "totalCommitments": {
+      "type": "integer",
+      "description": "Total commitment amount (tokens to be activated by fundraisers)",
+      "format": "int64"
+    },
+    "totalActivated": {
+      "type": "integer",
+      "description": "Total amount of tokens activated by fundraisers",
+      "format": "int64"
+    },
+    "totalCreated": {
+      "type": "integer",
+      "description": "Total amount of created/issued tokens",
+      "format": "int64"
+    },
+    "totalBurned": {
+      "type": "integer",
+      "description": "Total amount of burned tokens",
+      "format": "int64"
+    },
+    "totalBanished": {
+      "type": "integer",
+      "description": "Total amount of tokens sent to the null-address, which is equivalent to burning",
+      "format": "int64"
+    },
+    "totalFrozen": {
+      "type": "integer",
+      "description": "Total amount of frozen tokens (frozen security deposits, frozen rewards and frozen fees)",
+      "format": "int64"
+    },
+    "totalRollupBonds": {
+      "type": "integer",
+      "description": "Total amount of tokens locked as rollup bonds",
+      "format": "int64"
+    },
+    "totalSmartRollupBonds": {
+      "type": "integer",
+      "description": "Total amount of tokens locked as smart rollup bonds",
+      "format": "int64"
+    },
+    "totalLost": {
+      "type": "integer",
+      "description": "Total amount lost due to inaccuracy of the economic protocol introduced in Oxford.\nThis amount is literally lost, because it is no longer available for the account in any mean, but for some reason it is counted as delegated.",
+      "format": "int64"
+    },
+    "totalOwnStaked": {
+      "type": "integer",
+      "description": "Total active bakers' own staked balance",
+      "format": "int64"
+    },
+    "totalOwnDelegated": {
+      "type": "integer",
+      "description": "Total active bakers' own delegated balance",
+      "format": "int64"
+    },
+    "totalExternalStaked": {
+      "type": "integer",
+      "description": "Total active bakers' external staked balance",
+      "format": "int64"
+    },
+    "totalExternalDelegated": {
+      "type": "integer",
+      "description": "Total active bakers' external delegated balance",
+      "format": "int64"
+    },
+    "totalBakingPower": {
+      "type": "integer",
+      "description": "Total active bakers' baking power",
+      "format": "int64"
+    },
+    "totalVotingPower": {
+      "type": "integer",
+      "description": "Total active bakers' voting power",
+      "format": "int64"
+    },
+    "totalBakers": {
+      "type": "integer",
+      "description": "Total number of active bakers",
+      "format": "int32"
+    },
+    "totalStakers": {
+      "type": "integer",
+      "description": "Total number of active bakers' stakers",
+      "format": "int32"
+    },
+    "totalDelegators": {
+      "type": "integer",
+      "description": "Total number of active bakers' delegators",
+      "format": "int32"
+    },
+    "quote": {
+      "description": "Injected historical quote at the time of the block at which the statistics has been calculated",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/QuoteShort"
+        }
+      ]
+    }
+  }
+}

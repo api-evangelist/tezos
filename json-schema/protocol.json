@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Protocol",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)",
+      "format": "int32"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Hash of the protocol"
+    },
+    "version": {
+      "type": "integer",
+      "description": "Global version number",
+      "format": "int32"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Block height where the protocol was applied",
+      "format": "int32"
+    },
+    "firstCycle": {
+      "type": "integer",
+      "description": "Index of the first cycle started with the protocol",
+      "format": "int32"
+    },
+    "firstCycleLevel": {
+      "type": "integer",
+      "description": "Level of the first block of the first cycle started with the protocol",
+      "format": "int32"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Block height where the protocol ends. `null` if the protocol is active",
+      "format": "int32",
+      "nullable": true
+    },
+    "constants": {
+      "description": "Information about the protocol constants",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/ProtocolConstants"
+        }
+      ]
+    },
+    "extras": {
+      "description": "Off-chain extras",
+      "nullable": true
+    }
+  }
+}

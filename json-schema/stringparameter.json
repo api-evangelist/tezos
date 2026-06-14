@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StringParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a string to get items where the specified field is equal to the specified value.\n\nExample: `?parameters=abc`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify a string to get items where the specified field is not equal to the specified value.\n\nExample: `?parameters.ne=abc`.",
+      "nullable": true
+    },
+    "as": {
+      "type": "string",
+      "description": "**Same as** filter mode. \\\nSpecify a string template to get items where the specified field matches the specified template. \\\nThis mode supports wildcard `*`. Use `\\*` as an escape symbol.\n\nExample: `?parameters.as=*mid*` or `?parameters.as=*end`.",
+      "nullable": true
+    },
+    "un": {
+      "type": "string",
+      "description": "**Unlike** filter mode. \\\nSpecify a string template to get items where the specified field doesn't match the specified template.\nThis mode supports wildcard `*`. Use `\\*` as an escape symbol.\n\nExample: `?parameters.un=*mid*` or `?parameters.un=*end`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of strings to get items where the specified field is equal to one of the specified values. \\\nUse `\\,` as an escape symbol.\n\nExample: `?errors.in=bla,bal,abl`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \\\nUse `\\,` as an escape symbol.\n\nExample: `?errors.ni=bla,bal,abl`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "null": {
+      "type": "boolean",
+      "description": "**Is null** filter mode. \\\nUse this mode to get items where the specified field is null or not.\n\nExample: `?parameters.null` or `?parameters.null=false`.",
+      "nullable": true
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

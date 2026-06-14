@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BakingRightStatusParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify baking right status to get items where the specified field is equal to the specified value.\n\nExample: `?type=future`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify baking right status to get items where the specified field is not equal to the specified value.\n\nExample: `?type.ne=missed`.",
+      "nullable": true
+    }
+  },
+  "x-tzkt-extension": "query-parameter",
+  "x-tzkt-query-parameter": "future,realized,uncovered,missed"
+}

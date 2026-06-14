@@ -1,0 +1,36 @@
+{
+  "operation": "Domains_GetCount",
+  "method": "GET",
+  "path": "/v1/domains/count",
+  "tags": [
+    "Domains"
+  ],
+  "summary": "Get domains count",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "level",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "name",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "owner",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "address",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

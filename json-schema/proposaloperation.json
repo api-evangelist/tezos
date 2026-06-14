@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProposalOperation",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the operation, `proposal` - is used by bakers (delegates) to submit and/or upvote proposals to amend the protocol"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique ID of the operation, stored in the TzKT indexer database",
+          "format": "int64"
+        },
+        "level": {
+          "type": "integer",
+          "description": "The height of the block from the genesis block, in which the operation was included",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "block": {
+          "type": "string",
+          "description": "Hash of the block, in which the operation was included"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Hash of the operation"
+        },
+        "period": {
+          "description": "Information about the proposal period for which the proposal was submitted (upvoted)",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/PeriodInfo"
+            }
+          ]
+        },
+        "proposal": {
+          "description": "Information about the submitted (upvoted) proposal",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/ProposalAlias"
+            }
+          ]
+        },
+        "delegate": {
+          "description": "Information about the baker (delegate), submitted (upvoted) the proposal operation",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "votingPower": {
+          "type": "integer",
+          "description": "Baker's voting power",
+          "format": "int64"
+        },
+        "duplicated": {
+          "type": "boolean",
+          "description": "Indicates whether proposal upvote has already been pushed. Duplicated proposal operations are not counted when selecting proposal-winner."
+        },
+        "quote": {
+          "description": "Injected historical quote at the time of operation",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/QuoteShort"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

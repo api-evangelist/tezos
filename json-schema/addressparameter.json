@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AddressParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=` is the same as `param=`). \\\nSpecify an account address to get items where the specified field is equal to the specified value.\n\nExample: `?address=tz123..`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify an account address to get items where the specified field is not equal to the specified value.\n\nExample: `?address.ne=tz123..`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of account addresses to get items where the specified field is equal to one of the specified values.\n\nExample: `?address.in=tz123..,tz345..`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of account addresses to get items where the specified field is not equal to all the specified values.\n\nExample: `?address.ni=tz123..,tz345..`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

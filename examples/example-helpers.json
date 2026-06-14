@@ -1,0 +1,16 @@
+{
+  "operation": "Helpers_PostInject",
+  "method": "POST",
+  "path": "/v1/helpers/inject",
+  "tags": [
+    "Helpers"
+  ],
+  "summary": "Inject operation",
+  "parameters": [
+    {
+      "name": "async",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

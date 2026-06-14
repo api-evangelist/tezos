@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AnyOfParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a value to get items where any of the specified fields is equal to the specified value.\n\nExample: `?anyof.sender.target=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of values to get items where any of the specified fields is equal to one of the specified values.\n\nExample: `?anyof.sender.target.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M,null`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "null": {
+      "type": "boolean",
+      "description": "**Is null** filter mode. \\\nUse this mode to get items where any of the specified fields is null or not.\n\nExample: `?anyof.from.to.null` or `?anyof.from.to.null=false`.",
+      "nullable": true
+    }
+  },
+  "x-tzkt-extension": "anyof-parameter"
+}

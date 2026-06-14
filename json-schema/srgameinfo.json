@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SrGameInfo",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  ",
+      "format": "int64"
+    },
+    "initiator": {
+      "description": "Initiator, who found a wrong commitment and started the refutation game.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "initiatorCommitment": {
+      "description": "Initiator's version of a valid commitment",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/SrCommitmentInfo"
+        }
+      ]
+    },
+    "opponent": {
+      "description": "Opponent, who was accused in publishing a wrong commitment.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "opponentCommitment": {
+      "description": "Opponent's version of a valid commitment",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/SrCommitmentInfo"
+        }
+      ]
+    },
+    "initiatorReward": {
+      "type": "integer",
+      "description": "In case the initiator won, this field will contain the reward amount (in mutez).",
+      "format": "int64",
+      "nullable": true
+    },
+    "initiatorLoss": {
+      "type": "integer",
+      "description": "In case the initiator lost (including a `draw`), this field will contain the loss amount (in mutez).",
+      "format": "int64",
+      "nullable": true
+    },
+    "opponentReward": {
+      "type": "integer",
+      "description": "In case the opponent won, this field will contain the reward amount (in mutez).",
+      "format": "int64",
+      "nullable": true
+    },
+    "opponentLoss": {
+      "type": "integer",
+      "description": "In case the opponent lost (including a `draw`), this field will contain the loss amount (in mutez).",
+      "format": "int64",
+      "nullable": true
+    }
+  }
+}

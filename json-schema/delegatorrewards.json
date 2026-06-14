@@ -1,0 +1,349 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DelegatorRewards",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cycle": {
+      "type": "integer",
+      "description": "Cycle in which rewards were or will be earned.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "baker": {
+      "description": "Baker at the snapshot time.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "delegatedBalance": {
+      "type": "integer",
+      "description": "Amount delegated to the baker at the snapshot time (micro tez).\nThis amount doesn't include staked amount.",
+      "format": "int64"
+    },
+    "stakedPseudotokens": {
+      "type": "string",
+      "description": "Amount of staked pseudotokens, representing staker's share within the baker's `externalStakedBalance` at the snapshot time.",
+      "nullable": true
+    },
+    "stakedBalance": {
+      "type": "integer",
+      "description": "Estimated amount staked to the baker at the snapshot time (micro tez).\nIt's computed on-the-fly as `externalStakedBalance * stakedPseudotokens / issuedPseudotokens`.",
+      "format": "int64",
+      "nullable": true
+    },
+    "bakerRewards": {
+      "description": "Rewards of the delegator's baker, from which the delegator can estimate his share, given his `delegatedBalance`.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/BakerRewards"
+        }
+      ]
+    },
+    "quote": {
+      "description": "Injected historical quote at the end of the cycle",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/QuoteShort"
+        }
+      ]
+    },
+    "bakingPower": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "totalBakingPower": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "bakerDelegatedBalance": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "externalDelegatedBalance": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "bakerStakedBalance": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "externalStakedBalance": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "expectedBlocks": {
+      "type": "number",
+      "description": "**DEPRECATED**",
+      "format": "double"
+    },
+    "expectedEndorsements": {
+      "type": "number",
+      "description": "**DEPRECATED**",
+      "format": "double"
+    },
+    "expectedDalShards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "futureBlocks": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "futureBlockRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "blocks": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "blockRewardsDelegated": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "blockRewardsStakedOwn": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "blockRewardsStakedEdge": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "blockRewardsStakedShared": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "missedBlocks": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "missedBlockRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "futureEndorsements": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "futureEndorsementRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsements": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "endorsementRewardsDelegated": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementRewardsStakedOwn": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementRewardsStakedEdge": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementRewardsStakedShared": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "missedEndorsements": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "missedEndorsementRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "futureDalAttestationRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "dalAttestationRewardsDelegated": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "dalAttestationRewardsStakedOwn": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "dalAttestationRewardsStakedEdge": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "dalAttestationRewardsStakedShared": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "missedDalAttestationRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "blockFees": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "missedBlockFees": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleBakingRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleBakingLostStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleBakingLostUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleBakingLostExternalStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleBakingLostExternalUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostExternalStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostExternalUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostExternalStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostExternalUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsDelegated": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsStakedOwn": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsStakedEdge": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsStakedShared": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsDelegated": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsStakedOwn": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsStakedEdge": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsStakedShared": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "nonceRevelationLosses": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    }
+  }
+}

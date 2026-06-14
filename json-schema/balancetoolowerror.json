@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BalanceTooLowError",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of an error, `contract.balance_too_low` - an operation tried to spend more then the contract has\nhttps://tezos.gitlab.io/api/errors.html - full list of errors"
+        },
+        "balance": {
+          "type": "integer",
+          "description": "Balance of the contract",
+          "format": "int64"
+        },
+        "required": {
+          "type": "integer",
+          "description": "Required balance to send the operation",
+          "format": "int64"
+        }
+      }
+    }
+  ]
+}

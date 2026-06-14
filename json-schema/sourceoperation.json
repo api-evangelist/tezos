@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SourceOperation",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Operation type"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Operation hash",
+      "nullable": true
+    },
+    "counter": {
+      "type": "integer",
+      "description": "Operation counter (null in case of synthetic operations)",
+      "format": "int32",
+      "nullable": true
+    },
+    "nonce": {
+      "type": "integer",
+      "description": "Operation nonce (null in case of non-internal or synthetic operations)",
+      "format": "int32",
+      "nullable": true
+    },
+    "parameter": {
+      "description": "Transaction parameter, including called entrypoint and value passed to the entrypoint.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/TxParameter"
+        }
+      ]
+    }
+  }
+}

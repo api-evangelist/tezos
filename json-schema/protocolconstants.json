@@ -1,0 +1,232 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProtocolConstants",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "rampUpCycles": {
+      "type": "integer",
+      "description": "The number of cycles where security deposit is ramping up",
+      "format": "int32"
+    },
+    "noRewardCycles": {
+      "type": "integer",
+      "description": "The number of cycles with no baking rewards",
+      "format": "int32"
+    },
+    "consensusRightsDelay": {
+      "type": "integer",
+      "description": "Delay in cycles after which baking rights are assigned",
+      "format": "int32"
+    },
+    "delegateParametersActivationDelay": {
+      "type": "integer",
+      "description": "Delay in cycles after which the parameters from `set_delegate_parameters` operations take effect",
+      "format": "int32"
+    },
+    "blocksPerCycle": {
+      "type": "integer",
+      "description": "A number of blocks the cycle contains",
+      "format": "int32"
+    },
+    "blocksPerCommitment": {
+      "type": "integer",
+      "description": "A number of blocks that indicates how often seed nonce hash is included in a block. Seed nonce hash presents in only one out of `blocksPerCommitment`",
+      "format": "int32"
+    },
+    "blocksPerSnapshot": {
+      "type": "integer",
+      "description": "A number of blocks that indicates how often a snapshot (snapshots are records of the state of stake distributions) is taken",
+      "format": "int32"
+    },
+    "blocksPerVoting": {
+      "type": "integer",
+      "description": "A number of block that indicates how long a voting period takes",
+      "format": "int32"
+    },
+    "timeBetweenBlocks": {
+      "type": "integer",
+      "description": "Minimum amount of seconds between blocks",
+      "format": "int32"
+    },
+    "attestersPerBlock": {
+      "type": "integer",
+      "description": "Number of bakers that assigned to attest a block",
+      "format": "int32"
+    },
+    "hardOperationGasLimit": {
+      "type": "integer",
+      "description": "Maximum amount of gas that one operation can consume",
+      "format": "int32"
+    },
+    "hardOperationStorageLimit": {
+      "type": "integer",
+      "description": "Maximum amount of storage that one operation can consume",
+      "format": "int32"
+    },
+    "hardBlockGasLimit": {
+      "type": "integer",
+      "description": "Maximum amount of total gas usage of a single block",
+      "format": "int32"
+    },
+    "minimalStake": {
+      "type": "integer",
+      "description": "Required number of tokens to get 1 roll (micro tez)",
+      "format": "int64"
+    },
+    "minimalFrozenStake": {
+      "type": "integer",
+      "description": "Required number of tokens to be frozen by bakers (micro tez)",
+      "format": "int64"
+    },
+    "blockDeposit": {
+      "type": "integer",
+      "description": "Security deposit for baking (producing) a block (micro tez)",
+      "format": "int64"
+    },
+    "blockReward": {
+      "type": "array",
+      "description": "Reward for baking (producing) a block (micro tez)",
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "attestationDeposit": {
+      "type": "integer",
+      "description": "Security deposit for sending an attestation operation (micro tez)",
+      "format": "int64"
+    },
+    "attestationReward": {
+      "type": "array",
+      "description": "Reward for sending an attestation operation (micro tez)",
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "originationSize": {
+      "type": "integer",
+      "description": "Initial storage size of an originated (created) account (bytes)",
+      "format": "int32"
+    },
+    "byteCost": {
+      "type": "integer",
+      "description": "Cost of one storage byte in the blockchain (micro tez)",
+      "format": "int32"
+    },
+    "proposalQuorum": {
+      "type": "number",
+      "description": "Percentage of the total number of voting power required to select a proposal on the proposal period",
+      "format": "double"
+    },
+    "ballotQuorumMin": {
+      "type": "number",
+      "description": "The minimum value of quorum percentage on the exploration and promotion periods",
+      "format": "double"
+    },
+    "ballotQuorumMax": {
+      "type": "number",
+      "description": "The maximum value of quorum percentage on the exploration and promotion periods",
+      "format": "double"
+    },
+    "lbToggleThreshold": {
+      "type": "integer",
+      "description": "1/2 window size of 2000 blocks with precision of 1000000 for integer computation",
+      "format": "int32"
+    },
+    "consensusThreshold": {
+      "type": "integer",
+      "description": "Attestation quorum",
+      "format": "int32"
+    },
+    "minParticipationNumerator": {
+      "type": "integer",
+      "description": "Number of attested slots needed to receive attestation rewards",
+      "format": "int32"
+    },
+    "minParticipationDenominator": {
+      "type": "integer",
+      "description": "Number of attested slots needed to receive attestation rewards",
+      "format": "int32"
+    },
+    "denunciationPeriod": {
+      "type": "integer",
+      "description": "Number of cycles after double baking/(pre)attestation where an accusation operation can be injected",
+      "format": "int32"
+    },
+    "slashingDelay": {
+      "type": "integer",
+      "description": "Number of cycles after double baking/(pre)attestation evidence where slashing happens",
+      "format": "int32"
+    },
+    "maxDelegatedOverFrozenRatio": {
+      "type": "integer",
+      "description": "The ratio of delegated tez over the baker\u2019s frozen stake",
+      "format": "int32"
+    },
+    "maxExternalOverOwnStakeRatio": {
+      "type": "integer",
+      "description": "The ratio of external staked balance over the baker\u2019s own staked balance",
+      "format": "int32"
+    },
+    "delegationPowerDivider": {
+      "type": "integer",
+      "description": "The divider by which delegation power is divided",
+      "format": "int32"
+    },
+    "smartRollupOriginationSize": {
+      "type": "integer",
+      "description": "Initial storage size of an originated (created) smart rollup (bytes)",
+      "format": "int32"
+    },
+    "smartRollupStakeAmount": {
+      "type": "integer",
+      "description": "Smart rollup commitment bond (mutez)",
+      "format": "int64"
+    },
+    "smartRollupChallengeWindow": {
+      "type": "integer",
+      "description": "Window (in blocks) when it's possible to refute pending commitment",
+      "format": "int32"
+    },
+    "smartRollupCommitmentPeriod": {
+      "type": "integer",
+      "description": "Period (in blocks) for publishing commitments",
+      "format": "int32"
+    },
+    "smartRollupTimeoutPeriod": {
+      "type": "integer",
+      "description": "Period (in blocks) when a refutation game player must make a turn",
+      "format": "int32"
+    },
+    "dalNumberOfShards": {
+      "type": "integer",
+      "description": "Number of DAL Shards",
+      "format": "int32"
+    },
+    "dictator": {
+      "type": "string",
+      "description": "Governance dictator",
+      "nullable": true
+    },
+    "endorsersPerBlock": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "endorsementDeposit": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementReward": {
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    }
+  }
+}

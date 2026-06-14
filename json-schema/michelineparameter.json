@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MichelineParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify Micheline JSON value to get items where the specified field is equal to the specified value.\n\nExample: `?type={\"prim\":\"string\"}`.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "ne": {
+      "description": "**Not equal** filter mode. \\\nSpecify Micheline JSON value to get items where the specified field is not equal to the specified value.\n\nExample: `?balance.ne={\"prim\":\"string\"}`.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of Micheline JSON values where the specified field is equal to one of the specified values.\n\nExample: `?type.in={\"prim\":\"string\"},{\"prim\":\"nat\"}`.",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/IMicheline"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of Micheline JSON values where the specified field is not equal to all the specified values.\n\nExample: `?type.ni={\"prim\":\"string\"},{\"prim\":\"nat\"}`.",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/IMicheline"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigMap",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ptr": {
+      "type": "integer",
+      "description": "Bigmap pointer",
+      "format": "int32"
+    },
+    "contract": {
+      "description": "Smart contract in which's storage the bigmap is allocated",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "path": {
+      "type": "string",
+      "description": "Path to the bigmap in the contract storage "
+    },
+    "tags": {
+      "type": "array",
+      "description": "List of tags ( `metadata`, `token_metadata`,`ledger`, or `null` if there are no tags)",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Bigmap status (`true` - active, `false` - removed)"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Level of the block where the bigmap was seen first time",
+      "format": "int32"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Level of the block where the bigmap was seen last time",
+      "format": "int32"
+    },
+    "totalKeys": {
+      "type": "integer",
+      "description": "Total number of keys ever added to the bigmap",
+      "format": "int32"
+    },
+    "activeKeys": {
+      "type": "integer",
+      "description": "Total number of currently active keys",
+      "format": "int32"
+    },
+    "updates": {
+      "type": "integer",
+      "description": "Total number of actions with the bigmap",
+      "format": "int32"
+    },
+    "keyType": {
+      "description": "Bigmap key type as JSON schema or Micheline, depending on the `micheline` query parameter."
+    },
+    "valueType": {
+      "description": "Bigmap value type as JSON schema or Micheline, depending on the `micheline` query parameter."
+    }
+  }
+}

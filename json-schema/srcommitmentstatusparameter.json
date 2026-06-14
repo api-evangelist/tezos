@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SrCommitmentStatusParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \\\nSpecify an sr commitment status to get items where the specified field is equal to the specified value.\n\nExample: `?status=pending`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify an sr commitment status to get items where the specified field is not equal to the specified value.\n\nExample: `?status.ne=cemented`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of sr commitment statuses to get items where the specified field is equal to one of the specified values.\n\nExample: `?status.in=cemented,executed`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of sr commitment statuses to get items where the specified field is not equal to all the specified values.\n\nExample: `?status.ni=cemented,executed`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter",
+  "x-tzkt-query-parameter": "orphan,refuted,pending,cemented,executed"
+}

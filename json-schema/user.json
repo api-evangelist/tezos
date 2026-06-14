@@ -1,0 +1,336 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Internal TzKT id",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string",
+          "description": "Public key hash of the account"
+        },
+        "alias": {
+          "type": "string",
+          "description": "Name of the project behind the account or account description",
+          "nullable": true
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "Base58 representation of account's public key, revealed by the account",
+          "nullable": true
+        },
+        "revealed": {
+          "type": "boolean",
+          "description": "Public key revelation status. Unrevealed account can't send manager operation (transaction, origination etc.)"
+        },
+        "balance": {
+          "type": "integer",
+          "description": "Account balance",
+          "format": "int64"
+        },
+        "rollupBonds": {
+          "type": "integer",
+          "description": "Amount of tx rollup commitment bonds (micro tez)",
+          "format": "int64"
+        },
+        "smartRollupBonds": {
+          "type": "integer",
+          "description": "Amount of smart rollup commitment bonds (micro tez)",
+          "format": "int64"
+        },
+        "stakedBalance": {
+          "type": "integer",
+          "description": "Amount staked with the selected baker (micro tez).\nLike delegated amount, except for it is frozen and can be slashed.",
+          "format": "int64"
+        },
+        "stakedPseudotokens": {
+          "type": "string",
+          "description": "Amount of \"pseudo-tokens\" received after staking. These pseudotokens are used for unstaking.",
+          "nullable": true
+        },
+        "unstakedBalance": {
+          "type": "integer",
+          "description": "Amount that was unstaked, but not yet finalized (i.e. it is still frozen) (micro tez)",
+          "format": "int64"
+        },
+        "unstakedBaker": {
+          "description": "Information about the baker, for which there are pending unstake requests",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "counter": {
+          "type": "integer",
+          "description": "An account nonce which is used to prevent operation replay",
+          "format": "int32"
+        },
+        "delegate": {
+          "description": "Information about the current delegate of the account. `null` if it's not delegated",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DelegateInfo"
+            }
+          ]
+        },
+        "delegationLevel": {
+          "type": "integer",
+          "description": "Block height of latest delegation. `null` if it's not delegated",
+          "format": "int32",
+          "nullable": true
+        },
+        "delegationTime": {
+          "type": "string",
+          "description": "Block datetime of latest delegation (ISO 8601, e.g. `2020-02-20T02:40:57Z`). `null` if it's not delegated",
+          "format": "date-time",
+          "nullable": true
+        },
+        "numContracts": {
+          "type": "integer",
+          "description": "Number of contracts, created (originated) and/or managed by the account",
+          "format": "int32"
+        },
+        "rollupsCount": {
+          "type": "integer",
+          "description": "Number of tx rollups, created (originated) by the account",
+          "format": "int32"
+        },
+        "smartRollupsCount": {
+          "type": "integer",
+          "description": "Number of smart rollups, created (originated) by the account",
+          "format": "int32"
+        },
+        "activeTokensCount": {
+          "type": "integer",
+          "description": "Number of account tokens with non-zero balances",
+          "format": "int32"
+        },
+        "tokenBalancesCount": {
+          "type": "integer",
+          "description": "Number of tokens the account ever had",
+          "format": "int32"
+        },
+        "tokenTransfersCount": {
+          "type": "integer",
+          "description": "Number of token transfers from/to the account",
+          "format": "int32"
+        },
+        "activeTicketsCount": {
+          "type": "integer",
+          "description": "Number of tickets the account owns.",
+          "format": "int32"
+        },
+        "ticketBalancesCount": {
+          "type": "integer",
+          "description": "Number of tickets the account ever owned.",
+          "format": "int32"
+        },
+        "ticketTransfersCount": {
+          "type": "integer",
+          "description": "Number of ticket transfers from/to the account.",
+          "format": "int32"
+        },
+        "numActivations": {
+          "type": "integer",
+          "description": "Number of account activation operations. Are used to activate accounts that were recommended allocations of\ntezos tokens for donations to the Tezos Foundation\u2019s fundraiser",
+          "format": "int32"
+        },
+        "numDelegations": {
+          "type": "integer",
+          "description": "Number of delegation operations, related to the account",
+          "format": "int32"
+        },
+        "numOriginations": {
+          "type": "integer",
+          "description": "Number of all origination (deployment / contract creation) operations, related to the account",
+          "format": "int32"
+        },
+        "numTransactions": {
+          "type": "integer",
+          "description": "Number of all transaction (tez transfer) operations, related to the account",
+          "format": "int32"
+        },
+        "numReveals": {
+          "type": "integer",
+          "description": "Number of reveal (is used to reveal the public key associated with an account) operations of the contract",
+          "format": "int32"
+        },
+        "numRegisterConstants": {
+          "type": "integer",
+          "description": "Number of register global constant operations sent by the account",
+          "format": "int32"
+        },
+        "numSetDepositsLimits": {
+          "type": "integer",
+          "description": "Number of set deposits limit operations sent by the account",
+          "format": "int32"
+        },
+        "numMigrations": {
+          "type": "integer",
+          "description": "Number of migration (result of the context (database) migration during a protocol update) operations,\nrelated to the account (synthetic type) ",
+          "format": "int32"
+        },
+        "txRollupOriginationCount": {
+          "type": "integer",
+          "description": "Number of tx rollup origination operations sent by the account",
+          "format": "int32"
+        },
+        "txRollupSubmitBatchCount": {
+          "type": "integer",
+          "description": "Number of tx rollup submit batch operations sent by the account",
+          "format": "int32"
+        },
+        "txRollupCommitCount": {
+          "type": "integer",
+          "description": "Number of tx rollup commit operations sent by the account",
+          "format": "int32"
+        },
+        "txRollupReturnBondCount": {
+          "type": "integer",
+          "description": "Number of tx rollup return bond operations sent by the account",
+          "format": "int32"
+        },
+        "txRollupFinalizeCommitmentCount": {
+          "type": "integer",
+          "description": "Number of tx rollup finalize commitment operations sent by the account",
+          "format": "int32"
+        },
+        "txRollupRemoveCommitmentCount": {
+          "type": "integer",
+          "description": "Number of tx rollup remove commitment operations sent by the account",
+          "format": "int32"
+        },
+        "txRollupRejectionCount": {
+          "type": "integer",
+          "description": "Number of tx rollup rejection operations sent by the account",
+          "format": "int32"
+        },
+        "txRollupDispatchTicketsCount": {
+          "type": "integer",
+          "description": "Number of tx rollup dispatch tickets operations sent by the account",
+          "format": "int32"
+        },
+        "transferTicketCount": {
+          "type": "integer",
+          "description": "Number of transfer ticket operations sent by the account",
+          "format": "int32"
+        },
+        "increasePaidStorageCount": {
+          "type": "integer",
+          "description": "Number of `increase_paid_storage` operations sent by the account",
+          "format": "int32"
+        },
+        "drainDelegateCount": {
+          "type": "integer",
+          "description": "Number of `drain_delegate` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupAddMessagesCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_add_messages` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupCementCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_cement` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupExecuteCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_execute_outbox_message` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupOriginateCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_originate` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupPublishCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_publish` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupRecoverBondCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_recover_bond` operations related to the account",
+          "format": "int32"
+        },
+        "smartRollupRefuteCount": {
+          "type": "integer",
+          "description": "Number of `smart_rollup_refute` operations related to the account",
+          "format": "int32"
+        },
+        "refutationGamesCount": {
+          "type": "integer",
+          "description": "Number of smart rollup refutation games related to the account",
+          "format": "int32"
+        },
+        "activeRefutationGamesCount": {
+          "type": "integer",
+          "description": "Number of active smart rollup refutation games related to the account",
+          "format": "int32"
+        },
+        "stakingOpsCount": {
+          "type": "integer",
+          "description": "Number of staking operations related to the account",
+          "format": "int32"
+        },
+        "stakingUpdatesCount": {
+          "type": "integer",
+          "description": "Number of staking updates related to the account",
+          "format": "int32"
+        },
+        "setDelegateParametersOpsCount": {
+          "type": "integer",
+          "description": "Number of set delegate parameters operations related to the account",
+          "format": "int32"
+        },
+        "dalPublishCommitmentOpsCount": {
+          "type": "integer",
+          "description": "Number of DAL publish commitment operations related to the account",
+          "format": "int32"
+        },
+        "firstActivity": {
+          "type": "integer",
+          "description": "Block height of the first operation, related to the account",
+          "format": "int32",
+          "nullable": true
+        },
+        "firstActivityTime": {
+          "type": "string",
+          "description": "Block datetime of the first operation, related to the account (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time",
+          "nullable": true
+        },
+        "lastActivity": {
+          "type": "integer",
+          "description": "Height of the block in which the account state was changed last time",
+          "format": "int32",
+          "nullable": true
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "description": "Datetime of the block in which the account state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time",
+          "nullable": true
+        },
+        "extras": {
+          "description": "Off-chain extras",
+          "nullable": true
+        }
+      }
+    }
+  ]
+}

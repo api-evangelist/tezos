@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AutostakingOperation",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the operation, `autostaking`"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Internal TzKT ID.  \n**[sortable]**",
+          "format": "int64"
+        },
+        "level": {
+          "type": "integer",
+          "description": "Height of the block from the genesis",
+          "format": "int32"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+          "format": "date-time"
+        },
+        "baker": {
+          "description": "Baker for which autostaking event happened",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Alias"
+            }
+          ]
+        },
+        "action": {
+          "type": "string",
+          "description": "Autostaking action (`stake`, `unstake`, `finalize`)"
+        },
+        "amount": {
+          "type": "integer",
+          "description": "Amount (micro tez)",
+          "format": "int64"
+        },
+        "stakingUpdatesCount": {
+          "type": "integer",
+          "description": "Number of staking updates happened internally",
+          "format": "int64"
+        },
+        "quote": {
+          "description": "Injected historical quote at the time of operation",
+          "nullable": true,
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/QuoteShort"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

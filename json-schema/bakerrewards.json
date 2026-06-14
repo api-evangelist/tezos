@@ -1,0 +1,412 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BakerRewards",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cycle": {
+      "type": "integer",
+      "description": "Cycle in which rewards were or will be earned.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "ownDelegatedBalance": {
+      "type": "integer",
+      "description": "Amount delegated from the baker's own balance (micro tez).\nThis amount doesn't include staked amount.",
+      "format": "int64"
+    },
+    "externalDelegatedBalance": {
+      "type": "integer",
+      "description": "Amount delegated from external delegators and \"unstakers\" (delegators who left the baker, but still had locked unstaked balance delegated to the baker) (micro tez).\nThis amount doesn't include external staked amount.",
+      "format": "int64"
+    },
+    "delegatorsCount": {
+      "type": "integer",
+      "description": "Number of delegators (those who were delegated to the baker).\nThis doesn't include \"unstakers\" (delegators who left the baker, but still had locked unstaked balance delegated to the baker).",
+      "format": "int32"
+    },
+    "ownStakedBalance": {
+      "type": "integer",
+      "description": "Amount staked from the baker's own balance (micro tez).",
+      "format": "int64"
+    },
+    "externalStakedBalance": {
+      "type": "integer",
+      "description": "Amount staked from external stakers (micro tez).",
+      "format": "int64"
+    },
+    "stakersCount": {
+      "type": "integer",
+      "description": "Number of external stakers (those who delegated to the baker and also staked some amount).",
+      "format": "int32"
+    },
+    "issuedPseudotokens": {
+      "type": "string",
+      "description": "Amount of staking pseudotokens issued by/for external stakers.",
+      "nullable": true
+    },
+    "bakingPower": {
+      "type": "integer",
+      "description": "Baker's baking power",
+      "format": "int64"
+    },
+    "totalBakingPower": {
+      "type": "integer",
+      "description": "Sum of baking power of all active bakers",
+      "format": "int64"
+    },
+    "expectedBlocks": {
+      "type": "number",
+      "description": "Expected value of how many blocks baker should produce based on baker's active stake, selected stake and blocks per cycle.",
+      "format": "double"
+    },
+    "futureBlocks": {
+      "type": "integer",
+      "description": "Number of blocks which baker is allowed to produce in this cycle based on future baking rights.",
+      "format": "int32"
+    },
+    "futureBlockRewards": {
+      "type": "integer",
+      "description": "Estimated value of future block rewards.",
+      "format": "int64"
+    },
+    "blocks": {
+      "type": "integer",
+      "description": "Number of successfully baked blocks (both proposed and re-proposed blocks).",
+      "format": "int32"
+    },
+    "blockRewardsDelegated": {
+      "type": "integer",
+      "description": "Rewards, corresponding to delegated stake, received for baked blocks (both proposed and re-proposed blocks) on baker's liquid balance\n(it is not frozen and can be spent immediately).",
+      "format": "int64"
+    },
+    "blockRewardsStakedOwn": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's own stake, received for baked blocks (both proposed and re-proposed blocks) on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "blockRewardsStakedEdge": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's edge from external stake, received for baked blocks (both proposed and re-proposed blocks) on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "blockRewardsStakedShared": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's external stake, received for baked blocks (both proposed and re-proposed blocks) on baker's external staked balance\n(it is frozen and belongs to baker's stakers).",
+      "format": "int64"
+    },
+    "missedBlocks": {
+      "type": "integer",
+      "description": "Number of missed opportunities to bake block.",
+      "format": "int32"
+    },
+    "missedBlockRewards": {
+      "type": "integer",
+      "description": "Rewards which were not received due to missing blocks.",
+      "format": "int64"
+    },
+    "expectedAttestations": {
+      "type": "number",
+      "description": "Expected value of how many slots baker should validate based on baker's active stake, selected stake and attestation slots per cycle.",
+      "format": "double"
+    },
+    "futureAttestations": {
+      "type": "integer",
+      "description": "Number of slots which baker is allowed to validate in this cycle based on future attestation rights.",
+      "format": "int32"
+    },
+    "futureAttestationRewards": {
+      "type": "integer",
+      "description": "Estimated value of future attestation rewards.",
+      "format": "int64"
+    },
+    "attestations": {
+      "type": "integer",
+      "description": "Number of successfully attested slots.",
+      "format": "int32"
+    },
+    "attestationRewardsDelegated": {
+      "type": "integer",
+      "description": "Rewards, corresponding to delegated stake, received for attested slots on baker's liquid balance\n(it is not frozen and can be spent immediately).",
+      "format": "int64"
+    },
+    "attestationRewardsStakedOwn": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's own stake, received for attested slots on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "attestationRewardsStakedEdge": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's edge from external stake, received for attested slots on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "attestationRewardsStakedShared": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's external stake, received for attested slots on baker's external staked balance\n(it is frozen and belongs to baker's stakers).",
+      "format": "int64"
+    },
+    "missedAttestations": {
+      "type": "integer",
+      "description": "Number of not attested (missed) slots.",
+      "format": "int32"
+    },
+    "missedAttestationRewards": {
+      "type": "integer",
+      "description": "Rewards which were not received due to missing attestations.",
+      "format": "int64"
+    },
+    "expectedDalAttestations": {
+      "type": "integer",
+      "description": "Expected value of how many dal shards baker should attest based on baker's active stake, selected stake and total shards per cycle.",
+      "format": "int64"
+    },
+    "futureDalAttestationRewards": {
+      "type": "integer",
+      "description": "Estimated value of future dal attestation rewards.",
+      "format": "int64"
+    },
+    "dalAttestationRewardsDelegated": {
+      "type": "integer",
+      "description": "Rewards, corresponding to delegated stake, received for attested dal shards on baker's liquid balance\n(it is not frozen and can be spent immediately).",
+      "format": "int64"
+    },
+    "dalAttestationRewardsStakedOwn": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's own stake, received for attested dal shards on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "dalAttestationRewardsStakedEdge": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's edge from external stake, received for attested dal shards on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "dalAttestationRewardsStakedShared": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's external stake, received for attested dal shards on baker's external staked balance\n(it is frozen and belongs to baker's stakers).",
+      "format": "int64"
+    },
+    "missedDalAttestationRewards": {
+      "type": "integer",
+      "description": "Rewards which were not received due to denunciation or not enough participation.",
+      "format": "int64"
+    },
+    "blockFees": {
+      "type": "integer",
+      "description": "Operation fees which were harvested from successfully baked blocks.",
+      "format": "int64"
+    },
+    "missedBlockFees": {
+      "type": "integer",
+      "description": "Operation fees which were not received due to missing blocks.",
+      "format": "int64"
+    },
+    "doubleBakingRewards": {
+      "type": "integer",
+      "description": "Rewards for detecting double baking (accusing someone of producing two different blocks at the same level).",
+      "format": "int64"
+    },
+    "doubleBakingLostStaked": {
+      "type": "integer",
+      "description": "Amount of baker's own staked balance lost due to double baking",
+      "format": "int64"
+    },
+    "doubleBakingLostUnstaked": {
+      "type": "integer",
+      "description": "Amount of baker's own unstaked balance lost due to double baking",
+      "format": "int64"
+    },
+    "doubleBakingLostExternalStaked": {
+      "type": "integer",
+      "description": "Amount of baker's external staked balance lost due to double baking",
+      "format": "int64"
+    },
+    "doubleBakingLostExternalUnstaked": {
+      "type": "integer",
+      "description": "Amount of baker's external unstaked balance lost due to double baking",
+      "format": "int64"
+    },
+    "doubleConsensusRewards": {
+      "type": "integer",
+      "description": "Rewards for detecting double (pre)attestation (accusing someone of validating two different blocks at the same level).",
+      "format": "int64"
+    },
+    "doubleConsensusLostStaked": {
+      "type": "integer",
+      "description": "Amount of baker's own staked balance lost due to double (pre)attestation",
+      "format": "int64"
+    },
+    "doubleConsensusLostUnstaked": {
+      "type": "integer",
+      "description": "Amount of baker's own unstaked balance lost due to double (pre)attestation",
+      "format": "int64"
+    },
+    "doubleConsensusLostExternalStaked": {
+      "type": "integer",
+      "description": "Amount of baker's external staked balance lost due to double (pre)attestation",
+      "format": "int64"
+    },
+    "doubleConsensusLostExternalUnstaked": {
+      "type": "integer",
+      "description": "Amount of baker's external unstaked balance lost due to double (pre)attestation",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsDelegated": {
+      "type": "integer",
+      "description": "Rewards, corresponding to delegated stake, for including vdf revelations, received on baker's liquid balance\n(it is not frozen and can be spent immediately).",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsStakedOwn": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's own stake, for including vdf revelations, received on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsStakedEdge": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's edge from external stake, for including vdf revelations, received on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "vdfRevelationRewardsStakedShared": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's external stake, for including vdf revelations, received on baker's external staked balance\n(it is frozen and belongs to baker's stakers).",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsDelegated": {
+      "type": "integer",
+      "description": "Rewards, corresponding to delegated stake, for including seed nonce revelations, received on baker's liquid balance\n(it is not frozen and can be spent immediately).",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsStakedOwn": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's own stake, for including seed nonce revelations, received on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsStakedEdge": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's edge from external stake, for including seed nonce revelations, received on baker's own staked balance\n(it is frozen and belongs to the baker).",
+      "format": "int64"
+    },
+    "nonceRevelationRewardsStakedShared": {
+      "type": "integer",
+      "description": "Rewards, corresponding to baker's external stake, for including seed nonce revelations, received on baker's external staked balance\n(it is frozen and belongs to baker's stakers).",
+      "format": "int64"
+    },
+    "nonceRevelationLosses": {
+      "type": "integer",
+      "description": "Amount of frozen deposits lost due to missing seed nonce revelation (always zero after Ithaca).",
+      "format": "int64"
+    },
+    "quote": {
+      "description": "Injected historical quote at the end of the cycle",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/QuoteShort"
+        }
+      ]
+    },
+    "expectedDalShards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "expectedEndorsements": {
+      "type": "number",
+      "description": "**DEPRECATED**",
+      "format": "double"
+    },
+    "futureEndorsements": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "futureEndorsementRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsements": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "endorsementRewardsDelegated": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementRewardsStakedOwn": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementRewardsStakedEdge": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "endorsementRewardsStakedShared": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "missedEndorsements": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int32"
+    },
+    "missedEndorsementRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostExternalStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doubleEndorsingLostExternalUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingRewards": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostExternalStaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    },
+    "doublePreendorsingLostExternalUnstaked": {
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "format": "int64"
+    }
+  }
+}

@@ -287,6 +287,8 @@ common:
     url: https://tzkt.io
   - type: Blog
     url: https://baking-bad.org/blog/
+  - type: OpenAPI
+    url: openapi/openapi.json
   - type: Plans
     url: plans/tezos-plans-pricing.yml
   - type: RateLimits

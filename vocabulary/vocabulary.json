@@ -1,0 +1,1354 @@
+{
+  "title": "TzKT API Vocabulary",
+  "description": "Terms and concepts used in the TzKT Tezos blockchain indexer API",
+  "version": "1.0.0",
+  "source": "https://api.tzkt.io/v1/swagger.json",
+  "terms": [
+    {
+      "term": "type",
+      "type": "string",
+      "description": "Type of the account (`user` - simple wallet account, `delegate` - account, registered as a delegate (baker),\n`contract` - smart contract programmable account, `ghost` - non-existent contract, `empty` - account hasn't appeared in the blockchain yet,\n`rollup` - transactional optimistic rollup, `smart_rollup` - smart contract optimistic rollup)",
+      "source": "schema:Account"
+    },
+    {
+      "term": "address",
+      "type": "string",
+      "description": "",
+      "source": "schema:Account"
+    },
+    {
+      "term": "alias",
+      "type": "string",
+      "description": "Account alias name (off-chain data).",
+      "source": "schema:Alias"
+    },
+    {
+      "term": "active",
+      "type": "boolean",
+      "description": "Delegation status (`true` - active, `false` - deactivated)",
+      "source": "schema:DelegateInfo"
+    },
+    {
+      "term": "version",
+      "type": "string",
+      "description": "Software version (commit tag)",
+      "source": "schema:SoftwareAlias"
+    },
+    {
+      "term": "date",
+      "type": "string",
+      "description": "Date of the commit or when the software was first seen",
+      "source": "schema:SoftwareAlias"
+    },
+    {
+      "term": "eq",
+      "type": "integer",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify an integer number to get items where the specified field is equal to the specified value.\n\nExample: `?balance=1234`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "ne",
+      "type": "integer",
+      "description": "**Not equal** filter mode. \\\nSpecify an integer number to get items where the specified field is not equal to the specified value.\n\nExample: `?balance.ne=1234`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "gt",
+      "type": "integer",
+      "description": "**Greater than** filter mode. \\\nSpecify an integer number to get items where the specified field is greater than the specified value.\n\nExample: `?balance.gt=1234`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "ge",
+      "type": "integer",
+      "description": "**Greater or equal** filter mode. \\\nSpecify an integer number to get items where the specified field is greater than equal to the specified value.\n\nExample: `?balance.ge=1234`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "lt",
+      "type": "integer",
+      "description": "**Less than** filter mode. \\\nSpecify an integer number to get items where the specified field is less than the specified value.\n\nExample: `?balance.lt=1234`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "le",
+      "type": "integer",
+      "description": "**Less or equal** filter mode. \\\nSpecify an integer number to get items where the specified field is less than or equal to the specified value.\n\nExample: `?balance.le=1234`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "in",
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.\n\nExample: `?level.in=12,14,52,69`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "ni",
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.\n\nExample: `?level.ni=12,14,52,69`.",
+      "source": "schema:Int32Parameter"
+    },
+    {
+      "term": "eqx",
+      "type": "string",
+      "description": "**Equal to another field** filter mode. \\\nSpecify a field name to get items where the specified fields are equal.\n\nExample: `?sender.eqx=target`.",
+      "source": "schema:AccountParameter"
+    },
+    {
+      "term": "nex",
+      "type": "string",
+      "description": "**Not equal to another field** filter mode. \\\nSpecify a field name to get items where the specified fields are not equal.\n\nExample: `?sender.nex=initiator`.",
+      "source": "schema:AccountParameter"
+    },
+    {
+      "term": "null",
+      "type": "boolean",
+      "description": "**Is null** filter mode. \\\nUse this mode to get items where the specified field is null or not.\n\nExample: `?initiator.null` or `?initiator.null=false`.",
+      "source": "schema:AccountParameter"
+    },
+    {
+      "term": "inHasNull",
+      "type": "boolean",
+      "description": "",
+      "source": "schema:AccountParameter"
+    },
+    {
+      "term": "niHasNull",
+      "type": "boolean",
+      "description": "",
+      "source": "schema:AccountParameter"
+    },
+    {
+      "term": "empty",
+      "type": "boolean",
+      "description": "",
+      "source": "schema:Int64Parameter"
+    },
+    {
+      "term": "fields",
+      "type": "array",
+      "description": "**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \\\nSpecify a comma-separated list of fields to include into response.\n\nExample: `?select=address,balance` => `[ { \"address\": \"asd\", \"balance\": 10 } ]`.",
+      "source": "schema:SelectParameter"
+    },
+    {
+      "term": "values",
+      "type": "array",
+      "description": "**Values** selection mode. \\\nSpecify a comma-separated list of fields to include their values into response.\n\nExample: `?select.values=address,balance` => `[ [ \"asd\", 10 ] ]`.",
+      "source": "schema:SelectParameter"
+    },
+    {
+      "term": "asc",
+      "type": "string",
+      "description": "**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \\\nSpecify a field name to sort by.\n\nExample: `?sort=balance`.",
+      "source": "schema:SortParameter"
+    },
+    {
+      "term": "desc",
+      "type": "string",
+      "description": "**Descending** sort mode. \\\nSpecify a field name to sort by descending.\n\nExample: `?sort.desc=id`.",
+      "source": "schema:SortParameter"
+    },
+    {
+      "term": "el",
+      "type": "integer",
+      "description": "**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \\\nSkips specified number of elements.\n\nExample: `?offset=100`.",
+      "source": "schema:OffsetParameter"
+    },
+    {
+      "term": "pg",
+      "type": "integer",
+      "description": "**Page** offset mode. \\\nSkips `page * limit` elements. This is a classic pagination.\n\nExample: `?offset.pg=1`.",
+      "source": "schema:OffsetParameter"
+    },
+    {
+      "term": "cr",
+      "type": "integer",
+      "description": "**Cursor** offset mode. \\\nSkips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.\nAvoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.\n\nExample: `?offset.cr=45837`.",
+      "source": "schema:OffsetParameter"
+    },
+    {
+      "term": "id",
+      "type": "integer",
+      "description": "Internal ID of the activity element",
+      "source": "schema:Activity"
+    },
+    {
+      "term": "btc",
+      "type": "number",
+      "description": "XTZ/BTC price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "eur",
+      "type": "number",
+      "description": "XTZ/EUR price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "usd",
+      "type": "number",
+      "description": "XTZ/USD price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "cny",
+      "type": "number",
+      "description": "XTZ/CNY price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "jpy",
+      "type": "number",
+      "description": "XTZ/JPY price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "krw",
+      "type": "number",
+      "description": "XTZ/KRW price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "eth",
+      "type": "number",
+      "description": "XTZ/ETH price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "gbp",
+      "type": "number",
+      "description": "XTZ/GBP price",
+      "source": "schema:QuoteShort"
+    },
+    {
+      "term": "index",
+      "type": "integer",
+      "description": "Voting period index, starting from zero",
+      "source": "schema:PeriodInfo"
+    },
+    {
+      "term": "epoch",
+      "type": "integer",
+      "description": "Voting epoch index, starting from zero",
+      "source": "schema:PeriodInfo"
+    },
+    {
+      "term": "kind",
+      "type": "string",
+      "description": "Kind of the voting period\n`proposal` - delegates can submit protocol amendment proposals using the proposal operation\n`exploration` -  bakers (delegates) may vote on the top-ranked proposal from the previous Proposal Period using the ballot operation\n`testing` - If the proposal is approved in the Exploration Period, the testing (or 'cooldown') period begins and bakers start testing the new protocol\n`promotion` - delegates can cast one vote to promote or not the tested proposal using the ballot operation\n`adoption` - after the proposal is actually accepted, the ecosystem has some time to prepare to the upgrade",
+      "source": "schema:PeriodInfo"
+    },
+    {
+      "term": "firstLevel",
+      "type": "integer",
+      "description": "The height of the block in which the period starts",
+      "source": "schema:PeriodInfo"
+    },
+    {
+      "term": "lastLevel",
+      "type": "integer",
+      "description": "The height of the block in which the period ends",
+      "source": "schema:PeriodInfo"
+    },
+    {
+      "term": "hash",
+      "type": "string",
+      "description": "Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files",
+      "source": "schema:ProposalAlias"
+    },
+    {
+      "term": "bigmap",
+      "type": "integer",
+      "description": "Bigmap Id",
+      "source": "schema:BigMapDiff"
+    },
+    {
+      "term": "path",
+      "type": "string",
+      "description": "Path to the bigmap in the contract storage",
+      "source": "schema:BigMapDiff"
+    },
+    {
+      "term": "action",
+      "type": "string",
+      "description": "Action with the bigmap (`allocate`, `add_key`, `update_key`, `remove_key`, `remove`)",
+      "source": "schema:BigMapDiff"
+    },
+    {
+      "term": "content",
+      "type": "object",
+      "description": "Affected key.\nIf the action is `allocate` or `remove` the content will be `null`.",
+      "source": "schema:BigMapDiff"
+    },
+    {
+      "term": "key",
+      "type": "object",
+      "description": "Key in JSON or Micheline format, depending on the `micheline` query parameter.",
+      "source": "schema:BigMapKeyShort"
+    },
+    {
+      "term": "value",
+      "type": "object",
+      "description": "Value in JSON or Micheline format, depending on the `micheline` query parameter.\nNote, if the action is `remove_key` it will contain the last non-null value.",
+      "source": "schema:BigMapKeyShort"
+    },
+    {
+      "term": "typeHash",
+      "type": "integer",
+      "description": "32-bit hash of the contract parameter and storage types.\nThis field can be used for searching similar contracts (which have the same interface).",
+      "source": "schema:OriginatedContract"
+    },
+    {
+      "term": "codeHash",
+      "type": "integer",
+      "description": "32-bit hash of the contract code.\nThis field can be used for searching same contracts (which have the same script).",
+      "source": "schema:OriginatedContract"
+    },
+    {
+      "term": "tzips",
+      "type": "array",
+      "description": "List of implemented standards (TZIPs)",
+      "source": "schema:OriginatedContract"
+    },
+    {
+      "term": "initiator",
+      "type": "object",
+      "description": "Account that published the commitment first.",
+      "source": "schema:SrCommitmentInfo"
+    },
+    {
+      "term": "inboxLevel",
+      "type": "integer",
+      "description": "Inbox level",
+      "source": "schema:SrCommitmentInfo"
+    },
+    {
+      "term": "state",
+      "type": "string",
+      "description": "State hash",
+      "source": "schema:SrCommitmentInfo"
+    },
+    {
+      "term": "ticks",
+      "type": "integer",
+      "description": "Number of ticks",
+      "source": "schema:SrCommitmentInfo"
+    },
+    {
+      "term": "firstTime",
+      "type": "string",
+      "description": "Timestamp of the block where the commitment was first published.",
+      "source": "schema:SrCommitmentInfo"
+    },
+    {
+      "term": "initiatorCommitment",
+      "type": "object",
+      "description": "Initiator's version of a valid commitment",
+      "source": "schema:SrGameInfo"
+    },
+    {
+      "term": "opponent",
+      "type": "object",
+      "description": "Opponent, who was accused in publishing a wrong commitment.",
+      "source": "schema:SrGameInfo"
+    },
+    {
+      "term": "opponentCommitment",
+      "type": "object",
+      "description": "Opponent's version of a valid commitment",
+      "source": "schema:SrGameInfo"
+    },
+    {
+      "term": "initiatorReward",
+      "type": "integer",
+      "description": "In case the initiator won, this field will contain the reward amount (in mutez).",
+      "source": "schema:SrGameInfo"
+    },
+    {
+      "term": "initiatorLoss",
+      "type": "integer",
+      "description": "In case the initiator lost (including a `draw`), this field will contain the loss amount (in mutez).",
+      "source": "schema:SrGameInfo"
+    },
+    {
+      "term": "opponentReward",
+      "type": "integer",
+      "description": "In case the opponent won, this field will contain the reward amount (in mutez).",
+      "source": "schema:SrGameInfo"
+    },
+    {
+      "term": "opponentLoss",
+      "type": "integer",
+      "description": "In case the opponent lost (including a `draw`), this field will contain the loss amount (in mutez).",
+      "source": "schema:SrGameInfo"
+    },
+    {
+      "term": "entrypoint",
+      "type": "string",
+      "description": "Entrypoint called on the target contract",
+      "source": "schema:TxParameter"
+    },
+    {
+      "term": "ticketer",
+      "type": "object",
+      "description": "Contract, issued the ticket.",
+      "source": "schema:TicketInfo"
+    },
+    {
+      "term": "rawType",
+      "type": "object",
+      "description": "Ticket content type in Micheline format.",
+      "source": "schema:TicketInfo"
+    },
+    {
+      "term": "rawContent",
+      "type": "object",
+      "description": "Ticket content in Micheline format.",
+      "source": "schema:TicketInfo"
+    },
+    {
+      "term": "contentHash",
+      "type": "integer",
+      "description": "32-bit hash of the ticket content.",
+      "source": "schema:TicketInfo"
+    },
+    {
+      "term": "totalSupply",
+      "type": "string",
+      "description": "Total amount exists.",
+      "source": "schema:TicketInfo"
+    },
+    {
+      "term": "contract",
+      "type": "object",
+      "description": "Contract, created the token.",
+      "source": "schema:TokenInfo"
+    },
+    {
+      "term": "tokenId",
+      "type": "string",
+      "description": "Token id, unique within the contract.",
+      "source": "schema:TokenInfo"
+    },
+    {
+      "term": "standard",
+      "type": "string",
+      "description": "Token standard (either `fa1.2` or `fa2`).",
+      "source": "schema:TokenInfo"
+    },
+    {
+      "term": "metadata",
+      "type": "object",
+      "description": "Token metadata.  \n**[sortable]**",
+      "source": "schema:TokenInfo"
+    },
+    {
+      "term": "balance",
+      "type": "integer",
+      "description": "Contract balance (micro tez)",
+      "source": "schema:RelatedContract"
+    },
+    {
+      "term": "delegate",
+      "type": "object",
+      "description": "Information about the current delegate of the contract. `null` if it's not delegated",
+      "source": "schema:RelatedContract"
+    },
+    {
+      "term": "creationLevel",
+      "type": "integer",
+      "description": "Height of the block where the contract was created",
+      "source": "schema:RelatedContract"
+    },
+    {
+      "term": "creationTime",
+      "type": "string",
+      "description": "Datetime of the block where the contract was created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "source": "schema:RelatedContract"
+    },
+    {
+      "term": "delegationLevel",
+      "type": "integer",
+      "description": "Block height of last delegation operation",
+      "source": "schema:Delegator"
+    },
+    {
+      "term": "delegationTime",
+      "type": "string",
+      "description": "Block datetime of last delegation operation (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "source": "schema:Delegator"
+    },
+    {
+      "term": "level",
+      "type": "integer",
+      "description": "Height of the block at which the account balance was calculated",
+      "source": "schema:HistoricalBalance"
+    },
+    {
+      "term": "timestamp",
+      "type": "string",
+      "description": "Timestamp of the block at which the account balance was calculated",
+      "source": "schema:HistoricalBalance"
+    },
+    {
+      "term": "quote",
+      "type": "object",
+      "description": "Injected historical quote at the time of balance snapshot",
+      "source": "schema:HistoricalBalance"
+    },
+    {
+      "term": "ptr",
+      "type": "integer",
+      "description": "Bigmap pointer",
+      "source": "schema:BigMap"
+    },
+    {
+      "term": "tags",
+      "type": "array",
+      "description": "List of tags ( `metadata`, `token_metadata`,`ledger`, or `null` if there are no tags)",
+      "source": "schema:BigMap"
+    },
+    {
+      "term": "totalKeys",
+      "type": "integer",
+      "description": "Total number of keys ever added to the bigmap",
+      "source": "schema:BigMap"
+    },
+    {
+      "term": "activeKeys",
+      "type": "integer",
+      "description": "Total number of currently active keys",
+      "source": "schema:BigMap"
+    },
+    {
+      "term": "updates",
+      "type": "integer",
+      "description": "Total number of actions with the bigmap",
+      "source": "schema:BigMap"
+    },
+    {
+      "term": "keyType",
+      "type": "object",
+      "description": "Bigmap key type as JSON schema or Micheline, depending on the `micheline` query parameter.",
+      "source": "schema:BigMap"
+    },
+    {
+      "term": "valueType",
+      "type": "object",
+      "description": "Bigmap value type as JSON schema or Micheline, depending on the `micheline` query parameter.",
+      "source": "schema:BigMap"
+    },
+    {
+      "term": "as",
+      "type": "string",
+      "description": "**Same as** filter mode. \\\nSpecify a string template to get items where the specified field matches the specified template. \\\nThis mode supports wildcard `*`. Use `\\*` as an escape symbol.\n\nExample: `?parameters.as=*mid*` or `?parameters.as=*end`.",
+      "source": "schema:StringParameter"
+    },
+    {
+      "term": "un",
+      "type": "string",
+      "description": "**Unlike** filter mode. \\\nSpecify a string template to get items where the specified field doesn't match the specified template.\nThis mode supports wildcard `*`. Use `\\*` as an escape symbol.\n\nExample: `?parameters.un=*mid*` or `?parameters.un=*end`.",
+      "source": "schema:StringParameter"
+    },
+    {
+      "term": "any",
+      "type": "array",
+      "description": "**Has any** filter mode. \\\nSpecify a comma-separated list of bigmap tags to get bigmaps where at least one of the specified tags is presented.\n\nExample: `?tags.any=metadata` or `?tags.any=token_metadata,metadata`.",
+      "source": "schema:BigMapTagsParameter"
+    },
+    {
+      "term": "all",
+      "type": "array",
+      "description": "**Has all** filter mode. \\\nSpecify a comma-separated list of bigmap tags to get bigmaps where all of the specified tags are presented.\n\nExample: `?tags.all=metadata` or `?tags.all=token_metadata,metadata`.",
+      "source": "schema:BigMapTagsParameter"
+    },
+    {
+      "term": "lastTime",
+      "type": "string",
+      "description": "Timestamp of the block where the key was last seen.",
+      "source": "schema:BigMapKeyFull"
+    },
+    {
+      "term": "prim",
+      "type": "object",
+      "description": "",
+      "source": "schema:MichelinePrim"
+    },
+    {
+      "term": "args",
+      "type": "array",
+      "description": "",
+      "source": "schema:MichelinePrim"
+    },
+    {
+      "term": "annots",
+      "type": "array",
+      "description": "",
+      "source": "schema:MichelinePrim"
+    },
+    {
+      "term": "cycle",
+      "type": "integer",
+      "description": "Index of the cycle",
+      "source": "schema:Block"
+    },
+    {
+      "term": "proto",
+      "type": "integer",
+      "description": "Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)",
+      "source": "schema:Block"
+    },
+    {
+      "term": "payloadRound",
+      "type": "integer",
+      "description": "Round at which the block payload was proposed",
+      "source": "schema:Block"
+    },
+    {
+      "term": "blockRound",
+      "type": "integer",
+      "description": "Round at which the block was produced",
+      "source": "schema:Block"
+    },
+    {
+      "term": "attestationPower",
+      "type": "integer",
+      "description": "Recorder attestation power",
+      "source": "schema:Block"
+    },
+    {
+      "term": "attestationCommittee",
+      "type": "integer",
+      "description": "Total attestation committee power",
+      "source": "schema:Block"
+    },
+    {
+      "term": "deposit",
+      "type": "integer",
+      "description": "Security deposit frozen on the baker's account for producing the block (micro tez)",
+      "source": "schema:Block"
+    },
+    {
+      "term": "rewardDelegated",
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to delegated stake, paid to payload proposer's liquid balance (micro tez)\n(it is not frozen and can be spent immediately).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "rewardStakedOwn",
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's own stake, paid to payload proposer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "rewardStakedEdge",
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's edge from external stake, paid to payload proposer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "rewardStakedShared",
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's external stake, paid to payload proposer's external staked balance (micro tez)\n(it is frozen and belongs to baker's stakers).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "bonusDelegated",
+      "type": "integer",
+      "description": "Portion of bonus reward, corresponding to delegated stake, paid to block producer's liquid balance (micro tez)\n(it is not frozen and can be spent immediately).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "bonusStakedOwn",
+      "type": "integer",
+      "description": "Portion of bonus reward, corresponding to baker's own stake, paid to block producer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "bonusStakedEdge",
+      "type": "integer",
+      "description": "Portion of bonus reward, corresponding to baker's edge from external stake, paid to block producer's own staked balance (micro tez)\n(it is frozen and belongs to the baker).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "bonusStakedShared",
+      "type": "integer",
+      "description": "Portion of fixed reward, corresponding to baker's external stake, paid to block producer's external staked balance (micro tez)\n(it is frozen and belongs to baker's stakers).",
+      "source": "schema:Block"
+    },
+    {
+      "term": "fees",
+      "type": "integer",
+      "description": "Total fee gathered from operations, included into the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "nonceRevealed",
+      "type": "boolean",
+      "description": "Status of the seed nonce revelation\n`true` - seed nonce revealed\n`false` - there's no `seed_nonce_hash` in the block or seed nonce revelation has missed",
+      "source": "schema:Block"
+    },
+    {
+      "term": "proposer",
+      "type": "object",
+      "description": "Baker who proposed the block payload",
+      "source": "schema:Block"
+    },
+    {
+      "term": "producer",
+      "type": "object",
+      "description": "Baker who produced the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "software",
+      "type": "object",
+      "description": "Information about baker's software",
+      "source": "schema:Block"
+    },
+    {
+      "term": "lbToggle",
+      "type": "boolean",
+      "description": "Liquidity baking toggle (`true` if enabled, `false` if disabled, or `null` if the baker says 'pass')",
+      "source": "schema:Block"
+    },
+    {
+      "term": "lbToggleEma",
+      "type": "integer",
+      "description": "Liquidity baking escape EMA value with precision of 1000000 for integer computation",
+      "source": "schema:Block"
+    },
+    {
+      "term": "attestations",
+      "type": "array",
+      "description": "List of attestation (is operation, which specifies the head of the chain as seen by the attester of a given slot)\noperations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "preattestations",
+      "type": "array",
+      "description": "List of preattestation operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "proposals",
+      "type": "array",
+      "description": "List of proposal (is used by bakers (delegates) to submit and/or upvote proposals to amend the protocol)\noperations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "ballots",
+      "type": "array",
+      "description": "List of ballot (is used to vote for a proposal in a given voting cycle) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "activations",
+      "type": "array",
+      "description": "List of activation (is used to activate accounts that were recommended allocations of\ntezos tokens for donations to the Tezos Foundation\u2019s fundraiser) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "dalEntrapmentEvidenceOps",
+      "type": "array",
+      "description": "List of dal entrapment evidence operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "doubleBaking",
+      "type": "array",
+      "description": "List of double baking evidence (is used by bakers to provide evidence of double baking (baking two different\nblocks at the same height) by a baker) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "doubleConsensus",
+      "type": "array",
+      "description": "List of double consensus evidence (is used by bakers to provide evidence of double (pre)attestation\n((pre)attestation of two different blocks at the same block height) by a baker) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "nonceRevelations",
+      "type": "array",
+      "description": "List of nonce revelation (used by the blockchain to create randomness) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "vdfRevelations",
+      "type": "array",
+      "description": "List of vdf revelation (used by the blockchain to create randomness) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "delegations",
+      "type": "array",
+      "description": "List of delegation (is used to delegate funds to a delegate (an implicit account registered as a baker))\noperations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "originations",
+      "type": "array",
+      "description": "List of origination (deployment / contract creation ) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "transactions",
+      "type": "array",
+      "description": "List of transaction (is a standard operation used to transfer tezos tokens to an account)\noperations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "reveals",
+      "type": "array",
+      "description": "List of reveal (is used to reveal the public key associated with an account) operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "registerConstants",
+      "type": "array",
+      "description": "List of register global constant operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "setDepositsLimits",
+      "type": "array",
+      "description": "List of set deposits limit operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "transferTicketOps",
+      "type": "array",
+      "description": "List of transfer ticket operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupCommitOps",
+      "type": "array",
+      "description": "List of tx rollup commit operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupDispatchTicketsOps",
+      "type": "array",
+      "description": "List of tx rollup dispatch tickets operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupFinalizeCommitmentOps",
+      "type": "array",
+      "description": "List of tx rollup finalize commitment operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupOriginationOps",
+      "type": "array",
+      "description": "List of tx rollup origination operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupRejectionOps",
+      "type": "array",
+      "description": "List of tx rollup rejection operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupRemoveCommitmentOps",
+      "type": "array",
+      "description": "List of tx rollup remove commitment operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupReturnBondOps",
+      "type": "array",
+      "description": "List of tx rollup return bond operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "txRollupSubmitBatchOps",
+      "type": "array",
+      "description": "List of tx rollup submit batch operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "increasePaidStorageOps",
+      "type": "array",
+      "description": "List of increase paid storage operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "updateSecondaryKeyOps",
+      "type": "array",
+      "description": "List of update secondary key operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "drainDelegateOps",
+      "type": "array",
+      "description": "List of drain delegate operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "srAddMessagesOps",
+      "type": "array",
+      "description": "List of smart rollup add messages operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "srCementOps",
+      "type": "array",
+      "description": "List of smart rollup cement operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "srExecuteOps",
+      "type": "array",
+      "description": "List of smart rollup execute operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "srOriginateOps",
+      "type": "array",
+      "description": "List of smart rollup originate operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "srPublishOps",
+      "type": "array",
+      "description": "List of smart rollup publish operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "srRecoverBondOps",
+      "type": "array",
+      "description": "List of smart rollup recover bond operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "srRefuteOps",
+      "type": "array",
+      "description": "List of smart rollup refute operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "stakingOps",
+      "type": "array",
+      "description": "List of staking operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "setDelegateParametersOps",
+      "type": "array",
+      "description": "List of set delegate parameters operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "dalPublishCommitmentOps",
+      "type": "array",
+      "description": "List of DAL publish commitment operations, included in the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "migrations",
+      "type": "array",
+      "description": "List of migration operations, implicitly applied at the end of the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "revelationPenalties",
+      "type": "array",
+      "description": "List of revelation penalty operations, implicitly applied at the end of the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "attestationRewards",
+      "type": "array",
+      "description": "List of attestation rewards, implicitly applied at the end of the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "dalAttestationRewards",
+      "type": "array",
+      "description": "List of dal attestation rewards, implicitly applied at the end of the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "autostakingOps",
+      "type": "array",
+      "description": "List of autostaking operations, implicitly applied at the end of the block",
+      "source": "schema:Block"
+    },
+    {
+      "term": "validations",
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "aiToggle",
+      "type": "boolean",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "aiToggleEma",
+      "type": "integer",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "updateConsensusKeyOps",
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "endorsements",
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "preendorsements",
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "doubleEndorsing",
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "doublePreendorsing",
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "endorsingRewards",
+      "type": "array",
+      "description": "**DEPRECATED**",
+      "source": "schema:Block"
+    },
+    {
+      "term": "activated",
+      "type": "boolean",
+      "description": "Flag showing whether the account has been activated or not.",
+      "source": "schema:Commitment"
+    },
+    {
+      "term": "activationLevel",
+      "type": "integer",
+      "description": "Level of the block at which the account has been activated. `null` if the account is not activated yet.",
+      "source": "schema:Commitment"
+    },
+    {
+      "term": "activationTime",
+      "type": "string",
+      "description": "Datetime of the block at which the account has been activated (ISO 8601, e.g. `2020-02-20T02:40:57Z`). `null` if the account is not activated yet.",
+      "source": "schema:Commitment"
+    },
+    {
+      "term": "activatedAccount",
+      "type": "object",
+      "description": "Info about activated account. `null` if the account is not activated yet.",
+      "source": "schema:Commitment"
+    },
+    {
+      "term": "size",
+      "type": "integer",
+      "description": "Constant size in bytes",
+      "source": "schema:Constant"
+    },
+    {
+      "term": "refs",
+      "type": "integer",
+      "description": "Number of contracts referencing this constant",
+      "source": "schema:Constant"
+    },
+    {
+      "term": "creator",
+      "type": "object",
+      "description": "Account registered this constant",
+      "source": "schema:Constant"
+    },
+    {
+      "term": "extras",
+      "type": "object",
+      "description": "Off-chain extras",
+      "source": "schema:Constant"
+    },
+    {
+      "term": "storageSchema",
+      "type": "object",
+      "description": "JSON Schema of the contract storage in humanified format (as returned by API)",
+      "source": "schema:ContractInterface"
+    },
+    {
+      "term": "entrypoints",
+      "type": "array",
+      "description": "List of terminal entrypoints",
+      "source": "schema:ContractInterface"
+    },
+    {
+      "term": "bigMaps",
+      "type": "array",
+      "description": "List of currently available Big_maps",
+      "source": "schema:ContractInterface"
+    },
+    {
+      "term": "events",
+      "type": "array",
+      "description": "List of events extractable from the code (\"static\")",
+      "source": "schema:ContractInterface"
+    },
+    {
+      "term": "name",
+      "type": "string",
+      "description": "Entrypoint name",
+      "source": "schema:EntrypointInterface"
+    },
+    {
+      "term": "parameterSchema",
+      "type": "object",
+      "description": "JSON Schema of the entrypoint parameter in humanified format (as returned by API)",
+      "source": "schema:EntrypointInterface"
+    },
+    {
+      "term": "keySchema",
+      "type": "object",
+      "description": "JSON Schema of the Big_map key in humanified format (as returned by API)",
+      "source": "schema:BigMapInterface"
+    },
+    {
+      "term": "valueSchema",
+      "type": "object",
+      "description": "JSON Schema of the Big_map value in humanified format (as returned by API)",
+      "source": "schema:BigMapInterface"
+    },
+    {
+      "term": "tag",
+      "type": "string",
+      "description": "Event tag",
+      "source": "schema:EventInterface"
+    },
+    {
+      "term": "eventSchema",
+      "type": "object",
+      "description": "JSON Schema of the event type in humanified format (as returned by API)",
+      "source": "schema:EventInterface"
+    },
+    {
+      "term": "jsonParameters",
+      "type": "object",
+      "description": "A kind of JSON schema, describing how parameters will look like in a human-readable JSON format",
+      "source": "schema:Entrypoint"
+    },
+    {
+      "term": "michelineParameters",
+      "type": "object",
+      "description": "Parameters schema in micheline format",
+      "source": "schema:Entrypoint"
+    },
+    {
+      "term": "michelsonParameters",
+      "type": "string",
+      "description": "Parameters schema in michelson format",
+      "source": "schema:Entrypoint"
+    },
+    {
+      "term": "unused",
+      "type": "boolean",
+      "description": "Unused means that the entrypoint can be normalized to a more specific one.\nFor example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint\nbecause it can be normalized to `%entry2` or `%entry3`",
+      "source": "schema:Entrypoint"
+    },
+    {
+      "term": "jsonParameterType",
+      "type": "object",
+      "description": "Parameter type in human-readable JSON format",
+      "source": "schema:ContractView"
+    },
+    {
+      "term": "jsonReturnType",
+      "type": "object",
+      "description": "Return type in human-readable JSON format",
+      "source": "schema:ContractView"
+    },
+    {
+      "term": "michelineParameterType",
+      "type": "object",
+      "description": "Parameter type in micheline format",
+      "source": "schema:ContractView"
+    },
+    {
+      "term": "michelineReturnType",
+      "type": "object",
+      "description": "Return type in micheline format",
+      "source": "schema:ContractView"
+    },
+    {
+      "term": "michelsonParameterType",
+      "type": "string",
+      "description": "Parameter type in michelson format",
+      "source": "schema:ContractView"
+    },
+    {
+      "term": "michelsonReturnType",
+      "type": "string",
+      "description": "Return type in michelson format",
+      "source": "schema:ContractView"
+    },
+    {
+      "term": "operation",
+      "type": "object",
+      "description": "Operation that caused the storage change",
+      "source": "schema:StorageRecord"
+    }
+  ],
+  "categories": [
+    {
+      "term": "Accounts",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "BigMaps",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Blocks",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Commitments",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Constants",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Contracts",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Cycles",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Delegates",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Domains",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Events",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Head",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Helpers",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Operations",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Protocols",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Quotes",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Rewards",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Rights",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "SmartRollups",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Software",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Staking",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Statistics",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Tickets",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Tokens",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    },
+    {
+      "term": "Voting",
+      "type": "category",
+      "description": "",
+      "source": "tag"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "operation": "Head_Get",
+  "method": "GET",
+  "path": "/v1/head",
+  "tags": [
+    "Head"
+  ],
+  "summary": "Get indexer head",
+  "parameters": []
+}

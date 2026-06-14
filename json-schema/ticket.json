@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ticket",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.  \n**[sortable]**",
+      "format": "int64"
+    },
+    "ticketer": {
+      "description": "Contract, issued the ticket.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "rawType": {
+      "description": "Ticket content type in Micheline format.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "rawContent": {
+      "description": "Ticket content in Micheline format.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "content": {
+      "description": "Ticket content in JSON format.",
+      "nullable": true
+    },
+    "typeHash": {
+      "type": "integer",
+      "description": "32-bit hash of the ticket content type.",
+      "format": "int32"
+    },
+    "contentHash": {
+      "type": "integer",
+      "description": "32-bit hash of the ticket content.",
+      "format": "int32"
+    },
+    "firstMinter": {
+      "description": "Account, minted the ticket first.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Level of the block where the ticket was first seen.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "firstTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the ticket was first seen.",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Level of the block where the ticket was last seen.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "lastTime": {
+      "type": "string",
+      "description": "Timestamp of the block where the ticket was last seen.",
+      "format": "date-time"
+    },
+    "transfersCount": {
+      "type": "integer",
+      "description": "Total number of transfers.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "balancesCount": {
+      "type": "integer",
+      "description": "Total number of holders ever seen.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "holdersCount": {
+      "type": "integer",
+      "description": "Total number of current holders.  \n**[sortable]**",
+      "format": "int32"
+    },
+    "totalMinted": {
+      "type": "string",
+      "description": "Total amount minted."
+    },
+    "totalBurned": {
+      "type": "string",
+      "description": "Total amount burned."
+    },
+    "totalSupply": {
+      "type": "string",
+      "description": "Total amount exists."
+    }
+  }
+}

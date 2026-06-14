@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SelectParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "fields": {
+      "type": "array",
+      "description": "**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \\\nSpecify a comma-separated list of fields to include into response.\n\nExample: `?select=address,balance` => `[ { \"address\": \"asd\", \"balance\": 10 } ]`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "values": {
+      "type": "array",
+      "description": "**Values** selection mode. \\\nSpecify a comma-separated list of fields to include their values into response.\n\nExample: `?select.values=address,balance` => `[ [ \"asd\", 10 ] ]`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

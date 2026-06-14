@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QuoteShort",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "btc": {
+      "type": "number",
+      "description": "XTZ/BTC price",
+      "format": "double",
+      "nullable": true
+    },
+    "eur": {
+      "type": "number",
+      "description": "XTZ/EUR price",
+      "format": "double",
+      "nullable": true
+    },
+    "usd": {
+      "type": "number",
+      "description": "XTZ/USD price",
+      "format": "double",
+      "nullable": true
+    },
+    "cny": {
+      "type": "number",
+      "description": "XTZ/CNY price",
+      "format": "double",
+      "nullable": true
+    },
+    "jpy": {
+      "type": "number",
+      "description": "XTZ/JPY price",
+      "format": "double",
+      "nullable": true
+    },
+    "krw": {
+      "type": "number",
+      "description": "XTZ/KRW price",
+      "format": "double",
+      "nullable": true
+    },
+    "eth": {
+      "type": "number",
+      "description": "XTZ/ETH price",
+      "format": "double",
+      "nullable": true
+    },
+    "gbp": {
+      "type": "number",
+      "description": "XTZ/GBP price",
+      "format": "double",
+      "nullable": true
+    }
+  }
+}

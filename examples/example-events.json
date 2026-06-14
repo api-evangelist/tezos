@@ -1,0 +1,36 @@
+{
+  "operation": "Events_GetContractEventsCount",
+  "method": "GET",
+  "path": "/v1/contracts/events/count",
+  "tags": [
+    "Events"
+  ],
+  "summary": "Get contract events count",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "level",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "timestamp",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "contract",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "codeHash",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

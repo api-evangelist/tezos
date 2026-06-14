@@ -1,0 +1,10 @@
+{
+  "operation": "Blocks_GetCount",
+  "method": "GET",
+  "path": "/v1/blocks/count",
+  "tags": [
+    "Blocks"
+  ],
+  "summary": "Get blocks count",
+  "parameters": []
+}

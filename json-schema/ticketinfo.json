@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TicketInfo",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal TzKT id.",
+      "format": "int64"
+    },
+    "ticketer": {
+      "description": "Contract, issued the ticket.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/Alias"
+        }
+      ]
+    },
+    "rawType": {
+      "description": "Ticket content type in Micheline format.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "rawContent": {
+      "description": "Ticket content in Micheline format.",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/IMicheline"
+        }
+      ]
+    },
+    "content": {
+      "description": "Ticket content in JSON format.",
+      "nullable": true
+    },
+    "typeHash": {
+      "type": "integer",
+      "description": "32-bit hash of the ticket content type.",
+      "format": "int32"
+    },
+    "contentHash": {
+      "type": "integer",
+      "description": "32-bit hash of the ticket content.",
+      "format": "int32"
+    },
+    "totalSupply": {
+      "type": "string",
+      "description": "Total amount exists."
+    }
+  }
+}

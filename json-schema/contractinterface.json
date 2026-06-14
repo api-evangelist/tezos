@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContractInterface",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "storageSchema": {
+      "description": "JSON Schema of the contract storage in humanified format (as returned by API)",
+      "nullable": true
+    },
+    "entrypoints": {
+      "type": "array",
+      "description": "List of terminal entrypoints",
+      "items": {
+        "$ref": "#/components/schemas/EntrypointInterface"
+      }
+    },
+    "bigMaps": {
+      "type": "array",
+      "description": "List of currently available Big_maps",
+      "items": {
+        "$ref": "#/components/schemas/BigMapInterface"
+      }
+    },
+    "events": {
+      "type": "array",
+      "description": "List of events extractable from the code (\"static\")",
+      "items": {
+        "$ref": "#/components/schemas/EventInterface"
+      }
+    }
+  }
+}

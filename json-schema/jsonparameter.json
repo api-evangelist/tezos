@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JsonParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a JSON value to get items where the specified field is equal to the specified value.\n\nExample: `?parameter.from=tz1...` or `?parameter.signatures.[3].[0]=null` or `?parameter.sigs.[*]=null`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify a JSON value to get items where the specified field is not equal to the specified value.\n\nExample: `?parameter.ne=true` or `?parameter.amount.ne=0`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "gt": {
+      "type": "string",
+      "description": "**Greater than** filter mode. \\\nSpecify a string to get items where the specified field is greater than the specified value.\nNote that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,\ne.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.\nOtherwise, result may surprise you.\n\nExample: `?parameter.balance.gt=1234` or `?parameter.time.gt=2021-02-01`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "ge": {
+      "type": "string",
+      "description": "**Greater or equal** filter mode. \\\nSpecify a string to get items where the specified field is greater than equal to the specified value.\nNote that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,\ne.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.\nOtherwise, result may surprise you.\n\nExample: `?parameter.balance.ge=1234` or `?parameter.time.ge=2021-02-01`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "lt": {
+      "type": "string",
+      "description": "**Less than** filter mode. \\\nSpecify a string to get items where the specified field is less than the specified value.\nNote that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,\ne.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.\nOtherwise, result may surprise you.\n\nExample: `?parameter.balance.lt=1234` or `?parameter.time.lt=2021-02-01`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "le": {
+      "type": "string",
+      "description": "**Less or equal** filter mode. \\\nSpecify a string to get items where the specified field is less than or equal to the specified value.\nNote that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,\ne.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.\nOtherwise, result may surprise you.\n\nExample: `?parameter.balance.le=1234` or `?parameter.time.le=2021-02-01`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "as": {
+      "type": "string",
+      "description": "**Same as** filter mode. \\\nSpecify a string template to get items where the specified field matches the specified template. \\\nThis mode supports wildcard `*`. Use `\\*` as an escape symbol.\n\nExample: `?parameter.as=*mid*` or `?parameter.as=*end`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "un": {
+      "type": "string",
+      "description": "**Unlike** filter mode. \\\nSpecify a string template to get items where the specified field doesn't match the specified template.\nThis mode supports wildcard `*`. Use `\\*` as an escape symbol.\n\nExample: `?parameter.un=*mid*` or `?parameter.un=*end`.",
+      "nullable": true,
+      "x-tzkt-extension": "json-parameter"
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of strings or JSON array to get items where the specified field is equal to one of the specified values. \\\n\nExample: `?parameter.amount.in=1,2,3` or `?parameter.in=[{\"from\":\"tz1\",\"to\":\"tz2\"},{\"from\":\"tz2\",\"to\":\"tz1\"}]`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      },
+      "x-tzkt-extension": "json-parameter"
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \\\nUse `\\,` as an escape symbol.\n\nExample: `?parameter.amount.ni=1,2,3` or `?parameter.ni=[{\"from\":\"tz1\",\"to\":\"tz2\"},{\"from\":\"tz2\",\"to\":\"tz1\"}]`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      },
+      "x-tzkt-extension": "json-parameter"
+    },
+    "null": {
+      "type": "boolean",
+      "description": "**Is null** filter mode. \\\nUse this mode to get items where the specified field is null or not.\n\nExample: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.",
+      "x-tzkt-extension": "json-parameter"
+    }
+  },
+  "x-tzkt-extension": "json-parameter"
+}

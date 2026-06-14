@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OperationError",
+  "type": "object",
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "error.id": "#/components/schemas/BaseOperationError",
+      "contract.balance_too_low": "#/components/schemas/BalanceTooLowError",
+      "contract.non_existing_contract": "#/components/schemas/NonExistingContractError",
+      "contract.manager.unregistered_delegate": "#/components/schemas/UnregisteredDelegateError",
+      "Expression_already_registered": "#/components/schemas/ExpressionAlreadyRegisteredError"
+    }
+  },
+  "x-abstract": true,
+  "additionalProperties": false,
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of an error (`error.id`, `contract.balance_too_low`, `contract.non_existing_contract`,\n`contract.manager.unregistered_delegate`, etc.)\nhttps://tezos.gitlab.io/api/errors.html - full list of errors"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SplitStaker",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "type": "string",
+      "description": "Address of the staker"
+    },
+    "stakedPseudotokens": {
+      "type": "string",
+      "description": "Amount of staked pseudotokens at the snapshot time, representing staker's share within the baker's `externalStakedBalance`.",
+      "nullable": true
+    },
+    "stakedBalance": {
+      "type": "integer",
+      "description": "Estimated amount staked to the baker at the snapshot time (micro tez).\nIt's computed on-the-fly as `externalStakedBalance * stakedPseudotokens / issuedPseudotokens`.",
+      "format": "int64"
+    }
+  }
+}

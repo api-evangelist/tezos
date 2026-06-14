@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BigMapDiff",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "bigmap": {
+      "type": "integer",
+      "description": "Bigmap Id",
+      "format": "int32"
+    },
+    "path": {
+      "type": "string",
+      "description": "Path to the bigmap in the contract storage"
+    },
+    "action": {
+      "type": "string",
+      "description": "Action with the bigmap (`allocate`, `add_key`, `update_key`, `remove_key`, `remove`)"
+    },
+    "content": {
+      "description": "Affected key.\nIf the action is `allocate` or `remove` the content will be `null`.",
+      "nullable": true,
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/BigMapKeyShort"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "operation": "Commitments_Get",
+  "method": "GET",
+  "path": "/v1/commitments/{address}",
+  "tags": [
+    "Commitments"
+  ],
+  "summary": "Get commitment by blinded address",
+  "parameters": [
+    {
+      "name": "address",
+      "in": "path",
+      "required": true
+    }
+  ]
+}

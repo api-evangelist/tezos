@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BaseOperationError",
+  "allOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of an error\nhttps://tezos.gitlab.io/api/errors.html - full list of errors"
+        }
+      }
+    }
+  ]
+}

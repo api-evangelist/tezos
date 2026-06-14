@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IMicheline",
+  "type": "object",
+  "x-abstract": true,
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "$ref": "#/components/schemas/MichelineType"
+    }
+  }
+}

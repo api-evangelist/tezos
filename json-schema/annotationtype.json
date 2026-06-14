@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AnnotationType",
+  "type": "integer",
+  "description": "",
+  "x-enumNames": [
+    "Unsafe",
+    "Field",
+    "Type",
+    "Variable"
+  ],
+  "enum": [
+    0,
+    64,
+    128,
+    192
+  ]
+}

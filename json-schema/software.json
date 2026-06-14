@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Software",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "shortHash": {
+      "type": "string",
+      "description": "Software ID (short commit hash)"
+    },
+    "firstLevel": {
+      "type": "integer",
+      "description": "Level of the first block baked with this software",
+      "format": "int32"
+    },
+    "firstTime": {
+      "type": "string",
+      "description": "Datetime of the first block baked with this software",
+      "format": "date-time"
+    },
+    "lastLevel": {
+      "type": "integer",
+      "description": "Level of the last block baked with this software",
+      "format": "int32"
+    },
+    "lastTime": {
+      "type": "string",
+      "description": "Datetime of the last block baked with this software",
+      "format": "date-time"
+    },
+    "blocksCount": {
+      "type": "integer",
+      "description": "Total number of blocks baked with this software",
+      "format": "int32"
+    },
+    "extras": {
+      "description": "Off-chain extras",
+      "nullable": true
+    }
+  }
+}

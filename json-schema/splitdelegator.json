@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SplitDelegator",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "type": "string",
+      "description": "Address of the delegator"
+    },
+    "delegatedBalance": {
+      "type": "integer",
+      "description": "Amount delegated to the baker at the snapshot time (micro tez).\nThis amount doesn't include staked amount.",
+      "format": "int64"
+    },
+    "emptied": {
+      "type": "boolean",
+      "description": "Indicates whether the delegator is emptied (at the moment, not at the snapshot time).\nEmptied accounts (users with zero balance) should be re-allocated, so if you make payment to the emptied account you will pay allocation fee."
+    }
+  }
+}

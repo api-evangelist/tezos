@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AccountParameter",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eq": {
+      "type": "string",
+      "description": "**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \\\nSpecify a `tz` or `KT` address to get items where the specified field is equal to the specified value.\n\nExample: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.",
+      "nullable": true
+    },
+    "ne": {
+      "type": "string",
+      "description": "**Not equal** filter mode. \\\nSpecify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.\n\nExample: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.",
+      "nullable": true
+    },
+    "in": {
+      "type": "array",
+      "description": "**In list** (any of) filter mode. \\\nSpecify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.\n\nExample: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ni": {
+      "type": "array",
+      "description": "**Not in list** (none of) filter mode. \\\nSpecify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.\n\nExample: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "eqx": {
+      "type": "string",
+      "description": "**Equal to another field** filter mode. \\\nSpecify a field name to get items where the specified fields are equal.\n\nExample: `?sender.eqx=target`.",
+      "nullable": true
+    },
+    "nex": {
+      "type": "string",
+      "description": "**Not equal to another field** filter mode. \\\nSpecify a field name to get items where the specified fields are not equal.\n\nExample: `?sender.nex=initiator`.",
+      "nullable": true
+    },
+    "null": {
+      "type": "boolean",
+      "description": "**Is null** filter mode. \\\nUse this mode to get items where the specified field is null or not.\n\nExample: `?initiator.null` or `?initiator.null=false`.",
+      "nullable": true
+    },
+    "inHasNull": {
+      "type": "boolean"
+    },
+    "niHasNull": {
+      "type": "boolean"
+    }
+  },
+  "x-tzkt-extension": "query-parameter"
+}

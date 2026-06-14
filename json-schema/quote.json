@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Quote",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "level": {
+      "type": "integer",
+      "description": "The level of the block at which the quote has been saved",
+      "format": "int32"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "The datetime at which the quote has been saved (ISO 8601, e.g. `2020-02-20T02:40:57Z`)",
+      "format": "date-time"
+    },
+    "btc": {
+      "type": "number",
+      "description": "XTZ/BTC price",
+      "format": "double"
+    },
+    "eur": {
+      "type": "number",
+      "description": "XTZ/EUR price",
+      "format": "double"
+    },
+    "usd": {
+      "type": "number",
+      "description": "XTZ/USD price",
+      "format": "double"
+    },
+    "cny": {
+      "type": "number",
+      "description": "XTZ/CNY price",
+      "format": "double"
+    },
+    "jpy": {
+      "type": "number",
+      "description": "XTZ/JPY price",
+      "format": "double"
+    },
+    "krw": {
+      "type": "number",
+      "description": "XTZ/KRW price",
+      "format": "double"
+    },
+    "eth": {
+      "type": "number",
+      "description": "XTZ/ETH price",
+      "format": "double"
+    },
+    "gbp": {
+      "type": "number",
+      "description": "XTZ/GBP price",
+      "format": "double"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "operation": "Delegates_Get",
+  "method": "GET",
+  "path": "/v1/delegates",
+  "tags": [
+    "Delegates"
+  ],
+  "summary": "Get delegates",
+  "parameters": [
+    {
+      "name": "active",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "lastActivity",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "select",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "sort",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "offset",
+      "in": "query",
+      "required": false
+    }
+  ]
+}

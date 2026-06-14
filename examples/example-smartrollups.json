@@ -1,0 +1,36 @@
+{
+  "operation": "SmartRollups_GetSmartRollupsCount",
+  "method": "GET",
+  "path": "/v1/smart_rollups/count",
+  "tags": [
+    "SmartRollups"
+  ],
+  "summary": "Get smart rollups count",
+  "parameters": [
+    {
+      "name": "id",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "address",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "creator",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "firstActivity",
+      "in": "query",
+      "required": false
+    },
+    {
+      "name": "firstActivityTime",
+      "in": "query",
+      "required": false
+    }
+  ]
+}
