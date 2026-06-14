@@ -1,0 +1,104 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: Tezos (TzKT)
+providerId: tezos
+publisherName: Baking Bad
+serviceCategory: API
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - Tezos
+  - Blockchain
+  - TzKT
+  - Baking Bad
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: |
+  FinOps framework alignment for the TzKT API surface. The free public API
+  has no direct monetary cost to consumers; infrastructure cost arises from
+  the hosting side. For TzKT Pro subscribers, cost allocation tracks against
+  the contracted plan. Self-hosted deployments incur cloud/on-prem compute,
+  storage, and node operation costs that should be tracked per this framework.
+principles:
+  - name: Visibility
+    description: Make API consumption visible to engineering and platform teams — even free tiers consume shared infrastructure and should be tracked for potential upgrade decisions.
+  - name: Allocation
+    description: Tag every integration consuming TzKT with the owning team, environment, and application to inform tier upgrade decisions and cost attribution for self-hosted deployments.
+  - name: Optimization
+    description: Use server-side caching, pagination, field selection, and WebSocket subscriptions instead of polling to minimize request volume and infrastructure load.
+  - name: Accountability
+    description: For TzKT Pro and self-hosted deployments, establish budget owners and track actuals against contracted or forecasted spend.
+domains:
+  - name: Free Public API Consumption
+    description: Usage of the free TzKT public API. Direct monetary cost is zero; opportunity cost is the rate-limit envelope and shared infrastructure dependency.
+    costDrivers:
+      - request_volume
+      - endpoint_complexity
+      - data_freshness_requirements
+    focusMapping:
+      ChargeCategory: Usage
+      ChargeClass: Consumption
+      ServiceCategory: API
+      ServiceSubcategory: Blockchain Indexer API
+  - name: TzKT Pro Subscription
+    description: Contracted TzKT Pro access from Baking Bad with elevated quotas and SLA.
+    costDrivers:
+      - contracted_plan
+      - request_volume
+      - support_tier
+    focusMapping:
+      ChargeCategory: Purchase
+      ChargeClass: Committed
+      ServiceCategory: API
+      ServiceSubcategory: Blockchain Indexer API
+  - name: Self-Hosted Deployment
+    description: Cloud or on-prem costs for running the TzKT indexer (compute, storage, Tezos node RPC, egress).
+    costDrivers:
+      - compute_instance_type
+      - storage_volume
+      - node_rpc_costs
+      - network_egress
+    focusMapping:
+      ChargeCategory: Usage
+      ChargeClass: Consumption
+      ServiceCategory: Compute
+      ServiceSubcategory: Blockchain Infrastructure
+focusFields:
+  required:
+    - BillingPeriodStart
+    - BillingPeriodEnd
+    - ChargeCategory
+    - ChargePeriodStart
+    - ChargePeriodEnd
+    - ProviderName
+    - PublisherName
+    - InvoiceIssuerName
+    - ServiceName
+    - ServiceCategory
+    - BilledCost
+    - EffectiveCost
+    - ListCost
+    - ContractedCost
+    - PricingCategory
+    - PricingUnit
+    - PricingQuantity
+  recommended:
+    - SubAccountId
+    - SubAccountName
+    - ResourceId
+    - ResourceName
+    - ResourceType
+    - Region
+    - Tags
+notes:
+  - The free public TzKT API has no invoice — cost tracking applies to self-hosted or Pro deployments.
+  - For self-hosted TzKT, model costs against Docker host compute, PostgreSQL storage, and Tezos node operation.
+  - Monitor daily request utilization against the 3,000,000/day free tier cap to detect when a Pro upgrade is warranted.
+  - WebSocket connections consume server resources; include active subscription count in utilization tracking.

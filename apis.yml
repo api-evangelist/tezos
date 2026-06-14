@@ -1,0 +1,298 @@
+aid: tezos
+name: Tezos
+description: |
+  Tezos is a self-amending blockchain platform that uses on-chain governance
+  to upgrade its protocol without hard forks. The primary developer API surface
+  is provided by TzKT, an open-source Tezos blockchain indexer built and
+  maintained by the Baking Bad team. TzKT exposes a comprehensive REST API
+  (https://api.tzkt.io) covering 100+ endpoints for querying blocks, accounts,
+  operations, delegations, smart contracts, big maps, tokens (FA1.2/FA2/NFTs),
+  staking data, baking rights, governance periods, and protocol metadata on
+  the Tezos mainnet. The API supports deep filtering, deep selection, deep
+  sorting, CSV exports, and historical data queries at specific block heights.
+  A WebSocket API (SignalR) provides real-time subscription streams for new
+  blocks and operations. The public TzKT API is freely available with no API
+  key required; rate limits apply per IP via standard RateLimit headers and
+  HTTP 429 responses. TzKT Pro is available for teams requiring elevated
+  quotas and dedicated support. The indexer is MIT-licensed and can also be
+  self-hosted against a Tezos node.
+type: Index
+position: Provider
+access: Public
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Tezos
+  - Blockchain
+  - TzKT
+  - Baking Bad
+  - Cryptocurrency
+  - Smart Contracts
+  - NFT
+  - Tokens
+  - Delegations
+  - Staking
+  - Governance
+  - FA1.2
+  - FA2
+  - WebSocket
+url: https://raw.githubusercontent.com/api-evangelist/tezos/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+apis:
+  - aid: tezos:tzkt-accounts
+    name: TzKT Accounts API
+    description: |
+      The Accounts API returns profile data for any Tezos address — user
+      wallets, delegates (bakers), smart contracts, and ghost accounts.
+      Endpoints expose balance, staked amounts, token holdings, contract
+      count, first and last activity timestamps, and full paginated operation
+      history. A dedicated balance endpoint returns the current XTZ balance as
+      a plain integer.
+    humanURL: https://api.tzkt.io/#tag/Accounts
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Accounts
+      - Balances
+      - Wallets
+      - Delegates
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Accounts
+  - aid: tezos:tzkt-blocks
+    name: TzKT Blocks API
+    description: |
+      The Blocks API exposes Tezos block-level data including block hash,
+      level, protocol, timestamp, baker, priority, number of operations,
+      volume, fees, and reward metadata. Blocks can be fetched by hash,
+      level, or queried in bulk with pagination and sorting. A lightweight
+      head endpoint returns the current chain tip with live XTZ exchange
+      rates.
+    humanURL: https://api.tzkt.io/#tag/Blocks
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Blocks
+      - Chain
+      - Head
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Blocks
+  - aid: tezos:tzkt-operations
+    name: TzKT Operations API
+    description: |
+      The Operations API is the broadest endpoint group in TzKT, covering
+      all Tezos operation types: transactions, originations, delegations,
+      reveals, endorsements, double-bake evidence, ballot and proposal
+      operations, register global constants, set deposits limits, and
+      more. Operations can be filtered by sender, target, level, timestamp,
+      status, entrypoint, parameter, and many other fields. Supports
+      pagination, sorting, and CSV export.
+    humanURL: https://api.tzkt.io/#tag/Operations
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Operations
+      - Transactions
+      - Originations
+      - Delegations
+      - Endorsements
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Operations
+  - aid: tezos:tzkt-contracts
+    name: TzKT Contracts API
+    description: |
+      The Contracts API provides access to Tezos smart contract metadata,
+      storage, entrypoints, views, and code. Storage can be retrieved as
+      decoded JSON at the current state or at a historical block level.
+      Big map keys and values within contract storage are accessible through
+      dedicated endpoints. Contract events (emitted via EMIT instruction)
+      are also indexed.
+    humanURL: https://api.tzkt.io/#tag/Contracts
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Contracts
+      - Smart Contracts
+      - Storage
+      - Entrypoints
+      - Events
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Contracts
+  - aid: tezos:tzkt-bigmaps
+    name: TzKT Big Maps API
+    description: |
+      The Big Maps API indexes all Tezos big map allocations across smart
+      contracts, exposing individual key-value entries with historical
+      tracking. Keys and values are decoded from Micheline to JSON. Supports
+      bulk queries, filtering by contract, key hash, and active/removed
+      status.
+    humanURL: https://api.tzkt.io/#tag/BigMaps
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Big Maps
+      - Smart Contracts
+      - Storage
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/BigMaps
+  - aid: tezos:tzkt-tokens
+    name: TzKT Tokens API
+    description: |
+      The Tokens API covers FA1.2, FA2, and NFT token standards on Tezos.
+      Endpoints expose token metadata, holder balances, and transfer history.
+      Token balances can be queried per account or per token contract;
+      transfers can be filtered by sender, receiver, token ID, and time
+      range. Supports pagination and CSV export.
+    humanURL: https://api.tzkt.io/#tag/Tokens
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Tokens
+      - FA1.2
+      - FA2
+      - NFT
+      - Balances
+      - Transfers
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Tokens
+  - aid: tezos:tzkt-delegations-staking
+    name: TzKT Delegations and Staking API
+    description: |
+      The Delegations and Staking APIs expose baking (validation) economics
+      on Tezos. Delegations endpoints return active and historical delegation
+      assignments between addresses and bakers. Staking endpoints return
+      staked balances, staking operations, and per-cycle reward splits.
+      Baking rights (endorsing and baking slots) are also queryable per
+      baker and per cycle.
+    humanURL: https://api.tzkt.io/#tag/Delegators
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Delegations
+      - Staking
+      - Baking
+      - Rewards
+      - Validators
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Delegators
+  - aid: tezos:tzkt-governance
+    name: TzKT Governance API
+    description: |
+      The Governance API exposes Tezos on-chain governance data including
+      voting periods, proposals, ballots, and quorum thresholds. Developers
+      can query the history of all protocol upgrade votes, the current voting
+      epoch, and per-address ballot submissions.
+    humanURL: https://api.tzkt.io/#tag/Voting
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Governance
+      - Voting
+      - Proposals
+      - Protocol
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Voting
+  - aid: tezos:tzkt-protocols
+    name: TzKT Protocols API
+    description: |
+      The Protocols API returns metadata for each Tezos protocol version
+      including hash, first and last cycle, constants (block time, gas
+      limits, baking rewards), and amendment history. Useful for building
+      analytics that span multiple protocol eras.
+    humanURL: https://api.tzkt.io/#tag/Protocols
+    baseURL: https://api.tzkt.io/v1
+    tags:
+      - Protocols
+      - Chain Constants
+      - History
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/Protocols
+  - aid: tezos:tzkt-websocket
+    name: TzKT WebSocket API
+    description: |
+      The TzKT WebSocket API uses SignalR to deliver real-time push
+      notifications to subscribed clients. Channels cover new blocks,
+      new and confirmed operations (filtered by sender, target, or
+      entrypoint), big map updates, token transfers, and account balance
+      changes. Reconnects and message back-fills are handled automatically
+      by the SignalR client libraries available for JavaScript, .NET,
+      Java, and Python.
+    humanURL: https://api.tzkt.io/#tag/WebSocket
+    baseURL: wss://api.tzkt.io/v1/events
+    tags:
+      - WebSocket
+      - Real-Time
+      - Subscriptions
+      - Events
+      - SignalR
+    properties:
+      - type: Documentation
+        url: https://api.tzkt.io/#tag/WebSocket
+features:
+  - name: No Authentication Required
+    description: The public TzKT API is open access — no API key or registration needed for the free tier.
+  - name: Deep Filtering and Sorting
+    description: Every collection endpoint supports multi-field filtering, field selection, and sorting via query parameters.
+  - name: Historical Queries
+    description: Account balances, storage values, and big map keys can be queried at any historical block level.
+  - name: Real-Time WebSocket Streams
+    description: SignalR WebSocket channels deliver new blocks, operations, balance changes, and token transfers in real time.
+  - name: Token and NFT Indexing
+    description: FA1.2, FA2, and NFT token contracts are fully indexed with balances, transfers, and IPFS/HTTP metadata.
+  - name: CSV Export
+    description: Most collection endpoints support CSV download for offline analytics and reconciliation.
+  - name: Self-Hosting
+    description: TzKT is MIT-licensed and can be run against a local or remote Tezos node via Docker.
+  - name: Multiple Networks
+    description: Separate API instances available for mainnet, Ghostnet (testnet), and other Tezos test networks.
+useCases:
+  - name: Block Explorer Backend
+    description: Power blockchain explorers with block, operation, and account data from indexed TzKT endpoints.
+  - name: Wallet Integration
+    description: Retrieve account balances, token holdings, and operation history for Tezos wallet applications.
+  - name: DeFi Analytics
+    description: Track token transfers, big map state, and smart contract interactions for DeFi protocol dashboards.
+  - name: NFT Marketplace
+    description: Index FA2 NFT mints, transfers, and metadata for marketplace discovery and ownership tracking.
+  - name: Baking Monitoring
+    description: Monitor baker performance, staking rewards, delegation changes, and baking rights assignments.
+  - name: Governance Tracking
+    description: Follow on-chain proposal submissions, ballot counts, and protocol amendment outcomes.
+  - name: Financial Reconciliation
+    description: Export CSV operation history for accounting, tax reporting, and portfolio reconciliation.
+authentication:
+  - type: None
+    description: The public TzKT API at api.tzkt.io requires no authentication. Requests are rate-limited by IP address.
+common:
+  - type: Website
+    url: https://tzkt.io
+  - type: DeveloperPortal
+    url: https://api.tzkt.io
+  - type: Documentation
+    url: https://api.tzkt.io/
+  - type: GitHubOrganization
+    url: https://github.com/baking-bad
+  - type: GitHubRepository
+    url: https://github.com/baking-bad/tzkt
+  - type: MainnetAPI
+    url: https://api.tzkt.io/v1
+  - type: GhostnetAPI
+    url: https://api.ghostnet.tzkt.io/v1
+  - type: WebSocket
+    url: wss://api.tzkt.io/v1/events
+  - type: License
+    url: https://github.com/baking-bad/tzkt/blob/master/LICENSE
+  - type: Status
+    url: https://tzkt.io
+  - type: Blog
+    url: https://baking-bad.org/blog/
+  - type: Plans
+    url: plans/tezos-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/tezos-rate-limits.yml
+  - type: FinOps
+    url: finops/tezos-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

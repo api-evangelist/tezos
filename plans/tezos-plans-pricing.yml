@@ -1,0 +1,113 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Tezos (TzKT)
+providerId: tezos
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - Tezos
+  - Blockchain
+  - TzKT
+  - Baking Bad
+  - Cryptocurrency
+  - Smart Contracts
+  - NFT
+  - Tokens
+description: |
+  The public TzKT API (api.tzkt.io) is free and open access — no registration
+  or API key is required. Rate limits are enforced per IP via standard HTTP
+  headers (X-RateLimit-Limit-Second: 50, X-RateLimit-Limit-Day: 3,000,000).
+  TzKT Pro is available for teams that need elevated quotas, dedicated
+  infrastructure, or SLA-backed support; contact Baking Bad for commercial
+  terms. Self-hosting (MIT license, Docker images on Docker Hub) is a
+  cost-free alternative for teams with their own Tezos node.
+plans:
+  - id: tezos-free
+    name: Free Public API
+    type: free
+    description: |
+      No-registration, open-access tier for the TzKT REST and WebSocket APIs
+      hosted at api.tzkt.io. Rate-limited per IP address (50 requests/second,
+      3,000,000 requests/day). Suitable for development, research, light
+      production use, and community projects.
+    entries:
+      - label: Per-Second Rate Limit
+        description: Maximum requests per second per IP on the free public tier.
+        name: requests_per_second
+        type: quota
+        metric: requests
+        limit: 50
+        timeFrame: second
+        geo: global
+        domains:
+          - https://api.tzkt.io
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Per-Day Rate Limit
+        description: Maximum requests per day per IP on the free public tier.
+        name: requests_per_day
+        type: quota
+        metric: requests
+        limit: 3000000
+        timeFrame: day
+        geo: global
+        domains:
+          - https://api.tzkt.io
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+  - id: tezos-pro
+    name: TzKT Pro
+    type: paid
+    description: |
+      Commercial tier from Baking Bad offering higher rate limits, dedicated
+      API infrastructure, SLA, and priority support. Pricing and quota details
+      are available directly from Baking Bad (hello@bakingbad.dev). Suitable
+      for high-volume production integrations, exchanges, and wallets.
+    entries:
+      - label: Elevated Quotas
+        description: Higher per-second and per-day request quotas negotiated per contract.
+        name: elevated_quotas
+        type: quota
+        metric: requests
+        limit: 0
+        timeFrame: second
+        geo: global
+        domains:
+          - https://api.tzkt.io
+        unit: 1
+        price: 'contact'
+        userMultiplied: false
+  - id: tezos-self-hosted
+    name: Self-Hosted (Open Source)
+    type: free
+    description: |
+      MIT-licensed TzKT indexer deployable via Docker against any Tezos node.
+      No rate limits imposed by the provider; all infrastructure costs are the
+      operator's own. Docker images available on Docker Hub under
+      bakingbad/tzkt-api and bakingbad/tzkt-snapshot.
+    entries:
+      - label: Self-Hosted Access
+        description: Unlimited access to a self-hosted TzKT instance; no provider-imposed rate limits.
+        name: self_hosted_access
+        type: quota
+        metric: requests
+        limit: 0
+        timeFrame: month
+        geo: global
+        domains:
+          - http://localhost:5000
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+references:
+  - name: TzKT API Documentation
+    url: https://api.tzkt.io/
+  - name: Baking Bad GitHub
+    url: https://github.com/baking-bad/tzkt
+  - name: Docker Hub - TzKT API
+    url: https://hub.docker.com/r/bakingbad/tzkt-api
+  - name: Baking Bad Contact
+    url: https://bakingbad.dev/

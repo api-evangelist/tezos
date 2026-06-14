@@ -1,0 +1,83 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Tezos (TzKT)
+providerId: tezos
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - Tezos
+  - Blockchain
+  - TzKT
+  - Baking Bad
+  - Rate Limiting
+  - Quotas
+  - Throttling
+description: |
+  Rate limit definitions for the TzKT public API (api.tzkt.io). The free
+  public tier enforces 50 requests/second and 3,000,000 requests/day per
+  IP address. Limits are communicated via standard X-RateLimit and
+  RateLimit headers. Exceeding a limit returns HTTP 429. TzKT Pro plans
+  have higher limits negotiated directly with Baking Bad.
+headers:
+  limit: X-RateLimit-Limit-Second
+  remaining: X-RateLimit-Remaining-Second
+  dayLimit: X-RateLimit-Limit-Day
+  dayRemaining: X-RateLimit-Remaining-Day
+  reset: RateLimit-Reset
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  serviceUnavailable: 503
+limits:
+  - tier: free
+    name: Free Tier Per-Second Limit
+    scope: ip
+    metric: requests_per_second
+    limit: 50
+    burst: 50
+    timeFrame: second
+    applies:
+      - https://api.tzkt.io/v1
+    description: |
+      Maximum 50 requests per second per IP on the free public TzKT API.
+      Exceeding this limit returns HTTP 429 with Retry-After header.
+  - tier: free
+    name: Free Tier Per-Day Limit
+    scope: ip
+    metric: requests_per_day
+    limit: 3000000
+    burst: 0
+    timeFrame: day
+    applies:
+      - https://api.tzkt.io/v1
+    description: |
+      Maximum 3,000,000 requests per day per IP on the free public TzKT API.
+      The daily counter resets at UTC midnight.
+  - tier: pro
+    name: TzKT Pro Elevated Limits
+    scope: api-key
+    metric: requests_per_second
+    limit: 0
+    burst: 0
+    timeFrame: second
+    applies:
+      - https://api.tzkt.io/v1
+    description: |
+      TzKT Pro plans provide elevated per-second and per-day quotas;
+      specific values are negotiated with Baking Bad (hello@bakingbad.dev).
+recoveryStrategies:
+  - name: Respect Retry-After
+    description: Read the Retry-After header and pause that many seconds before retrying.
+  - name: Exponential Backoff
+    description: If no Retry-After header is present, apply exponential backoff starting at 1 second, capping at 60 seconds.
+  - name: Batch and Page
+    description: Use pagination (offset/limit) and bulk query parameters to fetch larger datasets in fewer requests rather than issuing many individual calls.
+  - name: Response Caching
+    description: TzKT has a built-in server-side cache. Clients should also cache responses for immutable data (historical blocks, finalized operations) to avoid redundant requests.
+notes:
+  - Rate limits are applied per originating IP address on the free public tier.
+  - WebSocket (SignalR) subscriptions count separately from REST API calls.
+  - Self-hosted TzKT instances have no provider-imposed rate limits.
+  - The X-RateLimit-Limit-Second header reflects the per-second window; X-RateLimit-Limit-Day reflects the rolling daily window.
