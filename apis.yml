@@ -265,6 +265,8 @@ authentication:
   - type: None
     description: The public TzKT API at api.tzkt.io requires no authentication. Requests are rate-limited by IP address.
 common:
+  - type: AgenticAccess
+    url: agentic-access/tezos-agentic-access.yml
   - type: DomainSecurity
     url: security/tezos-domain-security.yml
   - type: Website

@@ -1,0 +1,2914 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 288
+  by_action_class:
+    connected: 285
+    acting: 3
+  by_consequence:
+    read: 285
+    write: 3
+  human_in_the_loop_required: 0
+operations:
+- path: /v1/accounts
+  method: get
+  operationId: Accounts_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/activity
+  method: get
+  operationId: Accounts_GetActivity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/count
+  method: get
+  operationId: Accounts_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}
+  method: get
+  operationId: Accounts_GetByAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/contracts
+  method: get
+  operationId: Accounts_GetContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/delegators
+  method: get
+  operationId: Accounts_GetDelegators
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/counter
+  method: get
+  operationId: Accounts_GetCounter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/balance
+  method: get
+  operationId: Accounts_GetBalance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/balance_history/{level}
+  method: get
+  operationId: Accounts_GetBalanceAtLevel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/balance_history/{datetime}
+  method: get
+  operationId: Accounts_GetBalanceAtDate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/balance_history
+  method: get
+  operationId: Accounts_GetBalanceHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/accounts/{address}/report
+  method: get
+  operationId: Accounts_GetBalanceReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/count
+  method: get
+  operationId: BigMaps_GetBigMapsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps
+  method: get
+  operationId: BigMaps_GetBigMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/keys
+  method: get
+  operationId: BigMaps_GetBigMapKeys
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/updates/count
+  method: get
+  operationId: BigMaps_GetBigMapUpdates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/updates
+  method: get
+  operationId: BigMaps_GetBigMapUpdates2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/{id}
+  method: get
+  operationId: BigMaps_GetBigMapById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/{id}/type
+  method: get
+  operationId: BigMaps_GetBigMapType
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/{id}/keys
+  method: get
+  operationId: BigMaps_GetKeys
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/{id}/keys/{key}
+  method: get
+  operationId: BigMaps_GetKey
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/{id}/keys/{key}/updates
+  method: get
+  operationId: BigMaps_GetKeyUpdates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/{id}/historical_keys/{level}
+  method: get
+  operationId: BigMaps_GetHistoricalKeys
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/bigmaps/{id}/historical_keys/{level}/{key}
+  method: get
+  operationId: BigMaps_GetKey2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks/count
+  method: get
+  operationId: Blocks_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks
+  method: get
+  operationId: Blocks_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks/{hash}
+  method: get
+  operationId: Blocks_GetByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks/{level}
+  method: get
+  operationId: Blocks_GetByLevel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks/{level}/timestamp
+  method: get
+  operationId: Blocks_GetByLevel2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks/{timestamp}
+  method: get
+  operationId: Blocks_GetByDate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/blocks/{timestamp}/level
+  method: get
+  operationId: Blocks_GetByDate2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/commitments/{address}
+  method: get
+  operationId: Commitments_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/commitments
+  method: get
+  operationId: Commitments_GetAll
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/commitments/count
+  method: get
+  operationId: Commitments_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/constants
+  method: get
+  operationId: Constants_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/constants/{address}
+  method: get
+  operationId: Constants_GetByAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/constants/count
+  method: get
+  operationId: Constants_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts
+  method: get
+  operationId: Contracts_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/count
+  method: get
+  operationId: Contracts_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}
+  method: get
+  operationId: Contracts_GetByAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/same
+  method: get
+  operationId: Contracts_GetSame
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/similar
+  method: get
+  operationId: Contracts_GetSimilar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/code
+  method: get
+  operationId: Contracts_GetCode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/interface
+  method: get
+  operationId: Contracts_GetInterface
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/entrypoints
+  method: get
+  operationId: Contracts_GetEntrypoints
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/entrypoints/{name}
+  method: get
+  operationId: Contracts_GetEntrypointByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/views
+  method: get
+  operationId: Contracts_GetContractViews
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/views/{name}
+  method: get
+  operationId: Contracts_GetContractViewByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/entrypoints/{name}/build
+  method: get
+  operationId: Contracts_BuildEntrypointParametersGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/entrypoints/{name}/build
+  method: post
+  operationId: Contracts_BuildEntrypointParametersPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/contracts/{address}/storage
+  method: get
+  operationId: Contracts_GetStorage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/storage/schema
+  method: get
+  operationId: Contracts_GetStorageSchema
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/storage/history
+  method: get
+  operationId: Contracts_GetStorageHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/storage/raw
+  method: get
+  operationId: Contracts_GetRawStorage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/storage/raw/schema
+  method: get
+  operationId: Contracts_GetRawStorageSchema
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/storage/raw/history
+  method: get
+  operationId: Contracts_GetRawStorageHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/bigmaps
+  method: get
+  operationId: Contracts_GetBigMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/bigmaps/{name}
+  method: get
+  operationId: Contracts_GetBigMapByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/bigmaps/{name}/keys
+  method: get
+  operationId: Contracts_GetBigMapByNameKeys
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/bigmaps/{name}/keys/{key}
+  method: get
+  operationId: Contracts_GetKey
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/bigmaps/{name}/keys/{key}/updates
+  method: get
+  operationId: Contracts_GetKeyUpdates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}
+  method: get
+  operationId: Contracts_GetHistoricalKeys
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}/{key}
+  method: get
+  operationId: Contracts_GetKey2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cycles/count
+  method: get
+  operationId: Cycles_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cycles
+  method: get
+  operationId: Cycles_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/cycles/{index}
+  method: get
+  operationId: Cycles_GetByIndex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/delegates
+  method: get
+  operationId: Delegates_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/delegates/count
+  method: get
+  operationId: Delegates_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/delegates/{address}
+  method: get
+  operationId: Delegates_GetByAddress
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/domains/count
+  method: get
+  operationId: Domains_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/domains
+  method: get
+  operationId: Domains_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/domains/{name}
+  method: get
+  operationId: Domains_GetByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/events/count
+  method: get
+  operationId: Events_GetContractEventsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contracts/events
+  method: get
+  operationId: Events_GetContractEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/head
+  method: get
+  operationId: Head_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/helpers/inject
+  method: post
+  operationId: Helpers_PostInject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/helpers/view/{contract}/{name}
+  method: post
+  operationId: Helpers_PostRunScriptView
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/operations/{hash}
+  method: get
+  operationId: Operations_GetByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/{hash}/{counter}
+  method: get
+  operationId: Operations_GetByHashCounter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/{hash}/{counter}/{nonce}
+  method: get
+  operationId: Operations_GetByHashCounterNonce
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/{hash}/status
+  method: get
+  operationId: Operations_GetStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/attestations
+  method: get
+  operationId: Operations_GetAttestations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/attestations/{hash}
+  method: get
+  operationId: Operations_GetAttestationByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/attestations/count
+  method: get
+  operationId: Operations_GetAttestationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/preattestations
+  method: get
+  operationId: Operations_GetPreattestations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/preattestations/{hash}
+  method: get
+  operationId: Operations_GetPreattestationByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/preattestations/count
+  method: get
+  operationId: Operations_GetPreattestationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/ballots
+  method: get
+  operationId: Operations_GetBallots
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/ballots/{hash}
+  method: get
+  operationId: Operations_GetBallotByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/ballots/count
+  method: get
+  operationId: Operations_GetBallotsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/proposals
+  method: get
+  operationId: Operations_GetProposals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/proposals/{hash}
+  method: get
+  operationId: Operations_GetProposalByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/proposals/count
+  method: get
+  operationId: Operations_GetProposalsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/activations
+  method: get
+  operationId: Operations_GetActivations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/activations/{hash}
+  method: get
+  operationId: Operations_GetActivationByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/activations/count
+  method: get
+  operationId: Operations_GetActivationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_entrapment_evidence
+  method: get
+  operationId: Operations_GetDalEntrapmentEvidenceOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_entrapment_evidence/{hash}
+  method: get
+  operationId: Operations_GetDalEntrapmentEvidenceOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_entrapment_evidence/count
+  method: get
+  operationId: Operations_GetDalEntrapmentEvidenceOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/double_baking
+  method: get
+  operationId: Operations_GetDoubleBaking
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/double_baking/{hash}
+  method: get
+  operationId: Operations_GetDoubleBakingByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/double_baking/count
+  method: get
+  operationId: Operations_GetDoubleBakingCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/double_consensus
+  method: get
+  operationId: Operations_GetDoubleConsensus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/double_consensus/{hash}
+  method: get
+  operationId: Operations_GetDoubleConsensusByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/double_consensus/count
+  method: get
+  operationId: Operations_GetDoubleConsensusCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/nonce_revelations
+  method: get
+  operationId: Operations_GetNonceRevelations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/nonce_revelations/{hash}
+  method: get
+  operationId: Operations_GetNonceRevelationByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/nonce_revelations/count
+  method: get
+  operationId: Operations_GetNonceRevelationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/vdf_revelations
+  method: get
+  operationId: Operations_GetVdfRevelations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/vdf_revelations/{hash}
+  method: get
+  operationId: Operations_GetVdfRevelationByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/vdf_revelations/count
+  method: get
+  operationId: Operations_GetVdfRevelationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/drain_delegate
+  method: get
+  operationId: Operations_GetDrainDelegateOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/drain_delegate/{hash}
+  method: get
+  operationId: Operations_GetDrainDelegateByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/drain_delegate/count
+  method: get
+  operationId: Operations_GetDrainDelegateOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/delegations
+  method: get
+  operationId: Operations_GetDelegations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/delegations/{hash}
+  method: get
+  operationId: Operations_GetDelegationByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/delegations/{hash}/status
+  method: get
+  operationId: Operations_GetDelegationStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/delegations/count
+  method: get
+  operationId: Operations_GetDelegationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/originations
+  method: get
+  operationId: Operations_GetOriginations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/originations/{hash}
+  method: get
+  operationId: Operations_GetOriginationByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/originations/{hash}/status
+  method: get
+  operationId: Operations_GetOriginationStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/originations/count
+  method: get
+  operationId: Operations_GetOriginationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transactions
+  method: get
+  operationId: Operations_GetTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transactions/{hash}
+  method: get
+  operationId: Operations_GetTransactionByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transactions/{hash}/{counter}
+  method: get
+  operationId: Operations_GetTransactionByHashCounter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transactions/{hash}/{counter}/{nonce}
+  method: get
+  operationId: Operations_GetTransactionByHashCounterNonce
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transactions/{hash}/status
+  method: get
+  operationId: Operations_GetTransactionStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transactions/count
+  method: get
+  operationId: Operations_GetTransactionsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/reveals
+  method: get
+  operationId: Operations_GetReveals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/reveals/{hash}
+  method: get
+  operationId: Operations_GetRevealByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/reveals/{hash}/status
+  method: get
+  operationId: Operations_GetRevealStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/reveals/count
+  method: get
+  operationId: Operations_GetRevealsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/register_constants
+  method: get
+  operationId: Operations_GetRegisterConstants
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/register_constants/{hash}
+  method: get
+  operationId: Operations_GetRegisterConstantByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/register_constants/{hash}/status
+  method: get
+  operationId: Operations_GetRegisterConstantStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/register_constants/count
+  method: get
+  operationId: Operations_GetRegisterConstantsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/set_deposits_limits
+  method: get
+  operationId: Operations_GetSetDepositsLimits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/set_deposits_limits/{hash}
+  method: get
+  operationId: Operations_GetSetDepositsLimitByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/set_deposits_limits/{hash}/status
+  method: get
+  operationId: Operations_GetSetDepositsLimitStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/set_deposits_limits/count
+  method: get
+  operationId: Operations_GetSetDepositsLimitsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transfer_ticket
+  method: get
+  operationId: Operations_GetTransferTicketOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transfer_ticket/{hash}
+  method: get
+  operationId: Operations_GetTransferTicketOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transfer_ticket/{hash}/status
+  method: get
+  operationId: Operations_GetTransferTicketStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/transfer_ticket/count
+  method: get
+  operationId: Operations_GetTransferTicketOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_commit
+  method: get
+  operationId: Operations_GetTxRollupCommitOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_commit/{hash}
+  method: get
+  operationId: Operations_GetTxRollupCommitOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_commit/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupCommitStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_commit/count
+  method: get
+  operationId: Operations_GetTxRollupCommitOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_dispatch_tickets
+  method: get
+  operationId: Operations_GetTxRollupDispatchTicketsOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_dispatch_tickets/{hash}
+  method: get
+  operationId: Operations_GetTxRollupDispatchTicketsOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_dispatch_tickets/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupDispatchTicketsStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_dispatch_tickets/count
+  method: get
+  operationId: Operations_GetTxRollupDispatchTicketsOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_finalize_commitment
+  method: get
+  operationId: Operations_GetTxRollupFinalizeCommitmentOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_finalize_commitment/{hash}
+  method: get
+  operationId: Operations_GetTxRollupFinalizeCommitmentOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_finalize_commitment/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupFinalizeCommitmentStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_finalize_commitment/count
+  method: get
+  operationId: Operations_GetTxRollupFinalizeCommitmentOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_origination
+  method: get
+  operationId: Operations_GetTxRollupOriginationOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_origination/{hash}
+  method: get
+  operationId: Operations_GetTxRollupOriginationOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_origination/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupOriginationStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_origination/count
+  method: get
+  operationId: Operations_GetTxRollupOriginationOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_rejection
+  method: get
+  operationId: Operations_GetTxRollupRejectionOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_rejection/{hash}
+  method: get
+  operationId: Operations_GetTxRollupRejectionOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_rejection/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupRejectionStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_rejection/count
+  method: get
+  operationId: Operations_GetTxRollupRejectionOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_remove_commitment
+  method: get
+  operationId: Operations_GetTxRollupRemoveCommitmentOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_remove_commitment/{hash}
+  method: get
+  operationId: Operations_GetTxRollupRemoveCommitmentOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_remove_commitment/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupRemoveCommitmentStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_remove_commitment/count
+  method: get
+  operationId: Operations_GetTxRollupRemoveCommitmentOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_return_bond
+  method: get
+  operationId: Operations_GetTxRollupReturnBondOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_return_bond/{hash}
+  method: get
+  operationId: Operations_GetTxRollupReturnBondOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_return_bond/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupReturnBondStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_return_bond/count
+  method: get
+  operationId: Operations_GetTxRollupReturnBondOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_submit_batch
+  method: get
+  operationId: Operations_GetTxRollupSubmitBatchOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_submit_batch/{hash}
+  method: get
+  operationId: Operations_GetTxRollupSubmitBatchOpsByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_submit_batch/{hash}/status
+  method: get
+  operationId: Operations_GetTxRollupSubmitBatchStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/tx_rollup_submit_batch/count
+  method: get
+  operationId: Operations_GetTxRollupSubmitBatchOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/increase_paid_storage
+  method: get
+  operationId: Operations_GetIncreasePaidStorageOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/increase_paid_storage/{hash}
+  method: get
+  operationId: Operations_GetIncreasePaidStorageByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/increase_paid_storage/count
+  method: get
+  operationId: Operations_GetIncreasePaidStorageCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/update_secondary_key
+  method: get
+  operationId: Operations_GetUpdateSecondaryKeyOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/update_secondary_key/{hash}
+  method: get
+  operationId: Operations_GetUpdateSecondaryKeyByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/update_secondary_key/count
+  method: get
+  operationId: Operations_GetUpdateSecondaryKeyOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_add_messages
+  method: get
+  operationId: Operations_GetSmartRollupAddMessagesOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_add_messages/count
+  method: get
+  operationId: Operations_GetSmartRollupAddMessagesOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_cement
+  method: get
+  operationId: Operations_GetSmartRollupCementOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_cement/count
+  method: get
+  operationId: Operations_GetSmartRollupCementOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_execute
+  method: get
+  operationId: Operations_GetSmartRollupExecuteOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_execute/count
+  method: get
+  operationId: Operations_GetSmartRollupExecuteOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_originate
+  method: get
+  operationId: Operations_GetSmartRollupOriginateOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_originate/count
+  method: get
+  operationId: Operations_GetSmartRollupOriginateOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_publish
+  method: get
+  operationId: Operations_GetSmartRollupPublishOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_publish/count
+  method: get
+  operationId: Operations_GetSmartRollupPublishOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_recover_bond
+  method: get
+  operationId: Operations_GetSmartRollupRecoverBondOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_recover_bond/count
+  method: get
+  operationId: Operations_GetSmartRollupRecoverBondOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_refute
+  method: get
+  operationId: Operations_GetSmartRollupRefuteOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/sr_refute/count
+  method: get
+  operationId: Operations_GetSmartRollupRefuteOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/staking
+  method: get
+  operationId: Operations_GetStakingOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/staking/count
+  method: get
+  operationId: Operations_GetStakingOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/migrations
+  method: get
+  operationId: Operations_GetMigrations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/migrations/{id}
+  method: get
+  operationId: Operations_GetMigrationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/migrations/count
+  method: get
+  operationId: Operations_GetMigrationsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/revelation_penalties
+  method: get
+  operationId: Operations_GetRevelationPenalties
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/revelation_penalties/{id}
+  method: get
+  operationId: Operations_GetRevelationPenaltyById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/revelation_penalties/count
+  method: get
+  operationId: Operations_GetRevelationPenaltiesCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/baking
+  method: get
+  operationId: Operations_GetBaking
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/baking/{id}
+  method: get
+  operationId: Operations_GetBakingById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/baking/count
+  method: get
+  operationId: Operations_GetBakingCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/attestation_rewards
+  method: get
+  operationId: Operations_GetAttestationRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/attestation_rewards/{id}
+  method: get
+  operationId: Operations_GetAttestationRewardById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/attestation_rewards/count
+  method: get
+  operationId: Operations_GetAttestationRewardsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_attestation_reward
+  method: get
+  operationId: Operations_GetDalAttestationRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_attestation_reward/{id}
+  method: get
+  operationId: Operations_GetDalAttestationRewardById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_attestation_reward/count
+  method: get
+  operationId: Operations_GetDalAttestationRewardsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/autostaking
+  method: get
+  operationId: Operations_GetAutostakingOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/autostaking/count
+  method: get
+  operationId: Operations_GetAutostakingOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/set_delegate_parameters
+  method: get
+  operationId: Operations_GetSetDelegateParametersOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/set_delegate_parameters/count
+  method: get
+  operationId: Operations_GetSetDelegateParametersOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_publish_commitment
+  method: get
+  operationId: Operations_GetDalPublishCommitmentOps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/operations/dal_publish_commitment/count
+  method: get
+  operationId: Operations_GetDalPublishCommitmentOpsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/protocols/count
+  method: get
+  operationId: Protocols_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/protocols
+  method: get
+  operationId: Protocols_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/protocols/current
+  method: get
+  operationId: Protocols_GetCurrent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/protocols/{code}
+  method: get
+  operationId: Protocols_GetByCode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/protocols/{hash}
+  method: get
+  operationId: Protocols_GetByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/protocols/cycles/{cycle}
+  method: get
+  operationId: Protocols_GetByCycle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/quotes/count
+  method: get
+  operationId: Quotes_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/quotes/last
+  method: get
+  operationId: Quotes_GetLast
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/quotes
+  method: get
+  operationId: Quotes_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/bakers/{address}/count
+  method: get
+  operationId: Rewards_GetBakerRewardsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/bakers/{address}
+  method: get
+  operationId: Rewards_GetBakerRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/delegators/{address}/count
+  method: get
+  operationId: Rewards_GetDelegatorRewardsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/delegators/{address}
+  method: get
+  operationId: Rewards_GetDelegatorRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/stakers/{address}/count
+  method: get
+  operationId: Rewards_GetStakerRewardsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/stakers/{address}
+  method: get
+  operationId: Rewards_GetStakerRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/split/{baker}/{cycle}
+  method: get
+  operationId: Rewards_GetRewardSplit
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rewards/split/{baker}/{cycle}/{member}
+  method: get
+  operationId: Rewards_GetRewardSplitMember
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rights/count
+  method: get
+  operationId: Rights_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/rights
+  method: get
+  operationId: Rights_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/count
+  method: get
+  operationId: SmartRollups_GetSmartRollupsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups
+  method: get
+  operationId: SmartRollups_GetSmartRollups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/{address}
+  method: get
+  operationId: SmartRollups_GetSmartRollup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/{address}/entrypoints
+  method: get
+  operationId: SmartRollups_GetEntrypoints
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/{address}/interface
+  method: get
+  operationId: SmartRollups_GetInterface
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/{address}/stakers
+  method: get
+  operationId: SmartRollups_GetSmartRollupStakers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/commitments/count
+  method: get
+  operationId: SmartRollups_GetSmartRollupCommitmentsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/commitments
+  method: get
+  operationId: SmartRollups_GetSmartRollupCommitments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/games/count
+  method: get
+  operationId: SmartRollups_GetSmartRollupGamesCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/games
+  method: get
+  operationId: SmartRollups_GetSmartRollupGames
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/inbox/count
+  method: get
+  operationId: SmartRollups_GetInboxMessagesCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/smart_rollups/inbox
+  method: get
+  operationId: SmartRollups_GetInboxMessages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/software
+  method: get
+  operationId: Software_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/software/count
+  method: get
+  operationId: Software_GetCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/staking/updates/count
+  method: get
+  operationId: Staking_GetStakingUpdatesCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/staking/updates
+  method: get
+  operationId: Staking_GetStakingUpdates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/staking/unstake_requests/count
+  method: get
+  operationId: Staking_GetUnstakeRequestsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/staking/unstake_requests
+  method: get
+  operationId: Staking_GetUnstakeRequests
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/statistics
+  method: get
+  operationId: Statistics_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/statistics/daily
+  method: get
+  operationId: Statistics_GetDaily
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/statistics/cyclic
+  method: get
+  operationId: Statistics_GetCyclic
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/statistics/current
+  method: get
+  operationId: Statistics_GetCurrent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tickets/count
+  method: get
+  operationId: Tickets_GetTicketsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tickets
+  method: get
+  operationId: Tickets_GetTickets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tickets/balances/count
+  method: get
+  operationId: Tickets_GetTicketBalancesCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tickets/balances
+  method: get
+  operationId: Tickets_GetTicketBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tickets/transfers/count
+  method: get
+  operationId: Tickets_GetTicketTransfersCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tickets/transfers
+  method: get
+  operationId: Tickets_GetTicketTransfers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tickets/historical_balances/{level}
+  method: get
+  operationId: Tickets_GetHistoricalTicketBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tokens/count
+  method: get
+  operationId: Tokens_GetTokensCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tokens
+  method: get
+  operationId: Tokens_GetTokens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tokens/balances/count
+  method: get
+  operationId: Tokens_GetTokenBalancesCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tokens/balances
+  method: get
+  operationId: Tokens_GetTokenBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tokens/transfers/count
+  method: get
+  operationId: Tokens_GetTokenTransfersCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tokens/transfers
+  method: get
+  operationId: Tokens_GetTokenTransfers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tokens/historical_balances/{level}
+  method: get
+  operationId: Tokens_GetTokenBalances2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/proposals/count
+  method: get
+  operationId: Voting_GetProposalsCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/proposals
+  method: get
+  operationId: Voting_GetProposals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/proposals/{hash}
+  method: get
+  operationId: Voting_GetProposalByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/periods
+  method: get
+  operationId: Voting_GetPeriods
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/periods/{index}
+  method: get
+  operationId: Voting_GetPeriod
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/periods/current
+  method: get
+  operationId: Voting_GetCurrentPeriod
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/periods/{index}/voters
+  method: get
+  operationId: Voting_GetPeriodVoters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/periods/{index}/voters/{address}
+  method: get
+  operationId: Voting_GetPeriodVoter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/periods/current/voters
+  method: get
+  operationId: Voting_GetPeriodVoters2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/periods/current/voters/{address}
+  method: get
+  operationId: Voting_GetPeriodVoter2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/epochs
+  method: get
+  operationId: Voting_GetEpochs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/epochs/{index}
+  method: get
+  operationId: Voting_GetEpoch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/epochs/current
+  method: get
+  operationId: Voting_GetCurrentEpoch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/voting/epochs/latest_voting
+  method: get
+  operationId: Voting_GetLatestVoting
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
