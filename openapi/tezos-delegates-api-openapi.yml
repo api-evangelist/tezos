@@ -1,0 +1,842 @@
+openapi: 3.0.0
+info:
+  title: TzKT Accounts Delegates API
+  description: "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it \U0001F60A\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! \U0001F609\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n"
+  contact:
+    name: Baking Bad Team
+    url: https://bakingbad.dev
+    email: hello@bakingbad.dev
+  version: 1.17.1
+  x-logo:
+    url: https://tzkt.io/logo.png
+    href: https://tzkt.io/
+servers:
+- url: https://api.tzkt.io
+tags:
+- name: Delegates
+paths:
+  /v1/delegates:
+    get:
+      tags:
+      - Delegates
+      summary: Get delegates
+      description: Returns a list of delegate accounts.
+      operationId: Delegates_Get
+      parameters:
+      - name: active
+        in: query
+        description: Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BoolParameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: lastActivity
+        in: query
+        description: Filters delegates by last activity level (where the delegate was updated)
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts delegators by specified field. Supported fields: `id` (default), `stakedBalance`, `externalStakedBalance`, `ownDelegatedBalance`, `externalDelegatedBalance`, `bakingPower`, `votingPower`, `balance`, `numDelegators`, `stakersCount`, `activationLevel`, `deactivationLevel`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 6
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Delegate'
+  /v1/delegates/count:
+    get:
+      tags:
+      - Delegates
+      summary: Get delegates count
+      description: Returns a number of delegate accounts.
+      operationId: Delegates_GetCount
+      parameters:
+      - name: active
+        in: query
+        description: Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BoolParameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/delegates/{address}:
+    get:
+      tags:
+      - Delegates
+      summary: Get delegate by address
+      description: Returns a delegate with the specified address.
+      operationId: Delegates_GetByAddress
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Delegate address (starting with tz)
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delegate'
+components:
+  schemas:
+    SoftwareAlias:
+      type: object
+      additionalProperties: false
+      properties:
+        version:
+          type: string
+          description: Software version (commit tag)
+        date:
+          type: string
+          description: Date of the commit or when the software was first seen
+          format: date-time
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Account alias name (off-chain data).
+          nullable: true
+        address:
+          type: string
+          description: Account address (public key hash).
+    BoolParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: boolean
+          description: '**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \
+
+            Specify a bool flag to get items where the specified field is equal to the specified value.
+
+
+            Example: `?active=true` or `?active=1` or `?active`.'
+          nullable: true
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?active.null` or `?active.null=false`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type: string
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+          nullable: true
+        desc:
+          type: string
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    Delegate:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: integer
+            description: Internal TzKT id
+            format: int32
+          type:
+            type: string
+            description: Type of the account, `delegate` - account, registered as a delegate (baker)
+          address:
+            type: string
+            description: Public key hash of the delegate's main key
+          consensusAddress:
+            type: string
+            description: Public key hash of the delegate's consensus key
+            nullable: true
+          companionAddress:
+            type: string
+            description: Public key hash of the delegate's companion key
+            nullable: true
+          active:
+            type: boolean
+            description: Delegation status (`true` - active, `false` - deactivated)
+          alias:
+            type: string
+            description: Name of the baking service
+            nullable: true
+          publicKey:
+            type: string
+            description: Public key of the delegate (baker)
+          revealed:
+            type: boolean
+            description: Public key revelation status. Unrevealed account can't send manager operation (transaction, origination etc.)
+          balance:
+            type: integer
+            description: Total balance of the delegate (baker), including spendable and frozen funds (micro tez)
+            format: int64
+          rollupBonds:
+            type: integer
+            description: Amount of tx rollup commitment bonds (micro tez)
+            format: int64
+          smartRollupBonds:
+            type: integer
+            description: Amount of smart rollup commitment bonds (micro tez)
+            format: int64
+          stakedBalance:
+            type: integer
+            description: 'Amount staked from the own balance (micro tez).
+
+              Like delegated amount, except for it is frozen and can be slashed.'
+            format: int64
+          unstakedBalance:
+            type: integer
+            description: Amount that was unstaked, but not yet finalized (i.e. it is still frozen) (micro tez).
+            format: int64
+          unstakedBaker:
+            description: Information about the baker, for which there are pending unstake requests.
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          externalStakedBalance:
+            type: integer
+            description: 'Amount staked from external stakers (micro tez).
+
+              Like delegated amount, except for it is frozen and can be slashed.'
+            format: int64
+          externalUnstakedBalance:
+            type: integer
+            description: Amount that was unstaked by external stakers, but not yet finalized (i.e. it is still frozen) (micro tez).
+            format: int64
+          roundingError:
+            type: integer
+            description: Amount that was lost due to inconsistend rounding introduced in Oxford (micro tez).
+            format: int64
+          totalStakedBalance:
+            type: integer
+            description: Total staked balance, which is `stakedBalance + externalStakedBalance`.
+            format: int64
+          issuedPseudotokens:
+            type: string
+            description: Total amount of issued "pseudo-tokens". These pseudotokens are used for unstaking.
+            nullable: true
+          stakersCount:
+            type: integer
+            description: Number of external stakers.
+            format: int32
+          frozenDepositLimit:
+            type: integer
+            description: Configured max amount allowed to be locked as a security deposit (micro tez)
+            format: int64
+            nullable: true
+          limitOfStakingOverBaking:
+            type: integer
+            description: This parameter determines the maximum portion (millionth) of external stake by stakers over the baker's own staked funds.
+            format: int64
+            nullable: true
+          edgeOfBakingOverStaking:
+            type: integer
+            description: This parameter determines the fraction (billionth) of the rewards that accrue to the baker's liquid spendable balance — the remainder accrues to frozen stakes.
+            format: int64
+            nullable: true
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          activationLevel:
+            type: integer
+            description: Block height when delegate (baker) was registered as a baker last time
+            format: int32
+          activationTime:
+            type: string
+            description: Block datetime when delegate (baker) was registered as a baker last time (ISO 8601, e.g. 2019-11-31)
+            format: date-time
+          deactivationLevel:
+            type: integer
+            description: Block height when delegate (baker) was deactivated as a baker because of lack of funds or inactivity
+            format: int32
+            nullable: true
+          deactivationTime:
+            type: string
+            description: Block datetime when delegate (baker) was deactivated as a baker because of lack of funds or inactivity (ISO 8601, e.g. 2019-11-31)
+            format: date-time
+            nullable: true
+          bakingPower:
+            type: integer
+            description: Current baking power
+            format: int64
+          votingPower:
+            type: integer
+            description: Current voting power
+            format: int64
+          ownDelegatedBalance:
+            type: integer
+            description: Amount delegated from the own balance (micro tez).
+            format: int64
+          externalDelegatedBalance:
+            type: integer
+            description: Amount delegated from the external delegators (micro tez).
+            format: int64
+          numContracts:
+            type: integer
+            description: Number of contracts, created (originated) and/or managed by the delegate (baker)
+            format: int32
+          rollupsCount:
+            type: integer
+            description: Number of tx rollups, created (originated) by the account
+            format: int32
+          smartRollupsCount:
+            type: integer
+            description: Number of smart rollups, created (originated) by the account
+            format: int32
+          activeTokensCount:
+            type: integer
+            description: Number of account tokens with non-zero balances
+            format: int32
+          tokenBalancesCount:
+            type: integer
+            description: Number of tokens the account ever had
+            format: int32
+          tokenTransfersCount:
+            type: integer
+            description: Number of token transfers from/to the account
+            format: int32
+          activeTicketsCount:
+            type: integer
+            description: Number of tickets the account owns.
+            format: int32
+          ticketBalancesCount:
+            type: integer
+            description: Number of tickets the account ever owned.
+            format: int32
+          ticketTransfersCount:
+            type: integer
+            description: Number of ticket transfers from/to the account.
+            format: int32
+          numDelegators:
+            type: integer
+            description: Number of current delegators (accounts, delegated their funds) of the delegate (baker)
+            format: int32
+          numBlocks:
+            type: integer
+            description: Number of baked (validated) blocks all the time by the delegate (baker)
+            format: int32
+          numAttestations:
+            type: integer
+            description: Number of given attestations (approvals) by the delegate (baker)
+            format: int32
+          numPreattestations:
+            type: integer
+            description: Number of given preattestations (approvals) by the delegate (baker)
+            format: int32
+          numBallots:
+            type: integer
+            description: Number of submitted by the delegate ballots during a voting period
+            format: int32
+          numProposals:
+            type: integer
+            description: Number of submitted (upvoted) by the delegate proposals during a proposal period
+            format: int32
+          numActivations:
+            type: integer
+            description: 'Number of account activation operations. Are used to activate accounts that were recommended allocations of
+
+              tezos tokens for donations to the Tezos Foundation’s fundraiser'
+            format: int32
+          numDoubleBaking:
+            type: integer
+            description: 'Number of double baking (baking two different blocks at the same height) evidence operations,
+
+              included in blocks, baked (validated) by the delegate'
+            format: int32
+          numDoubleConsensus:
+            type: integer
+            description: 'Number of double consensus (attestation or preattestation of two different blocks at the same block height) evidence operations,
+
+              included in blocks, baked (validated) by the delegate'
+            format: int32
+          numNonceRevelations:
+            type: integer
+            description: Number of seed nonce revelation (are used by the blockchain to create randomness) operations provided by the delegate
+            format: int32
+          vdfRevelationsCount:
+            type: integer
+            description: Number of `vdf_revelation` operations included into blocks by the delegate
+            format: int32
+          numRevelationPenalties:
+            type: integer
+            description: Number of operations for all time in which rewards were lost due to unrevealed seed nonces by the delegate (synthetic type)
+            format: int32
+          numAttestationRewards:
+            type: integer
+            description: Number of attestation rewards received at the end of cycles (synthetic type)
+            format: int32
+          numDelegations:
+            type: integer
+            description: 'Number of all delegation related operations (new delegator, left delegator, registration as a baker),
+
+              related to the delegate (baker) '
+            format: int32
+          numOriginations:
+            type: integer
+            description: Number of all origination (deployment / contract creation) operations, related to the delegate (baker)
+            format: int32
+          numTransactions:
+            type: integer
+            description: Number of all transaction (tez transfer) operations, related to the delegate (baker)
+            format: int32
+          numReveals:
+            type: integer
+            description: Number of reveal (is used to reveal the public key associated with an account) operations of the delegate (baker)
+            format: int32
+          numRegisterConstants:
+            type: integer
+            description: Number of register global constant operations sent by the baker
+            format: int32
+          numSetDepositsLimits:
+            type: integer
+            description: Number of set deposits limit operations sent by the baker
+            format: int32
+          numMigrations:
+            type: integer
+            description: 'Number of migration (result of the context (database) migration during a protocol update) operations,
+
+              related to the delegate (synthetic type) '
+            format: int32
+          txRollupOriginationCount:
+            type: integer
+            description: Number of tx rollup origination operations sent by the account
+            format: int32
+          txRollupSubmitBatchCount:
+            type: integer
+            description: Number of tx rollup submit batch operations sent by the account
+            format: int32
+          txRollupCommitCount:
+            type: integer
+            description: Number of tx rollup commit operations sent by the account
+            format: int32
+          txRollupReturnBondCount:
+            type: integer
+            description: Number of tx rollup return bond operations sent by the account
+            format: int32
+          txRollupFinalizeCommitmentCount:
+            type: integer
+            description: Number of tx rollup finalize commitment operations sent by the account
+            format: int32
+          txRollupRemoveCommitmentCount:
+            type: integer
+            description: Number of tx rollup remove commitment operations sent by the account
+            format: int32
+          txRollupRejectionCount:
+            type: integer
+            description: Number of tx rollup rejection operations sent by the account
+            format: int32
+          txRollupDispatchTicketsCount:
+            type: integer
+            description: Number of tx rollup dispatch tickets operations sent by the account
+            format: int32
+          transferTicketCount:
+            type: integer
+            description: Number of transfer ticket operations sent by the account
+            format: int32
+          increasePaidStorageCount:
+            type: integer
+            description: Number of `increase_paid_storage` operations sent by the account
+            format: int32
+          updateSecondaryKeyCount:
+            type: integer
+            description: Number of `update_secondary_key` operations sent by the account
+            format: int32
+          drainDelegateCount:
+            type: integer
+            description: Number of `drain_delegate` operations related to the account
+            format: int32
+          smartRollupAddMessagesCount:
+            type: integer
+            description: Number of `smart_rollup_add_messages` operations related to the account
+            format: int32
+          smartRollupCementCount:
+            type: integer
+            description: Number of `smart_rollup_cement` operations related to the account
+            format: int32
+          smartRollupExecuteCount:
+            type: integer
+            description: Number of `smart_rollup_execute_outbox_message` operations related to the account
+            format: int32
+          smartRollupOriginateCount:
+            type: integer
+            description: Number of `smart_rollup_originate` operations related to the account
+            format: int32
+          smartRollupPublishCount:
+            type: integer
+            description: Number of `smart_rollup_publish` operations related to the account
+            format: int32
+          smartRollupRecoverBondCount:
+            type: integer
+            description: Number of `smart_rollup_recover_bond` operations related to the account
+            format: int32
+          smartRollupRefuteCount:
+            type: integer
+            description: Number of `smart_rollup_refute` operations related to the account
+            format: int32
+          refutationGamesCount:
+            type: integer
+            description: Number of smart rollup refutation games related to the account
+            format: int32
+          activeRefutationGamesCount:
+            type: integer
+            description: Number of active smart rollup refutation games related to the account
+            format: int32
+          stakingOpsCount:
+            type: integer
+            description: Number of staking operations related to the account
+            format: int32
+          autostakingOpsCount:
+            type: integer
+            description: Number of autostaking operations related to the account
+            format: int32
+          stakingUpdatesCount:
+            type: integer
+            description: Number of staking updates related to the account
+            format: int32
+          setDelegateParametersOpsCount:
+            type: integer
+            description: Number of set delegate parameters operations related to the account
+            format: int32
+          dalPublishCommitmentOpsCount:
+            type: integer
+            description: Number of DAL publish commitment operations related to the account
+            format: int32
+          dalEntrapmentEvidenceOpsCount:
+            type: integer
+            description: Number of DAL entrapment evidences related to the account
+            format: int32
+          dalAttestationRewardsCount:
+            type: integer
+            description: Number of DAL attestation rewards related to the account
+            format: int32
+          firstActivity:
+            type: integer
+            description: Block height of the first operation, related to the delegate (baker)
+            format: int32
+          firstActivityTime:
+            type: string
+            description: Block datetime of the first operation, related to the delegate (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          lastActivity:
+            type: integer
+            description: Height of the block in which the account state was changed last time
+            format: int32
+          lastActivityTime:
+            type: string
+            description: Datetime of the block in which the account state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          extras:
+            description: Off-chain extras
+            nullable: true
+          software:
+            description: Last seen baker's software
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/SoftwareAlias'
+          softwareUpdateLevel:
+            type: integer
+            description: Level of the first block baked by the baker with the current software version
+            format: int32
+            nullable: true
+          softwareUpdateTime:
+            type: string
+            description: Datetime of the first block baked by the baker with the current software version
+            format: date-time
+            nullable: true
+          stakingBalance:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int64
+          delegatedBalance:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int64
+          updateConsensusKeyCount:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+          numEndorsements:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+          numPreendorsements:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+          numDoubleEndorsing:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+          numDoublePreendorsing:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+          numEndorsingRewards:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type: integer
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+          nullable: true
+        pg:
+          type: integer
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+          nullable: true
+        cr:
+          type: integer
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+          nullable: true
+      x-tzkt-extension: query-parameter
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
+x-tagGroups:
+- name: REST API
+  tags:
+  - Accounts
+  - BigMaps
+  - Blocks
+  - Commitments
+  - Constants
+  - Contracts
+  - Cycles
+  - Delegates
+  - Domains
+  - Events
+  - Head
+  - Helpers
+  - Operations
+  - Protocols
+  - Quotes
+  - Rewards
+  - Rights
+  - SmartRollups
+  - Software
+  - Staking
+  - Statistics
+  - Tickets
+  - Tokens
+  - Voting
+- name: WebSocket API
+  tags:
+  - Get Started
+  - Subscriptions
+  - Examples
+- name: Libraries
+  tags:
+  - Typescript SDK
+  - Taquito extension

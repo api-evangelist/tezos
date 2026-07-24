@@ -1,0 +1,2922 @@
+openapi: 3.0.0
+info:
+  title: TzKT Accounts Contracts API
+  description: "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it \U0001F60A\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! \U0001F609\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n"
+  contact:
+    name: Baking Bad Team
+    url: https://bakingbad.dev
+    email: hello@bakingbad.dev
+  version: 1.17.1
+  x-logo:
+    url: https://tzkt.io/logo.png
+    href: https://tzkt.io/
+servers:
+- url: https://api.tzkt.io
+tags:
+- name: Contracts
+paths:
+  /v1/contracts:
+    get:
+      tags:
+      - Contracts
+      summary: Get contracts
+      description: Returns a list of contract accounts.
+      operationId: Contracts_Get
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int64Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: address
+        in: query
+        description: "Filter by address.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AddressParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: kind
+        in: query
+        description: "Filter by kind (`delegator_contract`, `smart_contract`, or `asset`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ContractKindParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: delegator_contract,smart_contract
+      - name: tzips
+        in: query
+        description: "Filter by tzips (`fa1`, `fa12`, or `fa2`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ContractTagsParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: fa1,fa12,fa2
+      - name: balance
+        in: query
+        description: "Filter by balance.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int64Parameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: creator
+        in: query
+        description: "Filter by creator.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: delegate
+        in: query
+        description: "Filter by delegate.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: firstActivity
+        in: query
+        description: "Filter by level of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: firstActivityTime
+        in: query
+        description: "Filter by timestamp (ISO 8601) of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: lastActivity
+        in: query
+        description: "Filter by level of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+      - name: lastActivityTime
+        in: query
+        description: "Filter by timestamp (ISO 8601) of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      - name: typeHash
+        in: query
+        description: "Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 12
+        x-tzkt-extension: query-parameter
+      - name: codeHash
+        in: query
+        description: "Filter by 32-bit hash of contract code (helpful for searching same contracts).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 13
+        x-tzkt-extension: query-parameter
+      - name: tokensCount
+        in: query
+        description: "Filter by number of different tokens minted within the contract.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 14
+        x-tzkt-extension: query-parameter
+      - name: ticketsCount
+        in: query
+        description: "Filter by number of different tickets minted within the contract.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 15
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 16
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 17
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 18
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 19
+        x-tzkt-extension: query-parameter
+      - name: includeStorage
+        in: query
+        description: Specifies whether to include contract storage into response.
+        schema:
+          type: boolean
+          default: false
+        x-position: 20
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+  /v1/contracts/count:
+    get:
+      tags:
+      - Contracts
+      summary: Get contracts count
+      description: Returns a number of contract accounts.
+      operationId: Contracts_GetCount
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int64Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: address
+        in: query
+        description: "Filter by address.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AddressParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: kind
+        in: query
+        description: "Filter by kind (`delegator_contract`, `smart_contract`, or `asset`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ContractKindParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: delegator_contract,smart_contract
+      - name: tzips
+        in: query
+        description: "Filter by tzips (`fa1`, `fa12`, or `fa2`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ContractTagsParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: fa1,fa12,fa2
+      - name: balance
+        in: query
+        description: "Filter by balance.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int64Parameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: creator
+        in: query
+        description: "Filter by creator.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: delegate
+        in: query
+        description: "Filter by delegate.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: firstActivity
+        in: query
+        description: "Filter by level of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: firstActivityTime
+        in: query
+        description: "Filter by timestamp (ISO 8601) of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: lastActivity
+        in: query
+        description: "Filter by level of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+      - name: lastActivityTime
+        in: query
+        description: "Filter by timestamp (ISO 8601) of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      - name: typeHash
+        in: query
+        description: "Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 12
+        x-tzkt-extension: query-parameter
+      - name: codeHash
+        in: query
+        description: "Filter by 32-bit hash of contract code (helpful for searching same contracts).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 13
+        x-tzkt-extension: query-parameter
+      - name: tokensCount
+        in: query
+        description: "Filter by number of different tokens minted within the contract.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 14
+        x-tzkt-extension: query-parameter
+      - name: ticketsCount
+        in: query
+        description: "Filter by number of different tickets minted within the contract.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 15
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/contracts/{address}:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract by address
+      description: Returns a contract account with the specified address.
+      operationId: Contracts_GetByAddress
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+  /v1/contracts/{address}/same:
+    get:
+      tags:
+      - Contracts
+      summary: Get same contracts
+      description: 'Returns contracts which have the same script as the specified one.
+
+        Note, contract scripts are compared by 32-bit hash, so in very rare cases there may be collisions.'
+      operationId: Contracts_GetSame
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 4
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: includeStorage
+        in: query
+        description: Specifies whether to include contract storage value in response.
+        schema:
+          type: boolean
+          default: false
+        x-position: 6
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+  /v1/contracts/{address}/similar:
+    get:
+      tags:
+      - Contracts
+      summary: Get similar contracts
+      description: 'Returns contracts which have the same interface (parameter and storage types) as the specified one.
+
+        Note, contract parameter and storage types are compared by 32-bit hash, so in very rare cases there may be collisions.'
+      operationId: Contracts_GetSimilar
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 4
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: includeStorage
+        in: query
+        description: Specifies whether to include contract storage value in response.
+        schema:
+          type: boolean
+          default: false
+        x-position: 6
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+  /v1/contracts/{address}/code:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract code
+      description: Returns a code of the specified contract.
+      operationId: Contracts_GetCode
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      - name: level
+        in: query
+        description: Level at which contract code should be taken. If `0` or not specified, the current value will be returned.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 2
+      - name: format
+        in: query
+        description: Code format (`0` - micheline, `1` - michelson, `2` - bytes (base64))
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          maximum: 2.0
+          minimum: 0.0
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /v1/contracts/{address}/interface:
+    get:
+      tags:
+      - Contracts
+      summary: Get JSON Schema [2020-12] interface for the contract
+      description: Returns standard JSON Schema for contract storage, entrypoints, and Big_map entries.
+      operationId: Contracts_GetInterface
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractInterface'
+  /v1/contracts/{address}/entrypoints:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract entrypoints
+      description: Returns entrypoints of the specified contract.
+      operationId: Contracts_GetEntrypoints
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      - name: all
+        in: query
+        description: "If true, returns all entrypoints, including unused ones.\n            Unused means that the entrypoint can be normalized to a more specific one.\n            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint\n            because it can be normalized to `%entry2` or `%entry3`"
+        schema:
+          type: boolean
+          default: false
+        x-position: 2
+      - name: json
+        in: query
+        description: Include parameters schema in human-readable JSON format
+        schema:
+          type: boolean
+          default: true
+        x-position: 3
+      - name: micheline
+        in: query
+        description: Include parameters schema in micheline format
+        schema:
+          type: boolean
+          default: false
+        x-position: 4
+      - name: michelson
+        in: query
+        description: Include parameters schema in michelson format
+        schema:
+          type: boolean
+          default: false
+        x-position: 5
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entrypoint'
+  /v1/contracts/{address}/entrypoints/{name}:
+    get:
+      tags:
+      - Contracts
+      summary: Get entrypoint by name
+      description: Returns contract's entrypoint with specified name.
+      operationId: Contracts_GetEntrypointByName
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: Entrypoint name
+        schema:
+          type: string
+        x-position: 2
+      - name: json
+        in: query
+        description: Include parameters schema in human-readable JSON format
+        schema:
+          type: boolean
+          default: true
+        x-position: 3
+      - name: micheline
+        in: query
+        description: Include parameters schema in micheline format
+        schema:
+          type: boolean
+          default: false
+        x-position: 4
+      - name: michelson
+        in: query
+        description: Include parameters schema in michelson format
+        schema:
+          type: boolean
+          default: false
+        x-position: 5
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entrypoint'
+  /v1/contracts/{address}/views:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract views
+      description: Returns all views of the specified contract.
+      operationId: Contracts_GetContractViews
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      - name: json
+        in: query
+        description: Include parameter and return types in human-readable JSON format
+        schema:
+          type: boolean
+          default: true
+        x-position: 2
+      - name: micheline
+        in: query
+        description: Include parameter and return types in micheline format
+        schema:
+          type: boolean
+          default: false
+        x-position: 3
+      - name: michelson
+        in: query
+        description: Include parameter and return types in michelson format
+        schema:
+          type: boolean
+          default: false
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContractView'
+  /v1/contracts/{address}/views/{name}:
+    get:
+      tags:
+      - Contracts
+      summary: Get view by name
+      description: Returns contract view with specified name.
+      operationId: Contracts_GetContractViewByName
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address (starting with KT)
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: View name
+        schema:
+          type: string
+        x-position: 2
+      - name: json
+        in: query
+        description: Include parameter and return types in human-readable JSON format
+        schema:
+          type: boolean
+          default: true
+        x-position: 3
+      - name: micheline
+        in: query
+        description: Include parameter and return types in micheline format
+        schema:
+          type: boolean
+          default: false
+        x-position: 4
+      - name: michelson
+        in: query
+        description: Include parameter and return types in michelson format
+        schema:
+          type: boolean
+          default: false
+        x-position: 5
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractView'
+  /v1/contracts/{address}/entrypoints/{name}/build:
+    get:
+      tags:
+      - Contracts
+      summary: Build entrypoint parameters
+      description: Returns micheline parameters converted from its JSON representation.
+      operationId: Contracts_BuildEntrypointParametersGET
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: Entrypoint name
+        schema:
+          type: string
+        x-position: 2
+      - name: value
+        in: query
+        description: Json parameters
+        schema:
+          type: string
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+    post:
+      tags:
+      - Contracts
+      summary: Build entrypoint parameters
+      description: Returns micheline parameters converted from its JSON representation.
+      operationId: Contracts_BuildEntrypointParametersPOST
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: Entrypoint name
+        schema:
+          type: string
+        x-position: 2
+      requestBody:
+        x-name: value
+        description: Json parameters
+        content:
+          application/json:
+            schema: {}
+        required: true
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /v1/contracts/{address}/storage:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract storage
+      description: Returns contract storage value in JSON format.
+      operationId: Contracts_GetStorage
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: level
+        in: query
+        description: Level at which storage value should be taken. If `0` or not specified, the current value will be returned.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 2
+      - name: path
+        in: query
+        description: Path in the JSON value (point-separated list of field names, e.g. `path=settings.refund_time` to return
+        schema:
+          type: string
+          nullable: true
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /v1/contracts/{address}/storage/schema:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract storage schema
+      description: Returns JSON schema of the contract storage.
+      operationId: Contracts_GetStorageSchema
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: level
+        in: query
+        description: Level at which storage schema should be taken. If `0` or not specified, the current schema will be returned.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /v1/contracts/{address}/storage/history:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract storage history
+      description: Returns contract storage historical values.
+      operationId: Contracts_GetStorageHistory
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: lastId
+        in: query
+        description: Id of the last item received (for pagination)
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 2
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 10
+          maximum: 1000.0
+          minimum: 0.0
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StorageRecord'
+  /v1/contracts/{address}/storage/raw:
+    get:
+      tags:
+      - Contracts
+      summary: Get raw contract storage
+      description: Returns raw contract storage value in micheline format.
+      operationId: Contracts_GetRawStorage
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: level
+        in: query
+        description: Level at which storage value should be taken. If `0` or not specified, the current value will be returned.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IMicheline'
+  /v1/contracts/{address}/storage/raw/schema:
+    get:
+      tags:
+      - Contracts
+      summary: Get raw contract storage schema
+      description: Returns micheline schema (type) of the contract storage.
+      operationId: Contracts_GetRawStorageSchema
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: level
+        in: query
+        description: Level at which storage schema should be taken. If `0` or not specified, the current schema will be returned.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IMicheline'
+  /v1/contracts/{address}/storage/raw/history:
+    get:
+      tags:
+      - Contracts
+      summary: Get raw contract storage history
+      description: Returns raw contract storage historical values.
+      operationId: Contracts_GetRawStorageHistory
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: lastId
+        in: query
+        description: Id of the last item received (for pagination)
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 2
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 10
+          maximum: 1000.0
+          minimum: 0.0
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StorageRecord'
+  /v1/contracts/{address}/bigmaps:
+    get:
+      tags:
+      - Contracts
+      summary: Get contract bigmaps
+      description: Returns all active bigmaps allocated in the contract storage.
+      operationId: Contracts_GetBigMaps
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: tags
+        in: query
+        description: Filters bigmaps tags (`metadata`, `token_metadata`, `ledger`).
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapTagsParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: metadata,token_metadata,ledger
+      - name: select
+        in: query
+        description: "Specify comma-separated list of fields to include into response or leave it undefined to return full object.\n            If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts bigmaps by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 6
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 7
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMap'
+  /v1/contracts/{address}/bigmaps/{name}:
+    get:
+      tags:
+      - Contracts
+      summary: Get bigmap by name
+      description: Returns contract bigmap with the specified name or storage path.
+      operationId: Contracts_GetBigMapByName
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+        schema:
+          type: string
+        x-position: 2
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigMap'
+  /v1/contracts/{address}/bigmaps/{name}/keys:
+    get:
+      tags:
+      - Contracts
+      summary: Get bigmap keys
+      description: Returns keys of a contract bigmap with the specified name.
+      operationId: Contracts_GetBigMapByNameKeys
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+        schema:
+          type: string
+        x-position: 2
+      - name: active
+        in: query
+        description: 'Filters keys by status: `true` - active, `false` - removed.'
+        schema:
+          type: boolean
+          nullable: true
+        x-position: 3
+      - name: key
+        in: query
+        description: "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 4
+        x-tzkt-extension: json-parameter
+      - name: value
+        in: query
+        description: "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 5
+        x-tzkt-extension: json-parameter
+      - name: lastLevel
+        in: query
+        description: Filters bigmap keys by the last update level.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 10
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 11
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapKey'
+  /v1/contracts/{address}/bigmaps/{name}/keys/{key}:
+    get:
+      tags:
+      - Contracts
+      summary: Get bigmap key
+      description: Returns the specified bigmap key.
+      operationId: Contracts_GetKey
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+        schema:
+          type: string
+        x-position: 2
+      - name: key
+        in: path
+        required: true
+        description: "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+        schema:
+          type: string
+        x-position: 3
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigMapKey'
+  /v1/contracts/{address}/bigmaps/{name}/keys/{key}/updates:
+    get:
+      tags:
+      - Contracts
+      summary: Get bigmap key updates
+      description: Returns updates history for the specified bigmap key.
+      operationId: Contracts_GetKeyUpdates
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+        schema:
+          type: string
+        x-position: 2
+      - name: key
+        in: path
+        required: true
+        description: "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+        schema:
+          type: string
+        x-position: 3
+      - name: sort
+        in: query
+        description: 'Sorts bigmap updates by specified field. Supported fields: `id` (default).'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 6
+      - name: micheline
+        in: query
+        description: 'Format of the key value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 7
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapKeyUpdate'
+  /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}:
+    get:
+      tags:
+      - Contracts
+      summary: Get historical keys
+      description: Returns a list of bigmap keys at the specific block.
+      operationId: Contracts_GetHistoricalKeys
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+        schema:
+          type: string
+        x-position: 2
+      - name: level
+        in: path
+        required: true
+        description: Level of the block at which you want to get bigmap keys
+        schema:
+          type: integer
+          format: int32
+        x-position: 3
+      - name: active
+        in: query
+        description: 'Filters keys by status: `true` - active, `false` - removed.'
+        schema:
+          type: boolean
+          nullable: true
+        x-position: 4
+      - name: key
+        in: query
+        description: "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 5
+        x-tzkt-extension: json-parameter
+      - name: value
+        in: query
+        description: "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 6
+        x-tzkt-extension: json-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts bigmap keys by specified field. Supported fields: `id` (default).'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 10
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 11
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapKeyHistorical'
+  /v1/contracts/{address}/bigmaps/{name}/historical_keys/{level}/{key}:
+    get:
+      tags:
+      - Contracts
+      summary: Get historical key
+      description: Returns the specified bigmap key at the specific block.
+      operationId: Contracts_GetKey2
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Contract address
+        schema:
+          type: string
+        x-position: 1
+      - name: name
+        in: path
+        required: true
+        description: "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+        schema:
+          type: string
+        x-position: 2
+      - name: level
+        in: path
+        required: true
+        description: Level of the block at which you want to get bigmap key
+        schema:
+          type: integer
+          format: int32
+        x-position: 3
+      - name: key
+        in: path
+        required: true
+        description: "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+        schema:
+          type: string
+        x-position: 4
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 5
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigMapKeyHistorical'
+components:
+  schemas:
+    ContractView:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Contract view name
+        jsonParameterType:
+          description: Parameter type in human-readable JSON format
+          nullable: true
+        jsonReturnType:
+          description: Return type in human-readable JSON format
+          nullable: true
+        michelineParameterType:
+          description: Parameter type in micheline format
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        michelineReturnType:
+          description: Return type in micheline format
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        michelsonParameterType:
+          type: string
+          description: Parameter type in michelson format
+          nullable: true
+        michelsonReturnType:
+          type: string
+          description: Return type in michelson format
+          nullable: true
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type: string
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+          nullable: true
+        desc:
+          type: string
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    BigMapInterface:
+      type: object
+      additionalProperties: false
+      properties:
+        path:
+          type: string
+          description: Full path to the Big_map in the contract storage
+        name:
+          type: string
+          description: Big_map name, if exists (field annotation)
+          nullable: true
+        keySchema:
+          description: JSON Schema of the Big_map key in humanified format (as returned by API)
+          nullable: true
+        valueSchema:
+          description: JSON Schema of the Big_map value in humanified format (as returned by API)
+          nullable: true
+    JsonParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a JSON value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?parameter.from=tz1...` or `?parameter.signatures.[3].[0]=null` or `?parameter.sigs.[*]=null`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a JSON value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?parameter.ne=true` or `?parameter.amount.ne=0`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        gt:
+          type: string
+          description: '**Greater than** filter mode. \
+
+            Specify a string to get items where the specified field is greater than the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.gt=1234` or `?parameter.time.gt=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        ge:
+          type: string
+          description: '**Greater or equal** filter mode. \
+
+            Specify a string to get items where the specified field is greater than equal to the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.ge=1234` or `?parameter.time.ge=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        lt:
+          type: string
+          description: '**Less than** filter mode. \
+
+            Specify a string to get items where the specified field is less than the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.lt=1234` or `?parameter.time.lt=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        le:
+          type: string
+          description: '**Less or equal** filter mode. \
+
+            Specify a string to get items where the specified field is less than or equal to the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.le=1234` or `?parameter.time.le=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        as:
+          type: string
+          description: '**Same as** filter mode. \
+
+            Specify a string template to get items where the specified field matches the specified template. \
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameter.as=*mid*` or `?parameter.as=*end`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        un:
+          type: string
+          description: '**Unlike** filter mode. \
+
+            Specify a string template to get items where the specified field doesn''t match the specified template.
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameter.un=*mid*` or `?parameter.un=*end`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of strings or JSON array to get items where the specified field is equal to one of the specified values. \
+
+
+            Example: `?parameter.amount.in=1,2,3` or `?parameter.in=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
+          nullable: true
+          items:
+            type: string
+          x-tzkt-extension: json-parameter
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \
+
+            Use `\,` as an escape symbol.
+
+
+            Example: `?parameter.amount.ni=1,2,3` or `?parameter.ni=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
+          nullable: true
+          items:
+            type: string
+          x-tzkt-extension: json-parameter
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
+          x-tzkt-extension: json-parameter
+      x-tzkt-extension: json-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type: integer
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+          nullable: true
+        pg:
+          type: integer
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+          nullable: true
+        cr:
+          type: integer
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+          nullable: true
+      x-tzkt-extension: query-parameter
+    Int64Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int64
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int64
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int64
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int64
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int64
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int64
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int64
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int64
+        empty:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    IMicheline:
+      type: object
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/MichelineType'
+    EntrypointInterface:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Entrypoint name
+        parameterSchema:
+          description: JSON Schema of the entrypoint parameter in humanified format (as returned by API)
+          nullable: true
+    MichelineFormat:
+      type: string
+      description: ''
+      x-enumNames:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+      enum:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+    BigMapKey:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        active:
+          type: boolean
+          description: Bigmap key status (`true` - active, `false` - removed)
+        hash:
+          type: string
+          description: Key hash
+        key:
+          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the key is inactive (removed) it will contain the last non-null value.'
+        firstLevel:
+          type: integer
+          description: Level of the block where the bigmap key was seen first time
+          format: int32
+        lastLevel:
+          type: integer
+          description: Level of the block where the bigmap key was seen last time
+          format: int32
+        updates:
+          type: integer
+          description: Total number of actions with the bigmap key
+          format: int32
+    BigMapKeyUpdate:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        level:
+          type: integer
+          description: Level of the block where the bigmap key was updated
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block where the bigmap key was updated
+          format: date-time
+        action:
+          type: string
+          description: Action with the key (`add_key`, `update_key`, `remove_key`)
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the action is `remove_key` it will contain the last non-null value.'
+    TimestampParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a datetime value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        gt:
+          type: string
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ge:
+          type: string
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        lt:
+          type: string
+          description: '**Less than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        le:
+          type: string
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+      x-tzkt-extension: query-parameter
+    Contract:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: integer
+            description: "Internal TzKT id.  \n**[sortable]**"
+            format: int32
+          type:
+            type: string
+            description: Type of the account, `contract` - smart contract programmable account.
+          address:
+            type: string
+            description: Public key hash of the contract
+          kind:
+            type: string
+            description: 'Kind of the contract (`delegator_contract` or `smart_contract`),
+
+              where `delegator_contract` - manager.tz smart contract for delegation purpose only.'
+          tzips:
+            type: array
+            description: List of implemented standards (TZIPs).
+            nullable: true
+            items:
+              type: string
+          alias:
+            type: string
+            description: Name of the project behind the contract or contract description.
+            nullable: true
+          balance:
+            type: integer
+            description: "Contract balance (micro tez).  \n**[sortable]**"
+            format: int64
+          creator:
+            description: "Information about the account, which has deployed the contract to the blockchain.  \nClick on the field to expand more details."
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          delegate:
+            description: "Information about the current delegate of the contract. `null` if it's not delegated.  \nClick on the field to expand more details."
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/DelegateInfo'
+          delegationLevel:
+            type: integer
+            description: Block height of latest delegation. `null` if it's not delegated.
+            format: int32
+            nullable: true
+          delegationTime:
+            type: string
+            description: Block datetime of latest delegation (ISO 8601, e.g. `2020-02-20T02:40:57Z`). `null` if it's not delegated.
+            format: date-time
+            nullable: true
+          numContracts:
+            type: integer
+            description: Number of contracts, created (originated) and/or managed by the contract.
+            format: int32
+          tokensCount:
+            type: integer
+            description: Number of tokens minted in the contract.
+            format: int32
+          activeTokensCount:
+            type: integer
+            description: Number of account tokens with non-zero balances.
+            format: int32
+          tokenBalancesCount:
+            type: integer
+            description: Number of tokens the account ever had.
+            format: int32
+          tokenTransfersCount:
+            type: integer
+            description: Number of token transfers from/to the account.
+            format: int32
+          ticketsCount:
+            type: integer
+            description: Number of tickets minted in the contract.
+            format: int32
+          activeTicketsCount:
+            type: integer
+            description: Number of tickets the account owns.
+            format: int32
+          ticketBalancesCount:
+            type: integer
+            description: Number of tickets the account ever owned.
+            format: int32
+          ticketTransfersCount:
+            type: integer
+            description: Number of ticket transfers from/to the account.
+            format: int32
+          numDelegations:
+            type: integer
+            description: Number of delegation operations of the contract.
+            format: int32
+          numOriginations:
+            type: integer
+            description: Number of origination (deployment / contract creation) operations, related the contract.
+            format: int32
+          numTransactions:
+            type: integer
+            description: "Number of transaction (transfer) operations, related to the contract.  \n**[sortable]**"
+            format: int32
+          numReveals:
+            type: integer
+            description: Number of reveal (is used to reveal the public key associated with an account) operations of the contract.
+            format: int32
+          numMigrations:
+            type: integer
+            description: 'Number of migration (result of the context (database) migration during a protocol update) operations.
+
+              related to the contract (synthetic type).'
+            format: int32
+          transferTicketCount:
+            type: integer
+            description: Number of transfer ticket operations related to the contract.
+            format: int32
+          increasePaidStorageCount:
+            type: integer
+            description: Number of `increase_paid_storage` operations related to the contract.
+            format: int32
+          eventsCount:
+            type: integer
+            description: Number of events produced by the contract.
+            format: int32
+          firstActivity:
+            type: integer
+            description: "Block height of the contract creation.  \n**[sortable]**"
+            format: int32
+          firstActivityTime:
+            type: string
+            description: Block datetime of the contract creation (ISO 8601, e.g. `2020-02-20T02:40:57Z`).
+            format: date-time
+          lastActivity:
+            type: integer
+            description: "Height of the block in which the account state was changed last time.  \n**[sortable]**"
+            format: int32
+          lastActivityTime:
+            type: string
+            description: Datetime of the block in which the account state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`).
+            format: date-time
+          typeHash:
+            type: integer
+            description: '32-bit hash of the contract parameter and storage types.
+
+              This field can be used for searching similar contracts (which have the same interface).'
+            format: int32
+          codeHash:
+            type: integer
+            description: '32-bit hash of the contract code.
+
+              This field can be used for searching same contracts (which have the same script).'
+            format: int32
+          metadata:
+            description: TZIP-16 metadata.
+            nullable: true
+          extras:
+            description: Off-chain extras.
+            nullable: true
+          storage:
+            description: Contract storage value. Omitted by default. Use `?includeStorage=true` to include it into response.
+            nullable: true
+    AddressParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=` is the same as `param=`). \
+
+            Specify an account address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?address=tz123..`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an account address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?address.ne=tz123..`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of account addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?address.in=tz123..,tz345..`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of account addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?address.ni=tz123..,tz345..`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    EventInterface:
+      type: object
+      additionalProperties: false
+      properties:
+        tag:
+          type: string
+          description: Event tag
+        eventSchema:
+          description: JSON Schema of the event type in humanified format (as returned by API)
+          nullable: true
+    TxParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        entrypoint:
+          type: string
+          description: Entrypoint called on the target contract
+        value:
+          description: 'Value passed to the called entrypoint converted to human-readable JSON. Note: you can configure parameters format by setting `micheline` query parameter.'
+          nullable: true
+    ContractKindParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a contract kind to get items where the specified field is equal to the specified value.
+
+
+            Example: `?kind=smart_contract`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a contract kind to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?kind.ne=delegator_contract`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of contract kinds to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?kind.in=smart_contract,asset`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of contract kinds to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?kind.ni=smart_contract,asset`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: delegator_contract,smart_contract
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        eqx:
+          type: string
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+          nullable: true
+        nex:
+          type: string
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+          nullable: true
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+          nullable: true
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    ContractTagsParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: array
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a comma-separated list of contract tags to get contracts with exactly the same set of tags.
+
+            Avoid using this mode and use `.any` or `.all` instead, because it may not work as expected due to internal ''hidden'' tags.
+
+
+            Example: `?tags=fa2` or `?tags=fa1,fa12`.'
+          nullable: true
+          items:
+            type: string
+        any:
+          type: array
+          description: '**Has any** filter mode. \
+
+            Specify a comma-separated list of contract tags to get contracts where at least one of the specified tags is presented.
+
+
+            Example: `?tags.any=fa2` or `?tags.any=fa1,fa12`.'
+          nullable: true
+          items:
+            type: string
+        all:
+          type: array
+          description: '**Has all** filter mode. \
+
+            Specify a comma-separated list of contract tags to get contracts where all of the specified tags are presented.
+
+
+            Example: `?tags.all=fa2` or `?tags.all=fa1,fa12`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: fa1,fa12,fa2
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    DelegateInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Name of the baking service
+          nullable: true
+        address:
+          type: string
+          description: Public key hash of the delegate (baker)
+        active:
+          type: boolean
+          description: Delegation status (`true` - active, `false` - deactivated)
+    ContractInterface:
+      type: object
+      additionalProperties: false
+      properties:
+        storageSchema:
+          description: JSON Schema of the contract storage in humanified format (as returned by API)
+          nullable: true
+        entrypoints:
+          type: array
+          description: List of terminal entrypoints
+          items:
+            $ref: '#/components/schemas/EntrypointInterface'
+        bigMaps:
+          type: array
+          description: List of currently available Big_maps
+          items:
+            $ref: '#/components/schemas/BigMapInterface'
+        events:
+          type: array
+          description: List of events extractable from the code ("static")
+          items:
+            $ref: '#/components/schemas/EventInterface'
+    BigMapKeyHistorical:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        active:
+          type: boolean
+          description: Bigmap key status (`true` - active, `false` - removed)
+        hash:
+          type: string
+          description: Key hash
+        key:
+          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the key is inactive (removed) it will contain the last non-null value.'
+    MichelineType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Int
+      - Bytes
+      - String
+      - Array
+      - Prim
+      enum:
+      - 0
+      - 32
+      - 64
+      - 96
+      - 128
+    BigMap:
+      type: object
+      additionalProperties: false
+      properties:
+        ptr:
+          type: integer
+          description: Bigmap pointer
+          format: int32
+        contract:
+          description: Smart contract in which's storage the bigmap is allocated
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        path:
+          type: string
+          description: 'Path to the bigmap in the contract storage '
+        tags:
+          type: array
+          description: List of tags ( `metadata`, `token_metadata`,`ledger`, or `null` if there are no tags)
+          nullable: true
+          items:
+            type: string
+        active:
+          type: boolean
+          description: Bigmap status (`true` - active, `false` - removed)
+        firstLevel:
+          type: integer
+          description: Level of the block where the bigmap was seen first time
+          format: int32
+        lastLevel:
+          type: integer
+          description: Level of the block where the bigmap was seen last time
+          format: int32
+        totalKeys:
+          type: integer
+          description: Total number of keys ever added to the bigmap
+          format: int32
+        activeKeys:
+          type: integer
+          description: Total number of currently active keys
+          format: int32
+        updates:
+          type: integer
+          description: Total number of actions with the bigmap
+          format: int32
+        keyType:
+          description: Bigmap key type as JSON schema or Micheline, depending on the `micheline` query parameter.
+        valueType:
+          description: Bigmap value type as JSON schema or Micheline, depending on the `micheline` query parameter.
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Account alias name (off-chain data).
+          nullable: true
+        address:
+          type: string
+          description: Account address (public key hash).
+    BigMapTagsParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: array
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps with exactly the same set of tags.
+
+            Avoid using this mode and use `.any` or `.all` instead, because it may not work as expected due to internal ''hidden'' tags.
+
+
+            Example: `?tags=metadata` or `?tags=token_metadata,metadata`.'
+          nullable: true
+          items:
+            type: string
+        any:
+          type: array
+          description: '**Has any** filter mode. \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps where at least one of the specified tags is presented.
+
+
+            Example: `?tags.any=metadata` or `?tags.any=token_metadata,metadata`.'
+          nullable: true
+          items:
+            type: string
+        all:
+          type: array
+          description: '**Has all** filter mode. \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps where all of the specified tags are presented.
+
+
+            Example: `?tags.all=metadata` or `?tags.all=token_metadata,metadata`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: metadata,token_metadata,ledger
+    SourceOperation:
+      type: object
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          description: Operation type
+        hash:
+          type: string
+          description: Operation hash
+          nullable: true
+        counter:
+          type: integer
+          description: Operation counter (null in case of synthetic operations)
+          format: int32
+          nullable: true
+        nonce:
+          type: integer
+          description: Operation nonce (null in case of non-internal or synthetic operations)
+          format: int32
+          nullable: true
+        parameter:
+          description: Transaction parameter, including called entrypoint and value passed to the entrypoint.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TxParameter'
+    Entrypoint:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Entrypoint name
+        jsonParameters:
+          description: A kind of JSON schema, describing how parameters will look like in a human-readable JSON format
+          nullable: true
+        michelineParameters:
+          description: Parameters schema in micheline format
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        michelsonParameters:
+          type: string
+          description: Parameters schema in michelson format
+          nullable: true
+        unused:
+          type: boolean
+          description: 'Unused means that the entrypoint can be normalized to a more specific one.
+
+            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint
+
+            because it can be normalized to `%entry2` or `%entry3`'
+    StorageRecord:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Id of the record that can be used for pagination
+          format: int32
+        level:
+          type: integer
+          description: Level at which the storage value was taken
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp at which the storage value was taken
+          format: date-time
+        operation:
+          description: Operation that caused the storage change
+          oneOf:
+          - $ref: '#/components/schemas/SourceOperation'
+        value:
+          description: New storage value
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
+x-tagGroups:
+- name: REST API
+  tags:
+  - Accounts
+  - BigMaps
+  - Blocks
+  - Commitments
+  - Constants
+  - Contracts
+  - Cycles
+  - Delegates
+  - Domains
+  - Events
+  - Head
+  - Helpers
+  - Operations
+  - Protocols
+  - Quotes
+  - Rewards
+  - Rights
+  - SmartRollups
+  - Software
+  - Staking
+  - Statistics
+  - Tickets
+  - Tokens
+  - Voting
+- name: WebSocket API
+  tags:
+  - Get Started
+  - Subscriptions
+  - Examples
+- name: Libraries
+  tags:
+  - Typescript SDK
+  - Taquito extension

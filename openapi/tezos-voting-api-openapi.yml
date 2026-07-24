@@ -1,0 +1,1125 @@
+openapi: 3.0.0
+info:
+  title: TzKT Accounts Voting API
+  description: "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it \U0001F60A\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! \U0001F609\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n"
+  contact:
+    name: Baking Bad Team
+    url: https://bakingbad.dev
+    email: hello@bakingbad.dev
+  version: 1.17.1
+  x-logo:
+    url: https://tzkt.io/logo.png
+    href: https://tzkt.io/
+servers:
+- url: https://api.tzkt.io
+tags:
+- name: Voting
+paths:
+  /v1/voting/proposals/count:
+    get:
+      tags:
+      - Voting
+      summary: Get proposals count
+      description: Returns the total number of protocol proposals.
+      operationId: Voting_GetProposalsCount
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/voting/proposals:
+    get:
+      tags:
+      - Voting
+      summary: Get proposals
+      description: Returns a list of protocol proposals.
+      operationId: Voting_GetProposals
+      parameters:
+      - name: hash
+        in: query
+        description: Filters proposals by hash
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ProtocolParameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: epoch
+        in: query
+        description: Filters proposals by voting epoch
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts proposals by specified field. Supported fields: `id` (default), `upvotes`, `votingPower`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 6
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Proposal'
+  /v1/voting/proposals/{hash}:
+    get:
+      tags:
+      - Voting
+      summary: Get proposal by hash
+      description: Returns the most recent protocol proposal with the specified hash.
+      operationId: Voting_GetProposalByHash
+      parameters:
+      - name: hash
+        in: path
+        required: true
+        description: Proposal hash
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+  /v1/voting/periods:
+    get:
+      tags:
+      - Voting
+      summary: Get voting periods
+      description: Returns a list of voting periods.
+      operationId: Voting_GetPeriods
+      parameters:
+      - name: firstLevel
+        in: query
+        description: Filter by level of the first block of the period.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: lastLevel
+        in: query
+        description: Filter by level of the last block of the period.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: epoch
+        in: query
+        description: Filters by voting epoch
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts voting periods by specified field. Supported fields: `id` (default).'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 7
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VotingPeriod'
+  /v1/voting/periods/{index}:
+    get:
+      tags:
+      - Voting
+      summary: Get voting period by index
+      description: Returns a voting period at the specified index.
+      operationId: Voting_GetPeriod
+      parameters:
+      - name: index
+        in: path
+        required: true
+        description: Voting period index starting from zero
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VotingPeriod'
+  /v1/voting/periods/current:
+    get:
+      tags:
+      - Voting
+      summary: Get current voting period
+      description: Returns current voting period.
+      operationId: Voting_GetCurrentPeriod
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VotingPeriod'
+  /v1/voting/periods/{index}/voters:
+    get:
+      tags:
+      - Voting
+      summary: Get period voters
+      description: Returns voters from the voting period at the specified index.
+      operationId: Voting_GetPeriodVoters
+      parameters:
+      - name: index
+        in: path
+        required: true
+        description: Voting period index starting from zero
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: status
+        in: query
+        description: Filters voters by status (`none`, `upvoted`, `voted_yay`, `voted_nay`, `voted_pass`)
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/VoterStatusParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: none,upvoted,voted_yay,voted_nay,voted_pass
+      - name: sort
+        in: query
+        description: 'Sorts voters by specified field. Supported fields: `id` (default), `votingPower`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 5
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoterSnapshot'
+  /v1/voting/periods/{index}/voters/{address}:
+    get:
+      tags:
+      - Voting
+      summary: Get period voter
+      description: Returns a voter with the specified address from the voting period at the specified index.
+      operationId: Voting_GetPeriodVoter
+      parameters:
+      - name: index
+        in: path
+        required: true
+        description: Voting period index starting from zero
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: address
+        in: path
+        required: true
+        description: Voter address
+        schema:
+          type: string
+        x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoterSnapshot'
+  /v1/voting/periods/current/voters:
+    get:
+      tags:
+      - Voting
+      summary: Get current period voters
+      description: Returns voters from the current period.
+      operationId: Voting_GetPeriodVoters2
+      parameters:
+      - name: status
+        in: query
+        description: Filters voters by status (`none`, `upvoted`, `voted_yay`, `voted_nay`, `voted_pass`)
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/VoterStatusParameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: none,upvoted,voted_yay,voted_nay,voted_pass
+      - name: sort
+        in: query
+        description: 'Sorts voters by specified field. Supported fields: `id` (default), `votingPower`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoterSnapshot'
+  /v1/voting/periods/current/voters/{address}:
+    get:
+      tags:
+      - Voting
+      summary: Get current period voter
+      description: Returns a voter with the specified address from the current period.
+      operationId: Voting_GetPeriodVoter2
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Voter address
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoterSnapshot'
+  /v1/voting/epochs:
+    get:
+      tags:
+      - Voting
+      summary: Get voting epochs
+      description: Returns a list of voting epochs.
+      operationId: Voting_GetEpochs
+      parameters:
+      - name: status
+        in: query
+        description: Filter by voting epoch status (`no_proposals`, `voting`, `completed`, `failed`).
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/EpochStatusParameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: no_proposals,voting,completed,failed
+      - name: sort
+        in: query
+        description: 'Sorts voting epochs by specified field. Supported fields: `index` (default).'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VotingEpoch'
+  /v1/voting/epochs/{index}:
+    get:
+      tags:
+      - Voting
+      summary: Get voting epoch by index
+      description: Returns a voting epoch at the specified index.
+      operationId: Voting_GetEpoch
+      parameters:
+      - name: index
+        in: path
+        required: true
+        description: Voting epoch index starting from zero
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VotingEpoch'
+  /v1/voting/epochs/current:
+    get:
+      tags:
+      - Voting
+      summary: Get current voting epoch
+      description: Returns the current voting epoch
+      operationId: Voting_GetCurrentEpoch
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VotingEpoch'
+  /v1/voting/epochs/latest_voting:
+    get:
+      tags:
+      - Voting
+      summary: Get latest voting
+      description: Returns the latest epoch with at least one proposal
+      operationId: Voting_GetLatestVoting
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VotingEpoch'
+components:
+  schemas:
+    VotingPeriod:
+      type: object
+      additionalProperties: false
+      properties:
+        index:
+          type: integer
+          description: Index of the voting period, starting from zero
+          format: int32
+        epoch:
+          type: integer
+          description: Index of the voting epoch, starting from zero
+          format: int32
+        firstLevel:
+          type: integer
+          description: The height of the block in which the period starts
+          format: int32
+        startTime:
+          type: string
+          description: The timestamp of the block in which the period starts
+          format: date-time
+        lastLevel:
+          type: integer
+          description: The height of the block in which the period ends
+          format: int32
+        endTime:
+          type: string
+          description: The timestamp of the block in which the period ends
+          format: date-time
+        kind:
+          type: string
+          description: 'Kind of the voting period:
+
+            `proposal` - delegates can submit protocol amendment proposals using the proposal operation
+
+            `exploration` -  bakers (delegates) may vote on the top-ranked proposal from the previous Proposal Period using the ballot operation
+
+            `testing` - If the proposal is approved in the Exploration Period, the testing (or ''cooldown'') period begins and bakers start testing the new protocol
+
+            `promotion` - delegates can cast one vote to promote or not the tested proposal using the ballot operation
+
+            `adoption` - after the proposal is actually accepted, the ecosystem has some time to prepare to the upgrade'
+        status:
+          type: string
+          description: 'Status of the voting period:
+
+            `active` - means that the voting period is in progress
+
+            `no_proposals` - means that there were no proposals during the voting period
+
+            `no_quorum` - means that there was a voting but the quorum was not reached
+
+            `no_supermajority` - means that there was a voting but the supermajority was not reached
+
+            `no_single_winner` - means that there were multiple winning proposals with the same voting power
+
+            `success` - means that the period was finished with positive voting result'
+        dictator:
+          type: string
+          description: "Status of the governance dictator:\n`none` - means that there were no actions by the dictator \n`abort` - means that the epoch was aborted by the dictator\n`reset` - means that the period was reset by the dictator\n`submit` - means that the dictator submitted a proposal"
+        totalBakers:
+          type: integer
+          description: The number of bakers on the voters list
+          format: int32
+        totalVotingPower:
+          type: integer
+          description: Total voting power of bakers on the voters list
+          format: int64
+        upvotesQuorum:
+          type: number
+          description: Upvotes quorum percentage (only for proposal period)
+          format: double
+          nullable: true
+        proposalsCount:
+          type: integer
+          description: The number of proposals injected during the voting period (only for proposal period)
+          format: int32
+          nullable: true
+        topUpvotes:
+          type: integer
+          description: This is how many upvotes (proposal operations) the most upvoted proposal has (only for proposal period)
+          format: int32
+          nullable: true
+        topVotingPower:
+          type: integer
+          description: This is how much voting power the most upvoted proposal has (only for proposal period)
+          format: int64
+          nullable: true
+        ballotsQuorum:
+          type: number
+          description: Ballots quorum percentage (only for exploration and promotion periods)
+          format: double
+          nullable: true
+        supermajority:
+          type: number
+          description: Supermajority percentage (only for exploration and promotion periods)
+          format: double
+          nullable: true
+        yayBallots:
+          type: integer
+          description: The number of the ballots with "yay" vote (only for exploration and promotion periods)
+          format: int32
+          nullable: true
+        yayVotingPower:
+          type: integer
+          description: Total voting power of the ballots with "yay" vote (only for exploration and promotion periods)
+          format: int64
+          nullable: true
+        nayBallots:
+          type: integer
+          description: The number of the ballots with "nay" vote (only for exploration and promotion periods)
+          format: int32
+          nullable: true
+        nayVotingPower:
+          type: integer
+          description: Total voting power of the ballots with "nay" vote (only for exploration and promotion periods)
+          format: int64
+          nullable: true
+        passBallots:
+          type: integer
+          description: The number of the ballots with "pass" vote (only for exploration and promotion periods)
+          format: int32
+          nullable: true
+        passVotingPower:
+          type: integer
+          description: Total voting power of the ballots with "pass" vote (only for exploration and promotion periods)
+          format: int64
+          nullable: true
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Account alias name (off-chain data).
+          nullable: true
+        address:
+          type: string
+          description: Account address (public key hash).
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type: string
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+          nullable: true
+        desc:
+          type: string
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    Proposal:
+      type: object
+      additionalProperties: false
+      properties:
+        hash:
+          type: string
+          description: Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files
+        initiator:
+          description: Information about the baker (delegate) submitted the proposal
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        firstPeriod:
+          type: integer
+          description: The first voting period where the proposal was active
+          format: int32
+        lastPeriod:
+          type: integer
+          description: The last voting period where the proposal was active
+          format: int32
+        epoch:
+          type: integer
+          description: The voting epoch where the proposal was active
+          format: int32
+        upvotes:
+          type: integer
+          description: The total number of upvotes (proposal operations)
+          format: int32
+        votingPower:
+          type: integer
+          description: The total voting power of bakers, upvoted the proposal
+          format: int64
+        status:
+          type: string
+          description: 'Status of the proposal
+
+            `active` - the proposal in the active state
+
+            `accepted` - the proposal was accepted
+
+            `rejected` - the proposal was rejected due to too many "nay" ballots
+
+            `skipped` - the proposal was skipped due to the quorum was not reached'
+        extras:
+          description: Off-chain extras
+          nullable: true
+    EpochStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an epoch status to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=completed`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an epoch status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=no_proposals`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of epoch statuses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?status.in=completed,failed`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of epoch statuses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?status.ni=completed,failed`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: no_proposals,voting,completed,failed
+    VoterStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a voter status to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=none`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a voter status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=none`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of voter statuses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?status.in=voted_yay,voted_nay`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of voter statuses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?status.ni=none,upvoted`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: none,upvoted,voted_yay,voted_nay,voted_pass
+    ProtocolParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a protocol hash to get items where the specified field is equal to the specified value.
+
+
+            Example: `?protocol=PsCARTHAGaz...`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a protocol hash to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=PsBabyM1eUX...`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of protocol hashes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=PsCARTHAGaz,PsBabyM1eUX`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of protocol hashes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=PsCARTHAGaz,PsBabyM1eUX`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type: integer
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+          nullable: true
+        pg:
+          type: integer
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+          nullable: true
+        cr:
+          type: integer
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+          nullable: true
+      x-tzkt-extension: query-parameter
+    VoterSnapshot:
+      type: object
+      additionalProperties: false
+      properties:
+        delegate:
+          description: Voter identity
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        votingPower:
+          type: integer
+          description: Baker's voting power
+          format: int64
+        status:
+          type: string
+          description: 'Voter''s status:
+
+            `none` - the voter did nothing
+
+            `upvoted` - the voter upvoted at least one proposal
+
+            `voted_yay` - the voter voted "yay"
+
+            `voted_nay` - the voter voted "nay"
+
+            `voted_pass` - the voter voted "pass"'
+    VotingEpoch:
+      type: object
+      additionalProperties: false
+      properties:
+        index:
+          type: integer
+          description: Index of the voting epoch, starting from zero
+          format: int32
+        firstLevel:
+          type: integer
+          description: The height of the block in which the epoch starts
+          format: int32
+        startTime:
+          type: string
+          description: The timestamp of the block in which the epoch starts
+          format: date-time
+        lastLevel:
+          type: integer
+          description: The height of the block in which the epoch ends
+          format: int32
+        endTime:
+          type: string
+          description: The timestamp of the block in which the epoch ends
+          format: date-time
+        status:
+          type: string
+          description: 'Status of the voting epoch:
+
+            `no_proposals` - there were no proposals proposed
+
+            `voting` - there was at least one proposal and the voting is in progress
+
+            `completed` - voting successfully completed and the proposal was accepted
+
+            `failed` - voting was not completed due to either quorum or supermajority was not reached'
+        periods:
+          type: array
+          description: Voting periods in the epoch
+          items:
+            $ref: '#/components/schemas/VotingPeriod'
+        proposals:
+          type: array
+          description: Proposals pushed during the voting epoch (null, if there were no proposals).
+          items:
+            $ref: '#/components/schemas/Proposal'
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
+x-tagGroups:
+- name: REST API
+  tags:
+  - Accounts
+  - BigMaps
+  - Blocks
+  - Commitments
+  - Constants
+  - Contracts
+  - Cycles
+  - Delegates
+  - Domains
+  - Events
+  - Head
+  - Helpers
+  - Operations
+  - Protocols
+  - Quotes
+  - Rewards
+  - Rights
+  - SmartRollups
+  - Software
+  - Staking
+  - Statistics
+  - Tickets
+  - Tokens
+  - Voting
+- name: WebSocket API
+  tags:
+  - Get Started
+  - Subscriptions
+  - Examples
+- name: Libraries
+  tags:
+  - Typescript SDK
+  - Taquito extension

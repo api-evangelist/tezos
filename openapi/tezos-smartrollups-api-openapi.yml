@@ -1,0 +1,2229 @@
+openapi: 3.0.0
+info:
+  title: TzKT Accounts SmartRollups API
+  description: "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it \U0001F60A\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! \U0001F609\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n"
+  contact:
+    name: Baking Bad Team
+    url: https://bakingbad.dev
+    email: hello@bakingbad.dev
+  version: 1.17.1
+  x-logo:
+    url: https://tzkt.io/logo.png
+    href: https://tzkt.io/
+servers:
+- url: https://api.tzkt.io
+tags:
+- name: SmartRollups
+paths:
+  /v1/smart_rollups/count:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollups count
+      description: Returns a total number of smart rollups.
+      operationId: SmartRollups_GetSmartRollupsCount
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: address
+        in: query
+        description: "Filter by smart rollup address.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AddressParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: creator
+        in: query
+        description: "Filter by smart rollup creator.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: firstActivity
+        in: query
+        description: "Filter by level of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: firstActivityTime
+        in: query
+        description: "Filter by timestamp of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: lastActivity
+        in: query
+        description: "Filter by level of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: lastActivityTime
+        in: query
+        description: "Filter by timestamp of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/smart_rollups:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollups
+      description: Returns a list of smart rollups.
+      operationId: SmartRollups_GetSmartRollups
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: address
+        in: query
+        description: "Filter by smart rollup address.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AddressParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: creator
+        in: query
+        description: "Filter by smart rollup creator.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: firstActivity
+        in: query
+        description: "Filter by level of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: firstActivityTime
+        in: query
+        description: "Filter by timestamp of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: lastActivity
+        in: query
+        description: "Filter by level of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: lastActivityTime
+        in: query
+        description: "Filter by timestamp of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 10
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SmartRollup'
+  /v1/smart_rollups/{address}:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollup by address
+      description: Returns a smart rollup with the specified address.
+      operationId: SmartRollups_GetSmartRollup
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Smart rollup address
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SmartRollup'
+  /v1/smart_rollups/{address}/entrypoints:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollup entrypoints
+      description: Returns entrypoints of the specified smart rollup.
+      operationId: SmartRollups_GetEntrypoints
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Smart rollup address (starting with sr1)
+        schema:
+          type: string
+        x-position: 1
+      - name: all
+        in: query
+        description: "If true, returns all entrypoints, including unused ones.\n            Unused means that the entrypoint can be normalized to a more specific one.\n            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint\n            because it can be normalized to `%entry2` or `%entry3`"
+        schema:
+          type: boolean
+          default: false
+        x-position: 2
+      - name: json
+        in: query
+        description: Include parameters schema in human-readable JSON format
+        schema:
+          type: boolean
+          default: true
+        x-position: 3
+      - name: micheline
+        in: query
+        description: Include parameters schema in micheline format
+        schema:
+          type: boolean
+          default: false
+        x-position: 4
+      - name: michelson
+        in: query
+        description: Include parameters schema in michelson format
+        schema:
+          type: boolean
+          default: false
+        x-position: 5
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entrypoint'
+  /v1/smart_rollups/{address}/interface:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get JSON Schema [2020-12] interface for the smart rollup
+      description: Returns standard JSON Schema for smart rollup parameter.
+      operationId: SmartRollups_GetInterface
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Smart rollup address
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                nullable: true
+  /v1/smart_rollups/{address}/stakers:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollup stakers
+      description: Returns a list of smart rollup stakers.
+      operationId: SmartRollups_GetSmartRollupStakers
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: address
+        in: path
+        required: true
+        description: "Filter by smart rollup staker address.  \nClick on the parameter to expand more details."
+        schema:
+          $ref: '#/components/schemas/AddressParameter'
+        x-position: 2
+      - name: bondStatus
+        in: query
+        description: "Filter by staker bond status (`active`, `returned`, or `lost`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SrBondStatusParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: active,returned,lost
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 6
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SrStaker'
+  /v1/smart_rollups/commitments/count:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollup commitments count
+      description: Returns a total number of smart rollup commitments.
+      operationId: SmartRollups_GetSmartRollupCommitmentsCount
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: initiator
+        in: query
+        description: "Filter by initiator (an account published the commitment first).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: rollup
+        in: query
+        description: "Filter by smart rollup.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: inboxLevel
+        in: query
+        description: "Filter by inbox level.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: firstLevel
+        in: query
+        description: "Filter by level of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: firstTime
+        in: query
+        description: "Filter by timestamp of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: lastLevel
+        in: query
+        description: "Filter by level of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: lastTime
+        in: query
+        description: "Filter by timestamp of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: status
+        in: query
+        description: "Filter by commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentStatusParameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: orphan,refuted,pending,cemented,executed
+      - name: predecessor.id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      - name: predecessor.hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 12
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/smart_rollups/commitments:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollup commitments
+      description: Returns a list of smart rollup commitments.
+      operationId: SmartRollups_GetSmartRollupCommitments
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: initiator
+        in: query
+        description: "Filter by initiator (an account published the commitment first).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: rollup
+        in: query
+        description: "Filter by smart rollup.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: inboxLevel
+        in: query
+        description: "Filter by inbox level.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: firstLevel
+        in: query
+        description: "Filter by level of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: firstTime
+        in: query
+        description: "Filter by timestamp of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: lastLevel
+        in: query
+        description: "Filter by level of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: lastTime
+        in: query
+        description: "Filter by timestamp of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: status
+        in: query
+        description: "Filter by commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentStatusParameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: orphan,refuted,pending,cemented,executed
+      - name: predecessor.id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      - name: predecessor.hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 12
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 13
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 14
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 15
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 16
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SrCommitment'
+  /v1/smart_rollups/games/count:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollup games count
+      description: Returns a total number of smart rollup refutation games.
+      operationId: SmartRollups_GetSmartRollupGamesCount
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: rollup
+        in: query
+        description: "Filter by smart rollup.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: initiator
+        in: query
+        description: "Filter by initiator (who found a wrong commitment and started the refutation game).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: initiatorCommitment.id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: initiatorCommitment.hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: opponent
+        in: query
+        description: "Filter by opponent (who was accused in publishing a wrong commitment).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: opponentCommitment.id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: opponentCommitment.hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: firstLevel
+        in: query
+        description: "Filter by level of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: firstTime
+        in: query
+        description: "Filter by timestamp of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+      - name: lastLevel
+        in: query
+        description: "Filter by level of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      - name: lastTime
+        in: query
+        description: "Filter by timestamp of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 12
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/smart_rollups/games:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get smart rollup games
+      description: Returns a list of smart rollup refutation games.
+      operationId: SmartRollups_GetSmartRollupGames
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: rollup
+        in: query
+        description: "Filter by smart rollup.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: initiator
+        in: query
+        description: "Filter by initiator (who found a wrong commitment and started the refutation game).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: initiatorCommitment.id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: initiatorCommitment.hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: opponent
+        in: query
+        description: "Filter by opponent (who was accused in publishing a wrong commitment).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: opponentCommitment.id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: opponentCommitment.hash
+        in: query
+        description: "Filter by commitment hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Src1HashParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: firstLevel
+        in: query
+        description: "Filter by level of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: firstTime
+        in: query
+        description: "Filter by timestamp of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+      - name: lastLevel
+        in: query
+        description: "Filter by level of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      - name: lastTime
+        in: query
+        description: "Filter by timestamp of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 12
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 13
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 14
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 15
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 16
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SrGame'
+  /v1/smart_rollups/inbox/count:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get inbox messages count
+      description: Returns a total number of smart rollup inbox messages.
+      operationId: SmartRollups_GetInboxMessagesCount
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: level
+        in: query
+        description: "Filter by level of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: timestamp
+        in: query
+        description: "Filter by timestamp of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: type
+        in: query
+        description: "Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SrMessageTypeParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: level_start,level_info,level_end,transfer,external,migration
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/smart_rollups/inbox:
+    get:
+      tags:
+      - SmartRollups
+      summary: Get inbox messages
+      description: Returns a list of smart rollup inbox messages.
+      operationId: SmartRollups_GetInboxMessages
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: level
+        in: query
+        description: "Filter by level of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: timestamp
+        in: query
+        description: "Filter by timestamp of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: type
+        in: query
+        description: "Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SrMessageTypeParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: level_start,level_info,level_end,transfer,external,migration
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 7
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: micheline
+        in: query
+        description: 'Format of smart rollup call parameters: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 9
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SrMessage'
+components:
+  schemas:
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type: string
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+          nullable: true
+        desc:
+          type: string
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type: integer
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+          nullable: true
+        pg:
+          type: integer
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+          nullable: true
+        cr:
+          type: integer
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+          nullable: true
+      x-tzkt-extension: query-parameter
+    IMicheline:
+      type: object
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/MichelineType'
+    SrGame:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        rollup:
+          description: Smart rollup, in which's scope the refutation game was started.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initiator:
+          description: Initiator, who found a wrong commitment and started the refutation game.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initiatorCommitment:
+          description: Initiator's version of a valid commitment
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+        opponent:
+          description: Opponent, who was accused in publishing a wrong commitment.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        opponentCommitment:
+          description: Opponent's version of a valid commitment
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+        lastMove:
+          description: The most recent move (`sr_refute` operation).
+          oneOf:
+          - $ref: '#/components/schemas/SrGameMove'
+        firstLevel:
+          type: integer
+          description: "Level of the block where the refutation game was started.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the refutation game was started.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the refutation game was last updated.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the refutation game was last updated.
+          format: date-time
+        initiatorReward:
+          type: integer
+          description: In case the initiator won, this field will contain the reward amount (in mutez).
+          format: int64
+          nullable: true
+        initiatorLoss:
+          type: integer
+          description: In case the initiator lost (including a `draw`), this field will contain the loss amount (in mutez).
+          format: int64
+          nullable: true
+        opponentReward:
+          type: integer
+          description: In case the opponent won, this field will contain the reward amount (in mutez).
+          format: int64
+          nullable: true
+        opponentLoss:
+          type: integer
+          description: In case the opponent lost (including a `draw`), this field will contain the loss amount (in mutez).
+          format: int64
+          nullable: true
+    SrBondStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an sr bond status to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=active`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an sr bond status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=active`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of sr bond statuses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?status.in=returned,lost`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of sr bond statuses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?status.ni=returned,lost`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: active,returned,lost
+    MichelineFormat:
+      type: string
+      description: ''
+      x-enumNames:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+      enum:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+    TimestampParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a datetime value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        gt:
+          type: string
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ge:
+          type: string
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        lt:
+          type: string
+          description: '**Less than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        le:
+          type: string
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+      x-tzkt-extension: query-parameter
+    SrMessageTypeParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an inbox message type to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=external`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an inbox message type to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=transfer`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of inbox message types to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?status.in=transfer,external`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of inbox message types to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?status.ni=transfer,external`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: level_start,level_info,level_end,transfer,external,migration
+    AddressParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=` is the same as `param=`). \
+
+            Specify an account address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?address=tz123..`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an account address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?address.ne=tz123..`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of account addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?address.in=tz123..,tz345..`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of account addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?address.ni=tz123..,tz345..`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        eqx:
+          type: string
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+          nullable: true
+        nex:
+          type: string
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+          nullable: true
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+          nullable: true
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    SrStaker:
+      allOf:
+      - $ref: '#/components/schemas/Alias'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: integer
+            description: "Internal TzKT id.  \n**[sortable]**"
+            format: int32
+          bondStatus:
+            type: string
+            description: Bond status (`active`, `returned`, or `lost`).
+          bondLevel:
+            type: integer
+            description: "Level of the block where the staker published his first commitment.  \n**[sortable]**"
+            format: int32
+          bondTime:
+            type: string
+            description: Timestamp of the block where the staker published his first commitment.
+            format: date-time
+    SmartRollup:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: integer
+            description: Internal TzKT id
+            format: int32
+          type:
+            type: string
+            description: Type of the account
+          address:
+            type: string
+            description: Address of the account
+          alias:
+            type: string
+            description: Name of the account
+            nullable: true
+          creator:
+            description: Information about the account, which has deployed the rollup to the blockchain
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          pvmKind:
+            type: string
+            description: 'PVM kind: `arith` or `wasm`'
+          genesisCommitment:
+            type: string
+            description: Genesis commitment hash
+          lastCommitment:
+            type: string
+            description: The most recent cemented commitment hash
+          inboxLevel:
+            type: integer
+            description: Inbox level of the most recent cemented commitment
+            format: int32
+          totalStakers:
+            type: integer
+            description: Total number of stakers.
+            format: int32
+          activeStakers:
+            type: integer
+            description: Total number of active stakers.
+            format: int32
+          executedCommitments:
+            type: integer
+            description: Number of commitments that were cemented and executed
+            format: int32
+          cementedCommitments:
+            type: integer
+            description: Number of commitments that were cemented (including executed ones)
+            format: int32
+          pendingCommitments:
+            type: integer
+            description: Number of pending commitments
+            format: int32
+          refutedCommitments:
+            type: integer
+            description: Number of commitments that were refuted
+            format: int32
+          orphanCommitments:
+            type: integer
+            description: Number of commitments that became orphan, due to their parent was refuted
+            format: int32
+          smartRollupBonds:
+            type: integer
+            description: Amount of mutez locked as bonds
+            format: int64
+          activeTokensCount:
+            type: integer
+            description: Number of account tokens with non-zero balances
+            format: int32
+          tokenBalancesCount:
+            type: integer
+            description: Number of tokens the account ever had
+            format: int32
+          tokenTransfersCount:
+            type: integer
+            description: Number of token transfers from/to the account
+            format: int32
+          activeTicketsCount:
+            type: integer
+            description: Number of tickets the account owns.
+            format: int32
+          ticketBalancesCount:
+            type: integer
+            description: Number of tickets the account ever owned.
+            format: int32
+          ticketTransfersCount:
+            type: integer
+            description: Number of ticket transfers from/to the account.
+            format: int32
+          numTransactions:
+            type: integer
+            description: Number of transaction operations related to the account
+            format: int32
+          transferTicketCount:
+            type: integer
+            description: Number of transfer ticket operations related to the account
+            format: int32
+          smartRollupCementCount:
+            type: integer
+            description: Number of `smart_rollup_cement` operations related to the account
+            format: int32
+          smartRollupExecuteCount:
+            type: integer
+            description: Number of `smart_rollup_execute_outbox_message` operations related to the account
+            format: int32
+          smartRollupOriginateCount:
+            type: integer
+            description: Number of `smart_rollup_originate` operations related to the account
+            format: int32
+          smartRollupPublishCount:
+            type: integer
+            description: Number of `smart_rollup_publish` operations related to the account
+            format: int32
+          smartRollupRecoverBondCount:
+            type: integer
+            description: Number of `smart_rollup_recover_bond` operations related to the account
+            format: int32
+          smartRollupRefuteCount:
+            type: integer
+            description: Number of `smart_rollup_refute` operations related to the account
+            format: int32
+          refutationGamesCount:
+            type: integer
+            description: Number of smart rollup refutation games related to the account
+            format: int32
+          activeRefutationGamesCount:
+            type: integer
+            description: Number of active smart rollup refutation games related to the account
+            format: int32
+          firstActivity:
+            type: integer
+            description: Block height at which the ghost contract appeared first time
+            format: int32
+          firstActivityTime:
+            type: string
+            description: Block datetime at which the ghost contract appeared first time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          lastActivity:
+            type: integer
+            description: Height of the block in which the ghost contract state was changed last time
+            format: int32
+          lastActivityTime:
+            type: string
+            description: Datetime of the block in which the ghost contract state was changed last time (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          extras:
+            description: Off-chain extras
+            nullable: true
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    MichelineType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Int
+      - Bytes
+      - String
+      - Array
+      - Prim
+      enum:
+      - 0
+      - 32
+      - 64
+      - 96
+      - 128
+    SrGameMove:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Unique ID of the operation, stored in the TzKT indexer database.
+          format: int64
+        level:
+          type: integer
+          description: The height of the block from the genesis block, in which the operation was included.
+          format: int32
+        timestamp:
+          type: string
+          description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`).
+          format: date-time
+        sender:
+          description: Information about the account who has sent the operation.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        move:
+          type: string
+          description: Player's move (`start`, `dissection`, `proof`, `timeout`).
+        gameStatus:
+          type: string
+          description: 'Game status after the move
+
+            (`ongoing` - game in progress, `loser` - one of the players lost, `draw` - both players lost).'
+    SrCommitmentInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal TzKT id.
+          format: int64
+        initiator:
+          description: Account that published the commitment first.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        inboxLevel:
+          type: integer
+          description: Inbox level
+          format: int32
+        state:
+          type: string
+          description: State hash
+        hash:
+          type: string
+          description: Commitment hash
+        ticks:
+          type: integer
+          description: Number of ticks
+          format: int64
+        firstLevel:
+          type: integer
+          description: Level of the block where the commitment was first published.
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the commitment was first published.
+          format: date-time
+    SrMessage:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        level:
+          type: integer
+          description: "Level of the block where the message was pushed.  \n**[sortable]**"
+          format: int32
+        index:
+          type: integer
+          description: 'Index of the inbox message within the block.  '
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block where the message was pushed.
+          format: date-time
+        type:
+          type: string
+          description: Type of the message (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).
+        predecessorHash:
+          type: string
+          description: For `level_info` messages only. Hash of the predecessor block.
+          nullable: true
+        predecessorTimestamp:
+          type: string
+          description: For `level_info` messages only. Timestamp of the predecessor block.
+          format: date-time
+          nullable: true
+        initiator:
+          description: For `transfer` messages only. Account, initiated the operation.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        sender:
+          description: For `transfer` messages only. Smart contract, sent the internal transaction.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        target:
+          description: For `transfer` messages only. Smart rollup to which the internal transaction was sent.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        entrypoint:
+          type: string
+          description: For `transfer` messages only. Entrypoint called in the target rollup
+          nullable: true
+        parameter:
+          description: 'For `transfer` messages only. Value passed to the called entrypoint. Note: you can configure parameters format by setting `micheline` query parameter.'
+          nullable: true
+        payload:
+          type: string
+          description: For `external` messages only. Payload bytes (in base64).
+          format: byte
+          nullable: true
+        protocol:
+          type: string
+          description: For `migration` messages only. Version of the new protocol (e.g. 'nairobi_017').
+          nullable: true
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Account alias name (off-chain data).
+          nullable: true
+        address:
+          type: string
+          description: Account address (public key hash).
+    Src1HashParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an src1-hash to get items where the specified field is equal to the specified value.
+
+
+            Example: `?hash=src1qwe...`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an src1-hash to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?hash.ne=src1qwe...`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of src1-hashes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?hash.in=hash1,hash2,hash3`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of src1-hashes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?hash.ni=hash1,hash2,hash3`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    Entrypoint:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Entrypoint name
+        jsonParameters:
+          description: A kind of JSON schema, describing how parameters will look like in a human-readable JSON format
+          nullable: true
+        michelineParameters:
+          description: Parameters schema in micheline format
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        michelsonParameters:
+          type: string
+          description: Parameters schema in michelson format
+          nullable: true
+        unused:
+          type: boolean
+          description: 'Unused means that the entrypoint can be normalized to a more specific one.
+
+            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint
+
+            because it can be normalized to `%entry2` or `%entry3`'
+    SrCommitment:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        rollup:
+          description: Smart rollup.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initiator:
+          description: Account that published the commitment first.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        inboxLevel:
+          type: integer
+          description: "Inbox level.  \n**[sortable]**"
+          format: int32
+        state:
+          type: string
+          description: State hash.
+        hash:
+          type: string
+          description: Commitment hash.
+        ticks:
+          type: integer
+          description: Number of ticks.
+          format: int64
+        firstLevel:
+          type: integer
+          description: "Level of the block where the commitment was first published.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the commitment was first published.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the commitment was last updated.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the commitment was last updated.
+          format: date-time
+        stakers:
+          type: integer
+          description: "Number of stakers, published this commitment.  \n**[sortable]**"
+          format: int32
+        activeStakers:
+          type: integer
+          description: "Number of active (not refuted) stakers.  \n**[sortable]**"
+          format: int32
+        successors:
+          type: integer
+          description: "Number of successor commitments.  \n**[sortable]**"
+          format: int32
+        status:
+          type: string
+          description: Commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).
+        predecessor:
+          description: Predecessor commitment.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+    SrCommitmentStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an sr commitment status to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=pending`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an sr commitment status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=cemented`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of sr commitment statuses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?status.in=cemented,executed`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of sr commitment statuses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?status.ni=cemented,executed`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: orphan,refuted,pending,cemented,executed
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
+x-tagGroups:
+- name: REST API
+  tags:
+  - Accounts
+  - BigMaps
+  - Blocks
+  - Commitments
+  - Constants
+  - Contracts
+  - Cycles
+  - Delegates
+  - Domains
+  - Events
+  - Head
+  - Helpers
+  - Operations
+  - Protocols
+  - Quotes
+  - Rewards
+  - Rights
+  - SmartRollups
+  - Software
+  - Staking
+  - Statistics
+  - Tickets
+  - Tokens
+  - Voting
+- name: WebSocket API
+  tags:
+  - Get Started
+  - Subscriptions
+  - Examples
+- name: Libraries
+  tags:
+  - Typescript SDK
+  - Taquito extension

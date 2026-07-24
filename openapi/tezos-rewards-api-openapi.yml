@@ -1,0 +1,1503 @@
+openapi: 3.0.0
+info:
+  title: TzKT Accounts Rewards API
+  description: "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it \U0001F60A\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! \U0001F609\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n"
+  contact:
+    name: Baking Bad Team
+    url: https://bakingbad.dev
+    email: hello@bakingbad.dev
+  version: 1.17.1
+  x-logo:
+    url: https://tzkt.io/logo.png
+    href: https://tzkt.io/
+servers:
+- url: https://api.tzkt.io
+tags:
+- name: Rewards
+paths:
+  /v1/rewards/bakers/{address}/count:
+    get:
+      tags:
+      - Rewards
+      summary: Get baker cycle rewards count
+      description: Returns total number of cycles where the baker was active
+      operationId: Rewards_GetBakerRewardsCount
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Baker address
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/rewards/bakers/{address}:
+    get:
+      tags:
+      - Rewards
+      summary: Get baker cycle rewards
+      description: Returns a list of baker rewards for every cycle, including future cycles.
+      operationId: Rewards_GetBakerRewards
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Baker address.
+        schema:
+          type: string
+        x-position: 1
+      - name: cycle
+        in: query
+        description: Filter by cycle.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 5
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: quote
+        in: query
+        description: Comma-separated list of ticker symbols to inject historical prices into response
+        schema:
+          default: None
+          oneOf:
+          - $ref: '#/components/schemas/Symbols'
+        x-position: 7
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BakerRewards'
+  /v1/rewards/delegators/{address}/count:
+    get:
+      tags:
+      - Rewards
+      summary: Get delegator cycle rewards count
+      description: Returns total number of cycles where the delegator was delegated to an active baker
+      operationId: Rewards_GetDelegatorRewardsCount
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Delegator address
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/rewards/delegators/{address}:
+    get:
+      tags:
+      - Rewards
+      summary: Get delegator cycle rewards
+      description: Returns a list of delegator rewards for every cycle, including future cycles.
+      operationId: Rewards_GetDelegatorRewards
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Delegator address.
+        schema:
+          type: string
+        x-position: 1
+      - name: cycle
+        in: query
+        description: Filter by cycle.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 5
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: quote
+        in: query
+        description: Comma-separated list of ticker symbols to inject historical prices into response
+        schema:
+          default: None
+          oneOf:
+          - $ref: '#/components/schemas/Symbols'
+        x-position: 7
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelegatorRewards'
+  /v1/rewards/stakers/{address}/count:
+    get:
+      tags:
+      - Rewards
+      summary: Get staker cycle rewards count
+      description: Returns total number of cycles where the staker was staking to an active baker
+      operationId: Rewards_GetStakerRewardsCount
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Staker address
+        schema:
+          type: string
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/rewards/stakers/{address}:
+    get:
+      tags:
+      - Rewards
+      summary: Get staker cycle rewards
+      description: Returns a list of staker rewards.
+      operationId: Rewards_GetStakerRewards
+      parameters:
+      - name: address
+        in: path
+        required: true
+        description: Staker address.
+        schema:
+          type: string
+        x-position: 1
+      - name: cycle
+        in: query
+        description: Filter by cycle.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 5
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: quote
+        in: query
+        description: Comma-separated list of ticker symbols to inject historical prices into response
+        schema:
+          default: None
+          oneOf:
+          - $ref: '#/components/schemas/Symbols'
+        x-position: 7
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StakerRewards'
+  /v1/rewards/split/{baker}/{cycle}:
+    get:
+      tags:
+      - Rewards
+      summary: Get reward split
+      description: 'Returns baker rewards for the specified cycle with all delegators and stakers (both snapshotted and actual ones).
+
+        This endpoint helps to distribute delegation rewards between delegators in proportion to their delegated balances.'
+      operationId: Rewards_GetRewardSplit
+      parameters:
+      - name: baker
+        in: path
+        required: true
+        description: Baker address
+        schema:
+          type: string
+        x-position: 1
+      - name: cycle
+        in: path
+        required: true
+        description: Rewards cycle
+        schema:
+          type: integer
+          format: int32
+        x-position: 2
+      - name: offset
+        in: query
+        description: Specifies how many delegators/stakers in the reward split should be skipped
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        x-position: 3
+      - name: limit
+        in: query
+        description: Maximum number of delegators/stakers to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardSplit'
+  /v1/rewards/split/{baker}/{cycle}/{member}:
+    get:
+      tags:
+      - Rewards
+      summary: Get reward split member
+      description: Returns delegator/staker from the reward split for the specified cycle.
+      operationId: Rewards_GetRewardSplitMember
+      parameters:
+      - name: baker
+        in: path
+        required: true
+        description: Baker address
+        schema:
+          type: string
+        x-position: 1
+      - name: cycle
+        in: path
+        required: true
+        description: Reward split cycle
+        schema:
+          type: integer
+          format: int32
+        x-position: 2
+      - name: member
+        in: path
+        required: true
+        description: Member address
+        schema:
+          type: string
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SplitMember'
+components:
+  schemas:
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type: number
+          description: XTZ/BTC price
+          format: double
+          nullable: true
+        eur:
+          type: number
+          description: XTZ/EUR price
+          format: double
+          nullable: true
+        usd:
+          type: number
+          description: XTZ/USD price
+          format: double
+          nullable: true
+        cny:
+          type: number
+          description: XTZ/CNY price
+          format: double
+          nullable: true
+        jpy:
+          type: number
+          description: XTZ/JPY price
+          format: double
+          nullable: true
+        krw:
+          type: number
+          description: XTZ/KRW price
+          format: double
+          nullable: true
+        eth:
+          type: number
+          description: XTZ/ETH price
+          format: double
+          nullable: true
+        gbp:
+          type: number
+          description: XTZ/GBP price
+          format: double
+          nullable: true
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Account alias name (off-chain data).
+          nullable: true
+        address:
+          type: string
+          description: Account address (public key hash).
+    DelegatorRewards:
+      type: object
+      additionalProperties: false
+      properties:
+        cycle:
+          type: integer
+          description: "Cycle in which rewards were or will be earned.  \n**[sortable]**"
+          format: int32
+        baker:
+          description: Baker at the snapshot time.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        delegatedBalance:
+          type: integer
+          description: 'Amount delegated to the baker at the snapshot time (micro tez).
+
+            This amount doesn''t include staked amount.'
+          format: int64
+        stakedPseudotokens:
+          type: string
+          description: Amount of staked pseudotokens, representing staker's share within the baker's `externalStakedBalance` at the snapshot time.
+          nullable: true
+        stakedBalance:
+          type: integer
+          description: 'Estimated amount staked to the baker at the snapshot time (micro tez).
+
+            It''s computed on-the-fly as `externalStakedBalance * stakedPseudotokens / issuedPseudotokens`.'
+          format: int64
+          nullable: true
+        bakerRewards:
+          description: Rewards of the delegator's baker, from which the delegator can estimate his share, given his `delegatedBalance`.
+          oneOf:
+          - $ref: '#/components/schemas/BakerRewards'
+        quote:
+          description: Injected historical quote at the end of the cycle
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/QuoteShort'
+        bakingPower:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        totalBakingPower:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        bakerDelegatedBalance:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        externalDelegatedBalance:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        bakerStakedBalance:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        externalStakedBalance:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        expectedBlocks:
+          type: number
+          description: '**DEPRECATED**'
+          format: double
+        expectedEndorsements:
+          type: number
+          description: '**DEPRECATED**'
+          format: double
+        expectedDalShards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        futureBlocks:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        futureBlockRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        blocks:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        blockRewardsDelegated:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        blockRewardsStakedOwn:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        blockRewardsStakedEdge:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        blockRewardsStakedShared:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        missedBlocks:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        missedBlockRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        futureEndorsements:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        futureEndorsementRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsements:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        endorsementRewardsDelegated:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsementRewardsStakedOwn:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsementRewardsStakedEdge:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsementRewardsStakedShared:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        missedEndorsements:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        missedEndorsementRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        futureDalAttestationRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        dalAttestationRewardsDelegated:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        dalAttestationRewardsStakedOwn:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        dalAttestationRewardsStakedEdge:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        dalAttestationRewardsStakedShared:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        missedDalAttestationRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        blockFees:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        missedBlockFees:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleBakingRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleBakingLostStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleBakingLostUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleBakingLostExternalStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleBakingLostExternalUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostExternalStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostExternalUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostExternalStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostExternalUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        vdfRevelationRewardsDelegated:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        vdfRevelationRewardsStakedOwn:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        vdfRevelationRewardsStakedEdge:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        vdfRevelationRewardsStakedShared:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        nonceRevelationRewardsDelegated:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        nonceRevelationRewardsStakedOwn:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        nonceRevelationRewardsStakedEdge:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        nonceRevelationRewardsStakedShared:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        nonceRevelationLosses:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type: string
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+          nullable: true
+        desc:
+          type: string
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    SplitStaker:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Address of the staker
+        stakedPseudotokens:
+          type: string
+          description: Amount of staked pseudotokens at the snapshot time, representing staker's share within the baker's `externalStakedBalance`.
+          nullable: true
+        stakedBalance:
+          type: integer
+          description: 'Estimated amount staked to the baker at the snapshot time (micro tez).
+
+            It''s computed on-the-fly as `externalStakedBalance * stakedPseudotokens / issuedPseudotokens`.'
+          format: int64
+    RewardSplit:
+      allOf:
+      - $ref: '#/components/schemas/BakerRewards'
+      - type: object
+        additionalProperties: false
+        properties:
+          delegators:
+            type: array
+            description: 'List of delegators, forming baker''s baking power.
+
+              This list includes "unstakers" (delegators who left the baker, but still had locked unstaked balance delegated to the baker),
+
+              therefore its length shouldn''t necessarily match the `delegatorsCount` value.'
+            items:
+              $ref: '#/components/schemas/SplitDelegator'
+          stakers:
+            type: array
+            description: List of stakers, forming baker's baking power.
+            items:
+              $ref: '#/components/schemas/SplitStaker'
+          actualStakers:
+            type: array
+            description: List of actual stakers, receiving staking rewards regardless of contribution to the baker's baking power.
+            items:
+              $ref: '#/components/schemas/SplitActualStaker'
+    SplitActualStaker:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Address of the delegator
+        initialStake:
+          type: integer
+          description: Staked balance at the beginning of the cycle (micro tez).
+          format: int64
+        finalStake:
+          type: integer
+          description: Staked balance at the end of the cycle (micro tez).
+          format: int64
+        rewards:
+          type: integer
+          description: Staking rewards (or losses if negative) earned during the cycle (micro tez).
+          format: int64
+    SplitDelegator:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Address of the delegator
+        delegatedBalance:
+          type: integer
+          description: 'Amount delegated to the baker at the snapshot time (micro tez).
+
+            This amount doesn''t include staked amount.'
+          format: int64
+        emptied:
+          type: boolean
+          description: 'Indicates whether the delegator is emptied (at the moment, not at the snapshot time).
+
+            Emptied accounts (users with zero balance) should be re-allocated, so if you make payment to the emptied account you will pay allocation fee.'
+    BakerRewards:
+      type: object
+      additionalProperties: false
+      properties:
+        cycle:
+          type: integer
+          description: "Cycle in which rewards were or will be earned.  \n**[sortable]**"
+          format: int32
+        ownDelegatedBalance:
+          type: integer
+          description: 'Amount delegated from the baker''s own balance (micro tez).
+
+            This amount doesn''t include staked amount.'
+          format: int64
+        externalDelegatedBalance:
+          type: integer
+          description: 'Amount delegated from external delegators and "unstakers" (delegators who left the baker, but still had locked unstaked balance delegated to the baker) (micro tez).
+
+            This amount doesn''t include external staked amount.'
+          format: int64
+        delegatorsCount:
+          type: integer
+          description: 'Number of delegators (those who were delegated to the baker).
+
+            This doesn''t include "unstakers" (delegators who left the baker, but still had locked unstaked balance delegated to the baker).'
+          format: int32
+        ownStakedBalance:
+          type: integer
+          description: Amount staked from the baker's own balance (micro tez).
+          format: int64
+        externalStakedBalance:
+          type: integer
+          description: Amount staked from external stakers (micro tez).
+          format: int64
+        stakersCount:
+          type: integer
+          description: Number of external stakers (those who delegated to the baker and also staked some amount).
+          format: int32
+        issuedPseudotokens:
+          type: string
+          description: Amount of staking pseudotokens issued by/for external stakers.
+          nullable: true
+        bakingPower:
+          type: integer
+          description: Baker's baking power
+          format: int64
+        totalBakingPower:
+          type: integer
+          description: Sum of baking power of all active bakers
+          format: int64
+        expectedBlocks:
+          type: number
+          description: Expected value of how many blocks baker should produce based on baker's active stake, selected stake and blocks per cycle.
+          format: double
+        futureBlocks:
+          type: integer
+          description: Number of blocks which baker is allowed to produce in this cycle based on future baking rights.
+          format: int32
+        futureBlockRewards:
+          type: integer
+          description: Estimated value of future block rewards.
+          format: int64
+        blocks:
+          type: integer
+          description: Number of successfully baked blocks (both proposed and re-proposed blocks).
+          format: int32
+        blockRewardsDelegated:
+          type: integer
+          description: 'Rewards, corresponding to delegated stake, received for baked blocks (both proposed and re-proposed blocks) on baker''s liquid balance
+
+            (it is not frozen and can be spent immediately).'
+          format: int64
+        blockRewardsStakedOwn:
+          type: integer
+          description: 'Rewards, corresponding to baker''s own stake, received for baked blocks (both proposed and re-proposed blocks) on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        blockRewardsStakedEdge:
+          type: integer
+          description: 'Rewards, corresponding to baker''s edge from external stake, received for baked blocks (both proposed and re-proposed blocks) on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        blockRewardsStakedShared:
+          type: integer
+          description: 'Rewards, corresponding to baker''s external stake, received for baked blocks (both proposed and re-proposed blocks) on baker''s external staked balance
+
+            (it is frozen and belongs to baker''s stakers).'
+          format: int64
+        missedBlocks:
+          type: integer
+          description: Number of missed opportunities to bake block.
+          format: int32
+        missedBlockRewards:
+          type: integer
+          description: Rewards which were not received due to missing blocks.
+          format: int64
+        expectedAttestations:
+          type: number
+          description: Expected value of how many slots baker should validate based on baker's active stake, selected stake and attestation slots per cycle.
+          format: double
+        futureAttestations:
+          type: integer
+          description: Number of slots which baker is allowed to validate in this cycle based on future attestation rights.
+          format: int32
+        futureAttestationRewards:
+          type: integer
+          description: Estimated value of future attestation rewards.
+          format: int64
+        attestations:
+          type: integer
+          description: Number of successfully attested slots.
+          format: int32
+        attestationRewardsDelegated:
+          type: integer
+          description: 'Rewards, corresponding to delegated stake, received for attested slots on baker''s liquid balance
+
+            (it is not frozen and can be spent immediately).'
+          format: int64
+        attestationRewardsStakedOwn:
+          type: integer
+          description: 'Rewards, corresponding to baker''s own stake, received for attested slots on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        attestationRewardsStakedEdge:
+          type: integer
+          description: 'Rewards, corresponding to baker''s edge from external stake, received for attested slots on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        attestationRewardsStakedShared:
+          type: integer
+          description: 'Rewards, corresponding to baker''s external stake, received for attested slots on baker''s external staked balance
+
+            (it is frozen and belongs to baker''s stakers).'
+          format: int64
+        missedAttestations:
+          type: integer
+          description: Number of not attested (missed) slots.
+          format: int32
+        missedAttestationRewards:
+          type: integer
+          description: Rewards which were not received due to missing attestations.
+          format: int64
+        expectedDalAttestations:
+          type: integer
+          description: Expected value of how many dal shards baker should attest based on baker's active stake, selected stake and total shards per cycle.
+          format: int64
+        futureDalAttestationRewards:
+          type: integer
+          description: Estimated value of future dal attestation rewards.
+          format: int64
+        dalAttestationRewardsDelegated:
+          type: integer
+          description: 'Rewards, corresponding to delegated stake, received for attested dal shards on baker''s liquid balance
+
+            (it is not frozen and can be spent immediately).'
+          format: int64
+        dalAttestationRewardsStakedOwn:
+          type: integer
+          description: 'Rewards, corresponding to baker''s own stake, received for attested dal shards on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        dalAttestationRewardsStakedEdge:
+          type: integer
+          description: 'Rewards, corresponding to baker''s edge from external stake, received for attested dal shards on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        dalAttestationRewardsStakedShared:
+          type: integer
+          description: 'Rewards, corresponding to baker''s external stake, received for attested dal shards on baker''s external staked balance
+
+            (it is frozen and belongs to baker''s stakers).'
+          format: int64
+        missedDalAttestationRewards:
+          type: integer
+          description: Rewards which were not received due to denunciation or not enough participation.
+          format: int64
+        blockFees:
+          type: integer
+          description: Operation fees which were harvested from successfully baked blocks.
+          format: int64
+        missedBlockFees:
+          type: integer
+          description: Operation fees which were not received due to missing blocks.
+          format: int64
+        doubleBakingRewards:
+          type: integer
+          description: Rewards for detecting double baking (accusing someone of producing two different blocks at the same level).
+          format: int64
+        doubleBakingLostStaked:
+          type: integer
+          description: Amount of baker's own staked balance lost due to double baking
+          format: int64
+        doubleBakingLostUnstaked:
+          type: integer
+          description: Amount of baker's own unstaked balance lost due to double baking
+          format: int64
+        doubleBakingLostExternalStaked:
+          type: integer
+          description: Amount of baker's external staked balance lost due to double baking
+          format: int64
+        doubleBakingLostExternalUnstaked:
+          type: integer
+          description: Amount of baker's external unstaked balance lost due to double baking
+          format: int64
+        doubleConsensusRewards:
+          type: integer
+          description: Rewards for detecting double (pre)attestation (accusing someone of validating two different blocks at the same level).
+          format: int64
+        doubleConsensusLostStaked:
+          type: integer
+          description: Amount of baker's own staked balance lost due to double (pre)attestation
+          format: int64
+        doubleConsensusLostUnstaked:
+          type: integer
+          description: Amount of baker's own unstaked balance lost due to double (pre)attestation
+          format: int64
+        doubleConsensusLostExternalStaked:
+          type: integer
+          description: Amount of baker's external staked balance lost due to double (pre)attestation
+          format: int64
+        doubleConsensusLostExternalUnstaked:
+          type: integer
+          description: Amount of baker's external unstaked balance lost due to double (pre)attestation
+          format: int64
+        vdfRevelationRewardsDelegated:
+          type: integer
+          description: 'Rewards, corresponding to delegated stake, for including vdf revelations, received on baker''s liquid balance
+
+            (it is not frozen and can be spent immediately).'
+          format: int64
+        vdfRevelationRewardsStakedOwn:
+          type: integer
+          description: 'Rewards, corresponding to baker''s own stake, for including vdf revelations, received on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        vdfRevelationRewardsStakedEdge:
+          type: integer
+          description: 'Rewards, corresponding to baker''s edge from external stake, for including vdf revelations, received on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        vdfRevelationRewardsStakedShared:
+          type: integer
+          description: 'Rewards, corresponding to baker''s external stake, for including vdf revelations, received on baker''s external staked balance
+
+            (it is frozen and belongs to baker''s stakers).'
+          format: int64
+        nonceRevelationRewardsDelegated:
+          type: integer
+          description: 'Rewards, corresponding to delegated stake, for including seed nonce revelations, received on baker''s liquid balance
+
+            (it is not frozen and can be spent immediately).'
+          format: int64
+        nonceRevelationRewardsStakedOwn:
+          type: integer
+          description: 'Rewards, corresponding to baker''s own stake, for including seed nonce revelations, received on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        nonceRevelationRewardsStakedEdge:
+          type: integer
+          description: 'Rewards, corresponding to baker''s edge from external stake, for including seed nonce revelations, received on baker''s own staked balance
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        nonceRevelationRewardsStakedShared:
+          type: integer
+          description: 'Rewards, corresponding to baker''s external stake, for including seed nonce revelations, received on baker''s external staked balance
+
+            (it is frozen and belongs to baker''s stakers).'
+          format: int64
+        nonceRevelationLosses:
+          type: integer
+          description: Amount of frozen deposits lost due to missing seed nonce revelation (always zero after Ithaca).
+          format: int64
+        quote:
+          description: Injected historical quote at the end of the cycle
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/QuoteShort'
+        expectedDalShards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        expectedEndorsements:
+          type: number
+          description: '**DEPRECATED**'
+          format: double
+        futureEndorsements:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        futureEndorsementRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsements:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        endorsementRewardsDelegated:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsementRewardsStakedOwn:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsementRewardsStakedEdge:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        endorsementRewardsStakedShared:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        missedEndorsements:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        missedEndorsementRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostExternalStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doubleEndorsingLostExternalUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingRewards:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostExternalStaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+        doublePreendorsingLostExternalUnstaked:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int64
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type: integer
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+          nullable: true
+        pg:
+          type: integer
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+          nullable: true
+        cr:
+          type: integer
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+          nullable: true
+      x-tzkt-extension: query-parameter
+    SplitMember:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Address of the delegator
+        delegatedBalance:
+          type: integer
+          description: 'Amount delegated to the baker at the snapshot time (micro tez).
+
+            This amount doesn''t include staked amount.'
+          format: int64
+        stakedPseudotokens:
+          type: string
+          description: Amount of staked pseudotokens at the snapshot time, representing staker's share within the baker's `externalStakedBalance`.
+          nullable: true
+        stakedBalance:
+          type: integer
+          description: 'Estimated amount staked to the baker at the snapshot time (micro tez).
+
+            It''s computed on-the-fly as `externalStakedBalance * stakedPseudotokens / issuedPseudotokens`.'
+          format: int64
+        emptied:
+          type: boolean
+          description: 'Indicates whether the delegator is emptied (at the moment, not at the snapshot time).
+
+            Emptied accounts (users with zero balance) should be re-allocated, so if you make payment to the emptied account you will pay allocation fee.'
+    Symbols:
+      type: string
+      description: ''
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+      enum:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    StakerRewards:
+      type: object
+      additionalProperties: false
+      properties:
+        cycle:
+          type: integer
+          description: "Cycle in which the rewards were earned.  \n**[sortable]**"
+          format: int32
+        baker:
+          description: Staker's baker.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initialStake:
+          type: integer
+          description: Staked balance at the beginning of the cycle (micro tez).
+          format: int64
+        addedStake:
+          type: integer
+          description: Amount added (staked) during the cycle (micro tez).
+          format: int64
+        removedStake:
+          type: integer
+          description: Amount removed (unstaked) during the cycle (micro tez).
+          format: int64
+        finalStake:
+          type: integer
+          description: Staked balance at the end of the cycle (micro tez).
+          format: int64
+        avgStake:
+          type: integer
+          description: Average (per-block) staked balance (micro tez).
+          format: int64
+        rewards:
+          type: integer
+          description: Staking rewards (or losses if negative) earned during the cycle (micro tez).
+          format: int64
+        bakerRewards:
+          description: Rewards of the staker's baker, from which the staker can understand the source of the rewards/losses.
+          oneOf:
+          - $ref: '#/components/schemas/BakerRewards'
+        quote:
+          description: Injected historical quote at the end of the cycle
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/QuoteShort'
+x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
+x-tagGroups:
+- name: REST API
+  tags:
+  - Accounts
+  - BigMaps
+  - Blocks
+  - Commitments
+  - Constants
+  - Contracts
+  - Cycles
+  - Delegates
+  - Domains
+  - Events
+  - Head
+  - Helpers
+  - Operations
+  - Protocols
+  - Quotes
+  - Rewards
+  - Rights
+  - SmartRollups
+  - Software
+  - Staking
+  - Statistics
+  - Tickets
+  - Tokens
+  - Voting
+- name: WebSocket API
+  tags:
+  - Get Started
+  - Subscriptions
+  - Examples
+- name: Libraries
+  tags:
+  - Typescript SDK
+  - Taquito extension

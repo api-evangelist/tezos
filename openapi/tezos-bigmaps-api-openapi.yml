@@ -1,0 +1,2328 @@
+openapi: 3.0.0
+info:
+  title: TzKT Accounts BigMaps API
+  description: "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it \U0001F60A\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! \U0001F609\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n"
+  contact:
+    name: Baking Bad Team
+    url: https://bakingbad.dev
+    email: hello@bakingbad.dev
+  version: 1.17.1
+  x-logo:
+    url: https://tzkt.io/logo.png
+    href: https://tzkt.io/
+servers:
+- url: https://api.tzkt.io
+tags:
+- name: BigMaps
+paths:
+  /v1/bigmaps/count:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmaps count
+      description: Returns the total number of bigmaps.
+      operationId: BigMaps_GetBigMapsCount
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/bigmaps:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmaps
+      description: Returns a list of bigmaps.
+      operationId: BigMaps_GetBigMaps
+      parameters:
+      - name: contract
+        in: query
+        description: Filters bigmaps by smart contract address.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: path
+        in: query
+        description: Filters bigmaps by path in the contract storage.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/StringParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: tags
+        in: query
+        description: 'Filters bigmaps by tags: `metadata`, `token_metadata`, `ledger`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapTagsParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: metadata,token_metadata,ledger
+      - name: active
+        in: query
+        description: 'Filters bigmaps by status: `true` - active, `false` - removed.'
+        schema:
+          type: boolean
+          nullable: true
+        x-position: 4
+      - name: lastLevel
+        in: query
+        description: Filters bigmaps by the last update level.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 9
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value type: `0` - JSON, `2` - Micheline'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 10
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMap'
+  /v1/bigmaps/keys:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap keys
+      description: Returns a list of all bigmap keys.
+      operationId: BigMaps_GetBigMapKeys
+      parameters:
+      - name: id
+        in: query
+        description: "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: bigmap
+        in: query
+        description: "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: active
+        in: query
+        description: 'Filters by status: `true` - active, `false` - removed.'
+        schema:
+          type: boolean
+          nullable: true
+        x-position: 3
+      - name: hash
+        in: query
+        description: "Filter by key hash.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ExpressionParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: key
+        in: query
+        description: "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 5
+        x-tzkt-extension: json-parameter
+      - name: value
+        in: query
+        description: "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 6
+        x-tzkt-extension: json-parameter
+      - name: firstLevel
+        in: query
+        description: "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: firstTime
+        in: query
+        description: "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: lastLevel
+        in: query
+        description: "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: lastTime
+        in: query
+        description: "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+      - name: updates
+        in: query
+        description: "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 11
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 12
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 13
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          format: int32
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 14
+      - name: select
+        in: query
+        description: "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectionParameter'
+        x-position: 15
+        x-tzkt-extension: query-parameter
+      - name: micheline
+        in: query
+        description: 'Format of the `key` and `value` fields: `0` - JSON, `2` - Micheline'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 16
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapKeyFull'
+  /v1/bigmaps/updates/count:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap updates count
+      description: Returns a total number of bigmap updates.
+      operationId: BigMaps_GetBigMapUpdates
+      parameters:
+      - name: bigmap
+        in: query
+        description: Filters by bigmap ptr
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: path
+        in: query
+        description: Filters by bigmap path
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/StringParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: contract
+        in: query
+        description: Filters by bigmap contract
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: tags
+        in: query
+        description: 'Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapTagsParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: metadata,token_metadata,ledger
+      - name: action
+        in: query
+        description: Filters by action
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapActionParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: allocate,add_key,update_key,remove_key,remove
+      - name: value
+        in: query
+        description: "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 6
+        x-tzkt-extension: json-parameter
+      - name: level
+        in: query
+        description: Filters by level
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: timestamp
+        in: query
+        description: Filters by timestamp
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapUpdate'
+  /v1/bigmaps/updates:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap updates
+      description: Returns a list of all bigmap updates.
+      operationId: BigMaps_GetBigMapUpdates2
+      parameters:
+      - name: bigmap
+        in: query
+        description: Filters by bigmap ptr
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 1
+        x-tzkt-extension: query-parameter
+      - name: path
+        in: query
+        description: Filters by bigmap path
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/StringParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: contract
+        in: query
+        description: Filters by bigmap contract
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: tags
+        in: query
+        description: 'Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapTagsParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: metadata,token_metadata,ledger
+      - name: action
+        in: query
+        description: Filters by action
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapActionParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+        x-tzkt-query-parameter: allocate,add_key,update_key,remove_key,remove
+      - name: value
+        in: query
+        description: "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 6
+        x-tzkt-extension: json-parameter
+      - name: level
+        in: query
+        description: Filters by level
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: timestamp
+        in: query
+        description: Filters by timestamp
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimestampParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 10
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 11
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value type: `0` - JSON, `2` - Micheline'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 12
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapUpdate'
+  /v1/bigmaps/{id}:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap by Id
+      description: Returns a bigmap with the specified Id.
+      operationId: BigMaps_GetBigMapById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Bigmap Id
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value type: `0` - JSON, `2` - Micheline'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigMap'
+  /v1/bigmaps/{id}/type:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap type
+      description: Returns a type of the bigmap with the specified Id in Micheline format (with annotations).
+      operationId: BigMaps_GetBigMapType
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Bigmap Id
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MichelinePrim'
+  /v1/bigmaps/{id}/keys:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap keys
+      description: Returns a list of bigmap keys.
+      operationId: BigMaps_GetKeys
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Bigmap Id
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: active
+        in: query
+        description: 'Filters keys by status: `true` - active, `false` - removed.'
+        schema:
+          type: boolean
+          nullable: true
+        x-position: 2
+      - name: key
+        in: query
+        description: "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 3
+        x-tzkt-extension: json-parameter
+      - name: value
+        in: query
+        description: "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 4
+        x-tzkt-extension: json-parameter
+      - name: lastLevel
+        in: query
+        description: Filters bigmap keys by the last update level.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 9
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 10
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapKey'
+  /v1/bigmaps/{id}/keys/{key}:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap key
+      description: Returns the specified bigmap key.
+      operationId: BigMaps_GetKey
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Bigmap Id
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: key
+        in: path
+        required: true
+        description: "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+        schema:
+          type: string
+        x-position: 2
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigMapKey'
+  /v1/bigmaps/{id}/keys/{key}/updates:
+    get:
+      tags:
+      - BigMaps
+      summary: Get bigmap key updates
+      description: Returns updates history for the specified bigmap key.
+      operationId: BigMaps_GetKeyUpdates
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Bigmap Id
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: key
+        in: path
+        required: true
+        description: "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+        schema:
+          type: string
+        x-position: 2
+      - name: sort
+        in: query
+        description: 'Sorts bigmap updates by specified field. Supported fields: `id` (default).'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 5
+      - name: micheline
+        in: query
+        description: 'Format of the key value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 6
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapKeyUpdate'
+  /v1/bigmaps/{id}/historical_keys/{level}:
+    get:
+      tags:
+      - BigMaps
+      summary: Get historical keys
+      description: Returns a list of bigmap keys at the specific block.
+      operationId: BigMaps_GetHistoricalKeys
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Bigmap Id
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: level
+        in: path
+        required: true
+        description: Level of the block at which you want to get bigmap keys
+        schema:
+          type: integer
+          format: int32
+        x-position: 2
+      - name: active
+        in: query
+        description: 'Filters keys by status: `true` - active, `false` - removed.'
+        schema:
+          type: boolean
+          nullable: true
+        x-position: 3
+      - name: key
+        in: query
+        description: "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 4
+        x-tzkt-extension: json-parameter
+      - name: value
+        in: query
+        description: "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/JsonParameter'
+        x-position: 5
+        x-tzkt-extension: json-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts bigmap keys by specified field. Supported fields: `id` (default).'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 9
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 10
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BigMapKeyHistorical'
+  /v1/bigmaps/{id}/historical_keys/{level}/{key}:
+    get:
+      tags:
+      - BigMaps
+      summary: Get historical key
+      description: Returns the specified bigmap key at the specific block.
+      operationId: BigMaps_GetKey2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Bigmap Id
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: level
+        in: path
+        required: true
+        description: Level of the block at which you want to get bigmap key
+        schema:
+          type: integer
+          format: int32
+        x-position: 2
+      - name: key
+        in: path
+        required: true
+        description: "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+        schema:
+          type: string
+        x-position: 3
+      - name: micheline
+        in: query
+        description: 'Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BigMapKeyHistorical'
+components:
+  schemas:
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type: string
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+          nullable: true
+        desc:
+          type: string
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    MichelinePrim:
+      type: object
+      additionalProperties: false
+      properties:
+        prim:
+          $ref: '#/components/schemas/PrimType'
+        args:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/IMicheline'
+        annots:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/IAnnotation'
+    BigMapKeyFull:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int32
+        bigmap:
+          type: integer
+          description: Bigmap ptr.
+          format: int32
+        active:
+          type: boolean
+          description: Key status (`true` - active, `false` - removed).
+        hash:
+          type: string
+          description: Key hash.
+        key:
+          description: "Key in JSON or Micheline format, depending on the `micheline` query parameter.  \n**[sortable]**"
+        value:
+          description: "Value in JSON or Micheline format, depending on the `micheline` query parameter.\nNote, if the key is inactive (removed) this field will contain the last non-null value.  \n**[sortable]**"
+        firstLevel:
+          type: integer
+          description: "Level of the block where the key was first seen.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the key was first seen.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the key was last seen.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the key was last seen.
+          format: date-time
+        updates:
+          type: integer
+          description: "Total number of actions with the key.  \n**[sortable]**"
+          format: int32
+    PrimType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - parameter
+      - storage
+      - code
+      - 'False'
+      - Elt
+      - Left
+      - None
+      - Pair
+      - Right
+      - Some
+      - 'True'
+      - Unit
+      - PACK
+      - UNPACK
+      - BLAKE2B
+      - SHA256
+      - SHA512
+      - ABS
+      - ADD
+      - AMOUNT
+      - AND
+      - BALANCE
+      - CAR
+      - CDR
+      - CHECK_SIGNATURE
+      - COMPARE
+      - CONCAT
+      - CONS
+      - CREATE_ACCOUNT
+      - CREATE_CONTRACT
+      - IMPLICIT_ACCOUNT
+      - DIP
+      - DROP
+      - DUP
+      - EDIV
+      - EMPTY_MAP
+      - EMPTY_SET
+      - EQ
+      - EXEC
+      - FAILWITH
+      - GE
+      - GET
+      - GT
+      - HASH_KEY
+      - IF
+      - IF_CONS
+      - IF_LEFT
+      - IF_NONE
+      - INT
+      - LAMBDA
+      - LE
+      - LEFT
+      - LOOP
+      - LSL
+      - LSR
+      - LT
+      - MAP
+      - MEM
+      - MUL
+      - NEG
+      - NEQ
+      - NIL
+      - NONE
+      - NOT
+      - NOW
+      - OR
+      - PAIR
+      - PUSH
+      - RIGHT
+      - SIZE
+      - SOME
+      - SOURCE
+      - SENDER
+      - SELF
+      - STEPS_TO_QUOTA
+      - SUB
+      - SWAP
+      - TRANSFER_TOKENS
+      - SET_DELEGATE
+      - UNIT
+      - UPDATE
+      - XOR
+      - ITER
+      - LOOP_LEFT
+      - ADDRESS
+      - CONTRACT
+      - ISNAT
+      - CAST
+      - RENAME
+      - bool
+      - contract
+      - int
+      - key
+      - key_hash
+      - lambda
+      - list
+      - map
+      - big_map
+      - nat
+      - option
+      - or
+      - pair
+      - set
+      - signature
+      - string
+      - bytes
+      - mutez
+      - timestamp
+      - unit
+      - operation
+      - address
+      - SLICE
+      - DIG
+      - DUG
+      - EMPTY_BIG_MAP
+      - APPLY
+      - chain_id
+      - CHAIN_ID
+      - LEVEL
+      - SELF_ADDRESS
+      - never
+      - NEVER
+      - UNPAIR
+      - VOTING_POWER
+      - TOTAL_VOTING_POWER
+      - KECCAK
+      - SHA3
+      - PAIRING_CHECK
+      - bls12_381_g1
+      - bls12_381_g2
+      - bls12_381_fr
+      - sapling_state
+      - sapling_transaction_deprecated
+      - SAPLING_EMPTY_STATE
+      - SAPLING_VERIFY_UPDATE
+      - ticket
+      - TICKET_DEPRECATED
+      - READ_TICKET
+      - SPLIT_TICKET
+      - JOIN_TICKETS
+      - GET_AND_UPDATE
+      - chest
+      - chest_key
+      - OPEN_CHEST
+      - VIEW
+      - view
+      - constant
+      - SUB_MUTEZ
+      - tx_rollup_l2_address
+      - MIN_BLOCK_TIME
+      - sapling_transaction
+      - EMIT
+      - Lambda_rec
+      - LAMBDA_REC
+      - TICKET
+      - BYTES
+      - NAT
+      - Ticket
+      - IS_IMPLICIT_ACCOUNT
+      - GET_ADDRESS_INDEX
+      - INDEX_ADDRESS
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+      - 36
+      - 37
+      - 38
+      - 39
+      - 40
+      - 41
+      - 42
+      - 43
+      - 44
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 50
+      - 51
+      - 52
+      - 53
+      - 54
+      - 55
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 65
+      - 66
+      - 67
+      - 68
+      - 69
+      - 70
+      - 71
+      - 72
+      - 73
+      - 74
+      - 75
+      - 76
+      - 77
+      - 78
+      - 79
+      - 80
+      - 81
+      - 82
+      - 83
+      - 84
+      - 85
+      - 86
+      - 87
+      - 88
+      - 89
+      - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
+      - 100
+      - 101
+      - 102
+      - 103
+      - 104
+      - 105
+      - 106
+      - 107
+      - 108
+      - 109
+      - 110
+      - 111
+      - 112
+      - 113
+      - 114
+      - 115
+      - 116
+      - 117
+      - 118
+      - 119
+      - 120
+      - 121
+      - 122
+      - 123
+      - 124
+      - 125
+      - 126
+      - 127
+      - 128
+      - 129
+      - 130
+      - 131
+      - 132
+      - 133
+      - 134
+      - 135
+      - 136
+      - 137
+      - 138
+      - 139
+      - 140
+      - 141
+      - 142
+      - 143
+      - 144
+      - 145
+      - 146
+      - 147
+      - 148
+      - 149
+      - 150
+      - 151
+      - 152
+      - 153
+      - 154
+      - 155
+      - 156
+      - 157
+      - 158
+      - 159
+      - 160
+    ExpressionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an expression hash to get items where the specified field is equal to the specified value.
+
+
+            Example: `?address=expr...`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify an expression hash to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?address.ne=expr...`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of expression hashes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?address.in=expr1,expr2`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of expression hashes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?address.ni=expr1,expr2`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    JsonParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a JSON value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?parameter.from=tz1...` or `?parameter.signatures.[3].[0]=null` or `?parameter.sigs.[*]=null`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a JSON value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?parameter.ne=true` or `?parameter.amount.ne=0`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        gt:
+          type: string
+          description: '**Greater than** filter mode. \
+
+            Specify a string to get items where the specified field is greater than the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.gt=1234` or `?parameter.time.gt=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        ge:
+          type: string
+          description: '**Greater or equal** filter mode. \
+
+            Specify a string to get items where the specified field is greater than equal to the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.ge=1234` or `?parameter.time.ge=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        lt:
+          type: string
+          description: '**Less than** filter mode. \
+
+            Specify a string to get items where the specified field is less than the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.lt=1234` or `?parameter.time.lt=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        le:
+          type: string
+          description: '**Less or equal** filter mode. \
+
+            Specify a string to get items where the specified field is less than or equal to the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.le=1234` or `?parameter.time.le=2021-02-01`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        as:
+          type: string
+          description: '**Same as** filter mode. \
+
+            Specify a string template to get items where the specified field matches the specified template. \
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameter.as=*mid*` or `?parameter.as=*end`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        un:
+          type: string
+          description: '**Unlike** filter mode. \
+
+            Specify a string template to get items where the specified field doesn''t match the specified template.
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameter.un=*mid*` or `?parameter.un=*end`.'
+          nullable: true
+          x-tzkt-extension: json-parameter
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of strings or JSON array to get items where the specified field is equal to one of the specified values. \
+
+
+            Example: `?parameter.amount.in=1,2,3` or `?parameter.in=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
+          nullable: true
+          items:
+            type: string
+          x-tzkt-extension: json-parameter
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \
+
+            Use `\,` as an escape symbol.
+
+
+            Example: `?parameter.amount.ni=1,2,3` or `?parameter.ni=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
+          nullable: true
+          items:
+            type: string
+          x-tzkt-extension: json-parameter
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
+          x-tzkt-extension: json-parameter
+      x-tzkt-extension: json-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type: integer
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+          nullable: true
+        pg:
+          type: integer
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+          nullable: true
+        cr:
+          type: integer
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+          nullable: true
+      x-tzkt-extension: query-parameter
+    BigMapUpdate:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        level:
+          type: integer
+          description: Level of the block where the bigmap was updated
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block where the bigmap was updated
+          format: date-time
+        bigmap:
+          type: integer
+          description: Bigmap ptr
+          format: int32
+        contract:
+          description: Smart contract in which's storage the bigmap is allocated
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        path:
+          type: string
+          description: Path to the bigmap in the contract storage
+        action:
+          type: string
+          description: Action with the bigmap (`allocate`, `add_key`, `update_key`, `remove_key`, `remove`)
+        content:
+          description: 'Updated key.
+
+            If the action is `allocate` or `remove` the content will be `null`.'
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapKeyShort'
+    IMicheline:
+      type: object
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/MichelineType'
+    TimestampParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a datetime value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        gt:
+          type: string
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ge:
+          type: string
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        lt:
+          type: string
+          description: '**Less than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        le:
+          type: string
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+      x-tzkt-extension: query-parameter
+    MichelineFormat:
+      type: string
+      description: ''
+      x-enumNames:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+      enum:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+    BigMapKey:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        active:
+          type: boolean
+          description: Bigmap key status (`true` - active, `false` - removed)
+        hash:
+          type: string
+          description: Key hash
+        key:
+          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the key is inactive (removed) it will contain the last non-null value.'
+        firstLevel:
+          type: integer
+          description: Level of the block where the bigmap key was seen first time
+          format: int32
+        lastLevel:
+          type: integer
+          description: Level of the block where the bigmap key was seen last time
+          format: int32
+        updates:
+          type: integer
+          description: Total number of actions with the bigmap key
+          format: int32
+    BigMapKeyUpdate:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        level:
+          type: integer
+          description: Level of the block where the bigmap key was updated
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block where the bigmap key was updated
+          format: date-time
+        action:
+          type: string
+          description: Action with the key (`add_key`, `update_key`, `remove_key`)
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the action is `remove_key` it will contain the last non-null value.'
+    BigMapActionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a contract kind to get items where the specified field is equal to the specified value.
+
+
+            Example: `?kind=smart_contract`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a contract kind to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?kind.ne=delegator_contract`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of contract kinds to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?kind.in=smart_contract,asset`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of contract kinds to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?kind.ni=smart_contract,asset`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: allocate,add_key,update_key,remove_key,remove
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        eqx:
+          type: string
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+          nullable: true
+        nex:
+          type: string
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+          nullable: true
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+          nullable: true
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    BigMapKeyShort:
+      type: object
+      additionalProperties: false
+      properties:
+        hash:
+          type: string
+          description: Key hash
+        key:
+          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the action is `remove_key` it will contain the last non-null value.'
+    BigMapKeyHistorical:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        active:
+          type: boolean
+          description: Bigmap key status (`true` - active, `false` - removed)
+        hash:
+          type: string
+          description: Key hash
+        key:
+          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the key is inactive (removed) it will contain the last non-null value.'
+    MichelineType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Int
+      - Bytes
+      - String
+      - Array
+      - Prim
+      enum:
+      - 0
+      - 32
+      - 64
+      - 96
+      - 128
+    BigMap:
+      type: object
+      additionalProperties: false
+      properties:
+        ptr:
+          type: integer
+          description: Bigmap pointer
+          format: int32
+        contract:
+          description: Smart contract in which's storage the bigmap is allocated
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        path:
+          type: string
+          description: 'Path to the bigmap in the contract storage '
+        tags:
+          type: array
+          description: List of tags ( `metadata`, `token_metadata`,`ledger`, or `null` if there are no tags)
+          nullable: true
+          items:
+            type: string
+        active:
+          type: boolean
+          description: Bigmap status (`true` - active, `false` - removed)
+        firstLevel:
+          type: integer
+          description: Level of the block where the bigmap was seen first time
+          format: int32
+        lastLevel:
+          type: integer
+          description: Level of the block where the bigmap was seen last time
+          format: int32
+        totalKeys:
+          type: integer
+          description: Total number of keys ever added to the bigmap
+          format: int32
+        activeKeys:
+          type: integer
+          description: Total number of currently active keys
+          format: int32
+        updates:
+          type: integer
+          description: Total number of actions with the bigmap
+          format: int32
+        keyType:
+          description: Bigmap key type as JSON schema or Micheline, depending on the `micheline` query parameter.
+        valueType:
+          description: Bigmap value type as JSON schema or Micheline, depending on the `micheline` query parameter.
+    IAnnotation:
+      type: object
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/AnnotationType'
+        value:
+          type: string
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Account alias name (off-chain data).
+          nullable: true
+        address:
+          type: string
+          description: Account address (public key hash).
+    StringParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a string to get items where the specified field is equal to the specified value.
+
+
+            Example: `?parameters=abc`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a string to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?parameters.ne=abc`.'
+          nullable: true
+        as:
+          type: string
+          description: '**Same as** filter mode. \
+
+            Specify a string template to get items where the specified field matches the specified template. \
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameters.as=*mid*` or `?parameters.as=*end`.'
+          nullable: true
+        un:
+          type: string
+          description: '**Unlike** filter mode. \
+
+            Specify a string template to get items where the specified field doesn''t match the specified template.
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameters.un=*mid*` or `?parameters.un=*end`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of strings to get items where the specified field is equal to one of the specified values. \
+
+            Use `\,` as an escape symbol.
+
+
+            Example: `?errors.in=bla,bal,abl`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \
+
+            Use `\,` as an escape symbol.
+
+
+            Example: `?errors.ni=bla,bal,abl`.'
+          nullable: true
+          items:
+            type: string
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?parameters.null` or `?parameters.null=false`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    BigMapTagsParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: array
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps with exactly the same set of tags.
+
+            Avoid using this mode and use `.any` or `.all` instead, because it may not work as expected due to internal ''hidden'' tags.
+
+
+            Example: `?tags=metadata` or `?tags=token_metadata,metadata`.'
+          nullable: true
+          items:
+            type: string
+        any:
+          type: array
+          description: '**Has any** filter mode. \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps where at least one of the specified tags is presented.
+
+
+            Example: `?tags.any=metadata` or `?tags.any=token_metadata,metadata`.'
+          nullable: true
+          items:
+            type: string
+        all:
+          type: array
+          description: '**Has all** filter mode. \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps where all of the specified tags are presented.
+
+
+            Example: `?tags.all=metadata` or `?tags.all=token_metadata,metadata`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: metadata,token_metadata,ledger
+    AnnotationType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Unsafe
+      - Field
+      - Type
+      - Variable
+      enum:
+      - 0
+      - 64
+      - 128
+      - 192
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
+x-tagGroups:
+- name: REST API
+  tags:
+  - Accounts
+  - BigMaps
+  - Blocks
+  - Commitments
+  - Constants
+  - Contracts
+  - Cycles
+  - Delegates
+  - Domains
+  - Events
+  - Head
+  - Helpers
+  - Operations
+  - Protocols
+  - Quotes
+  - Rewards
+  - Rights
+  - SmartRollups
+  - Software
+  - Staking
+  - Statistics
+  - Tickets
+  - Tokens
+  - Voting
+- name: WebSocket API
+  tags:
+  - Get Started
+  - Subscriptions
+  - Examples
+- name: Libraries
+  tags:
+  - Typescript SDK
+  - Taquito extension

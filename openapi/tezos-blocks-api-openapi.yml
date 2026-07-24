@@ -1,0 +1,4776 @@
+openapi: 3.0.0
+info:
+  title: TzKT Accounts Blocks API
+  description: "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it \U0001F60A\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! \U0001F609\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n"
+  contact:
+    name: Baking Bad Team
+    url: https://bakingbad.dev
+    email: hello@bakingbad.dev
+  version: 1.17.1
+  x-logo:
+    url: https://tzkt.io/logo.png
+    href: https://tzkt.io/
+servers:
+- url: https://api.tzkt.io
+tags:
+- name: Blocks
+paths:
+  /v1/blocks/count:
+    get:
+      tags:
+      - Blocks
+      summary: Get blocks count
+      description: Returns the total number of blocks.
+      operationId: Blocks_GetCount
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/blocks:
+    get:
+      tags:
+      - Blocks
+      summary: Get blocks
+      description: Returns a list of blocks.
+      operationId: Blocks_Get
+      parameters:
+      - name: anyof
+        in: query
+        description: 'Filters by any of the specified fields. Example: `anyof.proposer.producer=tz1...`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AnyOfParameter'
+        x-position: 1
+        x-tzkt-extension: anyof-parameter
+        x-tzkt-anyof-parameter: proposer,producer
+      - name: proposer
+        in: query
+        description: 'Filters blocks by block proposer. Allowed fields for `.eqx` mode: none.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 2
+        x-tzkt-extension: query-parameter
+      - name: producer
+        in: query
+        description: 'Filters blocks by block producer. Allowed fields for `.eqx` mode: none.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AccountParameter'
+        x-position: 3
+        x-tzkt-extension: query-parameter
+      - name: level
+        in: query
+        description: Filters blocks by level.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 4
+        x-tzkt-extension: query-parameter
+      - name: timestamp
+        in: query
+        description: Filters blocks by timestamp.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/DateTimeParameter'
+        x-position: 5
+        x-tzkt-extension: query-parameter
+      - name: blockRound
+        in: query
+        description: Filters blocks by block round.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Int32Parameter'
+        x-position: 6
+        x-tzkt-extension: query-parameter
+      - name: select
+        in: query
+        description: Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes.
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SelectParameter'
+        x-position: 7
+        x-tzkt-extension: query-parameter
+      - name: sort
+        in: query
+        description: 'Sorts blocks by specified field. Supported fields: `id` (default), `level`, `payloadRound`, `blockRound`, `attestationPower`, `reward`, `bonus`, `fees`.'
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SortParameter'
+        x-position: 8
+        x-tzkt-extension: query-parameter
+      - name: offset
+        in: query
+        description: Specifies which or how many items should be skipped
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/OffsetParameter'
+        x-position: 9
+        x-tzkt-extension: query-parameter
+      - name: limit
+        in: query
+        description: Maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 10000.0
+          minimum: 0.0
+        x-position: 10
+      - name: quote
+        in: query
+        description: Comma-separated list of ticker symbols to inject historical prices into response
+        schema:
+          default: None
+          oneOf:
+          - $ref: '#/components/schemas/Symbols'
+        x-position: 11
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Block'
+  /v1/blocks/{hash}:
+    get:
+      tags:
+      - Blocks
+      summary: Get block by hash
+      description: Returns a block with the specified hash.
+      operationId: Blocks_GetByHash
+      parameters:
+      - name: hash
+        in: path
+        required: true
+        description: Block hash
+        schema:
+          type: string
+        x-position: 1
+      - name: operations
+        in: query
+        description: Flag indicating whether to include block operations into returned object or not
+        schema:
+          type: boolean
+          default: false
+        x-position: 2
+      - name: micheline
+        in: query
+        description: 'Format of the parameters, storage and diffs: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 3
+      - name: quote
+        in: query
+        description: Comma-separated list of ticker symbols to inject historical prices into response
+        schema:
+          default: None
+          oneOf:
+          - $ref: '#/components/schemas/Symbols'
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block'
+  /v1/blocks/{level}:
+    get:
+      tags:
+      - Blocks
+      summary: Get block by level
+      description: Returns a block at the specified level.
+      operationId: Blocks_GetByLevel
+      parameters:
+      - name: level
+        in: path
+        required: true
+        description: Block level
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      - name: operations
+        in: query
+        description: Flag indicating whether to include block operations into returned object or not
+        schema:
+          type: boolean
+          default: false
+        x-position: 2
+      - name: micheline
+        in: query
+        description: 'Format of the parameters, storage and diffs: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 3
+      - name: quote
+        in: query
+        description: Comma-separated list of ticker symbols to inject historical prices into response
+        schema:
+          default: None
+          oneOf:
+          - $ref: '#/components/schemas/Symbols'
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block'
+  /v1/blocks/{level}/timestamp:
+    get:
+      tags:
+      - Blocks
+      summary: Get timestamp by level
+      description: Returns a timestamp of the block at the specified level.
+      operationId: Blocks_GetByLevel2
+      parameters:
+      - name: level
+        in: path
+        required: true
+        description: Block level
+        schema:
+          type: integer
+          format: int32
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+                format: date-time
+  /v1/blocks/{timestamp}:
+    get:
+      tags:
+      - Blocks
+      summary: Get block by timestamp
+      description: Returns a block closest to the specified timestamp.
+      operationId: Blocks_GetByDate
+      parameters:
+      - name: timestamp
+        in: path
+        required: true
+        description: Timestamp, e.g. `2020-01-01T00:00:00Z`
+        schema:
+          type: string
+          format: date-time
+        x-position: 1
+      - name: operations
+        in: query
+        description: Flag indicating whether to include block operations into returned object or not
+        schema:
+          type: boolean
+          default: false
+        x-position: 2
+      - name: micheline
+        in: query
+        description: 'Format of the parameters, storage and diffs: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string'
+        schema:
+          default: Json
+          oneOf:
+          - $ref: '#/components/schemas/MichelineFormat'
+        x-position: 3
+      - name: quote
+        in: query
+        description: Comma-separated list of ticker symbols to inject historical prices into response
+        schema:
+          default: None
+          oneOf:
+          - $ref: '#/components/schemas/Symbols'
+        x-position: 4
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Block'
+  /v1/blocks/{timestamp}/level:
+    get:
+      tags:
+      - Blocks
+      summary: Get level by timestamp
+      description: Returns a level of the block closest to the specified timestamp.
+      operationId: Blocks_GetByDate2
+      parameters:
+      - name: timestamp
+        in: path
+        required: true
+        description: Timestamp, e.g. `2020-01-01T00:00:00Z`
+        schema:
+          type: string
+          format: date-time
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+components:
+  schemas:
+    TxRollupOriginationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_origination`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          allocationFee:
+            type: integer
+            description: The amount of funds burned from the sender account for account creation (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type: string
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+          nullable: true
+        desc:
+          type: string
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+          nullable: true
+      x-tzkt-extension: query-parameter
+    SmartRollupExecuteOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `sr_execute`
+          id:
+            type: integer
+            description: "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          rollup:
+            description: Smart rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          commitment:
+            description: Executed commitment
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/SrCommitmentInfo'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          ticketTransfersCount:
+            type: integer
+            description: Number of ticket transfers produced by the operation, or `null` if there are no transfers
+            format: int32
+            nullable: true
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SetDelegateParametersOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `set_delegate_parameters`
+          id:
+            type: integer
+            description: "Internal TzKT ID.  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          limitOfStakingOverBaking:
+            type: integer
+            description: This parameter determines the maximum portion (millionth) of external stake by stakers over the baker's own staked funds
+            format: int64
+            nullable: true
+          edgeOfBakingOverStaking:
+            type: integer
+            description: This parameter determines the fraction (billionth) of the rewards that accrue to the delegate’s frozen deposit – the remainder is shared among its stakers
+            format: int64
+            nullable: true
+          activationCycle:
+            type: integer
+            description: Cycle from which the specified staking parameters are activated
+            format: int32
+            nullable: true
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    BallotOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `ballot` - is used to vote for a proposal in a given voting cycle
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          period:
+            description: Information about the voting period for which the ballot was submitted
+            oneOf:
+            - $ref: '#/components/schemas/PeriodInfo'
+          proposal:
+            description: Information about the proposal for which ballot was submitted
+            oneOf:
+            - $ref: '#/components/schemas/ProposalAlias'
+          delegate:
+            description: Information about the delegate (baker), submitted the ballot
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          votingPower:
+            type: integer
+            description: Baker's voting power
+            format: int64
+          vote:
+            type: string
+            description: Vote, given in the ballot (`yay`, `nay`, or `pass`)
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SmartRollupPublishOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `sr_publish`
+          id:
+            type: integer
+            description: "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          rollup:
+            description: Smart rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          commitment:
+            description: Published commitment
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/SrCommitmentInfo'
+          bond:
+            type: integer
+            description: Amount of bonds locked (micro tez)
+            format: int64
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TxRollupRejectionOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_rejection`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          committer:
+            description: Information about the committer
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          reward:
+            type: integer
+            description: Reward (micro tez) sent to the rejection sender
+            format: int64
+          loss:
+            type: integer
+            description: Loss (micro tez) burned from the committer
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SetDepositsLimitOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `set_deposits_limit`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          limit:
+            type: string
+            description: Frozen deposits limit (mutez), or `null` if no limit.
+            nullable: true
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    ActivationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: 'Type of the operation, `activation` - is used to activate accounts that were recommended allocations of
+
+              tezos tokens for donations to the Tezos Foundation’s fundraiser.'
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block, from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          account:
+            description: Information about activated account
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          balance:
+            type: integer
+            description: Account activation balance of tezos tokens that were recommended allocations for donations to the Tezos Foundation’s fundraiser
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    OperationError:
+      type: object
+      discriminator:
+        propertyName: type
+        mapping:
+          error.id: '#/components/schemas/BaseOperationError'
+          contract.balance_too_low: '#/components/schemas/BalanceTooLowError'
+          contract.non_existing_contract: '#/components/schemas/NonExistingContractError'
+          contract.manager.unregistered_delegate: '#/components/schemas/UnregisteredDelegateError'
+          Expression_already_registered: '#/components/schemas/ExpressionAlreadyRegisteredError'
+      x-abstract: true
+      additionalProperties: false
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Type of an error (`error.id`, `contract.balance_too_low`, `contract.non_existing_contract`,
+
+            `contract.manager.unregistered_delegate`, etc.)
+
+            https://tezos.gitlab.io/api/errors.html - full list of errors'
+    AnyOfParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a value to get items where any of the specified fields is equal to the specified value.
+
+
+            Example: `?anyof.sender.target=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of values to get items where any of the specified fields is equal to one of the specified values.
+
+
+            Example: `?anyof.sender.target.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M,null`.'
+          nullable: true
+          items:
+            type: string
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where any of the specified fields is null or not.
+
+
+            Example: `?anyof.from.to.null` or `?anyof.from.to.null=false`.'
+          nullable: true
+      x-tzkt-extension: anyof-parameter
+    OriginatedContract:
+      type: object
+      additionalProperties: false
+      properties:
+        kind:
+          type: string
+          description: 'Kind of the contract (`delegator_contract` or `smart_contract`),
+
+            where `delegator_contract` - manager.tz smart contract for delegation purpose only'
+        alias:
+          type: string
+          description: Name of the project behind the contract or contract description
+          nullable: true
+        address:
+          type: string
+          description: Public key hash of the contract
+        typeHash:
+          type: integer
+          description: '32-bit hash of the contract parameter and storage types.
+
+            This field can be used for searching similar contracts (which have the same interface).'
+          format: int32
+        codeHash:
+          type: integer
+          description: '32-bit hash of the contract code.
+
+            This field can be used for searching same contracts (which have the same script).'
+          format: int32
+        tzips:
+          type: array
+          description: List of implemented standards (TZIPs)
+          nullable: true
+          items:
+            type: string
+    DalPublishCommitmentOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `dal_publish_commitment`
+          id:
+            type: integer
+            description: "Internal TzKT ID.  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          slot:
+            type: integer
+            description: Slot number
+            format: int32
+          commitment:
+            type: string
+            description: Commitment hash
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type: integer
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+          nullable: true
+        pg:
+          type: integer
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+          nullable: true
+        cr:
+          type: integer
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+          nullable: true
+      x-tzkt-extension: query-parameter
+    UpdateSecondaryKeyOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `update_secondary_key`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          keyType:
+            type: string
+            description: 'Type of the key: `consensus` or `companion`'
+          activationCycle:
+            type: integer
+            description: Index of the cycle from which the secondary key will be active
+            format: int32
+          publicKey:
+            type: string
+            description: Secondary key
+          publicKeyHash:
+            type: string
+            description: Secondary key hash
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    RegisterConstantOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: 'Type of the operation, `register_constant` - is used to register a global
+
+              constant - Micheline expression that can be reused by multiple smart contracts'
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          address:
+            type: string
+            description: Global address of the registered constant (null if the operation failed)
+            nullable: true
+          value:
+            description: 'Constant value. Note: you can configure code format by setting `micheline` query parameter (`0 | 2` - raw micheline, `1 | 3` - raw micheline string).'
+            nullable: true
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SrGameInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: 'Internal TzKT id.  '
+          format: int64
+        initiator:
+          description: Initiator, who found a wrong commitment and started the refutation game.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initiatorCommitment:
+          description: Initiator's version of a valid commitment
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+        opponent:
+          description: Opponent, who was accused in publishing a wrong commitment.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        opponentCommitment:
+          description: Opponent's version of a valid commitment
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+        initiatorReward:
+          type: integer
+          description: In case the initiator won, this field will contain the reward amount (in mutez).
+          format: int64
+          nullable: true
+        initiatorLoss:
+          type: integer
+          description: In case the initiator lost (including a `draw`), this field will contain the loss amount (in mutez).
+          format: int64
+          nullable: true
+        opponentReward:
+          type: integer
+          description: In case the opponent won, this field will contain the reward amount (in mutez).
+          format: int64
+          nullable: true
+        opponentLoss:
+          type: integer
+          description: In case the opponent lost (including a `draw`), this field will contain the loss amount (in mutez).
+          format: int64
+          nullable: true
+    DateTimeParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=2020-01-01` is the same as `param=2020-01-01`). \
+
+            Specify a datetime to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        gt:
+          type: string
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        ge:
+          type: string
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        lt:
+          type: string
+          description: '**Less than** filter mode. \
+
+            Specify a datetime to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        le:
+          type: string
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          nullable: true
+          items:
+            type: string
+            format: date-time
+      x-tzkt-extension: query-parameter
+    TxRollupRemoveCommitmentOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_remove_commitment`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    DoubleConsensusOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: 'Type of the operation, `double_consensus` - is used by bakers to provide evidence of double (pre)attestation
+
+              ((pre)attestation of two different blocks at the same block height) by a baker'
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          accusedLevel:
+            type: integer
+            description: 'Height of the block from the genesis, at which double (pre)attestation occurred '
+            format: int32
+          slashedLevel:
+            type: integer
+            description: Height of the block from the genesis, at which the offender was slashed
+            format: int32
+          kind:
+            type: string
+            description: Kind of misbehaviour (`double_attestation` or `double_preattestation`)
+          accuser:
+            description: Information about the baker, produced the block, in which the accusation was included
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          reward:
+            type: integer
+            description: Reward of the baker, produced the block, in which the accusation was included
+            format: int64
+          offender:
+            description: Information about the baker, accused for producing two different attestations at the same level
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          lostStaked:
+            type: integer
+            description: Amount slashed from baker's own staked balance
+            format: int64
+          lostUnstaked:
+            type: integer
+            description: Amount slashed from baker's own unstaked balance
+            format: int64
+          lostExternalStaked:
+            type: integer
+            description: Amount slashed from baker's external staked balance
+            format: int64
+          lostExternalUnstaked:
+            type: integer
+            description: Amount slashed from baker's external unstaked balance
+            format: int64
+          stakingUpdatesCount:
+            type: integer
+            description: Number of staking updates happened internally
+            format: int32
+            nullable: true
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    PreattestationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `preattestation`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          delegate:
+            description: Information about the baker who sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          power:
+            type: integer
+            description: Attestation power
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+          slots:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+    SoftwareAlias:
+      type: object
+      additionalProperties: false
+      properties:
+        version:
+          type: string
+          description: Software version (commit tag)
+        date:
+          type: string
+          description: Date of the commit or when the software was first seen
+          format: date-time
+    DoubleBakingOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: 'Type of the operation, `double_baking` - is used by bakers to provide evidence of double baking
+
+              (baking two different blocks at the same height) by a baker'
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          accusedLevel:
+            type: integer
+            description: Height of the block from the genesis, which was double baked
+            format: int32
+          slashedLevel:
+            type: integer
+            description: Height of the block from the genesis, at which the offender was slashed
+            format: int32
+          accuser:
+            description: Information about the baker, produced the block, in which the accusation was included
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          reward:
+            type: integer
+            description: Reward of the baker, produced the block, in which the accusation was included
+            format: int64
+          offender:
+            description: Information about the baker, accused for producing two different blocks at the same level
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          lostStaked:
+            type: integer
+            description: Amount slashed from baker's own staked balance
+            format: int64
+          lostUnstaked:
+            type: integer
+            description: Amount slashed from baker's own unstaked balance
+            format: int64
+          lostExternalStaked:
+            type: integer
+            description: Amount slashed from baker's external staked balance
+            format: int64
+          lostExternalUnstaked:
+            type: integer
+            description: Amount slashed from baker's external unstaked balance
+            format: int64
+          stakingUpdatesCount:
+            type: integer
+            description: Number of staking updates happened internally
+            format: int32
+            nullable: true
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    MichelineFormat:
+      type: string
+      description: ''
+      x-enumNames:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+      enum:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+    SmartRollupCementOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `sr_cement`
+          id:
+            type: integer
+            description: "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          rollup:
+            description: Smart rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          commitment:
+            description: Cemented commitment
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/SrCommitmentInfo'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    ProposalAlias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Alias of the proposal
+          nullable: true
+        hash:
+          type: string
+          description: Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files
+    RevealOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `reveal` - is used to reveal the public key associated with an account
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          publicKey:
+            type: string
+            description: Revealed public key
+            nullable: true
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    DelegationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `delegation` -  is used to delegate funds to a delegate (an implicit account registered as a baker)
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          initiator:
+            description: Information about the initiator of the delegation contract call
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          sender:
+            description: Information about the delegated account
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          senderCodeHash:
+            type: integer
+            description: Hash of the sender contract code, or `null` is the sender is not a contract
+            format: int32
+            nullable: true
+          nonce:
+            type: integer
+            description: An account nonce which is used to prevent internal operation replay
+            format: int32
+            nullable: true
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to a baker, produced block, in which the operation was included
+            format: int64
+          amount:
+            type: integer
+            description: Sender's balance at the time of delegation operation (aka delegation amount).
+            format: int64
+          stakingUpdatesCount:
+            type: integer
+            description: Number of staking updates happened internally
+            format: int32
+            nullable: true
+          prevDelegate:
+            description: Information about the previous delegate of the account. `null` if there is no previous delegate
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          newDelegate:
+            description: Information about the delegate to which the operation was sent. `null` if there is no new delegate (an un-delegation operation)
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    VdfRevelationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `vdf_revelation` - used by the blockchain to create randomness
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          baker:
+            description: Information about the delegate (baker), who produced the block with the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          cycle:
+            type: integer
+            description: Cycle in which the operation was included
+            format: int32
+          solution:
+            type: string
+            description: Vdf solution
+          proof:
+            type: string
+            description: Vdf proof
+          rewardDelegated:
+            type: integer
+            description: 'Reward, corresponding to delegated stake, paid to baker''s liquid balance (micro tez)
+
+              (it is not frozen and can be spent immediately).'
+            format: int64
+          rewardStakedOwn:
+            type: integer
+            description: 'Reward, corresponding to baker''s own stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedEdge:
+            type: integer
+            description: 'Reward, corresponding to baker''s edge from external stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedShared:
+            type: integer
+            description: 'Reward, corresponding to baker''s external stake, paid to baker''s external staked balance (micro tez)
+
+              (it is frozen and belongs to baker''s stakers).'
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TxRollupReturnBondOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_return_bond`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          bond:
+            type: integer
+            description: Amount of bonds unlocked (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    BigMapDiff:
+      type: object
+      additionalProperties: false
+      properties:
+        bigmap:
+          type: integer
+          description: Bigmap Id
+          format: int32
+        path:
+          type: string
+          description: Path to the bigmap in the contract storage
+        action:
+          type: string
+          description: Action with the bigmap (`allocate`, `add_key`, `update_key`, `remove_key`, `remove`)
+        content:
+          description: 'Affected key.
+
+            If the action is `allocate` or `remove` the content will be `null`.'
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/BigMapKeyShort'
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: string
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        ne:
+          type: string
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          nullable: true
+          items:
+            type: string
+        eqx:
+          type: string
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+          nullable: true
+        nex:
+          type: string
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+          nullable: true
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+          nullable: true
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    PeriodInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        index:
+          type: integer
+          description: Voting period index, starting from zero
+          format: int32
+        epoch:
+          type: integer
+          description: Voting epoch index, starting from zero
+          format: int32
+        kind:
+          type: string
+          description: 'Kind of the voting period
+
+            `proposal` - delegates can submit protocol amendment proposals using the proposal operation
+
+            `exploration` -  bakers (delegates) may vote on the top-ranked proposal from the previous Proposal Period using the ballot operation
+
+            `testing` - If the proposal is approved in the Exploration Period, the testing (or ''cooldown'') period begins and bakers start testing the new protocol
+
+            `promotion` - delegates can cast one vote to promote or not the tested proposal using the ballot operation
+
+            `adoption` - after the proposal is actually accepted, the ecosystem has some time to prepare to the upgrade'
+        firstLevel:
+          type: integer
+          description: The height of the block in which the period starts
+          format: int32
+        lastLevel:
+          type: integer
+          description: The height of the block in which the period ends
+          format: int32
+    TxParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        entrypoint:
+          type: string
+          description: Entrypoint called on the target contract
+        value:
+          description: 'Value passed to the called entrypoint converted to human-readable JSON. Note: you can configure parameters format by setting `micheline` query parameter.'
+          nullable: true
+    DalAttestationRewardOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `dal_attestation_reward`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Block hash
+          baker:
+            description: Baker expected to receive dal attestation reward
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          expected:
+            type: integer
+            description: Expected dal attestation reward, based on baker's active stake (micro tez)
+            format: int64
+          rewardDelegated:
+            type: integer
+            description: 'Reward, corresponding to delegated stake, paid to baker''s liquid balance (micro tez)
+
+              (it is not frozen and can be spent immediately).'
+            format: int64
+          rewardStakedOwn:
+            type: integer
+            description: 'Reward, corresponding to baker''s own stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedEdge:
+            type: integer
+            description: 'Reward, corresponding to baker''s edge from external stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedShared:
+            type: integer
+            description: 'Reward, corresponding to baker''s external stake, paid to baker''s external staked balance (micro tez)
+
+              (it is frozen and belongs to baker''s stakers).'
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SmartRollupAddMessagesOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `sr_add_messages`
+          id:
+            type: integer
+            description: "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          messagesCount:
+            type: integer
+            description: Number of messages added to the smart rollup inbox
+            format: int32
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TransferTicketOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `transfer_ticket`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          target:
+            description: Information about the target to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          ticketer:
+            description: Information about the ticketer
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          amount:
+            type: string
+            description: Amount sent
+          entrypoint:
+            type: string
+            description: Entrypoint
+          ticketTransfersCount:
+            type: integer
+            description: Number of ticket transfers produced by the operation, or `null` if there are no transfers
+            format: int32
+            nullable: true
+          contentType:
+            description: Micheline type of the content
+            nullable: true
+          content:
+            description: Ticket content
+            nullable: true
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TxRollupSubmitBatchOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_submit_batch`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    BigMapKeyShort:
+      type: object
+      additionalProperties: false
+      properties:
+        hash:
+          type: string
+          description: Key hash
+        key:
+          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the action is `remove_key` it will contain the last non-null value.'
+    StakingOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `staking`
+          id:
+            type: integer
+            description: "Internal TzKT ID.  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          staker:
+            description: Information about the account for which the action is performed
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          action:
+            type: string
+            description: Staking action (`stake`, `unstake`, `finalize`)
+          requestedAmount:
+            type: integer
+            description: Amount passed as the staking operation parameter (micro tez)
+            format: int64
+          amount:
+            type: integer
+            description: Actually processed amount (micro tez)
+            format: int64
+            nullable: true
+          baker:
+            description: Information about the baker
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          stakingUpdatesCount:
+            type: integer
+            description: Number of staking updates happened internally
+            format: int64
+            nullable: true
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TxRollupDispatchTicketsOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_dispatch_tickets`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    OriginationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `origination` - deployment / contract creation operation.
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          initiator:
+            description: Information about the initiator of the contract call
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          sender:
+            description: Information about the account, created a contract
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          senderCodeHash:
+            type: integer
+            description: Hash of the sender contract code, or `null` is the sender is not a contract
+            format: int32
+            nullable: true
+          nonce:
+            type: integer
+            description: An account nonce which is used to prevent internal operation replay
+            format: int32
+            nullable: true
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for contract storage in the blockchain (micro tez)
+            format: int64
+          allocationFee:
+            type: integer
+            description: The amount of funds burned from the sender account for contract account creation (micro tez)
+            format: int64
+          contractBalance:
+            type: integer
+            description: The contract origination balance (micro tez)
+            format: int64
+          contractDelegate:
+            description: Information about the baker (delegate), which was marked as a delegate in the operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          code:
+            description: 'Contract code. Note: you can configure code format by setting `micheline` query parameter (`0 | 2` - raw micheline, `1 | 3` - raw micheline string).'
+            nullable: true
+          storage:
+            description: 'Initial contract storage value converted to human-readable JSON. Note: you can configure storage format by setting `micheline` query parameter.'
+            nullable: true
+          diffs:
+            type: array
+            description: List of bigmap updates (aka big_map_diffs) caused by the origination.
+            nullable: true
+            items:
+              $ref: '#/components/schemas/BigMapDiff'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was a successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          originatedContract:
+            description: Information about the originated ( deployed / created ) contract
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/OriginatedContract'
+          tokenTransfersCount:
+            type: integer
+            description: Number of token transfers produced by the operation, or `null` if there are no transfers
+            format: int32
+            nullable: true
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    Block:
+      type: object
+      additionalProperties: false
+      properties:
+        cycle:
+          type: integer
+          description: Index of the cycle
+          format: int32
+        level:
+          type: integer
+          description: Height of the block from the genesis
+          format: int32
+        hash:
+          type: string
+          description: Block hash
+        timestamp:
+          type: string
+          description: Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+          format: date-time
+        proto:
+          type: integer
+          description: Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)
+          format: int32
+        payloadRound:
+          type: integer
+          description: Round at which the block payload was proposed
+          format: int32
+        blockRound:
+          type: integer
+          description: Round at which the block was produced
+          format: int32
+        attestationPower:
+          type: integer
+          description: Recorder attestation power
+          format: int64
+        attestationCommittee:
+          type: integer
+          description: Total attestation committee power
+          format: int64
+        deposit:
+          type: integer
+          description: Security deposit frozen on the baker's account for producing the block (micro tez)
+          format: int64
+        rewardDelegated:
+          type: integer
+          description: 'Portion of fixed reward, corresponding to delegated stake, paid to payload proposer''s liquid balance (micro tez)
+
+            (it is not frozen and can be spent immediately).'
+          format: int64
+        rewardStakedOwn:
+          type: integer
+          description: 'Portion of fixed reward, corresponding to baker''s own stake, paid to payload proposer''s own staked balance (micro tez)
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        rewardStakedEdge:
+          type: integer
+          description: 'Portion of fixed reward, corresponding to baker''s edge from external stake, paid to payload proposer''s own staked balance (micro tez)
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        rewardStakedShared:
+          type: integer
+          description: 'Portion of fixed reward, corresponding to baker''s external stake, paid to payload proposer''s external staked balance (micro tez)
+
+            (it is frozen and belongs to baker''s stakers).'
+          format: int64
+        bonusDelegated:
+          type: integer
+          description: 'Portion of bonus reward, corresponding to delegated stake, paid to block producer''s liquid balance (micro tez)
+
+            (it is not frozen and can be spent immediately).'
+          format: int64
+        bonusStakedOwn:
+          type: integer
+          description: 'Portion of bonus reward, corresponding to baker''s own stake, paid to block producer''s own staked balance (micro tez)
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        bonusStakedEdge:
+          type: integer
+          description: 'Portion of bonus reward, corresponding to baker''s edge from external stake, paid to block producer''s own staked balance (micro tez)
+
+            (it is frozen and belongs to the baker).'
+          format: int64
+        bonusStakedShared:
+          type: integer
+          description: 'Portion of fixed reward, corresponding to baker''s external stake, paid to block producer''s external staked balance (micro tez)
+
+            (it is frozen and belongs to baker''s stakers).'
+          format: int64
+        fees:
+          type: integer
+          description: Total fee gathered from operations, included into the block
+          format: int64
+        nonceRevealed:
+          type: boolean
+          description: 'Status of the seed nonce revelation
+
+            `true` - seed nonce revealed
+
+            `false` - there''s no `seed_nonce_hash` in the block or seed nonce revelation has missed'
+        proposer:
+          description: Baker who proposed the block payload
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        producer:
+          description: Baker who produced the block
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        software:
+          description: Information about baker's software
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/SoftwareAlias'
+        lbToggle:
+          type: boolean
+          description: Liquidity baking toggle (`true` if enabled, `false` if disabled, or `null` if the baker says 'pass')
+          nullable: true
+        lbToggleEma:
+          type: integer
+          description: Liquidity baking escape EMA value with precision of 1000000 for integer computation
+          format: int32
+        attestations:
+          type: array
+          description: 'List of attestation (is operation, which specifies the head of the chain as seen by the attester of a given slot)
+
+            operations, included in the block'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AttestationOperation'
+        preattestations:
+          type: array
+          description: List of preattestation operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/PreattestationOperation'
+        proposals:
+          type: array
+          description: 'List of proposal (is used by bakers (delegates) to submit and/or upvote proposals to amend the protocol)
+
+            operations, included in the block'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProposalOperation'
+        ballots:
+          type: array
+          description: List of ballot (is used to vote for a proposal in a given voting cycle) operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/BallotOperation'
+        activations:
+          type: array
+          description: 'List of activation (is used to activate accounts that were recommended allocations of
+
+            tezos tokens for donations to the Tezos Foundation’s fundraiser) operations, included in the block'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ActivationOperation'
+        dalEntrapmentEvidenceOps:
+          type: array
+          description: List of dal entrapment evidence operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DalEntrapmentEvidenceOperation'
+        doubleBaking:
+          type: array
+          description: 'List of double baking evidence (is used by bakers to provide evidence of double baking (baking two different
+
+            blocks at the same height) by a baker) operations, included in the block'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DoubleBakingOperation'
+        doubleConsensus:
+          type: array
+          description: 'List of double consensus evidence (is used by bakers to provide evidence of double (pre)attestation
+
+            ((pre)attestation of two different blocks at the same block height) by a baker) operations, included in the block'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DoubleConsensusOperation'
+        nonceRevelations:
+          type: array
+          description: List of nonce revelation (used by the blockchain to create randomness) operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/NonceRevelationOperation'
+        vdfRevelations:
+          type: array
+          description: List of vdf revelation (used by the blockchain to create randomness) operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/VdfRevelationOperation'
+        delegations:
+          type: array
+          description: 'List of delegation (is used to delegate funds to a delegate (an implicit account registered as a baker))
+
+            operations, included in the block'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DelegationOperation'
+        originations:
+          type: array
+          description: List of origination (deployment / contract creation ) operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/OriginationOperation'
+        transactions:
+          type: array
+          description: 'List of transaction (is a standard operation used to transfer tezos tokens to an account)
+
+            operations, included in the block'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TransactionOperation'
+        reveals:
+          type: array
+          description: List of reveal (is used to reveal the public key associated with an account) operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RevealOperation'
+        registerConstants:
+          type: array
+          description: List of register global constant operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RegisterConstantOperation'
+        setDepositsLimits:
+          type: array
+          description: List of set deposits limit operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SetDepositsLimitOperation'
+        transferTicketOps:
+          type: array
+          description: List of transfer ticket operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TransferTicketOperation'
+        txRollupCommitOps:
+          type: array
+          description: List of tx rollup commit operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupCommitOperation'
+        txRollupDispatchTicketsOps:
+          type: array
+          description: List of tx rollup dispatch tickets operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupDispatchTicketsOperation'
+        txRollupFinalizeCommitmentOps:
+          type: array
+          description: List of tx rollup finalize commitment operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupFinalizeCommitmentOperation'
+        txRollupOriginationOps:
+          type: array
+          description: List of tx rollup origination operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupOriginationOperation'
+        txRollupRejectionOps:
+          type: array
+          description: List of tx rollup rejection operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupRejectionOperation'
+        txRollupRemoveCommitmentOps:
+          type: array
+          description: List of tx rollup remove commitment operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupRemoveCommitmentOperation'
+        txRollupReturnBondOps:
+          type: array
+          description: List of tx rollup return bond operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupReturnBondOperation'
+        txRollupSubmitBatchOps:
+          type: array
+          description: List of tx rollup submit batch operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/TxRollupSubmitBatchOperation'
+        increasePaidStorageOps:
+          type: array
+          description: List of increase paid storage operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/IncreasePaidStorageOperation'
+        updateSecondaryKeyOps:
+          type: array
+          description: List of update secondary key operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UpdateSecondaryKeyOperation'
+        drainDelegateOps:
+          type: array
+          description: List of drain delegate operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DrainDelegateOperation'
+        srAddMessagesOps:
+          type: array
+          description: List of smart rollup add messages operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SmartRollupAddMessagesOperation'
+        srCementOps:
+          type: array
+          description: List of smart rollup cement operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SmartRollupCementOperation'
+        srExecuteOps:
+          type: array
+          description: List of smart rollup execute operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SmartRollupExecuteOperation'
+        srOriginateOps:
+          type: array
+          description: List of smart rollup originate operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SmartRollupOriginateOperation'
+        srPublishOps:
+          type: array
+          description: List of smart rollup publish operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SmartRollupPublishOperation'
+        srRecoverBondOps:
+          type: array
+          description: List of smart rollup recover bond operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SmartRollupRecoverBondOperation'
+        srRefuteOps:
+          type: array
+          description: List of smart rollup refute operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SmartRollupRefuteOperation'
+        stakingOps:
+          type: array
+          description: List of staking operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/StakingOperation'
+        setDelegateParametersOps:
+          type: array
+          description: List of set delegate parameters operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SetDelegateParametersOperation'
+        dalPublishCommitmentOps:
+          type: array
+          description: List of DAL publish commitment operations, included in the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DalPublishCommitmentOperation'
+        migrations:
+          type: array
+          description: List of migration operations, implicitly applied at the end of the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/MigrationOperation'
+        revelationPenalties:
+          type: array
+          description: List of revelation penalty operations, implicitly applied at the end of the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RevelationPenaltyOperation'
+        attestationRewards:
+          type: array
+          description: List of attestation rewards, implicitly applied at the end of the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AttestationRewardOperation'
+        dalAttestationRewards:
+          type: array
+          description: List of dal attestation rewards, implicitly applied at the end of the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DalAttestationRewardOperation'
+        autostakingOps:
+          type: array
+          description: List of autostaking operations, implicitly applied at the end of the block
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AutostakingOperation'
+        quote:
+          description: Injected historical quote at the time of block
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/QuoteShort'
+        validations:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        aiToggle:
+          type: boolean
+          description: '**DEPRECATED**'
+          nullable: true
+        aiToggleEma:
+          type: integer
+          description: '**DEPRECATED**'
+          format: int32
+        updateConsensusKeyOps:
+          type: array
+          description: '**DEPRECATED**'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/UpdateSecondaryKeyOperation'
+        endorsements:
+          type: array
+          description: '**DEPRECATED**'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AttestationOperation'
+        preendorsements:
+          type: array
+          description: '**DEPRECATED**'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/PreattestationOperation'
+        doubleEndorsing:
+          type: array
+          description: '**DEPRECATED**'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DoubleConsensusOperation'
+        doublePreendorsing:
+          type: array
+          description: '**DEPRECATED**'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/DoubleConsensusOperation'
+        endorsingRewards:
+          type: array
+          description: '**DEPRECATED**'
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AttestationRewardOperation'
+    IncreasePaidStorageOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `increase_paid_storage`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          contract:
+            description: Information about the contract for which paid storage was increased
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          amount:
+            type: string
+            description: Amount of storage in bytes prepaid.
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SrCommitmentInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal TzKT id.
+          format: int64
+        initiator:
+          description: Account that published the commitment first.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        inboxLevel:
+          type: integer
+          description: Inbox level
+          format: int32
+        state:
+          type: string
+          description: State hash
+        hash:
+          type: string
+          description: Commitment hash
+        ticks:
+          type: integer
+          description: Number of ticks
+          format: int64
+        firstLevel:
+          type: integer
+          description: Level of the block where the commitment was first published.
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the commitment was first published.
+          format: date-time
+    SmartRollupRecoverBondOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `sr_recover_bond`
+          id:
+            type: integer
+            description: "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          rollup:
+            description: Smart rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          staker:
+            description: Staker account, which's bond should be returned
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          bond:
+            type: integer
+            description: Amount of bonds returned (micro tez)
+            format: int64
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TxRollupCommitOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_commit`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          bond:
+            type: integer
+            description: Amount of bonds (micro tez) locked
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    NonceRevelationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `nonce_revelation` - are used by the blockchain to create randomness
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          baker:
+            description: Information about the delegate (baker), who produced the block with the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          sender:
+            description: Information about the delegate (baker), who revealed the nonce (sent the operation)
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          revealedLevel:
+            type: integer
+            description: Block height of the block, where seed nonce hash is stored
+            format: int32
+          revealedCycle:
+            type: integer
+            description: Cycle for which seed nonce was revealed
+            format: int32
+          nonce:
+            type: string
+            description: Seed nonce hex
+          rewardDelegated:
+            type: integer
+            description: 'Reward, corresponding to delegated stake, paid to baker''s liquid balance (micro tez)
+
+              (it is not frozen and can be spent immediately).'
+            format: int64
+          rewardStakedOwn:
+            type: integer
+            description: 'Reward, corresponding to baker''s own stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedEdge:
+            type: integer
+            description: 'Reward, corresponding to baker''s edge from external stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedShared:
+            type: integer
+            description: 'Reward, corresponding to baker''s external stake, paid to baker''s external staked balance (micro tez)
+
+              (it is frozen and belongs to baker''s stakers).'
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TransactionOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `transaction` - is a standard operation used to transfer tezos tokens to an account
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          initiator:
+            description: Information about the initiator of the transaction call
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          sender:
+            description: Information about the account sent the transaction
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          senderCodeHash:
+            type: integer
+            description: Hash of the sender contract code, or `null` is the sender is not a contract
+            format: int32
+            nullable: true
+          nonce:
+            type: integer
+            description: An account nonce which is used to prevent internal operation replay
+            format: int32
+            nullable: true
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          allocationFee:
+            type: integer
+            description: The amount of funds burned from the sender account for account creation (micro tez)
+            format: int64
+          target:
+            description: Information about the target of the transaction
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          targetCodeHash:
+            type: integer
+            description: Hash of the target contract code, or `null` is the target is not a contract
+            format: int32
+            nullable: true
+          amount:
+            type: integer
+            description: The transaction amount (micro tez)
+            format: int64
+          parameter:
+            description: Transaction parameter, including called entrypoint and value passed to the entrypoint.
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/TxParameter'
+          storage:
+            description: 'Contract storage after executing the transaction converted to human-readable JSON. Note: you can configure storage format by setting `micheline` query parameter.'
+            nullable: true
+          diffs:
+            type: array
+            description: List of bigmap updates (aka big_map_diffs) caused by the transaction.
+            nullable: true
+            items:
+              $ref: '#/components/schemas/BigMapDiff'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          hasInternals:
+            type: boolean
+            description: 'An indication of whether the transaction has an internal operations
+
+              `true` - there are internal operations
+
+              `false` - no internal operations'
+          tokenTransfersCount:
+            type: integer
+            description: Number of token transfers produced by the operation, or `null` if there are no transfers
+            format: int32
+            nullable: true
+          ticketTransfersCount:
+            type: integer
+            description: Number of ticket transfers produced by the operation, or `null` if there are no transfers
+            format: int32
+            nullable: true
+          eventsCount:
+            type: integer
+            description: Number of events produced by the operation, or `null` if there are no events
+            format: int32
+            nullable: true
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    RevelationPenaltyOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `revelation_penalty` - is operation, in which rewards were lost due to unrevealed seed nonces by the delegate (synthetic type)
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          baker:
+            description: 'Information about the delegate (baker) who has lost rewards due to unrevealed seed nonces '
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          missedLevel:
+            type: integer
+            description: Height of the block, which contains hash of the seed nonce, which was to be revealed
+            format: int32
+          loss:
+            type: integer
+            description: Reward for baking and gathered fees from the block, which were lost due to unrevealed seed nonces (micro tez)
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type: number
+          description: XTZ/BTC price
+          format: double
+          nullable: true
+        eur:
+          type: number
+          description: XTZ/EUR price
+          format: double
+          nullable: true
+        usd:
+          type: number
+          description: XTZ/USD price
+          format: double
+          nullable: true
+        cny:
+          type: number
+          description: XTZ/CNY price
+          format: double
+          nullable: true
+        jpy:
+          type: number
+          description: XTZ/JPY price
+          format: double
+          nullable: true
+        krw:
+          type: number
+          description: XTZ/KRW price
+          format: double
+          nullable: true
+        eth:
+          type: number
+          description: XTZ/ETH price
+          format: double
+          nullable: true
+        gbp:
+          type: number
+          description: XTZ/GBP price
+          format: double
+          nullable: true
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type: string
+          description: Account alias name (off-chain data).
+          nullable: true
+        address:
+          type: string
+          description: Account address (public key hash).
+    AutostakingOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `autostaking`
+          id:
+            type: integer
+            description: "Internal TzKT ID.  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          baker:
+            description: Baker for which autostaking event happened
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          action:
+            type: string
+            description: Autostaking action (`stake`, `unstake`, `finalize`)
+          amount:
+            type: integer
+            description: Amount (micro tez)
+            format: int64
+          stakingUpdatesCount:
+            type: integer
+            description: Number of staking updates happened internally
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    TxRollupFinalizeCommitmentOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `tx_rollup_finalize_commitment`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          rollup:
+            description: Information about the rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    ProposalOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `proposal` - is used by bakers (delegates) to submit and/or upvote proposals to amend the protocol
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          period:
+            description: Information about the proposal period for which the proposal was submitted (upvoted)
+            oneOf:
+            - $ref: '#/components/schemas/PeriodInfo'
+          proposal:
+            description: Information about the submitted (upvoted) proposal
+            oneOf:
+            - $ref: '#/components/schemas/ProposalAlias'
+          delegate:
+            description: Information about the baker (delegate), submitted (upvoted) the proposal operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          votingPower:
+            type: integer
+            description: Baker's voting power
+            format: int64
+          duplicated:
+            type: boolean
+            description: Indicates whether proposal upvote has already been pushed. Duplicated proposal operations are not counted when selecting proposal-winner.
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SmartRollupRefuteOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `sr_refute`
+          id:
+            type: integer
+            description: "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          rollup:
+            description: Smart rollup to which the operation was sent
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          game:
+            description: Refutation game info
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/SrGameInfo'
+          move:
+            type: string
+            description: Player's move (`start`, `dissection`, `proof`, `timeout`)
+          gameStatus:
+            type: string
+            description: Game status, after player's move (`ongoing`, `loser`, `draw`)
+          dissectionStart:
+            type: integer
+            description: The first tick in the dissection range. This field is `null` if `move` is not `dissection.
+            format: int64
+            nullable: true
+          dissectionEnd:
+            type: integer
+            description: The last tick in the dissection range. This field is `null` if `move` is not `dissection.
+            format: int64
+            nullable: true
+          dissectionSteps:
+            type: integer
+            description: Total ticks in the dissection range. This field is `null` if `move` is not `dissection`.
+            format: int32
+            nullable: true
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    DrainDelegateOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `drain_delegate`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          delegate:
+            description: Information about the drained delegate
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          target:
+            description: Information about the recipient account
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          amount:
+            type: integer
+            description: Amount sent from the drained baker to the target
+            format: int64
+          fee:
+            type: integer
+            description: Amount sent from the drained baker to the block baker
+            format: int64
+          allocationFee:
+            type: integer
+            description: The amount of funds burned from the drained baker for account creation (micro tez)
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    MigrationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `migration` - result of the context (database) migration during a protocol update (synthetic type)
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          kind:
+            type: string
+            description: "Kind of the migration \n`bootstrap` - balance updates, included in the first block after genesis\n`activate_delegate` - registering a new baker (delegator) during protocol migration\n`airdrop` - airdrop of 1 micro tez during Babylon protocol upgrade\n`proposal_invoice` - invoice for creation a proposal for protocol upgrade\n`code_change` - changing contract scripts during Babylon protocol upgrade\n`origination` - implicit (hardcoded in the protocol) origination of liquidity baking contracts\n`subsidy` - liquidity baking subsidy\n`remove_bigmap_key` - removing the key from the bigmap"
+          account:
+            description: Information about the account whose balance has updated as a result of the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          balanceChange:
+            type: integer
+            description: The amount for which the operation updated the balance (micro tez)
+            format: int64
+          storage:
+            description: 'Contract storage after the migration converted to human-readable JSON. Note: you can configure storage format by setting `micheline` query parameter.'
+            nullable: true
+          diffs:
+            type: array
+            description: List of bigmap updates caused by the migration.
+            nullable: true
+            items:
+              $ref: '#/components/schemas/BigMapDiff'
+          tokenTransfersCount:
+            type: integer
+            description: Number of token transfers produced by the operation, or `null` if there are no transfers
+            format: int32
+            nullable: true
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    AttestationOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: 'Type of the operation, `attestation` - is operation, which specifies the head of the chain as seen by the attester of a given slot.
+
+              The attester is randomly selected to be included in the block that extends the head of the chain as specified in this operation.
+
+              A block with more attestations improves the weight of the chain and increases the likelihood of that chain being the canonical one.'
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          delegate:
+            description: Information about the baker who sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          power:
+            type: integer
+            description: Attestation power
+            format: int64
+          deposit:
+            type: integer
+            description: Security deposit frozen on the baker's account
+            format: int64
+          rewards:
+            type: integer
+            description: Reward of the baker for the operation
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+          slots:
+            type: integer
+            description: '**DEPRECATED**'
+            format: int32
+    AttestationRewardOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `attestation_reward`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: Height of the block from the genesis
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime at which the block is claimed to have been created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Block hash
+          baker:
+            description: Baker expected to receive attestation reward
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          expected:
+            type: integer
+            description: Expected attestation reward, based on baker's active stake (micro tez)
+            format: int64
+          rewardDelegated:
+            type: integer
+            description: 'Reward, corresponding to delegated stake, paid to baker''s liquid balance (micro tez)
+
+              (it is not frozen and can be spent immediately).'
+            format: int64
+          rewardStakedOwn:
+            type: integer
+            description: 'Reward, corresponding to baker''s own stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedEdge:
+            type: integer
+            description: 'Reward, corresponding to baker''s edge from external stake, paid to baker''s own staked balance (micro tez)
+
+              (it is frozen and belongs to the baker).'
+            format: int64
+          rewardStakedShared:
+            type: integer
+            description: 'Reward, corresponding to baker''s external stake, paid to baker''s external staked balance (micro tez)
+
+              (it is frozen and belongs to baker''s stakers).'
+            format: int64
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    SmartRollupOriginateOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `sr_originate`
+          id:
+            type: integer
+            description: "Unique ID of the operation, stored in the TzKT indexer database  \n**[sortable]**"
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          hash:
+            type: string
+            description: Hash of the operation
+          sender:
+            description: Information about the account who has sent the operation
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          counter:
+            type: integer
+            description: An account nonce which is used to prevent operation replay
+            format: int32
+          gasLimit:
+            type: integer
+            description: A cap on the amount of gas a given operation can consume
+            format: int32
+          gasUsed:
+            type: integer
+            description: Amount of gas, consumed by the operation
+            format: int32
+          storageLimit:
+            type: integer
+            description: A cap on the amount of storage a given operation can consume
+            format: int32
+          storageUsed:
+            type: integer
+            description: Amount of storage, consumed by the operation
+            format: int32
+          bakerFee:
+            type: integer
+            description: Fee to the baker, produced block, in which the operation was included (micro tez)
+            format: int64
+          storageFee:
+            type: integer
+            description: The amount of funds burned from the sender account for used the blockchain storage (micro tez)
+            format: int64
+          status:
+            type: string
+            description: 'Operation status (`applied` - an operation applied by the node and successfully added to the blockchain,
+
+              `failed` - an operation which failed with some particular error (not enough balance, gas limit, etc),
+
+              `backtracked` - an operation which was successful but reverted due to one of the following operations in the same operation group was failed,
+
+              `skipped` - all operations after the failed one in an operation group)'
+          pvmKind:
+            type: string
+            description: PVM kind (`arith` or `wasm`).
+          kernel:
+            type: string
+            description: Kernel bytes (in base64).
+            format: byte
+          parameterType:
+            description: 'Smart rollup parameter type. Note: you can configure format by setting `micheline` query parameter.'
+            nullable: true
+          genesisCommitment:
+            type: string
+            description: Genesis commitment hash.
+            nullable: true
+          rollup:
+            description: Originated smart rollup.
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          errors:
+            type: array
+            description: List of errors provided by the node, injected the operation to the blockchain. `null` if there is no errors
+            nullable: true
+            items:
+              $ref: '#/components/schemas/OperationError'
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    DalEntrapmentEvidenceOperation:
+      allOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          type:
+            type: string
+            description: Type of the operation, `dal_entrapment_evidence`
+          id:
+            type: integer
+            description: Unique ID of the operation, stored in the TzKT indexer database
+            format: int64
+          level:
+            type: integer
+            description: The height of the block from the genesis block, in which the operation was included
+            format: int32
+          timestamp:
+            type: string
+            description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            format: date-time
+          block:
+            type: string
+            description: Hash of the block, in which the operation was included
+          hash:
+            type: string
+            description: Hash of the operation
+          accuser:
+            description: Information about the baker, produced the block, in which the evidence was included
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          offender:
+            description: Information about the baker, accused for attesting trapped shard
+            oneOf:
+            - $ref: '#/components/schemas/Alias'
+          trapLevel:
+            type: integer
+            description: Height of the block from the genesis, where the trap was attested
+            format: int32
+          trapSlotIndex:
+            type: integer
+            description: Trap slot index
+            format: int32
+          quote:
+            description: Injected historical quote at the time of operation
+            nullable: true
+            oneOf:
+            - $ref: '#/components/schemas/QuoteShort'
+    Symbols:
+      type: string
+      description: ''
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+      enum:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type: integer
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+          nullable: true
+        ne:
+          type: integer
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+          nullable: true
+        gt:
+          type: integer
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+          nullable: true
+        ge:
+          type: integer
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+          nullable: true
+        lt:
+          type: integer
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+          nullable: true
+        le:
+          type: integer
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+          nullable: true
+        in:
+          type: array
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+        ni:
+          type: array
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          nullable: true
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type: array
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          nullable: true
+          items:
+            type: string
+        values:
+          type: array
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          nullable: true
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
+x-tagGroups:
+- name: REST API
+  tags:
+  - Accounts
+  - BigMaps
+  - Blocks
+  - Commitments
+  - Constants
+  - Contracts
+  - Cycles
+  - Delegates
+  - Domains
+  - Events
+  - Head
+  - Helpers
+  - Operations
+  - Protocols
+  - Quotes
+  - Rewards
+  - Rights
+  - SmartRollups
+  - Software
+  - Staking
+  - Statistics
+  - Tickets
+  - Tokens
+  - Voting
+- name: WebSocket API
+  tags:
+  - Get Started
+  - Subscriptions
+  - Examples
+- name: Libraries
+  tags:
+  - Typescript SDK
+  - Taquito extension
