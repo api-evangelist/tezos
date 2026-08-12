@@ -581,8 +581,6 @@ common:
     url: https://api.tzkt.io/v1
   - type: GhostnetAPI
     url: https://api.ghostnet.tzkt.io/v1
-  - type: WebSocket
-    url: wss://api.tzkt.io/v1/events
   - type: License
     url: https://github.com/baking-bad/tzkt/blob/master/LICENSE
   - type: Status
@@ -590,7 +588,7 @@ common:
   - type: Blog
     url: https://baking-bad.org/blog/
   - type: OpenAPI
-    url: openapi/openapi.json
+    url: openapi/_original/openapi.json
   - type: Plans
     url: plans/tezos-plans-pricing.yml
   - type: RateLimits
