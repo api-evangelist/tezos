@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Protocols API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Protocols",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get protocols count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/protocols/count"
+          },
+          "docs": "Returns the total number of protocols."
+        },
+        {
+          "info": {
+            "name": "Get protocols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/protocols",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts protocols by specified field. Supported fields: `code` (default), `firstLevel`, `lastLevel`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of protocols."
+        },
+        {
+          "info": {
+            "name": "Get current protocol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/protocols/current"
+          },
+          "docs": "Returns current protocol."
+        },
+        {
+          "info": {
+            "name": "Get protocol by code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/protocols/:code",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "Protocol code (e.g. 4 for Athens, 5 for Babylon, etc)"
+              }
+            ]
+          },
+          "docs": "Returns a protocol with the specified proto code."
+        },
+        {
+          "info": {
+            "name": "Get protocol by hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/protocols/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Protocol hash"
+              }
+            ]
+          },
+          "docs": "Returns a protocol with the specified hash."
+        },
+        {
+          "info": {
+            "name": "Get protocol by cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/protocols/cycles/:cycle",
+            "params": [
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "path",
+                "description": "Cycle index"
+              }
+            ]
+          },
+          "docs": "Returns a protocol at the specified cycle."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

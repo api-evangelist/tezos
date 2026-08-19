@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Events API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contract events count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/events/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the event was emitted.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the event was emitted.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "codeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by hash of the code of the contract emitted the event.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event tag.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payload.  \nNote, this parameter supports the following format: `payload{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?payload.foo.bar.in=1,2,3`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transaction, in which the event was emitted.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of contract events."
+        },
+        {
+          "info": {
+            "name": "Get contract events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/events",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the event was emitted.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the event was emitted.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "codeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by hash of the code of the contract emitted the event.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event tag.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payload.  \nNote, this parameter supports the following format: `payload{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?payload.foo.bar.in=1,2,3`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transaction, in which the event was emitted.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of contract events."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

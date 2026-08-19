@@ -1,0 +1,950 @@
+{
+  "item": [
+    {
+      "id": "984e3cce-e358-43ac-9522-efe6385f7792",
+      "name": "Statistics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9af0efb0-bae0-4646-8404-926d3b7f849e",
+          "name": "Get statistics",
+          "request": {
+            "name": "Get statistics",
+            "description": {
+              "content": "Returns a list of end-of-block statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "statistics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters statistics by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters statistics by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "quote",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99689730-40f1-4067-948d-e7e8b9eabd5c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "statistics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "quote",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"cycle\": 1299,\n    \"date\": \"2023-10-16T15:18:26.433Z\",\n    \"level\": 5645,\n    \"timestamp\": \"1973-10-26T03:57:38.212Z\",\n    \"totalSupply\": 388,\n    \"circulatingSupply\": 6043,\n    \"totalBootstrapped\": 3264,\n    \"totalCommitments\": 6094,\n    \"totalActivated\": 6630,\n    \"totalCreated\": 1407,\n    \"totalBurned\": 4767,\n    \"totalBanished\": 9925,\n    \"totalFrozen\": 3786,\n    \"totalRollupBonds\": 8540,\n    \"totalSmartRollupBonds\": 5359,\n    \"totalLost\": 8417,\n    \"totalOwnStaked\": 2375,\n    \"totalOwnDelegated\": 6711,\n    \"totalExternalStaked\": 8994,\n    \"totalExternalDelegated\": 4339,\n    \"totalBakingPower\": 4758,\n    \"totalVotingPower\": 4998,\n    \"totalBakers\": 7842,\n    \"totalStakers\": 9335,\n    \"totalDelegators\": 8955,\n    \"quote\": {\n      \"btc\": 5177.706782681715,\n      \"eur\": 5026.930975514639,\n      \"usd\": 7198.264938513235,\n      \"cny\": 9186.991242058246,\n      \"jpy\": 8297.10819783557,\n      \"krw\": 7553.302801881736,\n      \"eth\": 9159.966343932672,\n      \"gbp\": 1040.4048762603536\n    }\n  },\n  {\n    \"cycle\": 7769,\n    \"date\": \"1959-11-01T16:15:11.205Z\",\n    \"level\": 1602,\n    \"timestamp\": \"1976-03-31T09:38:58.469Z\",\n    \"totalSupply\": 6332,\n    \"circulatingSupply\": 6047,\n    \"totalBootstrapped\": 3875,\n    \"totalCommitments\": 3708,\n    \"totalActivated\": 9417,\n    \"totalCreated\": 6456,\n    \"totalBurned\": 4503,\n    \"totalBanished\": 3748,\n    \"totalFrozen\": 6867,\n    \"totalRollupBonds\": 9494,\n    \"totalSmartRollupBonds\": 6970,\n    \"totalLost\": 1133,\n    \"totalOwnStaked\": 6384,\n    \"totalOwnDelegated\": 8988,\n    \"totalExternalStaked\": 7324,\n    \"totalExternalDelegated\": 5996,\n    \"totalBakingPower\": 4043,\n    \"totalVotingPower\": 6313,\n    \"totalBakers\": 9656,\n    \"totalStakers\": 7408,\n    \"totalDelegators\": 1843,\n    \"quote\": {\n      \"btc\": 6826.929169427971,\n      \"eur\": 7393.726830647696,\n      \"usd\": 3282.0284194493374,\n      \"cny\": 1403.7864851910686,\n      \"jpy\": 6590.029841176477,\n      \"krw\": 4336.584894256465,\n      \"eth\": 7530.420025597889,\n      \"gbp\": 8446.91359284312\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "488cd065-29ea-4f34-94b3-22ce283b4e0d",
+          "name": "Get daily statistics",
+          "request": {
+            "name": "Get daily statistics",
+            "description": {
+              "content": "Returns a list of end-of-day statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "statistics",
+                "daily"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<dateTime>",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters statistics by date."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "quote",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "283b87fc-dad0-45d4-a217-2a907a13d5e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "statistics",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "quote",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"cycle\": 1299,\n    \"date\": \"2023-10-16T15:18:26.433Z\",\n    \"level\": 5645,\n    \"timestamp\": \"1973-10-26T03:57:38.212Z\",\n    \"totalSupply\": 388,\n    \"circulatingSupply\": 6043,\n    \"totalBootstrapped\": 3264,\n    \"totalCommitments\": 6094,\n    \"totalActivated\": 6630,\n    \"totalCreated\": 1407,\n    \"totalBurned\": 4767,\n    \"totalBanished\": 9925,\n    \"totalFrozen\": 3786,\n    \"totalRollupBonds\": 8540,\n    \"totalSmartRollupBonds\": 5359,\n    \"totalLost\": 8417,\n    \"totalOwnStaked\": 2375,\n    \"totalOwnDelegated\": 6711,\n    \"totalExternalStaked\": 8994,\n    \"totalExternalDelegated\": 4339,\n    \"totalBakingPower\": 4758,\n    \"totalVotingPower\": 4998,\n    \"totalBakers\": 7842,\n    \"totalStakers\": 9335,\n    \"totalDelegators\": 8955,\n    \"quote\": {\n      \"btc\": 5177.706782681715,\n      \"eur\": 5026.930975514639,\n      \"usd\": 7198.264938513235,\n      \"cny\": 9186.991242058246,\n      \"jpy\": 8297.10819783557,\n      \"krw\": 7553.302801881736,\n      \"eth\": 9159.966343932672,\n      \"gbp\": 1040.4048762603536\n    }\n  },\n  {\n    \"cycle\": 7769,\n    \"date\": \"1959-11-01T16:15:11.205Z\",\n    \"level\": 1602,\n    \"timestamp\": \"1976-03-31T09:38:58.469Z\",\n    \"totalSupply\": 6332,\n    \"circulatingSupply\": 6047,\n    \"totalBootstrapped\": 3875,\n    \"totalCommitments\": 3708,\n    \"totalActivated\": 9417,\n    \"totalCreated\": 6456,\n    \"totalBurned\": 4503,\n    \"totalBanished\": 3748,\n    \"totalFrozen\": 6867,\n    \"totalRollupBonds\": 9494,\n    \"totalSmartRollupBonds\": 6970,\n    \"totalLost\": 1133,\n    \"totalOwnStaked\": 6384,\n    \"totalOwnDelegated\": 8988,\n    \"totalExternalStaked\": 7324,\n    \"totalExternalDelegated\": 5996,\n    \"totalBakingPower\": 4043,\n    \"totalVotingPower\": 6313,\n    \"totalBakers\": 9656,\n    \"totalStakers\": 7408,\n    \"totalDelegators\": 1843,\n    \"quote\": {\n      \"btc\": 6826.929169427971,\n      \"eur\": 7393.726830647696,\n      \"usd\": 3282.0284194493374,\n      \"cny\": 1403.7864851910686,\n      \"jpy\": 6590.029841176477,\n      \"krw\": 4336.584894256465,\n      \"eth\": 7530.420025597889,\n      \"gbp\": 8446.91359284312\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "352c60b2-45aa-416d-a898-93d0e3eec0ac",
+          "name": "Get cyclic statistics",
+          "request": {
+            "name": "Get cyclic statistics",
+            "description": {
+              "content": "Returns a list of end-of-cycle statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "statistics",
+                "cyclic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters statistics by cycle."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "quote",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3355d9bd-1e22-46d0-9650-f46044d92baa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "statistics",
+                    "cyclic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "quote",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"cycle\": 1299,\n    \"date\": \"2023-10-16T15:18:26.433Z\",\n    \"level\": 5645,\n    \"timestamp\": \"1973-10-26T03:57:38.212Z\",\n    \"totalSupply\": 388,\n    \"circulatingSupply\": 6043,\n    \"totalBootstrapped\": 3264,\n    \"totalCommitments\": 6094,\n    \"totalActivated\": 6630,\n    \"totalCreated\": 1407,\n    \"totalBurned\": 4767,\n    \"totalBanished\": 9925,\n    \"totalFrozen\": 3786,\n    \"totalRollupBonds\": 8540,\n    \"totalSmartRollupBonds\": 5359,\n    \"totalLost\": 8417,\n    \"totalOwnStaked\": 2375,\n    \"totalOwnDelegated\": 6711,\n    \"totalExternalStaked\": 8994,\n    \"totalExternalDelegated\": 4339,\n    \"totalBakingPower\": 4758,\n    \"totalVotingPower\": 4998,\n    \"totalBakers\": 7842,\n    \"totalStakers\": 9335,\n    \"totalDelegators\": 8955,\n    \"quote\": {\n      \"btc\": 5177.706782681715,\n      \"eur\": 5026.930975514639,\n      \"usd\": 7198.264938513235,\n      \"cny\": 9186.991242058246,\n      \"jpy\": 8297.10819783557,\n      \"krw\": 7553.302801881736,\n      \"eth\": 9159.966343932672,\n      \"gbp\": 1040.4048762603536\n    }\n  },\n  {\n    \"cycle\": 7769,\n    \"date\": \"1959-11-01T16:15:11.205Z\",\n    \"level\": 1602,\n    \"timestamp\": \"1976-03-31T09:38:58.469Z\",\n    \"totalSupply\": 6332,\n    \"circulatingSupply\": 6047,\n    \"totalBootstrapped\": 3875,\n    \"totalCommitments\": 3708,\n    \"totalActivated\": 9417,\n    \"totalCreated\": 6456,\n    \"totalBurned\": 4503,\n    \"totalBanished\": 3748,\n    \"totalFrozen\": 6867,\n    \"totalRollupBonds\": 9494,\n    \"totalSmartRollupBonds\": 6970,\n    \"totalLost\": 1133,\n    \"totalOwnStaked\": 6384,\n    \"totalOwnDelegated\": 8988,\n    \"totalExternalStaked\": 7324,\n    \"totalExternalDelegated\": 5996,\n    \"totalBakingPower\": 4043,\n    \"totalVotingPower\": 6313,\n    \"totalBakers\": 9656,\n    \"totalStakers\": 7408,\n    \"totalDelegators\": 1843,\n    \"quote\": {\n      \"btc\": 6826.929169427971,\n      \"eur\": 7393.726830647696,\n      \"usd\": 3282.0284194493374,\n      \"cny\": 1403.7864851910686,\n      \"jpy\": 6590.029841176477,\n      \"krw\": 4336.584894256465,\n      \"eth\": 7530.420025597889,\n      \"gbp\": 8446.91359284312\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96afad20-468b-43d9-89e9-72bd0fceba83",
+          "name": "Get current statistics",
+          "request": {
+            "name": "Get current statistics",
+            "description": {
+              "content": "Returns statistics at the end of a head block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "statistics",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select a single field, response will be a single value in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select a single field, response will be a single value in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "quote",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d8c5155-4e9e-4ba8-9273-ccb5ed4a5a77",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "statistics",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "quote",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cycle\": 4358,\n  \"date\": \"1999-07-28T06:52:12.002Z\",\n  \"level\": 5430,\n  \"timestamp\": \"1965-10-29T00:13:47.931Z\",\n  \"totalSupply\": 4339,\n  \"circulatingSupply\": 1406,\n  \"totalBootstrapped\": 4686,\n  \"totalCommitments\": 2883,\n  \"totalActivated\": 578,\n  \"totalCreated\": 3421,\n  \"totalBurned\": 9395,\n  \"totalBanished\": 9493,\n  \"totalFrozen\": 6710,\n  \"totalRollupBonds\": 5563,\n  \"totalSmartRollupBonds\": 129,\n  \"totalLost\": 2146,\n  \"totalOwnStaked\": 4816,\n  \"totalOwnDelegated\": 57,\n  \"totalExternalStaked\": 3771,\n  \"totalExternalDelegated\": 4522,\n  \"totalBakingPower\": 9377,\n  \"totalVotingPower\": 1520,\n  \"totalBakers\": 1124,\n  \"totalStakers\": 6965,\n  \"totalDelegators\": 6819,\n  \"quote\": {\n    \"btc\": 9596.61140047363,\n    \"eur\": 5807.770627505682,\n    \"usd\": 430.3676598786976,\n    \"cny\": 6846.066340484513,\n    \"jpy\": 6849.134648370992,\n    \"krw\": 8290.643066333088,\n    \"eth\": 2687.6869819715,\n    \"gbp\": 8104.14219234679\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tzkt.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3f4a41e6-3d4f-4c3a-b7de-9b645786d108",
+    "name": "TzKT Accounts Statistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\n\nContact Support:\n Name: Baking Bad Team\n Email: hello@bakingbad.dev",
+      "type": "text/plain"
+    }
+  }
+}

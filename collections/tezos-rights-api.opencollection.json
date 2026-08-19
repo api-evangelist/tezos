@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Rights API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rights",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get rights count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rights/count",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by type (`baking`, `attestation`)"
+              },
+              {
+                "name": "baker",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by baker"
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by cycle"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by level"
+              },
+              {
+                "name": "slots",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by slots"
+              },
+              {
+                "name": "round",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by round"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by status (`future`, `realized`, `missed`)"
+              }
+            ]
+          },
+          "docs": "Returns the total number of stored rights."
+        },
+        {
+          "info": {
+            "name": "Get rights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rights",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by type (`baking`, `attestation`)"
+              },
+              {
+                "name": "baker",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by baker"
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by cycle"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by level"
+              },
+              {
+                "name": "slots",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by slots"
+              },
+              {
+                "name": "round",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by round"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters rights by status (`future`, `realized`, `missed`)"
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts rights by specified field. Supported fields: `level` (default)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of rights."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

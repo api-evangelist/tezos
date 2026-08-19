@@ -1,0 +1,780 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts SmartRollups API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SmartRollups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get smart rollups count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "creator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup creator.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of smart rollups."
+        },
+        {
+          "info": {
+            "name": "Get smart rollups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "creator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup creator.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the rollup was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the rollup was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of smart rollups."
+        },
+        {
+          "info": {
+            "name": "Get smart rollup by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Smart rollup address"
+              }
+            ]
+          },
+          "docs": "Returns a smart rollup with the specified address."
+        },
+        {
+          "info": {
+            "name": "Get smart rollup entrypoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/:address/entrypoints",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Smart rollup address (starting with sr1)"
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns all entrypoints, including unused ones.\n            Unused means that the entrypoint can be normalized to a more specific one.\n            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint\n            because it can be normalized to `%entry2` or `%entry3`"
+              },
+              {
+                "name": "json",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in human-readable JSON format"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in micheline format"
+              },
+              {
+                "name": "michelson",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in michelson format"
+              }
+            ]
+          },
+          "docs": "Returns entrypoints of the specified smart rollup."
+        },
+        {
+          "info": {
+            "name": "Get JSON Schema [2020-12] interface for the smart rollup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/:address/interface",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Smart rollup address"
+              }
+            ]
+          },
+          "docs": "Returns standard JSON Schema for smart rollup parameter."
+        },
+        {
+          "info": {
+            "name": "Get smart rollup stakers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/:address/stakers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Filter by smart rollup staker address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "bondStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter by staker bond status (`active`, `returned`, or `lost`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of smart rollup stakers."
+        },
+        {
+          "info": {
+            "name": "Get smart rollup commitments count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/commitments/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by initiator (an account published the commitment first).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rollup",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "inboxLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inbox level.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "predecessor.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "predecessor.hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of smart rollup commitments."
+        },
+        {
+          "info": {
+            "name": "Get smart rollup commitments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/commitments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by initiator (an account published the commitment first).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rollup",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "inboxLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inbox level.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the commitment was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the commitment was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "predecessor.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "predecessor.hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of smart rollup commitments."
+        },
+        {
+          "info": {
+            "name": "Get smart rollup games count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/games/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rollup",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by initiator (who found a wrong commitment and started the refutation game).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiatorCommitment.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiatorCommitment.hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "opponent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by opponent (who was accused in publishing a wrong commitment).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "opponentCommitment.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "opponentCommitment.hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of smart rollup refutation games."
+        },
+        {
+          "info": {
+            "name": "Get smart rollup games",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/games",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rollup",
+                "value": "",
+                "type": "query",
+                "description": "Filter by smart rollup.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by initiator (who found a wrong commitment and started the refutation game).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiatorCommitment.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "initiatorCommitment.hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "opponent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by opponent (who was accused in publishing a wrong commitment).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "opponentCommitment.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "opponentCommitment.hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by commitment hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the refutation game was started.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the refutation game was last updated.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of smart rollup refutation games."
+        },
+        {
+          "info": {
+            "name": "Get inbox messages count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/inbox/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of smart rollup inbox messages."
+        },
+        {
+          "info": {
+            "name": "Get inbox messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/smart_rollups/inbox",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the message was pushed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by inbox message type (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of smart rollup call parameters: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string"
+              }
+            ]
+          },
+          "docs": "Returns a list of smart rollup inbox messages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

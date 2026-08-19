@@ -1,0 +1,779 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Tickets API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tickets count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tickets/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticketer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticketer address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rawType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content type in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rawContent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in JSON format.  \nNote, this parameter supports the following format: `content{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?content.color.in=red,green`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "contentHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstMinter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by address of the first minter.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the ticket was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the ticket was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the ticket was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the ticket was last seen.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of tickets."
+        },
+        {
+          "info": {
+            "name": "Get tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tickets",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticketer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticketer address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rawType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content type in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "rawContent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in JSON format.  \nNote, this parameter supports the following format: `content{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?content.color.in=red,green`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "contentHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstMinter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by address of the first minter.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the ticket was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the ticket was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the ticket was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the ticket was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of tickets."
+        },
+        {
+          "info": {
+            "name": "Get ticket balances count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tickets/balances/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.\nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.ticketer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticketer address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content type in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawContent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.content",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in JSON format.  \nNote, this parameter supports the following format: `content{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?content.color.in=red,green`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.contentHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transfersCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number of transfers.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was last changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was last changed.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of ticket balances."
+        },
+        {
+          "info": {
+            "name": "Get ticket balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tickets/balances",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.\nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.ticketer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticketer address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content type in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawContent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.content",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in JSON format.  \nNote, this parameter supports the following format: `content{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?content.color.in=red,green`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.contentHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transfersCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number of transfers.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was last changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was last changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of ticket balances."
+        },
+        {
+          "info": {
+            "name": "Get ticket transfers count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tickets/transfers/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.\nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.ticketer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticketer address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content type in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawContent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.content",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in JSON format.  \nNote, this parameter supports the following format: `content{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?content.color.in=red,green`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.contentHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "anyof",
+                "value": "",
+                "type": "query",
+                "description": "Filter by any of the specified fields (`from` or `to`).\nExample: `anyof.from.to=tz1...` will return transfers where `from` OR `to` is equal to the specified value.\nThis parameter is useful when you need to get both incoming and outgoing transfers of the account at once.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Filter by recepient address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transaction, caused the ticket transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transferTicketId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transfer_ticket operation, caused the ticket transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "smartRollupExecuteId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the smart_rollup_execute operation, caused the ticket transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "or.ColsAndVals",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the total number of ticket transfers."
+        },
+        {
+          "info": {
+            "name": "Get ticket transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tickets/transfers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.\nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.ticketer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticketer address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content type in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.rawContent",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in Micheline format.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.content",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticket content in JSON format.  \nNote, this parameter supports the following format: `content{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?content.color.in=red,green`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.contentHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of ticket content.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "anyof",
+                "value": "",
+                "type": "query",
+                "description": "Filter by any of the specified fields (`from` or `to`).\nExample: `anyof.from.to=tz1...` will return transfers where `from` OR `to` is equal to the specified value.\nThis parameter is useful when you need to get both incoming and outgoing transfers of the account at once.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Filter by recepient address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transaction, caused the ticket transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transferTicketId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transfer_ticket operation, caused the ticket transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "smartRollupExecuteId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the smart_rollup_execute operation, caused the ticket transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "or.ColsAndVals",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of ticket transfers."
+        },
+        {
+          "info": {
+            "name": "Get historical ticket balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tickets/historical_balances/:level",
+            "params": [
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Level of the block at the end of which historical balances must be calculated"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.\nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.\nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticket.ticketer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ticketer address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of ticket balances at the end of the specified block.\nNote, this endpoint is quite heavy, therefore at least one of the filters\n(`account`, `ticket.id`, `ticket.ticketer`) must be specified."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

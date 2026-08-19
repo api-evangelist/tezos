@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Delegates API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delegates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get delegates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/delegates",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)"
+              },
+              {
+                "name": "lastActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filters delegates by last activity level (where the delegate was updated)"
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `id` (default), `stakedBalance`, `externalStakedBalance`, `ownDelegatedBalance`, `externalDelegatedBalance`, `bakingPower`, `votingPower`, `balance`, `numDelegators`, `stakersCount`, `activationLevel`, `deactivationLevel`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of delegate accounts."
+        },
+        {
+          "info": {
+            "name": "Get delegates count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/delegates/count",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)"
+              }
+            ]
+          },
+          "docs": "Returns a number of delegate accounts."
+        },
+        {
+          "info": {
+            "name": "Get delegate by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/delegates/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Delegate address (starting with tz)"
+              }
+            ]
+          },
+          "docs": "Returns a delegate with the specified address."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,257 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Blocks API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get blocks count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/blocks/count"
+          },
+          "docs": "Returns the total number of blocks."
+        },
+        {
+          "info": {
+            "name": "Get blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/blocks",
+            "params": [
+              {
+                "name": "anyof",
+                "value": "",
+                "type": "query",
+                "description": "Filters by any of the specified fields. Example: `anyof.proposer.producer=tz1...`."
+              },
+              {
+                "name": "proposer",
+                "value": "",
+                "type": "query",
+                "description": "Filters blocks by block proposer. Allowed fields for `.eqx` mode: none."
+              },
+              {
+                "name": "producer",
+                "value": "",
+                "type": "query",
+                "description": "Filters blocks by block producer. Allowed fields for `.eqx` mode: none."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filters blocks by level."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filters blocks by timestamp."
+              },
+              {
+                "name": "blockRound",
+                "value": "",
+                "type": "query",
+                "description": "Filters blocks by block round."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts blocks by specified field. Supported fields: `id` (default), `level`, `payloadRound`, `blockRound`, `attestationPower`, `reward`, `bonus`, `fees`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of blocks."
+        },
+        {
+          "info": {
+            "name": "Get block by hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/blocks/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Block hash"
+              },
+              {
+                "name": "operations",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether to include block operations into returned object or not"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the parameters, storage and diffs: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a block with the specified hash."
+        },
+        {
+          "info": {
+            "name": "Get block by level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/blocks/:level",
+            "params": [
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Block level"
+              },
+              {
+                "name": "operations",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether to include block operations into returned object or not"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the parameters, storage and diffs: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a block at the specified level."
+        },
+        {
+          "info": {
+            "name": "Get timestamp by level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/blocks/:level/timestamp",
+            "params": [
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Block level"
+              }
+            ]
+          },
+          "docs": "Returns a timestamp of the block at the specified level."
+        },
+        {
+          "info": {
+            "name": "Get block by timestamp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/blocks/:timestamp",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "path",
+                "description": "Timestamp, e.g. `2020-01-01T00:00:00Z`"
+              },
+              {
+                "name": "operations",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether to include block operations into returned object or not"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the parameters, storage and diffs: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a block closest to the specified timestamp."
+        },
+        {
+          "info": {
+            "name": "Get level by timestamp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/blocks/:timestamp/level",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "path",
+                "description": "Timestamp, e.g. `2020-01-01T00:00:00Z`"
+              }
+            ]
+          },
+          "docs": "Returns a level of the block closest to the specified timestamp."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

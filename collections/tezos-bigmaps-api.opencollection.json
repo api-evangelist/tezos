@@ -1,0 +1,664 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts BigMaps API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BigMaps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get bigmaps count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/count"
+          },
+          "docs": "Returns the total number of bigmaps."
+        },
+        {
+          "info": {
+            "name": "Get bigmaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps",
+            "params": [
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmaps by smart contract address."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmaps by path in the contract storage."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmaps by tags: `metadata`, `token_metadata`, `ledger`."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmaps by status: `true` - active, `false` - removed."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmaps by the last update level."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value type: `0` - JSON, `2` - Micheline"
+              }
+            ]
+          },
+          "docs": "Returns a list of bigmaps."
+        },
+        {
+          "info": {
+            "name": "Get bigmap keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "bigmap",
+                "value": "",
+                "type": "query",
+                "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filters by status: `true` - active, `false` - removed."
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by key hash.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "updates",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the `key` and `value` fields: `0` - JSON, `2` - Micheline"
+              }
+            ]
+          },
+          "docs": "Returns a list of all bigmap keys."
+        },
+        {
+          "info": {
+            "name": "Get bigmap updates count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/updates/count",
+            "params": [
+              {
+                "name": "bigmap",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap ptr"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap path"
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap contract"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filters by action"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filters by level"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filters by timestamp"
+              }
+            ]
+          },
+          "docs": "Returns a total number of bigmap updates."
+        },
+        {
+          "info": {
+            "name": "Get bigmap updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/updates",
+            "params": [
+              {
+                "name": "bigmap",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap ptr"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap path"
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap contract"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filters by action"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filters by level"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filters by timestamp"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value type: `0` - JSON, `2` - Micheline"
+              }
+            ]
+          },
+          "docs": "Returns a list of all bigmap updates."
+        },
+        {
+          "info": {
+            "name": "Get bigmap by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap Id"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value type: `0` - JSON, `2` - Micheline"
+              }
+            ]
+          },
+          "docs": "Returns a bigmap with the specified Id."
+        },
+        {
+          "info": {
+            "name": "Get bigmap type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/:id/type",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap Id"
+              }
+            ]
+          },
+          "docs": "Returns a type of the bigmap with the specified Id in Micheline format (with annotations)."
+        },
+        {
+          "info": {
+            "name": "Get bigmap keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/:id/keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap Id"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by status: `true` - active, `false` - removed."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmap keys by the last update level."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns a list of bigmap keys."
+        },
+        {
+          "info": {
+            "name": "Get bigmap key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/:id/keys/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap Id"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns the specified bigmap key."
+        },
+        {
+          "info": {
+            "name": "Get bigmap key updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/:id/keys/:key/updates",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap Id"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmap updates by specified field. Supported fields: `id` (default)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the key value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns updates history for the specified bigmap key."
+        },
+        {
+          "info": {
+            "name": "Get historical keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/:id/historical_keys/:level",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap Id"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Level of the block at which you want to get bigmap keys"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by status: `true` - active, `false` - removed."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns a list of bigmap keys at the specific block."
+        },
+        {
+          "info": {
+            "name": "Get historical key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/bigmaps/:id/historical_keys/:level/:key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap Id"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Level of the block at which you want to get bigmap key"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns the specified bigmap key at the specific block."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

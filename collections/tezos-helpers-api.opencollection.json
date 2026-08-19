@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Helpers API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Helpers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Inject operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tzkt.io/v1/helpers/inject",
+            "params": [
+              {
+                "name": "async",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, the function returns immediately. Otherwise, the operation will be validated before the result is returned."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Injects signed operation to the blockchain and returns the operation hash."
+        },
+        {
+          "info": {
+            "name": "Run script view",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tzkt.io/v1/helpers/view/:contract/:name",
+            "params": [
+              {
+                "name": "contract",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "View name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulate a call to a michelson view"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,785 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Tokens API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tokens count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tokens/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id. Note, this is not the same as `tokenId` nat value.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "globalId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by \"global id\", which is a `\"{contract}:{tokenId}\"` string.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "standard",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token standard (`fa1.2` or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "totalMinted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by total minted.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "totalBurned",
+                "value": "",
+                "type": "query",
+                "description": "Filter by total burned. Note: total burned shows only those tokens that were literally burned,\nexcluding tokens sent to burn addresses (because they still exist on the burn address' balance).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "totalSupply",
+                "value": "",
+                "type": "query",
+                "description": "Filter by total supply. Note: total supply shows all existing tokens,\nincluding tokens sent to burn addresses (so that they exist on the burn address' balance).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstMinter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by address of the first minter.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the token was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the token was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the token was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the token was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by metadata.  \nNote, this parameter supports the following format: `metadata{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?metadata.symbol.in=kUSD,uUSD`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "indexedAt",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a total number of tokens."
+        },
+        {
+          "info": {
+            "name": "Get tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tokens",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id. Note, this is not the same as `tokenId` nat value.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "globalId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by \"global id\", which is a `\"{contract}:{tokenId}\"` string.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "standard",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token standard (`fa1.2` or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "totalMinted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by total minted.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "totalBurned",
+                "value": "",
+                "type": "query",
+                "description": "Filter by total burned. Note: total burned shows only those tokens that were literally burned,\nexcluding tokens sent to burn addresses (because they still exist on the burn address' balance).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "totalSupply",
+                "value": "",
+                "type": "query",
+                "description": "Filter by total supply. Note: total supply shows all existing tokens,\nincluding tokens sent to burn addresses (so that they exist on the burn address' balance).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstMinter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by address of the first minter.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the token was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the token was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the token was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the token was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by metadata.  \nNote, this parameter supports the following format: `metadata{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?metadata.symbol.in=kUSD,uUSD`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "indexedAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of tokens."
+        },
+        {
+          "info": {
+            "name": "Get token balances count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tokens/balances/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id. Note, this is not the same as `tokenId`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.standard",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token standard (`fa1.2` or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was last changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "indexedAt",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a total number of token balances."
+        },
+        {
+          "info": {
+            "name": "Get token balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tokens/balances",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id. Note, this is not the same as `tokenId`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.standard",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token standard (`fa1.2` or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was first changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the balance was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the balance was last changed.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "indexedAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of token balances."
+        },
+        {
+          "info": {
+            "name": "Get token transfers count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tokens/transfers/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id. Note, this is not the same as `tokenId`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.standard",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token standard (`fa1.2` or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "anyof",
+                "value": "",
+                "type": "query",
+                "description": "Filter by any of the specified fields (`from` or `to`).\nExample: `anyof.from.to=tz1...` will return transfers where `from` OR `to` is equal to the specified value.\nThis parameter is useful when you need to get both incoming and outgoing transfers of the account at once.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transaction, caused the token transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "originationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the origination, caused the token transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "migrationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the migration, caused the token transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "or.ColsAndVals",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "indexedAt",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the total number of token transfers."
+        },
+        {
+          "info": {
+            "name": "Get token transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tokens/transfers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the transfer was made.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id. Note, this is not the same as `tokenId`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.standard",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token standard (`fa1.2` or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "anyof",
+                "value": "",
+                "type": "query",
+                "description": "Filter by any of the specified fields (`from` or `to`).\nExample: `anyof.from.to=tz1...` will return transfers where `from` OR `to` is equal to the specified value.\nThis parameter is useful when you need to get both incoming and outgoing transfers of the account at once.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the transaction, caused the token transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "originationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the origination, caused the token transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "migrationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by id of the migration, caused the token transfer.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "or.ColsAndVals",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "indexedAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of token transfers."
+        },
+        {
+          "info": {
+            "name": "Get historical token balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/tokens/historical_balances/:level",
+            "params": [
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Level of the block at the end of which historical balances must be calculated"
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id. Note, this is not the same as `tokenId`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.contract",
+                "value": "",
+                "type": "query",
+                "description": "Filter by contract address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tokenId (for FA1.2 tokens tokenId is always `\"0\"`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.standard",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token standard (`fa1.2` or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "token.metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter by metadata. Note, this parameter supports the following format: `token.metadata{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by, for example: `?token.metadata.symbol.in=kUSD,uUSD`.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of token balances at the end of the specified block.\nNote, this endpoint is quite heavy, therefore at least one of the filters\n(`account`, `token.id`, `token.contract` with `token.tokenId`) must be specified."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

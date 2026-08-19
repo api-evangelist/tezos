@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Commitments API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Commitments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get commitment by blinded address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/commitments/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Blinded address (starting with btz)"
+              }
+            ]
+          },
+          "docs": "Returns a commitment with the specified blinded address."
+        },
+        {
+          "info": {
+            "name": "Get commitments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/commitments",
+            "params": [
+              {
+                "name": "activated",
+                "value": "",
+                "type": "query",
+                "description": "Filters commitments by activation status"
+              },
+              {
+                "name": "activationLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filters commitments by activation level"
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filters commitments by activated balance"
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `id` (default), `balance`, `activationLevel`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of commitments."
+        },
+        {
+          "info": {
+            "name": "Get commitments count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/commitments/count",
+            "params": [
+              {
+                "name": "activated",
+                "value": "",
+                "type": "query",
+                "description": "Filters commitments by activation status"
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filters commitments by activated balance"
+              }
+            ]
+          },
+          "docs": "Returns a number of commitments."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,528 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filters by internal id."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Filters by address."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`)."
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by contract kind (`delegator_contract` or `smart_contract`)"
+              },
+              {
+                "name": "delegate",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by delegate. Allowed fields for `.eqx` mode: none."
+              },
+              {
+                "name": "stakedPseudotokens",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by amount of staked pseudotokens."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by balance"
+              },
+              {
+                "name": "staked",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by participation in staking"
+              },
+              {
+                "name": "lastActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by last activity level (where the account was updated)"
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `id` (default), `balance`, `rollupBonds`, `firstActivity`, `lastActivity`, `numTransactions`, `numContracts`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of accounts."
+        },
+        {
+          "info": {
+            "name": "Get accounts activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/activity",
+            "params": [
+              {
+                "name": "addresses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of account addresses to get activity of."
+              },
+              {
+                "name": "roles",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of activity roles (`sender`, `target`, `initiator`, `mention`) to filter activity by."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of activity types (`activation`, `autostaking`, `baking`, `ballot`, `dal_attestation_reward`,\n            `dal_entrapment_evidence`, `dal_publish_commitment`, `delegation`, `double_baking`, `double_consensus`, `drain_delegate`, \n            `attestation`, `attestation_reward`, `increase_paid_storage`, `migration`, `nonce_revelation`, `origination`, `preattestation`, `proposal`,\n            `register_constant`, `reveal`, `revelation_penalty`, `set_delegate_parameters`, `set_deposits_limit`, `sr_add_messages`, `sr_cement`, `sr_execute`,\n            `sr_originate`, `sr_publish`, `sr_recover_bond`, `sr_refute`, `staking`, `transaction`, `transfer_ticket`, `tx_rollup_commit`, `tx_rollup_dispatch_tickets`,\n            `tx_rollup_finalize_commitment`, `tx_rollup_origination`, `tx_rollup_rejection`, `tx_rollup_remove_commitment`, `tx_rollup_return_bond`, `tx_rollup_submit_batch`,\n            `vdf_revelation`, `update_secondary_key`, `ticket_transfer`, `token_transfer`)"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter activity by timestamp."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort mode: 0 - asc (oldest to newest), 1 - desc (newest to oldest)."
+              },
+              {
+                "name": "lastId",
+                "value": "",
+                "type": "query",
+                "description": "Id of the last activity element received, which is used for cursor pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of elements to return."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the parameters, storage and diffs: `0` - JSON, `1` - JSON string, `2` - raw micheline, `3` - raw micheline string."
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response."
+              }
+            ]
+          },
+          "docs": "Get accounts activity"
+        },
+        {
+          "info": {
+            "name": "Get accounts count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/count",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`)."
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by contract kind (`delegator_contract` or `smart_contract`)"
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by balance"
+              },
+              {
+                "name": "staked",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by participation in staking"
+              },
+              {
+                "name": "firstActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filters accounts by first activity level (where the account was created)"
+              }
+            ]
+          },
+          "docs": "Returns a number of accounts."
+        },
+        {
+          "info": {
+            "name": "Get account by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address"
+              }
+            ]
+          },
+          "docs": "Returns an account with the specified address."
+        },
+        {
+          "info": {
+            "name": "Get account contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/contracts",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz or KT)"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts contracts by specified field. Supported fields: `id` (default, desc), `balance`, `creationLevel`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of contracts created by (or related to) the specified account."
+        },
+        {
+          "info": {
+            "name": "Get account delegators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/delegators",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters delegators by type (`user`, `delegate`, `contract`, `rollup`, `smart_rollup`, `ghost`)."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filters delegators by balance."
+              },
+              {
+                "name": "delegationLevel",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `delegationLevel` (default, desc), `balance`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of accounts delegated to the specified account."
+        },
+        {
+          "info": {
+            "name": "Get counter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/counter",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz or KT)"
+              }
+            ]
+          },
+          "docs": "Returns account counter"
+        },
+        {
+          "info": {
+            "name": "Get balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/balance",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz or KT)"
+              }
+            ]
+          },
+          "docs": "Returns account balance"
+        },
+        {
+          "info": {
+            "name": "Get balance at level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/balance_history/:level",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz or KT)"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Block height at which you want to know account balance"
+              }
+            ]
+          },
+          "docs": "Returns account balance* at the specified block.  \n\\* - for non-baker tz-accounts historical balances do not include staked tez,\nbecause stakers do not really have staked tez on their balance, they have staking pseudotokens instead.\nIf you want to get a full historical balance, including staked tez, use the Tezos node RPC:\n`/chains/main/blocks/{level}/context/contracts/{address}/full_balance`."
+        },
+        {
+          "info": {
+            "name": "Get balance at date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/balance_history/:datetime",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz or KT)"
+              },
+              {
+                "name": "datetime",
+                "value": "",
+                "type": "path",
+                "description": "Datetime at which you want to know account balance (e.g. `2020-01-01`, or `2019-12-30T23:42:59Z`)"
+              }
+            ]
+          },
+          "docs": "Returns account balance* at the specified datetime.  \n\\* - for non-baker tz-accounts historical balances do not include staked tez,\nbecause stakers do not really have staked tez on their balance, they have staking pseudotokens instead.\nIf you want to get a full historical balance, including staked tez, use the Tezos node RPC:\n`/chains/main/blocks/{level}/context/contracts/{address}/full_balance`."
+        },
+        {
+          "info": {
+            "name": "Get balance history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/balance_history",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz or KT)"
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Step of the time series, for example if `step = 1000` you will get balances at blocks `1000, 2000, 3000, ...`."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts historical balances by specified field. Supported fields: `level`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns time series with historical balances* (only changes, without duplicates).  \n\\* - for non-baker tz-accounts historical balances do not include staked tez,\nbecause stakers do not really have staked tez on their balance, they have staking pseudotokens instead.\nIf you want to get a full historical balance, including staked tez, use the Tezos node RPC:\n`/chains/main/blocks/{level}/context/contracts/{address}/full_balance`."
+        },
+        {
+          "info": {
+            "name": "Get account report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/accounts/:address/report",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Account address (starting with tz or KT)"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start of the datetime range to filter by (ISO 8601, e.g. 2019-11-31)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End of the datetime range to filter by (ISO 8601, e.g. 2019-12-31)"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Currency to convert amounts to (`btc`, `eur`, `usd`, `cny`, `jpy`, `krw`, `eth`, `gbp`)"
+              },
+              {
+                "name": "historical",
+                "value": "",
+                "type": "query",
+                "description": "`true` if you want to use historical prices, `false` to use current price"
+              },
+              {
+                "name": "delimiter",
+                "value": "",
+                "type": "query",
+                "description": "Column delimiter (`comma`, `semicolon`)"
+              },
+              {
+                "name": "separator",
+                "value": "",
+                "type": "query",
+                "description": "Decimal separator (`comma`, `point`)"
+              }
+            ]
+          },
+          "docs": "Exports account balance report in .csv format"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

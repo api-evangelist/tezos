@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Head API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Head",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get indexer head",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/head"
+          },
+          "docs": "Returns indexer head and synchronization status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

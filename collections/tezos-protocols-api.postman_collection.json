@@ -1,0 +1,580 @@
+{
+  "item": [
+    {
+      "id": "7aaca631-9cec-4737-9569-af9b50122e2c",
+      "name": "Protocols",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9494f2d-9cb2-43cc-ad11-3dcc926a3444",
+          "name": "Get protocols count",
+          "request": {
+            "name": "Get protocols count",
+            "description": {
+              "content": "Returns the total number of protocols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "protocols",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48429a29-2afc-41ad-9b2f-137e159604a4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "protocols",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "4142",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19eb8e34-b864-46d7-b3ba-66b7b011e367",
+          "name": "Get protocols",
+          "request": {
+            "name": "Get protocols",
+            "description": {
+              "content": "Returns a list of protocols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "protocols"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts protocols by specified field. Supported fields: `code` (default), `firstLevel`, `lastLevel`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts protocols by specified field. Supported fields: `code` (default), `firstLevel`, `lastLevel`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59a1b78a-36fc-4536-899e-1140dda9b56e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "protocols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"code\": 4034,\n    \"hash\": \"string\",\n    \"version\": 2774,\n    \"firstLevel\": 2566,\n    \"firstCycle\": 8302,\n    \"firstCycleLevel\": 2762,\n    \"lastLevel\": 514,\n    \"constants\": {\n      \"rampUpCycles\": 74,\n      \"noRewardCycles\": 6688,\n      \"consensusRightsDelay\": 380,\n      \"delegateParametersActivationDelay\": 3834,\n      \"blocksPerCycle\": 1080,\n      \"blocksPerCommitment\": 2045,\n      \"blocksPerSnapshot\": 5521,\n      \"blocksPerVoting\": 9063,\n      \"timeBetweenBlocks\": 1776,\n      \"attestersPerBlock\": 4135,\n      \"hardOperationGasLimit\": 8096,\n      \"hardOperationStorageLimit\": 3009,\n      \"hardBlockGasLimit\": 1082,\n      \"minimalStake\": 4295,\n      \"minimalFrozenStake\": 8303,\n      \"blockDeposit\": 7520,\n      \"blockReward\": [\n        7088,\n        8892\n      ],\n      \"attestationDeposit\": 3215,\n      \"attestationReward\": [\n        5530,\n        636\n      ],\n      \"originationSize\": 7305,\n      \"byteCost\": 2649,\n      \"proposalQuorum\": 7722.263651585258,\n      \"ballotQuorumMin\": 819.7322743465741,\n      \"ballotQuorumMax\": 1188.8741690449533,\n      \"lbToggleThreshold\": 9002,\n      \"consensusThreshold\": 9860,\n      \"minParticipationNumerator\": 9322,\n      \"minParticipationDenominator\": 4902,\n      \"denunciationPeriod\": 8970,\n      \"slashingDelay\": 5982,\n      \"maxDelegatedOverFrozenRatio\": 6393,\n      \"maxExternalOverOwnStakeRatio\": 2827,\n      \"delegationPowerDivider\": 315,\n      \"smartRollupOriginationSize\": 5214,\n      \"smartRollupStakeAmount\": 4241,\n      \"smartRollupChallengeWindow\": 4106,\n      \"smartRollupCommitmentPeriod\": 7620,\n      \"smartRollupTimeoutPeriod\": 7444,\n      \"dalNumberOfShards\": 1474,\n      \"dictator\": \"string\",\n      \"endorsersPerBlock\": 357,\n      \"endorsementDeposit\": 168,\n      \"endorsementReward\": [\n        1900,\n        3412\n      ]\n    },\n    \"extras\": {}\n  },\n  {\n    \"code\": 9668,\n    \"hash\": \"string\",\n    \"version\": 1867,\n    \"firstLevel\": 9979,\n    \"firstCycle\": 1988,\n    \"firstCycleLevel\": 9804,\n    \"lastLevel\": 3659,\n    \"constants\": {\n      \"rampUpCycles\": 6903,\n      \"noRewardCycles\": 8707,\n      \"consensusRightsDelay\": 7968,\n      \"delegateParametersActivationDelay\": 1022,\n      \"blocksPerCycle\": 8884,\n      \"blocksPerCommitment\": 4113,\n      \"blocksPerSnapshot\": 5786,\n      \"blocksPerVoting\": 4202,\n      \"timeBetweenBlocks\": 5940,\n      \"attestersPerBlock\": 3079,\n      \"hardOperationGasLimit\": 3653,\n      \"hardOperationStorageLimit\": 7628,\n      \"hardBlockGasLimit\": 8288,\n      \"minimalStake\": 1447,\n      \"minimalFrozenStake\": 3565,\n      \"blockDeposit\": 3342,\n      \"blockReward\": [\n        4771,\n        5543\n      ],\n      \"attestationDeposit\": 4200,\n      \"attestationReward\": [\n        2577,\n        8136\n      ],\n      \"originationSize\": 7380,\n      \"byteCost\": 1515,\n      \"proposalQuorum\": 6009.579759553088,\n      \"ballotQuorumMin\": 8969.810043393223,\n      \"ballotQuorumMax\": 937.4863617265328,\n      \"lbToggleThreshold\": 8968,\n      \"consensusThreshold\": 7611,\n      \"minParticipationNumerator\": 3564,\n      \"minParticipationDenominator\": 7827,\n      \"denunciationPeriod\": 3095,\n      \"slashingDelay\": 3984,\n      \"maxDelegatedOverFrozenRatio\": 2638,\n      \"maxExternalOverOwnStakeRatio\": 2678,\n      \"delegationPowerDivider\": 7837,\n      \"smartRollupOriginationSize\": 500,\n      \"smartRollupStakeAmount\": 7479,\n      \"smartRollupChallengeWindow\": 102,\n      \"smartRollupCommitmentPeriod\": 1140,\n      \"smartRollupTimeoutPeriod\": 3438,\n      \"dalNumberOfShards\": 8204,\n      \"dictator\": \"string\",\n      \"endorsersPerBlock\": 7157,\n      \"endorsementDeposit\": 1833,\n      \"endorsementReward\": [\n        1496,\n        9574\n      ]\n    },\n    \"extras\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc51ed10-7cc3-4da9-a884-56a8adbd2965",
+          "name": "Get current protocol",
+          "request": {
+            "name": "Get current protocol",
+            "description": {
+              "content": "Returns current protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "protocols",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77c48651-569f-4f85-bceb-92205c986b8f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "protocols",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1617,\n  \"hash\": \"string\",\n  \"version\": 5176,\n  \"firstLevel\": 6971,\n  \"firstCycle\": 7566,\n  \"firstCycleLevel\": 9513,\n  \"lastLevel\": 1373,\n  \"constants\": {\n    \"rampUpCycles\": 4079,\n    \"noRewardCycles\": 946,\n    \"consensusRightsDelay\": 9523,\n    \"delegateParametersActivationDelay\": 782,\n    \"blocksPerCycle\": 6360,\n    \"blocksPerCommitment\": 2369,\n    \"blocksPerSnapshot\": 8853,\n    \"blocksPerVoting\": 5601,\n    \"timeBetweenBlocks\": 650,\n    \"attestersPerBlock\": 5243,\n    \"hardOperationGasLimit\": 8715,\n    \"hardOperationStorageLimit\": 568,\n    \"hardBlockGasLimit\": 9706,\n    \"minimalStake\": 7437,\n    \"minimalFrozenStake\": 7711,\n    \"blockDeposit\": 3230,\n    \"blockReward\": [\n      4211,\n      9952\n    ],\n    \"attestationDeposit\": 2444,\n    \"attestationReward\": [\n      5581,\n      1412\n    ],\n    \"originationSize\": 2285,\n    \"byteCost\": 8839,\n    \"proposalQuorum\": 7435.118271655027,\n    \"ballotQuorumMin\": 6092.924388198424,\n    \"ballotQuorumMax\": 4795.112981119456,\n    \"lbToggleThreshold\": 3026,\n    \"consensusThreshold\": 6300,\n    \"minParticipationNumerator\": 1237,\n    \"minParticipationDenominator\": 170,\n    \"denunciationPeriod\": 8608,\n    \"slashingDelay\": 7692,\n    \"maxDelegatedOverFrozenRatio\": 7575,\n    \"maxExternalOverOwnStakeRatio\": 5117,\n    \"delegationPowerDivider\": 190,\n    \"smartRollupOriginationSize\": 8419,\n    \"smartRollupStakeAmount\": 3968,\n    \"smartRollupChallengeWindow\": 5661,\n    \"smartRollupCommitmentPeriod\": 8384,\n    \"smartRollupTimeoutPeriod\": 4005,\n    \"dalNumberOfShards\": 9006,\n    \"dictator\": \"string\",\n    \"endorsersPerBlock\": 7884,\n    \"endorsementDeposit\": 5169,\n    \"endorsementReward\": [\n      9265,\n      3167\n    ]\n  },\n  \"extras\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e3fbabb-0515-4982-950b-c5f3f8bcd338",
+          "name": "Get protocol by code",
+          "request": {
+            "name": "Get protocol by code",
+            "description": {
+              "content": "Returns a protocol with the specified proto code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "protocols",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "code",
+                  "description": "(Required) Protocol code (e.g. 4 for Athens, 5 for Babylon, etc)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15e564ff-957c-4404-9f04-d957c6c7826f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "protocols",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "code",
+                      "description": "(Required) Protocol code (e.g. 4 for Athens, 5 for Babylon, etc)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1617,\n  \"hash\": \"string\",\n  \"version\": 5176,\n  \"firstLevel\": 6971,\n  \"firstCycle\": 7566,\n  \"firstCycleLevel\": 9513,\n  \"lastLevel\": 1373,\n  \"constants\": {\n    \"rampUpCycles\": 4079,\n    \"noRewardCycles\": 946,\n    \"consensusRightsDelay\": 9523,\n    \"delegateParametersActivationDelay\": 782,\n    \"blocksPerCycle\": 6360,\n    \"blocksPerCommitment\": 2369,\n    \"blocksPerSnapshot\": 8853,\n    \"blocksPerVoting\": 5601,\n    \"timeBetweenBlocks\": 650,\n    \"attestersPerBlock\": 5243,\n    \"hardOperationGasLimit\": 8715,\n    \"hardOperationStorageLimit\": 568,\n    \"hardBlockGasLimit\": 9706,\n    \"minimalStake\": 7437,\n    \"minimalFrozenStake\": 7711,\n    \"blockDeposit\": 3230,\n    \"blockReward\": [\n      4211,\n      9952\n    ],\n    \"attestationDeposit\": 2444,\n    \"attestationReward\": [\n      5581,\n      1412\n    ],\n    \"originationSize\": 2285,\n    \"byteCost\": 8839,\n    \"proposalQuorum\": 7435.118271655027,\n    \"ballotQuorumMin\": 6092.924388198424,\n    \"ballotQuorumMax\": 4795.112981119456,\n    \"lbToggleThreshold\": 3026,\n    \"consensusThreshold\": 6300,\n    \"minParticipationNumerator\": 1237,\n    \"minParticipationDenominator\": 170,\n    \"denunciationPeriod\": 8608,\n    \"slashingDelay\": 7692,\n    \"maxDelegatedOverFrozenRatio\": 7575,\n    \"maxExternalOverOwnStakeRatio\": 5117,\n    \"delegationPowerDivider\": 190,\n    \"smartRollupOriginationSize\": 8419,\n    \"smartRollupStakeAmount\": 3968,\n    \"smartRollupChallengeWindow\": 5661,\n    \"smartRollupCommitmentPeriod\": 8384,\n    \"smartRollupTimeoutPeriod\": 4005,\n    \"dalNumberOfShards\": 9006,\n    \"dictator\": \"string\",\n    \"endorsersPerBlock\": 7884,\n    \"endorsementDeposit\": 5169,\n    \"endorsementReward\": [\n      9265,\n      3167\n    ]\n  },\n  \"extras\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9f19ddf-d4ef-44f1-9314-b38e4bf481a9",
+          "name": "Get protocol by hash",
+          "request": {
+            "name": "Get protocol by hash",
+            "description": {
+              "content": "Returns a protocol with the specified hash.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "protocols",
+                ":hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Protocol hash"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab601c9a-57dc-461a-9d03-598d778a4b9f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "protocols",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Protocol hash"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1617,\n  \"hash\": \"string\",\n  \"version\": 5176,\n  \"firstLevel\": 6971,\n  \"firstCycle\": 7566,\n  \"firstCycleLevel\": 9513,\n  \"lastLevel\": 1373,\n  \"constants\": {\n    \"rampUpCycles\": 4079,\n    \"noRewardCycles\": 946,\n    \"consensusRightsDelay\": 9523,\n    \"delegateParametersActivationDelay\": 782,\n    \"blocksPerCycle\": 6360,\n    \"blocksPerCommitment\": 2369,\n    \"blocksPerSnapshot\": 8853,\n    \"blocksPerVoting\": 5601,\n    \"timeBetweenBlocks\": 650,\n    \"attestersPerBlock\": 5243,\n    \"hardOperationGasLimit\": 8715,\n    \"hardOperationStorageLimit\": 568,\n    \"hardBlockGasLimit\": 9706,\n    \"minimalStake\": 7437,\n    \"minimalFrozenStake\": 7711,\n    \"blockDeposit\": 3230,\n    \"blockReward\": [\n      4211,\n      9952\n    ],\n    \"attestationDeposit\": 2444,\n    \"attestationReward\": [\n      5581,\n      1412\n    ],\n    \"originationSize\": 2285,\n    \"byteCost\": 8839,\n    \"proposalQuorum\": 7435.118271655027,\n    \"ballotQuorumMin\": 6092.924388198424,\n    \"ballotQuorumMax\": 4795.112981119456,\n    \"lbToggleThreshold\": 3026,\n    \"consensusThreshold\": 6300,\n    \"minParticipationNumerator\": 1237,\n    \"minParticipationDenominator\": 170,\n    \"denunciationPeriod\": 8608,\n    \"slashingDelay\": 7692,\n    \"maxDelegatedOverFrozenRatio\": 7575,\n    \"maxExternalOverOwnStakeRatio\": 5117,\n    \"delegationPowerDivider\": 190,\n    \"smartRollupOriginationSize\": 8419,\n    \"smartRollupStakeAmount\": 3968,\n    \"smartRollupChallengeWindow\": 5661,\n    \"smartRollupCommitmentPeriod\": 8384,\n    \"smartRollupTimeoutPeriod\": 4005,\n    \"dalNumberOfShards\": 9006,\n    \"dictator\": \"string\",\n    \"endorsersPerBlock\": 7884,\n    \"endorsementDeposit\": 5169,\n    \"endorsementReward\": [\n      9265,\n      3167\n    ]\n  },\n  \"extras\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d025ab63-7283-400c-a99c-65082690b090",
+          "name": "Get protocol by cycle",
+          "request": {
+            "name": "Get protocol by cycle",
+            "description": {
+              "content": "Returns a protocol at the specified cycle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "protocols",
+                "cycles",
+                ":cycle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle",
+                  "description": "(Required) Cycle index"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "681cbc8d-1a32-4ff8-a4f1-66f3d60ce5b1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "protocols",
+                    "cycles",
+                    ":cycle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle",
+                      "description": "(Required) Cycle index"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1617,\n  \"hash\": \"string\",\n  \"version\": 5176,\n  \"firstLevel\": 6971,\n  \"firstCycle\": 7566,\n  \"firstCycleLevel\": 9513,\n  \"lastLevel\": 1373,\n  \"constants\": {\n    \"rampUpCycles\": 4079,\n    \"noRewardCycles\": 946,\n    \"consensusRightsDelay\": 9523,\n    \"delegateParametersActivationDelay\": 782,\n    \"blocksPerCycle\": 6360,\n    \"blocksPerCommitment\": 2369,\n    \"blocksPerSnapshot\": 8853,\n    \"blocksPerVoting\": 5601,\n    \"timeBetweenBlocks\": 650,\n    \"attestersPerBlock\": 5243,\n    \"hardOperationGasLimit\": 8715,\n    \"hardOperationStorageLimit\": 568,\n    \"hardBlockGasLimit\": 9706,\n    \"minimalStake\": 7437,\n    \"minimalFrozenStake\": 7711,\n    \"blockDeposit\": 3230,\n    \"blockReward\": [\n      4211,\n      9952\n    ],\n    \"attestationDeposit\": 2444,\n    \"attestationReward\": [\n      5581,\n      1412\n    ],\n    \"originationSize\": 2285,\n    \"byteCost\": 8839,\n    \"proposalQuorum\": 7435.118271655027,\n    \"ballotQuorumMin\": 6092.924388198424,\n    \"ballotQuorumMax\": 4795.112981119456,\n    \"lbToggleThreshold\": 3026,\n    \"consensusThreshold\": 6300,\n    \"minParticipationNumerator\": 1237,\n    \"minParticipationDenominator\": 170,\n    \"denunciationPeriod\": 8608,\n    \"slashingDelay\": 7692,\n    \"maxDelegatedOverFrozenRatio\": 7575,\n    \"maxExternalOverOwnStakeRatio\": 5117,\n    \"delegationPowerDivider\": 190,\n    \"smartRollupOriginationSize\": 8419,\n    \"smartRollupStakeAmount\": 3968,\n    \"smartRollupChallengeWindow\": 5661,\n    \"smartRollupCommitmentPeriod\": 8384,\n    \"smartRollupTimeoutPeriod\": 4005,\n    \"dalNumberOfShards\": 9006,\n    \"dictator\": \"string\",\n    \"endorsersPerBlock\": 7884,\n    \"endorsementDeposit\": 5169,\n    \"endorsementReward\": [\n      9265,\n      3167\n    ]\n  },\n  \"extras\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tzkt.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "df886fb0-5db3-44e9-ba9a-3fb6f245b1ae",
+    "name": "TzKT Accounts Protocols API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\n\nContact Support:\n Name: Baking Bad Team\n Email: hello@bakingbad.dev",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,4474 @@
+{
+  "item": [
+    {
+      "id": "d1ae0aed-5bd4-4c9d-a5eb-86da0787f8f3",
+      "name": "BigMaps",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "213df4c8-8ee2-4023-82b3-76b05d6d1753",
+          "name": "Get bigmaps count",
+          "request": {
+            "name": "Get bigmaps count",
+            "description": {
+              "content": "Returns the total number of bigmaps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cb4bde5-cc3d-4266-b3ca-9ff4660dace2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "3354",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37eb9fce-6575-40c0-a06b-071e9c6c1d4e",
+          "name": "Get bigmaps",
+          "request": {
+            "name": "Get bigmaps",
+            "description": {
+              "content": "Returns a list of bigmaps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "eqx",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "nex",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "inHasNull",
+                  "value": "<boolean>",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "niHasNull",
+                  "value": "<boolean>",
+                  "description": "Filters bigmaps by smart contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by path in the contract storage."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by path in the contract storage."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by path in the contract storage."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters bigmaps by path in the contract storage."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters bigmaps by path in the contract storage."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters bigmaps by path in the contract storage."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters bigmaps by path in the contract storage."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters bigmaps by tags: `metadata`, `token_metadata`, `ledger`."
+                },
+                {
+                  "disabled": false,
+                  "key": "any",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters bigmaps by tags: `metadata`, `token_metadata`, `ledger`."
+                },
+                {
+                  "disabled": false,
+                  "key": "all",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters bigmaps by tags: `metadata`, `token_metadata`, `ledger`."
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filters bigmaps by status: `true` - active, `false` - removed."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters bigmaps by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the bigmap key and value type: `0` - JSON, `2` - Micheline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "622e10e6-43ef-40ab-8cc8-2d261bea4325",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eqx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inHasNull",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "niHasNull",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "any",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ptr\": 454,\n    \"contract\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"path\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"active\": true,\n    \"firstLevel\": 4515,\n    \"lastLevel\": 7944,\n    \"totalKeys\": 4367,\n    \"activeKeys\": 5851,\n    \"updates\": 4565,\n    \"keyType\": {},\n    \"valueType\": {}\n  },\n  {\n    \"ptr\": 2502,\n    \"contract\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"path\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"active\": false,\n    \"firstLevel\": 5010,\n    \"lastLevel\": 6294,\n    \"totalKeys\": 8430,\n    \"activeKeys\": 831,\n    \"updates\": 647,\n    \"keyType\": {},\n    \"valueType\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe0e8db3-4cbe-4399-8b76-b8bfd9d5271c",
+          "name": "Get bigmap keys",
+          "request": {
+            "name": "Get bigmap keys",
+            "description": {
+              "content": "Returns a list of all bigmap keys.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                "keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by bigmap ptr.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filters by status: `true` - active, `false` - removed."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filter by key hash.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filter by key hash.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filter by key hash.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filter by key hash.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filter by key.  \nNote, this parameter supports the following format: `key{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?key.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filter by value.  \nNote, this parameter supports the following format: `value{.path?}{.mode?}=...`,\nso you can specify a path to a particular field to filter by (for example, `?value.foo.in=bar,baz`).  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by level of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was first seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by level of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<dateTime>",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filter by timestamp (ISO 8601) of the block where the key was last seen.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filter by number of actions with the bigmap key.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+                },
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the `key` and `value` fields: `0` - JSON, `2` - Micheline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81f0f7cf-d8d4-4562-a3a6-be4f124b5f52",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6334,\n    \"bigmap\": 7157,\n    \"active\": false,\n    \"hash\": \"string\",\n    \"key\": {},\n    \"value\": {},\n    \"firstLevel\": 2317,\n    \"firstTime\": \"1959-01-27T02:26:45.928Z\",\n    \"lastLevel\": 6776,\n    \"lastTime\": \"2014-05-18T16:20:32.599Z\",\n    \"updates\": 9010\n  },\n  {\n    \"id\": 1953,\n    \"bigmap\": 2368,\n    \"active\": true,\n    \"hash\": \"string\",\n    \"key\": {},\n    \"value\": {},\n    \"firstLevel\": 7306,\n    \"firstTime\": \"1957-08-25T06:31:23.640Z\",\n    \"lastLevel\": 6237,\n    \"lastTime\": \"2025-04-25T12:05:47.525Z\",\n    \"updates\": 8501\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "144420de-47aa-419e-a6b5-02bf1c7cd3f9",
+          "name": "Get bigmap updates count",
+          "request": {
+            "name": "Get bigmap updates count",
+            "description": {
+              "content": "Returns a total number of bigmap updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                "updates",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "eqx",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "nex",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "inHasNull",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "niHasNull",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+                },
+                {
+                  "disabled": false,
+                  "key": "any",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+                },
+                {
+                  "disabled": false,
+                  "key": "all",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters by timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ee2554b-9b56-4063-90d5-418e76c77b6c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    "updates",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eqx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inHasNull",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "niHasNull",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "any",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<dateTime>,<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4009,\n    \"level\": 1508,\n    \"timestamp\": \"1983-05-11T06:29:56.646Z\",\n    \"bigmap\": 8019,\n    \"contract\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"path\": \"string\",\n    \"action\": \"string\",\n    \"content\": {\n      \"hash\": \"string\",\n      \"key\": {},\n      \"value\": {}\n    }\n  },\n  {\n    \"id\": 8979,\n    \"level\": 9322,\n    \"timestamp\": \"2009-01-16T00:10:03.472Z\",\n    \"bigmap\": 418,\n    \"contract\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"path\": \"string\",\n    \"action\": \"string\",\n    \"content\": {\n      \"hash\": \"string\",\n      \"key\": {},\n      \"value\": {}\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22b2f244-ef50-425a-ab38-a75d5a15f53e",
+          "name": "Get bigmap updates",
+          "request": {
+            "name": "Get bigmap updates",
+            "description": {
+              "content": "Returns a list of all bigmap updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                "updates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by bigmap ptr"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap path"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "eqx",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "nex",
+                  "value": "<string>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "inHasNull",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "niHasNull",
+                  "value": "<boolean>",
+                  "description": "Filters by bigmap contract"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+                },
+                {
+                  "disabled": false,
+                  "key": "any",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+                },
+                {
+                  "disabled": false,
+                  "key": "all",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by bigmap tags: `metadata`, `token_metadata`, `ledger`"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by action"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters by level"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<dateTime>",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters by timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts bigmaps by specified field. Supported fields: `id` (default), `ptr`, `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the bigmap key and value type: `0` - JSON, `2` - Micheline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef7343c9-18be-45b2-b73e-3763dbb57435",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eqx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inHasNull",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "niHasNull",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "any",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4009,\n    \"level\": 1508,\n    \"timestamp\": \"1983-05-11T06:29:56.646Z\",\n    \"bigmap\": 8019,\n    \"contract\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"path\": \"string\",\n    \"action\": \"string\",\n    \"content\": {\n      \"hash\": \"string\",\n      \"key\": {},\n      \"value\": {}\n    }\n  },\n  {\n    \"id\": 8979,\n    \"level\": 9322,\n    \"timestamp\": \"2009-01-16T00:10:03.472Z\",\n    \"bigmap\": 418,\n    \"contract\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"path\": \"string\",\n    \"action\": \"string\",\n    \"content\": {\n      \"hash\": \"string\",\n      \"key\": {},\n      \"value\": {}\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bfe7ec0-b838-4b22-b012-e7d81ae457b2",
+          "name": "Get bigmap by Id",
+          "request": {
+            "name": "Get bigmap by Id",
+            "description": {
+              "content": "Returns a bigmap with the specified Id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the bigmap key and value type: `0` - JSON, `2` - Micheline"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Bigmap Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9246a7be-2008-41e5-ade9-1e36dd7eecdc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Bigmap Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ptr\": 4120,\n  \"contract\": {\n    \"alias\": \"string\",\n    \"address\": \"string\"\n  },\n  \"path\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"active\": true,\n  \"firstLevel\": 7437,\n  \"lastLevel\": 3763,\n  \"totalKeys\": 489,\n  \"activeKeys\": 9667,\n  \"updates\": 4730,\n  \"keyType\": {},\n  \"valueType\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40b857f1-20ce-4f59-a74f-d1d76af03fd0",
+          "name": "Get bigmap type",
+          "request": {
+            "name": "Get bigmap type",
+            "description": {
+              "content": "Returns a type of the bigmap with the specified Id in Micheline format (with annotations).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                ":id",
+                "type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Bigmap Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "458292f9-5070-4f35-8d44-f85052462221",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    ":id",
+                    "type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Bigmap Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prim\": 11,\n  \"args\": [\n    {\n      \"type\": 64\n    },\n    {\n      \"type\": 128\n    }\n  ],\n  \"annots\": [\n    {\n      \"type\": 0,\n      \"value\": \"string\"\n    },\n    {\n      \"type\": 64,\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91d248ff-3882-4d40-9da5-54219d1d6ce4",
+          "name": "Get bigmap keys",
+          "request": {
+            "name": "Get bigmap keys",
+            "description": {
+              "content": "Returns a list of bigmap keys.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                ":id",
+                "keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filters keys by status: `true` - active, `false` - removed."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters bigmap keys by the last update level."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Bigmap Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33e8c194-dc1b-4bce-aea2-2591c0bd29f7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    ":id",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Bigmap Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6127,\n    \"active\": true,\n    \"hash\": \"string\",\n    \"key\": {},\n    \"value\": {},\n    \"firstLevel\": 3603,\n    \"lastLevel\": 252,\n    \"updates\": 9669\n  },\n  {\n    \"id\": 1866,\n    \"active\": false,\n    \"hash\": \"string\",\n    \"key\": {},\n    \"value\": {},\n    \"firstLevel\": 4042,\n    \"lastLevel\": 5412,\n    \"updates\": 5565\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ef0e7b4-b576-46f0-be58-9d28a0def6b8",
+          "name": "Get bigmap key",
+          "request": {
+            "name": "Get bigmap key",
+            "description": {
+              "content": "Returns the specified bigmap key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                ":id",
+                "keys",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Bigmap Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98d908b7-5d56-4c9b-943d-29b34ea8d325",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    ":id",
+                    "keys",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Bigmap Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6505,\n  \"active\": false,\n  \"hash\": \"string\",\n  \"key\": {},\n  \"value\": {},\n  \"firstLevel\": 2808,\n  \"lastLevel\": 8288,\n  \"updates\": 37\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94cd586c-4826-41ca-b0f9-8caf505db583",
+          "name": "Get bigmap key updates",
+          "request": {
+            "name": "Get bigmap key updates",
+            "description": {
+              "content": "Returns updates history for the specified bigmap key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                ":id",
+                "keys",
+                ":key",
+                "updates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts bigmap updates by specified field. Supported fields: `id` (default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts bigmap updates by specified field. Supported fields: `id` (default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the key value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Bigmap Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92a71368-d451-43bc-8aa8-c38d32922f6a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    ":id",
+                    "keys",
+                    ":key",
+                    "updates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Bigmap Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4387,\n    \"level\": 6247,\n    \"timestamp\": \"1982-04-01T11:36:09.966Z\",\n    \"action\": \"string\",\n    \"value\": {}\n  },\n  {\n    \"id\": 6855,\n    \"level\": 3058,\n    \"timestamp\": \"1984-04-21T19:30:45.893Z\",\n    \"action\": \"string\",\n    \"value\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82b3ff3a-df7a-4505-a40b-baea46b78b92",
+          "name": "Get historical keys",
+          "request": {
+            "name": "Get historical keys",
+            "description": {
+              "content": "Returns a list of bigmap keys at the specific block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                ":id",
+                "historical_keys",
+                ":level"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filters keys by status: `true` - active, `false` - removed."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "un",
+                  "value": "<string>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Bigmap Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "level",
+                  "description": "(Required) Level of the block at which you want to get bigmap keys"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bc6f279-9cee-4fb8-8796-b9d4b323f26d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    ":id",
+                    "historical_keys",
+                    ":level"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "un",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Bigmap Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) Level of the block at which you want to get bigmap keys"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 9589,\n    \"active\": false,\n    \"hash\": \"string\",\n    \"key\": {},\n    \"value\": {}\n  },\n  {\n    \"id\": 7975,\n    \"active\": false,\n    \"hash\": \"string\",\n    \"key\": {},\n    \"value\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5ccab5a-4306-4c2b-8994-87c78da7b3f0",
+          "name": "Get historical key",
+          "request": {
+            "name": "Get historical key",
+            "description": {
+              "content": "Returns the specified bigmap key at the specific block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bigmaps",
+                ":id",
+                "historical_keys",
+                ":level",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "micheline",
+                  "value": "<string>",
+                  "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Bigmap Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "level",
+                  "description": "(Required) Level of the block at which you want to get bigmap key"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73e56105-ca8b-47c1-879a-d45f1eb47409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bigmaps",
+                    ":id",
+                    "historical_keys",
+                    ":level",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "micheline",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Bigmap Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) Level of the block at which you want to get bigmap key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4957,\n  \"active\": false,\n  \"hash\": \"string\",\n  \"key\": {},\n  \"value\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tzkt.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c2527a54-1b60-4d9d-8ed5-59960a6f54da",
+    "name": "TzKT Accounts BigMaps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\n\nContact Support:\n Name: Baking Bad Team\n Email: hello@bakingbad.dev",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Voting API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Voting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get proposals count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/proposals/count"
+          },
+          "docs": "Returns the total number of protocol proposals."
+        },
+        {
+          "info": {
+            "name": "Get proposals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/proposals",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query",
+                "description": "Filters proposals by hash"
+              },
+              {
+                "name": "epoch",
+                "value": "",
+                "type": "query",
+                "description": "Filters proposals by voting epoch"
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts proposals by specified field. Supported fields: `id` (default), `upvotes`, `votingPower`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of protocol proposals."
+        },
+        {
+          "info": {
+            "name": "Get proposal by hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/proposals/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "Proposal hash"
+              }
+            ]
+          },
+          "docs": "Returns the most recent protocol proposal with the specified hash."
+        },
+        {
+          "info": {
+            "name": "Get voting periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/periods",
+            "params": [
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the first block of the period."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the last block of the period."
+              },
+              {
+                "name": "epoch",
+                "value": "",
+                "type": "query",
+                "description": "Filters by voting epoch"
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts voting periods by specified field. Supported fields: `id` (default)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of voting periods."
+        },
+        {
+          "info": {
+            "name": "Get voting period by index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/periods/:index",
+            "params": [
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "Voting period index starting from zero"
+              }
+            ]
+          },
+          "docs": "Returns a voting period at the specified index."
+        },
+        {
+          "info": {
+            "name": "Get current voting period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/periods/current"
+          },
+          "docs": "Returns current voting period."
+        },
+        {
+          "info": {
+            "name": "Get period voters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/periods/:index/voters",
+            "params": [
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "Voting period index starting from zero"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters voters by status (`none`, `upvoted`, `voted_yay`, `voted_nay`, `voted_pass`)"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts voters by specified field. Supported fields: `id` (default), `votingPower`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns voters from the voting period at the specified index."
+        },
+        {
+          "info": {
+            "name": "Get period voter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/periods/:index/voters/:address",
+            "params": [
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "Voting period index starting from zero"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Voter address"
+              }
+            ]
+          },
+          "docs": "Returns a voter with the specified address from the voting period at the specified index."
+        },
+        {
+          "info": {
+            "name": "Get current period voters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/periods/current/voters",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters voters by status (`none`, `upvoted`, `voted_yay`, `voted_nay`, `voted_pass`)"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts voters by specified field. Supported fields: `id` (default), `votingPower`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns voters from the current period."
+        },
+        {
+          "info": {
+            "name": "Get current period voter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/periods/current/voters/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Voter address"
+              }
+            ]
+          },
+          "docs": "Returns a voter with the specified address from the current period."
+        },
+        {
+          "info": {
+            "name": "Get voting epochs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/epochs",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by voting epoch status (`no_proposals`, `voting`, `completed`, `failed`)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts voting epochs by specified field. Supported fields: `index` (default)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of voting epochs."
+        },
+        {
+          "info": {
+            "name": "Get voting epoch by index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/epochs/:index",
+            "params": [
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "Voting epoch index starting from zero"
+              }
+            ]
+          },
+          "docs": "Returns a voting epoch at the specified index."
+        },
+        {
+          "info": {
+            "name": "Get current voting epoch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/epochs/current"
+          },
+          "docs": "Returns the current voting epoch"
+        },
+        {
+          "info": {
+            "name": "Get latest voting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/voting/epochs/latest_voting"
+          },
+          "docs": "Returns the latest epoch with at least one proposal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

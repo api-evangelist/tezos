@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Cycles API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cycles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get cycles count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/cycles/count"
+          },
+          "docs": "Returns the total number of cycles, including future cycles."
+        },
+        {
+          "info": {
+            "name": "Get cycles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/cycles",
+            "params": [
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts cycles by specified field. Supported fields: `index` (default, desc)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of cycles, including future cycles."
+        },
+        {
+          "info": {
+            "name": "Get cycle by index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/cycles/:index",
+            "params": [
+              {
+                "name": "index",
+                "value": "",
+                "type": "path",
+                "description": "Cycle index starting from zero"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a cycle at the specified index."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

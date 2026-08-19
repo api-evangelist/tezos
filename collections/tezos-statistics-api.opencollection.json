@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Statistics API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/statistics",
+            "params": [
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filters statistics by level."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filters statistics by timestamp."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of end-of-block statistics."
+        },
+        {
+          "info": {
+            "name": "Get daily statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/statistics/daily",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filters statistics by date."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of end-of-day statistics."
+        },
+        {
+          "info": {
+            "name": "Get cyclic statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/statistics/cyclic",
+            "params": [
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filters statistics by cycle."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `id` (default), `level`, `cycle`, `date`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of end-of-cycle statistics."
+        },
+        {
+          "info": {
+            "name": "Get current statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/statistics/current",
+            "params": [
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select a single field, response will be a single value in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns statistics at the end of a head block."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

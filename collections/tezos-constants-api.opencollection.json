@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Constants API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Constants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get global constants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/constants",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Filters constants by global address (starts with `expr..`)."
+              },
+              {
+                "name": "creationLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filters constants by creation level."
+              },
+              {
+                "name": "creationTime",
+                "value": "",
+                "type": "query",
+                "description": "Filters constants by creation time."
+              },
+              {
+                "name": "creator",
+                "value": "",
+                "type": "query",
+                "description": "Filters constants by creator."
+              },
+              {
+                "name": "refs",
+                "value": "",
+                "type": "query",
+                "description": "Filters constants by number of refs."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Filters constants by size in bytes."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts delegators by specified field. Supported fields: `id` (default), `creationLevel`, `size`, `refs`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Constant value format (`0` - micheline, `1` - michelson, `2` - bytes (base64))"
+              }
+            ]
+          },
+          "docs": "Returns a list of global constants."
+        },
+        {
+          "info": {
+            "name": "Get global constant by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/constants/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Global address (starts with `expr..`)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Constant value format (`0` - micheline, `1` - michelson, `2` - bytes (base64))"
+              }
+            ]
+          },
+          "docs": "Returns global constant with specified address (expression hash)."
+        },
+        {
+          "info": {
+            "name": "Get global constants count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/constants/count",
+            "params": [
+              {
+                "name": "refs",
+                "value": "",
+                "type": "query",
+                "description": "Filters constants by number of refs."
+              }
+            ]
+          },
+          "docs": "Returns a number of global constants."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

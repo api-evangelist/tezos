@@ -1,0 +1,308 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Rewards API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get baker cycle rewards count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/bakers/:address/count",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Baker address"
+              }
+            ]
+          },
+          "docs": "Returns total number of cycles where the baker was active"
+        },
+        {
+          "info": {
+            "name": "Get baker cycle rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/bakers/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Baker address."
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cycle."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of baker rewards for every cycle, including future cycles."
+        },
+        {
+          "info": {
+            "name": "Get delegator cycle rewards count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/delegators/:address/count",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Delegator address"
+              }
+            ]
+          },
+          "docs": "Returns total number of cycles where the delegator was delegated to an active baker"
+        },
+        {
+          "info": {
+            "name": "Get delegator cycle rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/delegators/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Delegator address."
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cycle."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of delegator rewards for every cycle, including future cycles."
+        },
+        {
+          "info": {
+            "name": "Get staker cycle rewards count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/stakers/:address/count",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Staker address"
+              }
+            ]
+          },
+          "docs": "Returns total number of cycles where the staker was staking to an active baker"
+        },
+        {
+          "info": {
+            "name": "Get staker cycle rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/stakers/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Staker address."
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cycle."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "quote",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ticker symbols to inject historical prices into response"
+              }
+            ]
+          },
+          "docs": "Returns a list of staker rewards."
+        },
+        {
+          "info": {
+            "name": "Get reward split",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/split/:baker/:cycle",
+            "params": [
+              {
+                "name": "baker",
+                "value": "",
+                "type": "path",
+                "description": "Baker address"
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "path",
+                "description": "Rewards cycle"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many delegators/stakers in the reward split should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of delegators/stakers to return"
+              }
+            ]
+          },
+          "docs": "Returns baker rewards for the specified cycle with all delegators and stakers (both snapshotted and actual ones).\nThis endpoint helps to distribute delegation rewards between delegators in proportion to their delegated balances."
+        },
+        {
+          "info": {
+            "name": "Get reward split member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/rewards/split/:baker/:cycle/:member",
+            "params": [
+              {
+                "name": "baker",
+                "value": "",
+                "type": "path",
+                "description": "Baker address"
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "path",
+                "description": "Reward split cycle"
+              },
+              {
+                "name": "member",
+                "value": "",
+                "type": "path",
+                "description": "Member address"
+              }
+            ]
+          },
+          "docs": "Returns delegator/staker from the reward split for the specified cycle."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

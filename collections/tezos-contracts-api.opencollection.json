@@ -1,0 +1,1194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Contracts API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Filter by address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by kind (`delegator_contract`, `smart_contract`, or `asset`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tzips",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tzips (`fa1`, `fa12`, or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "creator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creator.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "delegate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by delegate.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "codeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of contract code (helpful for searching same contracts).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tokensCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number of different tokens minted within the contract.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticketsCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number of different tickets minted within the contract.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "includeStorage",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether to include contract storage into response."
+              }
+            ]
+          },
+          "docs": "Returns a list of contract accounts."
+        },
+        {
+          "info": {
+            "name": "Get contracts count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Filter by address.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by kind (`delegator_contract`, `smart_contract`, or `asset`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tzips",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tzips (`fa1`, `fa12`, or `fa2`).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Filter by balance.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "creator",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creator.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "delegate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by delegate.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the contract was first seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastActivityTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the contract was last seen.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "typeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of contract parameter and storage types (helpful for searching similar contracts).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "codeHash",
+                "value": "",
+                "type": "query",
+                "description": "Filter by 32-bit hash of contract code (helpful for searching same contracts).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "tokensCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number of different tokens minted within the contract.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "ticketsCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number of different tickets minted within the contract.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a number of contract accounts."
+        },
+        {
+          "info": {
+            "name": "Get contract by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              }
+            ]
+          },
+          "docs": "Returns a contract account with the specified address."
+        },
+        {
+          "info": {
+            "name": "Get same contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/same",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "includeStorage",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether to include contract storage value in response."
+              }
+            ]
+          },
+          "docs": "Returns contracts which have the same script as the specified one.\nNote, contract scripts are compared by 32-bit hash, so in very rare cases there may be collisions."
+        },
+        {
+          "info": {
+            "name": "Get similar contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/similar",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              },
+              {
+                "name": "includeStorage",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether to include contract storage value in response."
+              }
+            ]
+          },
+          "docs": "Returns contracts which have the same interface (parameter and storage types) as the specified one.\nNote, contract parameter and storage types are compared by 32-bit hash, so in very rare cases there may be collisions."
+        },
+        {
+          "info": {
+            "name": "Get contract code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/code",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Level at which contract code should be taken. If `0` or not specified, the current value will be returned."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Code format (`0` - micheline, `1` - michelson, `2` - bytes (base64))"
+              }
+            ]
+          },
+          "docs": "Returns a code of the specified contract."
+        },
+        {
+          "info": {
+            "name": "Get JSON Schema [2020-12] interface for the contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/interface",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              }
+            ]
+          },
+          "docs": "Returns standard JSON Schema for contract storage, entrypoints, and Big_map entries."
+        },
+        {
+          "info": {
+            "name": "Get contract entrypoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/entrypoints",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns all entrypoints, including unused ones.\n            Unused means that the entrypoint can be normalized to a more specific one.\n            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint\n            because it can be normalized to `%entry2` or `%entry3`"
+              },
+              {
+                "name": "json",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in human-readable JSON format"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in micheline format"
+              },
+              {
+                "name": "michelson",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in michelson format"
+              }
+            ]
+          },
+          "docs": "Returns entrypoints of the specified contract."
+        },
+        {
+          "info": {
+            "name": "Get entrypoint by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/entrypoints/:name",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Entrypoint name"
+              },
+              {
+                "name": "json",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in human-readable JSON format"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in micheline format"
+              },
+              {
+                "name": "michelson",
+                "value": "",
+                "type": "query",
+                "description": "Include parameters schema in michelson format"
+              }
+            ]
+          },
+          "docs": "Returns contract's entrypoint with specified name."
+        },
+        {
+          "info": {
+            "name": "Get contract views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/views",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              },
+              {
+                "name": "json",
+                "value": "",
+                "type": "query",
+                "description": "Include parameter and return types in human-readable JSON format"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Include parameter and return types in micheline format"
+              },
+              {
+                "name": "michelson",
+                "value": "",
+                "type": "query",
+                "description": "Include parameter and return types in michelson format"
+              }
+            ]
+          },
+          "docs": "Returns all views of the specified contract."
+        },
+        {
+          "info": {
+            "name": "Get view by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/views/:name",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address (starting with KT)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "View name"
+              },
+              {
+                "name": "json",
+                "value": "",
+                "type": "query",
+                "description": "Include parameter and return types in human-readable JSON format"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Include parameter and return types in micheline format"
+              },
+              {
+                "name": "michelson",
+                "value": "",
+                "type": "query",
+                "description": "Include parameter and return types in michelson format"
+              }
+            ]
+          },
+          "docs": "Returns contract view with specified name."
+        },
+        {
+          "info": {
+            "name": "Build entrypoint parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/entrypoints/:name/build",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Entrypoint name"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Json parameters"
+              }
+            ]
+          },
+          "docs": "Returns micheline parameters converted from its JSON representation."
+        },
+        {
+          "info": {
+            "name": "Build entrypoint parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tzkt.io/v1/contracts/:address/entrypoints/:name/build",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Entrypoint name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns micheline parameters converted from its JSON representation."
+        },
+        {
+          "info": {
+            "name": "Get contract storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/storage",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Level at which storage value should be taken. If `0` or not specified, the current value will be returned."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Path in the JSON value (point-separated list of field names, e.g. `path=settings.refund_time` to return"
+              }
+            ]
+          },
+          "docs": "Returns contract storage value in JSON format."
+        },
+        {
+          "info": {
+            "name": "Get contract storage schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/storage/schema",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Level at which storage schema should be taken. If `0` or not specified, the current schema will be returned."
+              }
+            ]
+          },
+          "docs": "Returns JSON schema of the contract storage."
+        },
+        {
+          "info": {
+            "name": "Get contract storage history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/storage/history",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "lastId",
+                "value": "",
+                "type": "query",
+                "description": "Id of the last item received (for pagination)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns contract storage historical values."
+        },
+        {
+          "info": {
+            "name": "Get raw contract storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/storage/raw",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Level at which storage value should be taken. If `0` or not specified, the current value will be returned."
+              }
+            ]
+          },
+          "docs": "Returns raw contract storage value in micheline format."
+        },
+        {
+          "info": {
+            "name": "Get raw contract storage schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/storage/raw/schema",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Level at which storage schema should be taken. If `0` or not specified, the current schema will be returned."
+              }
+            ]
+          },
+          "docs": "Returns micheline schema (type) of the contract storage."
+        },
+        {
+          "info": {
+            "name": "Get raw contract storage history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/storage/raw/history",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "lastId",
+                "value": "",
+                "type": "query",
+                "description": "Id of the last item received (for pagination)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Returns raw contract storage historical values."
+        },
+        {
+          "info": {
+            "name": "Get contract bigmaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/bigmaps",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmaps tags (`metadata`, `token_metadata`, `ledger`)."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object.\n            If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmaps by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `totalKeys`, `activeKeys`, `updates`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns all active bigmaps allocated in the contract storage."
+        },
+        {
+          "info": {
+            "name": "Get bigmap by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/bigmaps/:name",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns contract bigmap with the specified name or storage path."
+        },
+        {
+          "info": {
+            "name": "Get bigmap keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/bigmaps/:name/keys",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by status: `true` - active, `false` - removed."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filters bigmap keys by the last update level."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default), `firstLevel`, `lastLevel`, `updates`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns keys of a contract bigmap with the specified name."
+        },
+        {
+          "info": {
+            "name": "Get bigmap key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/bigmaps/:name/keys/:key",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns the specified bigmap key."
+        },
+        {
+          "info": {
+            "name": "Get bigmap key updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/bigmaps/:name/keys/:key/updates",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmap updates by specified field. Supported fields: `id` (default)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the key value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns updates history for the specified bigmap key."
+        },
+        {
+          "info": {
+            "name": "Get historical keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/bigmaps/:name/historical_keys/:level",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Level of the block at which you want to get bigmap keys"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by status: `true` - active, `false` - removed."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON key. Note, this query parameter supports the following format: `?key{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?key.token_id=...`."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Filters keys by JSON value. Note, this query parameter supports the following format: `?value{.path?}{.mode?}=...`,\n            so you can specify a path to a particular field to filter by, for example: `?value.balance.gt=...`."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts bigmap keys by specified field. Supported fields: `id` (default)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns a list of bigmap keys at the specific block."
+        },
+        {
+          "info": {
+            "name": "Get historical key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/contracts/:address/bigmaps/:name/historical_keys/:level/:key",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Contract address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Bigmap name is the last piece of the bigmap storage path.\n            For example, if the storage path is `ledger` or `assets.ledger`, then the name is `ledger`.\n            If there are multiple bigmaps with the same name, for example `assets.ledger` and `tokens.ledger`, you can specify the full path."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "Level of the block at which you want to get bigmap key"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Either a key hash (`expr123...`) or a plain value (`foo...`).\n            Even if the key is complex (an object or an array), you can specify it as is, for example, `/keys/{\"address\":\"tz123\",\"nat\":\"123\"}`."
+              },
+              {
+                "name": "micheline",
+                "value": "",
+                "type": "query",
+                "description": "Format of the bigmap key and value: `0` - JSON, `1` - JSON string, `2` - Micheline, `3` - Micheline string"
+              }
+            ]
+          },
+          "docs": "Returns the specified bigmap key at the specific block."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

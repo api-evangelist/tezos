@@ -1,0 +1,491 @@
+{
+  "item": [
+    {
+      "id": "f0ac40c5-bb82-456b-92fc-7987fd8a3b88",
+      "name": "Quotes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a2993e7-194e-4330-820f-4bf439fd6b02",
+          "name": "Get quotes count",
+          "request": {
+            "name": "Get quotes count",
+            "description": {
+              "content": "Returns the total number of quotes aligned with blocks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "quotes",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c3cd5e2-fc9f-4ace-95c4-d2a3fd059f95",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "quotes",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "60",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8c2b76c-51e6-4cab-8330-85aa396778c3",
+          "name": "Get last quote",
+          "request": {
+            "name": "Get last quote",
+            "description": {
+              "content": "Returns last known quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "quotes",
+                "last"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21eba454-2867-4a4f-a2ab-2954e903cc00",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "quotes",
+                    "last"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"level\": 7985,\n  \"timestamp\": \"2024-03-21T22:13:21.796Z\",\n  \"btc\": 2127.2427287252194,\n  \"eur\": 2752.6930344934995,\n  \"usd\": 1990.5319449051574,\n  \"cny\": 8802.049606878367,\n  \"jpy\": 1352.7995938540694,\n  \"krw\": 8149.230068835298,\n  \"eth\": 401.0390174866707,\n  \"gbp\": 9271.682010725577\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f49c84a7-a3aa-414f-9088-1cf6d6e266a7",
+          "name": "Get quotes",
+          "request": {
+            "name": "Get quotes",
+            "description": {
+              "content": "Returns a list of quotes aligned with blocks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters quotes by level."
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<dateTime>",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<dateTime>",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<dateTime>",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<dateTime>",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<dateTime>",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<dateTime>",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<dateTime>\",\"<dateTime>\"]",
+                  "description": "Filters quotes by timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts quotes by specified field. Supported fields: `level` (default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts quotes by specified field. Supported fields: `level` (default)."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4087f15-bbdd-45c6-b762-85ca750875ee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<dateTime>,<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"level\": 8983,\n    \"timestamp\": \"2002-03-08T12:01:19.556Z\",\n    \"btc\": 549.6839365181216,\n    \"eur\": 5163.846722795742,\n    \"usd\": 3592.6736611851993,\n    \"cny\": 7780.094557651262,\n    \"jpy\": 4473.236693396682,\n    \"krw\": 8267.909520416611,\n    \"eth\": 5916.115403861801,\n    \"gbp\": 4749.09333630298\n  },\n  {\n    \"level\": 1669,\n    \"timestamp\": \"1964-03-13T00:29:52.808Z\",\n    \"btc\": 4511.487450879832,\n    \"eur\": 8646.940941116818,\n    \"usd\": 3773.2372027004435,\n    \"cny\": 5483.623309238308,\n    \"jpy\": 5324.1173560665,\n    \"krw\": 298.0048737531482,\n    \"eth\": 2746.818677601456,\n    \"gbp\": 6575.751561625959\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tzkt.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "676c10d4-ba0b-4f35-aafb-0f15fdf6dd68",
+    "name": "TzKT Accounts Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\n\nContact Support:\n Name: Baking Bad Team\n Email: hello@bakingbad.dev",
+      "type": "text/plain"
+    }
+  }
+}

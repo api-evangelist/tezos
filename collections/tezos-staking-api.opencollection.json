@@ -1,0 +1,490 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TzKT Accounts Staking API",
+    "version": "1.17.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Staking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get staking updates count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/staking/updates/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the staking update happened.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the staking update happened.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filter by freezer or block cycle (depending on the update type).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "baker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related baker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "staker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related staker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by staking update type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "pseudotokens",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount of staking pseudotokens minted or burnt.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "roundingError",
+                "value": "",
+                "type": "query",
+                "description": "Filter by protocol rounding error.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "autostakingOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "stakingOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "delegationOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "doubleBakingOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "doubleConsensusOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of staking updates."
+        },
+        {
+          "info": {
+            "name": "Get staking updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/staking/updates",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block, where the staking update happened.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp of the block, where the staking update happened.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filter by freezer or block cycle (depending on the update type).  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "baker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related baker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "staker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related staker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by staking update type.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "pseudotokens",
+                "value": "",
+                "type": "query",
+                "description": "Filter by amount of staking pseudotokens minted or burnt.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "roundingError",
+                "value": "",
+                "type": "query",
+                "description": "Filter by protocol rounding error.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "autostakingOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "stakingOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "delegationOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "doubleBakingOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "doubleConsensusOpId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the related operation.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of staking updates."
+        },
+        {
+          "info": {
+            "name": "Get unstake requests count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/staking/unstake_requests/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cycle.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "baker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related baker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "staker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related staker.\nIf staker is null, then it's aggregated unstaked deposits for the baker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "requestedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by requested amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "restakedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by restaked amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "finalizedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by finalized amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "slashedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by slashed amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "roundingError",
+                "value": "",
+                "type": "query",
+                "description": "Filter by protocol rounding error.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "actualAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by actual amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "updatesCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by staking updates count.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the unstake request was created.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the unstake request was created.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the unstake request was last updated.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the unstake request was last updated.  \nClick on the parameter to expand more details."
+              }
+            ]
+          },
+          "docs": "Returns a total number of unstake requests."
+        },
+        {
+          "info": {
+            "name": "Get unstake requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tzkt.io/v1/staking/unstake_requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by internal TzKT id.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "cycle",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cycle.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "baker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related baker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "staker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by related staker.\nIf staker is null, then it's aggregated unstaked deposits for the baker.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "requestedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by requested amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "restakedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by restaked amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "finalizedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by finalized amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "slashedAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by slashed amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "roundingError",
+                "value": "",
+                "type": "query",
+                "description": "Filter by protocol rounding error.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "actualAmount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by actual amount.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "updatesCount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by staking updates count.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the unstake request was created.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "firstTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the unstake request was created.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastLevel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by level of the block where the unstake request was last updated.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "lastTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp (ISO 8601) of the block where the unstake request was last updated.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts items (asc or desc) by the specified field.\nYou can see what fields can be used for sorting in the response description, below.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which or how many items should be skipped.  \nClick on the parameter to expand more details."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Specify a comma-separated list of fields to include into response or leave it undefined to get default set of fields.\nThis parameter accepts values of the following format: `{field}{path?}{as alias?}`, so you can do deep selection\n(for example, `?select=balance,token.metadata.symbol as token,...`).  \nNote, if you select just one field, the response will be flatten into a simple array of values.  \nClick on the parameter to expand the details."
+              }
+            ]
+          },
+          "docs": "Returns a list of unstake requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

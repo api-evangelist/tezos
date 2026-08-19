@@ -1,0 +1,469 @@
+{
+  "item": [
+    {
+      "id": "677f2708-2318-4376-9fc4-fdabb8df84d3",
+      "name": "Delegates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0c3d03c5-1aa7-4670-90bb-75c8882533a3",
+          "name": "Get delegates",
+          "request": {
+            "name": "Get delegates",
+            "description": {
+              "content": "Returns a list of delegate accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delegates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<boolean>",
+                  "description": "Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)"
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)"
+                },
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<integer>",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ne",
+                  "value": "<integer>",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "gt",
+                  "value": "<integer>",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge",
+                  "value": "<integer>",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "lt",
+                  "value": "<integer>",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "le",
+                  "value": "<integer>",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "in",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ni",
+                  "value": "[\"<integer>\",\"<integer>\"]",
+                  "description": "Filters delegates by last activity level (where the delegate was updated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Specify comma-separated list of fields to include into response or leave it undefined to return full object. If you select single field, response will be an array of values in both `.fields` and `.values` modes."
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `stakedBalance`, `externalStakedBalance`, `ownDelegatedBalance`, `externalDelegatedBalance`, `bakingPower`, `votingPower`, `balance`, `numDelegators`, `stakersCount`, `activationLevel`, `deactivationLevel`."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "Sorts delegators by specified field. Supported fields: `id` (default), `stakedBalance`, `externalStakedBalance`, `ownDelegatedBalance`, `externalDelegatedBalance`, `bakingPower`, `votingPower`, `balance`, `numDelegators`, `stakersCount`, `activationLevel`, `deactivationLevel`."
+                },
+                {
+                  "disabled": false,
+                  "key": "el",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "pg",
+                  "value": "<integer>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "cr",
+                  "value": "<long>",
+                  "description": "Specifies which or how many items should be skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "127cd8de-ed84-4e48-a904-1c80fc52ff09",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delegates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "eq",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ne",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ge",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "le",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "in",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "ni",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "values",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "el",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pg",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cr",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6081,\n    \"type\": \"string\",\n    \"address\": \"string\",\n    \"consensusAddress\": \"string\",\n    \"companionAddress\": \"string\",\n    \"active\": false,\n    \"alias\": \"string\",\n    \"publicKey\": \"string\",\n    \"revealed\": true,\n    \"balance\": 9867,\n    \"rollupBonds\": 7346,\n    \"smartRollupBonds\": 6631,\n    \"stakedBalance\": 883,\n    \"unstakedBalance\": 1842,\n    \"unstakedBaker\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"externalStakedBalance\": 282,\n    \"externalUnstakedBalance\": 9307,\n    \"roundingError\": 3983,\n    \"totalStakedBalance\": 4552,\n    \"issuedPseudotokens\": \"string\",\n    \"stakersCount\": 6517,\n    \"frozenDepositLimit\": 7590,\n    \"limitOfStakingOverBaking\": 2978,\n    \"edgeOfBakingOverStaking\": 8667,\n    \"counter\": 624,\n    \"activationLevel\": 9563,\n    \"activationTime\": \"2001-02-12T12:45:09.048Z\",\n    \"deactivationLevel\": 4030,\n    \"deactivationTime\": \"1954-01-16T04:32:12.079Z\",\n    \"bakingPower\": 6941,\n    \"votingPower\": 2207,\n    \"ownDelegatedBalance\": 3240,\n    \"externalDelegatedBalance\": 6861,\n    \"numContracts\": 5544,\n    \"rollupsCount\": 7738,\n    \"smartRollupsCount\": 7404,\n    \"activeTokensCount\": 9819,\n    \"tokenBalancesCount\": 7630,\n    \"tokenTransfersCount\": 9903,\n    \"activeTicketsCount\": 5153,\n    \"ticketBalancesCount\": 9769,\n    \"ticketTransfersCount\": 9888,\n    \"numDelegators\": 3264,\n    \"numBlocks\": 3710,\n    \"numAttestations\": 8391,\n    \"numPreattestations\": 8113,\n    \"numBallots\": 1363,\n    \"numProposals\": 2812,\n    \"numActivations\": 2101,\n    \"numDoubleBaking\": 663,\n    \"numDoubleConsensus\": 4109,\n    \"numNonceRevelations\": 20,\n    \"vdfRevelationsCount\": 154,\n    \"numRevelationPenalties\": 133,\n    \"numAttestationRewards\": 4294,\n    \"numDelegations\": 6369,\n    \"numOriginations\": 9816,\n    \"numTransactions\": 2200,\n    \"numReveals\": 2404,\n    \"numRegisterConstants\": 4867,\n    \"numSetDepositsLimits\": 6816,\n    \"numMigrations\": 5644,\n    \"txRollupOriginationCount\": 6374,\n    \"txRollupSubmitBatchCount\": 1288,\n    \"txRollupCommitCount\": 7870,\n    \"txRollupReturnBondCount\": 239,\n    \"txRollupFinalizeCommitmentCount\": 9671,\n    \"txRollupRemoveCommitmentCount\": 9004,\n    \"txRollupRejectionCount\": 4524,\n    \"txRollupDispatchTicketsCount\": 2407,\n    \"transferTicketCount\": 8026,\n    \"increasePaidStorageCount\": 8170,\n    \"updateSecondaryKeyCount\": 6892,\n    \"drainDelegateCount\": 4929,\n    \"smartRollupAddMessagesCount\": 8316,\n    \"smartRollupCementCount\": 8563,\n    \"smartRollupExecuteCount\": 5675,\n    \"smartRollupOriginateCount\": 4600,\n    \"smartRollupPublishCount\": 5999,\n    \"smartRollupRecoverBondCount\": 6792,\n    \"smartRollupRefuteCount\": 716,\n    \"refutationGamesCount\": 680,\n    \"activeRefutationGamesCount\": 3715,\n    \"stakingOpsCount\": 7328,\n    \"autostakingOpsCount\": 9459,\n    \"stakingUpdatesCount\": 8625,\n    \"setDelegateParametersOpsCount\": 8763,\n    \"dalPublishCommitmentOpsCount\": 7353,\n    \"dalEntrapmentEvidenceOpsCount\": 4690,\n    \"dalAttestationRewardsCount\": 6027,\n    \"firstActivity\": 6123,\n    \"firstActivityTime\": \"2004-10-10T11:07:18.691Z\",\n    \"lastActivity\": 9388,\n    \"lastActivityTime\": \"2004-12-14T22:11:05.285Z\",\n    \"extras\": {},\n    \"software\": {\n      \"version\": \"string\",\n      \"date\": \"1992-08-09T03:42:22.020Z\"\n    },\n    \"softwareUpdateLevel\": 3612,\n    \"softwareUpdateTime\": \"1982-12-16T20:40:47.661Z\",\n    \"stakingBalance\": 9309,\n    \"delegatedBalance\": 2270,\n    \"updateConsensusKeyCount\": 5832,\n    \"numEndorsements\": 7583,\n    \"numPreendorsements\": 8553,\n    \"numDoubleEndorsing\": 2192,\n    \"numDoublePreendorsing\": 2527,\n    \"numEndorsingRewards\": 6032\n  },\n  {\n    \"id\": 8965,\n    \"type\": \"string\",\n    \"address\": \"string\",\n    \"consensusAddress\": \"string\",\n    \"companionAddress\": \"string\",\n    \"active\": true,\n    \"alias\": \"string\",\n    \"publicKey\": \"string\",\n    \"revealed\": true,\n    \"balance\": 1460,\n    \"rollupBonds\": 6355,\n    \"smartRollupBonds\": 3517,\n    \"stakedBalance\": 883,\n    \"unstakedBalance\": 4481,\n    \"unstakedBaker\": {\n      \"alias\": \"string\",\n      \"address\": \"string\"\n    },\n    \"externalStakedBalance\": 8372,\n    \"externalUnstakedBalance\": 1888,\n    \"roundingError\": 7887,\n    \"totalStakedBalance\": 2473,\n    \"issuedPseudotokens\": \"string\",\n    \"stakersCount\": 8199,\n    \"frozenDepositLimit\": 6357,\n    \"limitOfStakingOverBaking\": 5014,\n    \"edgeOfBakingOverStaking\": 9428,\n    \"counter\": 4966,\n    \"activationLevel\": 5241,\n    \"activationTime\": \"2002-08-31T23:50:56.410Z\",\n    \"deactivationLevel\": 9854,\n    \"deactivationTime\": \"2022-02-11T13:54:23.935Z\",\n    \"bakingPower\": 4669,\n    \"votingPower\": 1991,\n    \"ownDelegatedBalance\": 809,\n    \"externalDelegatedBalance\": 6457,\n    \"numContracts\": 9586,\n    \"rollupsCount\": 9256,\n    \"smartRollupsCount\": 7356,\n    \"activeTokensCount\": 4722,\n    \"tokenBalancesCount\": 8786,\n    \"tokenTransfersCount\": 6034,\n    \"activeTicketsCount\": 2657,\n    \"ticketBalancesCount\": 7112,\n    \"ticketTransfersCount\": 1833,\n    \"numDelegators\": 5861,\n    \"numBlocks\": 501,\n    \"numAttestations\": 1265,\n    \"numPreattestations\": 8064,\n    \"numBallots\": 4907,\n    \"numProposals\": 791,\n    \"numActivations\": 9238,\n    \"numDoubleBaking\": 1873,\n    \"numDoubleConsensus\": 3,\n    \"numNonceRevelations\": 7232,\n    \"vdfRevelationsCount\": 3430,\n    \"numRevelationPenalties\": 4002,\n    \"numAttestationRewards\": 9256,\n    \"numDelegations\": 5820,\n    \"numOriginations\": 2582,\n    \"numTransactions\": 7770,\n    \"numReveals\": 7250,\n    \"numRegisterConstants\": 2870,\n    \"numSetDepositsLimits\": 2310,\n    \"numMigrations\": 8231,\n    \"txRollupOriginationCount\": 4575,\n    \"txRollupSubmitBatchCount\": 609,\n    \"txRollupCommitCount\": 6975,\n    \"txRollupReturnBondCount\": 6988,\n    \"txRollupFinalizeCommitmentCount\": 2689,\n    \"txRollupRemoveCommitmentCount\": 8666,\n    \"txRollupRejectionCount\": 6082,\n    \"txRollupDispatchTicketsCount\": 5115,\n    \"transferTicketCount\": 2953,\n    \"increasePaidStorageCount\": 5511,\n    \"updateSecondaryKeyCount\": 9027,\n    \"drainDelegateCount\": 3745,\n    \"smartRollupAddMessagesCount\": 4082,\n    \"smartRollupCementCount\": 7092,\n    \"smartRollupExecuteCount\": 3272,\n    \"smartRollupOriginateCount\": 1366,\n    \"smartRollupPublishCount\": 4750,\n    \"smartRollupRecoverBondCount\": 922,\n    \"smartRollupRefuteCount\": 3286,\n    \"refutationGamesCount\": 9714,\n    \"activeRefutationGamesCount\": 805,\n    \"stakingOpsCount\": 3747,\n    \"autostakingOpsCount\": 3895,\n    \"stakingUpdatesCount\": 4193,\n    \"setDelegateParametersOpsCount\": 7262,\n    \"dalPublishCommitmentOpsCount\": 6211,\n    \"dalEntrapmentEvidenceOpsCount\": 5244,\n    \"dalAttestationRewardsCount\": 817,\n    \"firstActivity\": 6425,\n    \"firstActivityTime\": \"1953-02-02T03:36:50.839Z\",\n    \"lastActivity\": 7402,\n    \"lastActivityTime\": \"1981-07-25T22:21:20.440Z\",\n    \"extras\": {},\n    \"software\": {\n      \"version\": \"string\",\n      \"date\": \"1954-06-27T13:30:09.471Z\"\n    },\n    \"softwareUpdateLevel\": 7527,\n    \"softwareUpdateTime\": \"2017-10-09T09:44:22.891Z\",\n    \"stakingBalance\": 6920,\n    \"delegatedBalance\": 7715,\n    \"updateConsensusKeyCount\": 3408,\n    \"numEndorsements\": 3528,\n    \"numPreendorsements\": 8783,\n    \"numDoubleEndorsing\": 2853,\n    \"numDoublePreendorsing\": 3528,\n    \"numEndorsingRewards\": 2330\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04838c54-e009-4c86-92bf-942106283a5f",
+          "name": "Get delegates count",
+          "request": {
+            "name": "Get delegates count",
+            "description": {
+              "content": "Returns a number of delegate accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delegates",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "eq",
+                  "value": "<boolean>",
+                  "description": "Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)"
+                },
+                {
+                  "disabled": false,
+                  "key": "null",
+                  "value": "<boolean>",
+                  "description": "Delegate status to filter by (true - only active, false - only deactivated, undefined - all delegates)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ddfa998-4708-44f3-bd3f-00e1d23e104b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delegates",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "eq",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "8665",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a0c355c-efc8-40fc-affe-52d4798cd4e4",
+          "name": "Get delegate by address",
+          "request": {
+            "name": "Get delegate by address",
+            "description": {
+              "content": "Returns a delegate with the specified address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "delegates",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Delegate address (starting with tz)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3529fc7-2b53-429e-8024-589e963e7378",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "delegates",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Delegate address (starting with tz)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 223,\n  \"type\": \"string\",\n  \"address\": \"string\",\n  \"consensusAddress\": \"string\",\n  \"companionAddress\": \"string\",\n  \"active\": true,\n  \"alias\": \"string\",\n  \"publicKey\": \"string\",\n  \"revealed\": true,\n  \"balance\": 275,\n  \"rollupBonds\": 440,\n  \"smartRollupBonds\": 3486,\n  \"stakedBalance\": 1121,\n  \"unstakedBalance\": 8972,\n  \"unstakedBaker\": {\n    \"alias\": \"string\",\n    \"address\": \"string\"\n  },\n  \"externalStakedBalance\": 4170,\n  \"externalUnstakedBalance\": 4275,\n  \"roundingError\": 2190,\n  \"totalStakedBalance\": 4000,\n  \"issuedPseudotokens\": \"string\",\n  \"stakersCount\": 6059,\n  \"frozenDepositLimit\": 7138,\n  \"limitOfStakingOverBaking\": 391,\n  \"edgeOfBakingOverStaking\": 893,\n  \"counter\": 7340,\n  \"activationLevel\": 7850,\n  \"activationTime\": \"1983-07-29T15:25:56.577Z\",\n  \"deactivationLevel\": 5987,\n  \"deactivationTime\": \"2007-02-05T09:51:25.967Z\",\n  \"bakingPower\": 4154,\n  \"votingPower\": 2115,\n  \"ownDelegatedBalance\": 3849,\n  \"externalDelegatedBalance\": 3385,\n  \"numContracts\": 4891,\n  \"rollupsCount\": 4165,\n  \"smartRollupsCount\": 4521,\n  \"activeTokensCount\": 5509,\n  \"tokenBalancesCount\": 3574,\n  \"tokenTransfersCount\": 5273,\n  \"activeTicketsCount\": 1609,\n  \"ticketBalancesCount\": 8601,\n  \"ticketTransfersCount\": 6024,\n  \"numDelegators\": 5783,\n  \"numBlocks\": 4552,\n  \"numAttestations\": 2001,\n  \"numPreattestations\": 288,\n  \"numBallots\": 2530,\n  \"numProposals\": 9216,\n  \"numActivations\": 5312,\n  \"numDoubleBaking\": 4709,\n  \"numDoubleConsensus\": 9478,\n  \"numNonceRevelations\": 1119,\n  \"vdfRevelationsCount\": 2969,\n  \"numRevelationPenalties\": 4863,\n  \"numAttestationRewards\": 4232,\n  \"numDelegations\": 6813,\n  \"numOriginations\": 242,\n  \"numTransactions\": 2354,\n  \"numReveals\": 9177,\n  \"numRegisterConstants\": 4965,\n  \"numSetDepositsLimits\": 7963,\n  \"numMigrations\": 9022,\n  \"txRollupOriginationCount\": 1253,\n  \"txRollupSubmitBatchCount\": 8169,\n  \"txRollupCommitCount\": 3525,\n  \"txRollupReturnBondCount\": 8355,\n  \"txRollupFinalizeCommitmentCount\": 251,\n  \"txRollupRemoveCommitmentCount\": 8223,\n  \"txRollupRejectionCount\": 3813,\n  \"txRollupDispatchTicketsCount\": 7078,\n  \"transferTicketCount\": 1608,\n  \"increasePaidStorageCount\": 6120,\n  \"updateSecondaryKeyCount\": 9847,\n  \"drainDelegateCount\": 2859,\n  \"smartRollupAddMessagesCount\": 7959,\n  \"smartRollupCementCount\": 705,\n  \"smartRollupExecuteCount\": 8999,\n  \"smartRollupOriginateCount\": 9993,\n  \"smartRollupPublishCount\": 6132,\n  \"smartRollupRecoverBondCount\": 9763,\n  \"smartRollupRefuteCount\": 5854,\n  \"refutationGamesCount\": 1064,\n  \"activeRefutationGamesCount\": 9668,\n  \"stakingOpsCount\": 5309,\n  \"autostakingOpsCount\": 7130,\n  \"stakingUpdatesCount\": 4809,\n  \"setDelegateParametersOpsCount\": 9174,\n  \"dalPublishCommitmentOpsCount\": 7439,\n  \"dalEntrapmentEvidenceOpsCount\": 2863,\n  \"dalAttestationRewardsCount\": 1584,\n  \"firstActivity\": 1705,\n  \"firstActivityTime\": \"2009-12-25T20:28:37.924Z\",\n  \"lastActivity\": 7107,\n  \"lastActivityTime\": \"1993-03-26T11:46:26.321Z\",\n  \"extras\": {},\n  \"software\": {\n    \"version\": \"string\",\n    \"date\": \"1980-07-03T15:49:28.597Z\"\n  },\n  \"softwareUpdateLevel\": 6946,\n  \"softwareUpdateTime\": \"1986-09-01T23:15:51.251Z\",\n  \"stakingBalance\": 4334,\n  \"delegatedBalance\": 6254,\n  \"updateConsensusKeyCount\": 825,\n  \"numEndorsements\": 2319,\n  \"numPreendorsements\": 9111,\n  \"numDoubleEndorsing\": 7404,\n  \"numDoublePreendorsing\": 4572,\n  \"numEndorsingRewards\": 6447\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tzkt.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "764a1a0f-fc6e-4c78-a1d6-66b216bb7400",
+    "name": "TzKT Accounts Delegates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\r\n\r\nTzKT is the most widely used tool in Tezos that provides you with convenient and flexible access to the Tezos blockchain data, processed and indexed by its own indexer. \r\nYou can fetch all historical data via REST API, or subscribe for real-time data via WebSocket API. TzKT was built by the joint efforts of the entire Tezos community \r\nto help developers build more services and dapps on top of Tezos.\r\n\r\nTzKT Indexer and API are [open-source](https://github.com/baking-bad/tzkt), so don't be afraid to depend on the third-party service,\r\nbecause you can always clone, build and run it yourself to have full control over all the components.\r\n\r\nFeel free to contact us if you have any questions or feature requests.\r\nYour feedback is much appreciated!\r\n\r\n- Discord: https://discord.gg/aG8XKuwsQd\r\n- Telegram: https://t.me/baking_bad_chat\r\n- X: https://x.com/TezosBakingBad\r\n- Email: hello@bakingbad.dev\r\n\r\nAnd don't forget to star TzKT [on GitHub](https://github.com/baking-bad/tzkt) if you like it 😊\r\n\r\n# Get Started\r\n\r\nThere are two API services provided for public use:\r\n- **Free TzKT API** with free anonymous access;\r\n- **TzKT Pro** with paid subscriptions with increased rate limits, off-chain data, extended support and business-level SLA.\r\n\r\nYou can find more details about differences between available tiers [here](https://tzkt.io/api).\r\n\r\n## Free TzKT API\r\n\r\nFree-tier TzKT API is the best way to get started and explore available Tezos data and API functionality.\r\nIt doesn't require authorization and is free for everyone and for both commercial and non-commercial use.\r\n\r\n> #### Note: attribution required\r\nIf you use free-tier TzKT API, you **must** mention it on your website or application by placing the label\r\n\"Powered by TzKT API\", or \"Built with TzKT API\", or \"Data provided by TzKT API\" with a direct link to [tzkt.io](https://tzkt.io).\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://api.tzkt.io/` or `https://api.mainnet.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Ghostnet: `https://api.ghostnet.tzkt.io/` ([view docs](https://api.ghostnet.tzkt.io))\r\n- Shadownet: `https://api.shadownet.tzkt.io/` ([view docs](https://api.shadownet.tzkt.io))\r\n- Seoulnet: `https://api.seoulnet.tzkt.io/` ([view docs](https://api.seoulnet.tzkt.io))\r\n- Tallinnnet: `https://api.tallinnnet.tzkt.io/` ([view docs](https://api.tallinnnet.tzkt.io))\r\n\r\n### Sending Requests\r\n\r\nTo send a request to Free TzKT API you need literally nothing. Just take the base URL of the particular network\r\n(for example, Tezos mainnet: `https://api.tzkt.io`) and append the path of the particular endpoint\r\n(for example, chain's head: `/v1/head`), that's pretty much it: \r\n\r\n```bash\r\ncurl https://api.tzkt.io/v1/head\r\n```\r\n\r\nRead through this documentation to explore available endpoints, query parameters\r\n(note, if you click on a query parameter, you will see available modes, such as `.eq`, `.in`, etc.)\r\nand response models. If you have any questions, do not hesitate to ask for support, Tezos community has always been very friendly! 😉\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits.\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\r\n## TzKT Pro\r\n\r\nTzKT Pro is intended for professional use, for those who seek for extended capabilities, performance, reliability and business-level SLA.\r\nTzKT Pro service is provided via paid subscriptions. Please, refer to [Pricing Plans](https://tzkt.io/api) to check available tiers.\r\n\r\nIt's available for the following Tezos networks with the following base URLs:\r\n\r\n- Mainnet: `https://pro.tzkt.io/` ([view docs](https://api.tzkt.io))\r\n- Testnets: *let us know if you need TzKT Pro for testnets*\r\n\r\n### Authorization\r\n\r\nTo access TzKT Pro you will need to authorize requests with your personal API key, that you will receive on your email after purchasing a subscription.\r\nThis can be done by adding the query string parameter `?apikey={your_key}` or by adding the HTTP header `apikey: {your_key}`.\r\n\r\nNote that you can have multiple API keys within a single subscription.\r\n\r\nKeep your API keys private, do not publish it anywhere and do not hardcode it, especially in public repositories.\r\nIf your key was compromised, just let us know and we will issue a new one.\r\n\r\nAlso note that passing the API key via HTTP headers is more secure, because in HTTPS headers are encrypted,\r\nbut query string is not, so the key can be unintentionally exposed to third parties.\r\n\r\n### Sending Requests\r\n\r\nSending a request with the API key passed as a query string parameter:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head?apikey={your_key}\r\n```\r\n\r\nSending a request with the API key passed via an HTTP header:\r\n\r\n```bash\r\ncurl https://pro.tzkt.io/v1/head \\\r\n    -H 'apikey: {your_key}'\r\n```\r\n\r\n### Rate Limits\r\n\r\nPlease, refer to https://tzkt.io/api to check relevant rate limits for different pricing plans.\r\n\r\nAlso, TzKT Pro provides you with the additional HTTP headers to show the allowed limits, number of available requests\r\nand the time remaining (in seconds) until the quota is reset. Here's an example:\r\n\r\n```\r\nRateLimit-Limit: 50\r\nRateLimit-Remaining: 49\r\nRateLimit-Reset: 1\r\n```\r\n\r\nIt also sends general information about your rate limits per second and per day:\r\n\r\n```\r\nX-RateLimit-Limit-Second: 50\r\nX-RateLimit-Remaining-Second: 49\r\nX-RateLimit-Limit-Day: 3000000\r\nX-RateLimit-Remaining-Day: 2994953\r\n```\r\n\r\nIf you exceed the limit, the API will respond with `HTTP 429` status code.\r\n\n\nContact Support:\n Name: Baking Bad Team\n Email: hello@bakingbad.dev",
+      "type": "text/plain"
+    }
+  }
+}
