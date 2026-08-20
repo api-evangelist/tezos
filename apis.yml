@@ -69,6 +69,11 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Account
+  - Balances
+  - Wallets
+  - Delegates
+  tags_raw:
   - Accounts
   - Balances
   - Wallets
@@ -95,6 +100,9 @@ apis:
   tags:
   - Blocks
   - Chain
+  tags_raw:
+  - Blocks
+  - Chain
   - Head
   properties:
   - type: Documentation
@@ -118,6 +126,11 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Operations
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Transaction
+  - Originations
+  - Delegations
+  - Endorsements
+  tags_raw:
   - Operations
   - Transactions
   - Originations
@@ -143,6 +156,12 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Contracts
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Contracts
+  - Smart Contracts
+  - Storage
+  - Entrypoints
+  - Event
+  tags_raw:
   - Contracts
   - Smart Contracts
   - Storage
@@ -281,6 +300,12 @@ apis:
   tags:
   - WebSocket
   - Real-Time
+  - Subscription
+  - Event
+  - SignalR
+  tags_raw:
+  - WebSocket
+  - Real-Time
   - Subscriptions
   - Events
   - SignalR
@@ -293,6 +318,8 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -303,6 +330,8 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Big Maps
+  tags_raw:
   - BigMaps
   properties:
   - type: OpenAPI
@@ -383,6 +412,8 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -392,7 +423,8 @@ apis:
   description: The Head API from Tezos — 1 operation(s) for head.
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
-  tags:
+  tags: []
+  tags_raw:
   - Head
   properties:
   - type: OpenAPI
@@ -412,7 +444,8 @@ apis:
   description: The Operations API from Tezos — 142 operation(s) for operations.
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
-  tags:
+  tags: []
+  tags_raw:
   - Operations
   properties:
   - type: OpenAPI
