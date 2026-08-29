@@ -17,6 +17,19 @@ description: |
   quotas and dedicated support. The indexer is MIT-licensed and can also be
   self-hosted against a Tezos node.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: open
@@ -596,6 +609,10 @@ authentication:
   - type: None
     description: The public TzKT API at api.tzkt.io requires no authentication. Requests are rate-limited by IP address.
 common:
+  - type: IssueTracker
+    url: https://github.com/baking-bad/tzkt/issues
+  - type: Releases
+    url: https://github.com/baking-bad/tzkt/releases
   - type: AgenticAccess
     url: agentic-access/tezos-agentic-access.yml
   - type: DomainSecurity
