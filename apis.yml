@@ -343,7 +343,7 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
   tags:
-  - BigMaps
+  - Big Maps
   tags_raw:
   - BigMaps
   properties:
