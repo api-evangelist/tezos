@@ -54,6 +54,21 @@ tags:
   - Smart Contracts
   - NFT
   - Tokens
+  - Delegation
+  - Staking
+  - Governance
+  - FA1.2
+  - FA2
+  - WebSocket
+tags_raw:
+  - Tezos
+  - Blockchain
+  - TzKT
+  - Baking Bad
+  - Cryptocurrency
+  - Smart Contracts
+  - NFT
+  - Tokens
   - Delegations
   - Staking
   - Governance
@@ -141,7 +156,7 @@ apis:
   tags:
   - Transaction
   - Originations
-  - Delegations
+  - Delegation
   - Endorsements
   tags_raw:
   - Operations
@@ -245,6 +260,12 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Delegators
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Delegation
+  - Staking
+  - Baking
+  - Rewards
+  - Validator
+  tags_raw:
   - Delegations
   - Staking
   - Baking
@@ -286,6 +307,10 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Protocols
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Protocol
+  - Chain Constants
+  - History
+  tags_raw:
   - Protocols
   - Chain Constants
   - History
@@ -469,6 +494,8 @@ apis:
   humanURL: https://api.tzkt.io/#tag/Accounts
   baseURL: https://api.tzkt.io/v1
   tags:
+  - Protocol
+  tags_raw:
   - Protocols
   properties:
   - type: OpenAPI
