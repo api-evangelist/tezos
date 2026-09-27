@@ -652,196 +652,6 @@ paths:
                   $ref: '#/components/schemas/UnstakeRequest'
 components:
   schemas:
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Int64Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int64
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int64
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int64
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int64
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int64
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int64
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int64
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int64
-        empty:
-          type: boolean
-      x-tzkt-extension: query-parameter
-    UnstakeRequestStatusParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
-
-            Specify an unstake request status to get items where the specified field is equal to the specified value.
-
-
-            Example: `?status=pending`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an unstake request status to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?status.ne=finalized`.'
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: pending,finalizable,finalized
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
     BigIntegerNullableParameter:
       type: object
       additionalProperties: false
@@ -941,193 +751,95 @@ components:
 
             Example: `?nonce.null` or `?nonce.null=false`.'
       x-tzkt-extension: query-parameter
-    UnstakeRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT ID.  \n**[sortable]**"
-          format: int32
-        cycle:
-          type: integer
-          description: "Cycle at which the unstake request was created.  \n**[sortable]**"
-          format: int32
-        baker:
-          description: Related baker.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        staker:
-          description: Related staker.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        requestedAmount:
-          type: integer
-          description: Initially requested amount (mutez).
-          format: int64
-        restakedAmount:
-          type: integer
-          description: Amount that was restaked back (mutez).
-          format: int64
-        finalizedAmount:
-          type: integer
-          description: Finalized amount (mutez).
-          format: int64
-        slashedAmount:
-          type: integer
-          description: Slashed amount (mutez).
-          format: int64
-        roundingError:
-          type:
-          - integer
-          - 'null'
-          description: Protocol rounding error, appearing after slashing.
-          format: int64
-        actualAmount:
-          type: integer
-          description: 'Actual amount that was/is/will be available for finalizing. '
-          format: int64
-        status:
-          type: string
-          description: Status of the unstake request (`pending`, `finalizable`, `finalized`).
-        unlockCycle:
-          type: integer
-          description: Cycle at which the unstake request will become finalizable
-          format: int32
-        unlockLevel:
-          type: integer
-          description: Level of the block at which the unstake request will become finalizable
-          format: int32
-        unlockTime:
-          type: string
-          description: Timestamp of the block at which the unstake request will become finalizable
-          format: date-time
-        updatesCount:
-          type: integer
-          description: Number of staking updates related to the unstake request.
-          format: int32
-        firstLevel:
-          type: integer
-          description: "Level of the block where the unstake request was created.  \n**[sortable]**"
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the unstake request was created.
-          format: date-time
-        lastLevel:
-          type: integer
-          description: "Level of the block where the unstake request was last updated.  \n**[sortable]**"
-          format: int32
-        lastTime:
-          type: string
-          description: Timestamp of the block where the unstake request was last updated.
-          format: date-time
-    Int64NullParameter:
+    StakingUpdateTypeParameter:
       type: object
       additionalProperties: false
       properties:
         eq:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify an integer number to get items where the specified field is equal to the specified value.
+            Specify a staking update type to get items where the specified field is equal to the specified value.
 
 
-            Example: `?balance=1234`.'
-          format: int64
+            Example: `?kind=stake`.'
         ne:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is not equal to the specified value.
+            Specify a staking update type to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?balance.ne=1234`.'
-          format: int64
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int64
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int64
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int64
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int64
+            Example: `?kind.ne=finalize`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of staking update types to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?level.in=12,14,52,69`.'
+            Example: `?kind.in=stake,unstake`.'
           items:
-            type: integer
-            format: int64
+            type: string
         ni:
           type:
           - array
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of staking update types to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?level.ni=12,14,52,69`.'
+            Example: `?kind.ni=finalize,restake`.'
           items:
-            type: integer
-            format: int64
-        'null':
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: stake,unstake,restake,finalize,slash_staked,slash_unstaked
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
           type:
-          - boolean
+          - integer
           - 'null'
-          description: '**Is null** filter mode. \
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
 
-            Use this mode to get items where the specified field is null or not.
+            Skips specified number of elements.
 
 
-            Example: `?nonce.null` or `?nonce.null=false`.'
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
     StakingUpdate:
       type: object
@@ -1264,151 +976,6 @@ components:
           items:
             type: string
       x-tzkt-extension: query-parameter
-    StakingUpdateTypeParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a staking update type to get items where the specified field is equal to the specified value.
-
-
-            Example: `?kind=stake`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a staking update type to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?kind.ne=finalize`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of staking update types to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?kind.in=stake,unstake`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of staking update types to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?kind.ni=finalize,restake`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: stake,unstake,restake,finalize,slash_staked,slash_unstaked
-    AccountParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
-          type: boolean
-      x-tzkt-extension: query-parameter
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -1506,6 +1073,439 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    Int64Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int64
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int64
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int64
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int64
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int64
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int64
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int64
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int64
+        empty:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    UnstakeRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT ID.  \n**[sortable]**"
+          format: int32
+        cycle:
+          type: integer
+          description: "Cycle at which the unstake request was created.  \n**[sortable]**"
+          format: int32
+        baker:
+          description: Related baker.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        staker:
+          description: Related staker.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        requestedAmount:
+          type: integer
+          description: Initially requested amount (mutez).
+          format: int64
+        restakedAmount:
+          type: integer
+          description: Amount that was restaked back (mutez).
+          format: int64
+        finalizedAmount:
+          type: integer
+          description: Finalized amount (mutez).
+          format: int64
+        slashedAmount:
+          type: integer
+          description: Slashed amount (mutez).
+          format: int64
+        roundingError:
+          type:
+          - integer
+          - 'null'
+          description: Protocol rounding error, appearing after slashing.
+          format: int64
+        actualAmount:
+          type: integer
+          description: 'Actual amount that was/is/will be available for finalizing. '
+          format: int64
+        status:
+          type: string
+          description: Status of the unstake request (`pending`, `finalizable`, `finalized`).
+        unlockCycle:
+          type: integer
+          description: Cycle at which the unstake request will become finalizable
+          format: int32
+        unlockLevel:
+          type: integer
+          description: Level of the block at which the unstake request will become finalizable
+          format: int32
+        unlockTime:
+          type: string
+          description: Timestamp of the block at which the unstake request will become finalizable
+          format: date-time
+        updatesCount:
+          type: integer
+          description: Number of staking updates related to the unstake request.
+          format: int32
+        firstLevel:
+          type: integer
+          description: "Level of the block where the unstake request was created.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the unstake request was created.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the unstake request was last updated.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the unstake request was last updated.
+          format: date-time
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    Int64NullParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int64
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int64
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int64
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int64
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int64
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int64
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int64
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int64
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?nonce.null` or `?nonce.null=false`.'
+      x-tzkt-extension: query-parameter
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    UnstakeRequestStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an unstake request status to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=pending`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an unstake request status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=finalized`.'
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: pending,finalizable,finalized
     Int32Parameter:
       type: object
       additionalProperties: false

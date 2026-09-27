@@ -203,31 +203,6 @@ paths:
                   $ref: '#/components/schemas/BakingRight'
 components:
   schemas:
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
     BakingRightTypeParameter:
       type: object
       additionalProperties: false
@@ -254,35 +229,84 @@ components:
             Example: `?type.ne=attestation`.'
       x-tzkt-extension: query-parameter
       x-tzkt-query-parameter: baking,attestation
-    SelectParameter:
+    BakingRight:
       type: object
       additionalProperties: false
       properties:
-        fields:
+        type:
+          type: string
+          description: 'Type of the right:
+
+            - `baking` - right to bake (produce) a block;
+
+            - `attestation` - right to attest (validate) a block.'
+        cycle:
+          type: integer
+          description: Cycle on which the right can be realized.
+          format: int32
+        level:
+          type: integer
+          description: Level at which a block must be baked or an attestation must be sent.
+          format: int32
+        timestamp:
+          type: string
+          description: Time (estimated, in case of future rights) when a block must be baked or an attestation must be sent.
+          format: date-time
+        round:
           type:
-          - array
+          - integer
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+          description: 'Round (0 - ∞) at which the baker can propose/produce a block.
 
-            Specify a comma-separated list of fields to include into response.
+            If a baker at round  `0` doesn''t produce a block within the given time interval, then the right goes to a baker at round` 1`, etc.
 
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
+            For `attestation` rights this field is always `null`.'
+          format: int32
+        slots:
           type:
-          - array
+          - integer
           - 'null'
-          description: '**Values** selection mode. \
+          description: Number of slots to be attested. For `baking` rights this field is always `null`.
+          format: int32
+        baker:
+          description: Baker to which baking or attestation right has been given.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        status:
+          type: string
+          description: 'Status of the baking or attestation right:
 
-            Specify a comma-separated list of fields to include their values into response.
+            - `future` - the right is not realized yet;
+
+            - `realized` - the right was successfully realized;
+
+            - `missed` - the right was not realized.'
+    BakingRightStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify baking right status to get items where the specified field is equal to the specified value.
 
 
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
+            Example: `?type=future`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify baking right status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?type.ne=missed`.'
       x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: future,realized,uncovered,missed
     OffsetParameter:
       type: object
       additionalProperties: false
@@ -322,6 +346,89 @@ components:
 
             Example: `?offset.cr=45837`.'
           format: int64
+      x-tzkt-extension: query-parameter
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
       x-tzkt-extension: query-parameter
     Int32NullParameter:
       type: object
@@ -430,140 +537,59 @@ components:
 
             Example: `?nonce.null` or `?nonce.null=false`.'
       x-tzkt-extension: query-parameter
-    BakingRight:
+    SelectParameter:
       type: object
       additionalProperties: false
       properties:
-        type:
-          type: string
-          description: 'Type of the right:
-
-            - `baking` - right to bake (produce) a block;
-
-            - `attestation` - right to attest (validate) a block.'
-        cycle:
-          type: integer
-          description: Cycle on which the right can be realized.
-          format: int32
-        level:
-          type: integer
-          description: Level at which a block must be baked or an attestation must be sent.
-          format: int32
-        timestamp:
-          type: string
-          description: Time (estimated, in case of future rights) when a block must be baked or an attestation must be sent.
-          format: date-time
-        round:
+        fields:
           type:
-          - integer
+          - array
           - 'null'
-          description: 'Round (0 - ∞) at which the baker can propose/produce a block.
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
 
-            If a baker at round  `0` doesn''t produce a block within the given time interval, then the right goes to a baker at round` 1`, etc.
+            Specify a comma-separated list of fields to include into response.
 
-            For `attestation` rights this field is always `null`.'
-          format: int32
-        slots:
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
           type:
-          - integer
+          - array
           - 'null'
-          description: Number of slots to be attested. For `baking` rights this field is always `null`.
-          format: int32
-        baker:
-          description: Baker to which baking or attestation right has been given.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        status:
-          type: string
-          description: 'Status of the baking or attestation right:
+          description: '**Values** selection mode. \
 
-            - `future` - the right is not realized yet;
+            Specify a comma-separated list of fields to include their values into response.
 
-            - `realized` - the right was successfully realized;
 
-            - `missed` - the right was not realized.'
-    AccountParameter:
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    SortParameter:
       type: object
       additionalProperties: false
       properties:
-        eq:
+        asc:
           type:
           - string
           - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
 
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+            Specify a field name to sort by.
 
 
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
+            Example: `?sort=balance`.'
+        desc:
           type:
           - string
           - 'null'
-          description: '**Not equal** filter mode. \
+          description: '**Descending** sort mode. \
 
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+            Specify a field name to sort by descending.
 
 
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
-          type: boolean
+            Example: `?sort.desc=id`.'
       x-tzkt-extension: query-parameter
     Alias:
       type: object
@@ -577,32 +603,6 @@ components:
         address:
           type: string
           description: Account address (public key hash).
-    BakingRightStatusParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify baking right status to get items where the specified field is equal to the specified value.
-
-
-            Example: `?type=future`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify baking right status to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?type.ne=missed`.'
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: future,realized,uncovered,missed
     Int32Parameter:
       type: object
       additionalProperties: false

@@ -260,31 +260,6 @@ paths:
                 $ref: '#/components/schemas/Statistics'
 components:
   schemas:
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
     Symbols:
       type: string
       description: ''
@@ -309,34 +284,45 @@ components:
       - Krw
       - Eth
       - Gbp
-    SelectParameter:
+    OffsetParameter:
       type: object
       additionalProperties: false
       properties:
-        fields:
+        el:
           type:
-          - array
+          - integer
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
 
-            Specify a comma-separated list of fields to include into response.
+            Skips specified number of elements.
 
 
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
+            Example: `?offset=100`.'
+          format: int32
+        pg:
           type:
-          - array
+          - integer
           - 'null'
-          description: '**Values** selection mode. \
+          description: '**Page** offset mode. \
 
-            Specify a comma-separated list of fields to include their values into response.
+            Skips `page * limit` elements. This is a classic pagination.
 
 
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
     DateTimeParameter:
       type: object
@@ -549,46 +535,6 @@ components:
           description: Injected historical quote at the time of the block at which the statistics has been calculated
           oneOf:
           - $ref: '#/components/schemas/QuoteShort'
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -685,6 +631,112 @@ components:
           items:
             type: string
             format: date-time
+      x-tzkt-extension: query-parameter
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type:
+          - number
+          - 'null'
+          description: XTZ/BTC price
+          format: double
+        eur:
+          type:
+          - number
+          - 'null'
+          description: XTZ/EUR price
+          format: double
+        usd:
+          type:
+          - number
+          - 'null'
+          description: XTZ/USD price
+          format: double
+        cny:
+          type:
+          - number
+          - 'null'
+          description: XTZ/CNY price
+          format: double
+        jpy:
+          type:
+          - number
+          - 'null'
+          description: XTZ/JPY price
+          format: double
+        krw:
+          type:
+          - number
+          - 'null'
+          description: XTZ/KRW price
+          format: double
+        eth:
+          type:
+          - number
+          - 'null'
+          description: XTZ/ETH price
+          format: double
+        gbp:
+          type:
+          - number
+          - 'null'
+          description: XTZ/GBP price
+          format: double
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
       x-tzkt-extension: query-parameter
     Int32Parameter:
       type: object
@@ -783,58 +835,6 @@ components:
             type: integer
             format: int32
       x-tzkt-extension: query-parameter
-    QuoteShort:
-      type: object
-      additionalProperties: false
-      properties:
-        btc:
-          type:
-          - number
-          - 'null'
-          description: XTZ/BTC price
-          format: double
-        eur:
-          type:
-          - number
-          - 'null'
-          description: XTZ/EUR price
-          format: double
-        usd:
-          type:
-          - number
-          - 'null'
-          description: XTZ/USD price
-          format: double
-        cny:
-          type:
-          - number
-          - 'null'
-          description: XTZ/CNY price
-          format: double
-        jpy:
-          type:
-          - number
-          - 'null'
-          description: XTZ/JPY price
-          format: double
-        krw:
-          type:
-          - number
-          - 'null'
-          description: XTZ/KRW price
-          format: double
-        eth:
-          type:
-          - number
-          - 'null'
-          description: XTZ/ETH price
-          format: double
-        gbp:
-          type:
-          - number
-          - 'null'
-          description: XTZ/GBP price
-          format: double
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API

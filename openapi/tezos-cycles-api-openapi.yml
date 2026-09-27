@@ -125,31 +125,6 @@ paths:
                 $ref: '#/components/schemas/Cycle'
 components:
   schemas:
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
     Symbols:
       type: string
       description: ''
@@ -174,35 +149,6 @@ components:
       - Krw
       - Eth
       - Gbp
-    SelectParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
     OffsetParameter:
       type: object
       additionalProperties: false
@@ -242,6 +188,87 @@ components:
 
             Example: `?offset.cr=45837`.'
           format: int64
+      x-tzkt-extension: query-parameter
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type:
+          - number
+          - 'null'
+          description: XTZ/BTC price
+          format: double
+        eur:
+          type:
+          - number
+          - 'null'
+          description: XTZ/EUR price
+          format: double
+        usd:
+          type:
+          - number
+          - 'null'
+          description: XTZ/USD price
+          format: double
+        cny:
+          type:
+          - number
+          - 'null'
+          description: XTZ/CNY price
+          format: double
+        jpy:
+          type:
+          - number
+          - 'null'
+          description: XTZ/JPY price
+          format: double
+        krw:
+          type:
+          - number
+          - 'null'
+          description: XTZ/KRW price
+          format: double
+        eth:
+          type:
+          - number
+          - 'null'
+          description: XTZ/ETH price
+          format: double
+        gbp:
+          type:
+          - number
+          - 'null'
+          description: XTZ/GBP price
+          format: double
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
       x-tzkt-extension: query-parameter
     Cycle:
       type: object
@@ -322,58 +349,31 @@ components:
           type: integer
           description: '**DEPRECATED**'
           format: int64
-    QuoteShort:
+    SortParameter:
       type: object
       additionalProperties: false
       properties:
-        btc:
+        asc:
           type:
-          - number
+          - string
           - 'null'
-          description: XTZ/BTC price
-          format: double
-        eur:
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
           type:
-          - number
+          - string
           - 'null'
-          description: XTZ/EUR price
-          format: double
-        usd:
-          type:
-          - number
-          - 'null'
-          description: XTZ/USD price
-          format: double
-        cny:
-          type:
-          - number
-          - 'null'
-          description: XTZ/CNY price
-          format: double
-        jpy:
-          type:
-          - number
-          - 'null'
-          description: XTZ/JPY price
-          format: double
-        krw:
-          type:
-          - number
-          - 'null'
-          description: XTZ/KRW price
-          format: double
-        eth:
-          type:
-          - number
-          - 'null'
-          description: XTZ/ETH price
-          format: double
-        gbp:
-          type:
-          - number
-          - 'null'
-          description: XTZ/GBP price
-          format: double
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API
