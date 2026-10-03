@@ -1059,240 +1059,6 @@ paths:
                   $ref: '#/components/schemas/TokenBalanceShort'
 components:
   schemas:
-    TokenBalanceShort:
-      type: object
-      additionalProperties: false
-      properties:
-        account:
-          description: "Owner account.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        token:
-          description: "Token info.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/TokenInfoShort'
-        balance:
-          type: string
-          description: "Balance (raw value, not divided by `decimals`).  \n**[sortable]**"
-    Int64Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int64
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int64
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int64
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int64
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int64
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int64
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int64
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int64
-        empty:
-          type: boolean
-      x-tzkt-extension: query-parameter
-    ValueTupleOfStringAndListOfInteger:
-      type: object
-      additionalProperties: false
-    TokenInfo:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: Internal TzKT id (not the same as `tokenId`).
-          format: int64
-        contract:
-          description: Contract, created the token.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        tokenId:
-          type: string
-          description: Token id, unique within the contract.
-        standard:
-          type: string
-          description: Token standard (either `fa1.2` or `fa2`).
-        totalSupply:
-          type: string
-          description: Total number of existing tokens (raw value, not divided by `decimals`).
-        metadata:
-          description: "Token metadata.  \n**[sortable]**"
-    TokenGlobalIdParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is equal to the specified value.
-
-
-            Example: `?type=fa2`.'
-        in:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?type.ne=fa1.2`.'
-    TokenBalance:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int64
-        account:
-          description: "Owner account.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        token:
-          description: "Token info.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/TokenInfo'
-        balance:
-          type: string
-          description: "Balance (raw value, not divided by `decimals`).  \n**[sortable]**"
-        balanceValue:
-          type:
-          - string
-          - 'null'
-          description: "Balance value in mutez, based on the current token price.  \n**[sortable]**"
-        transfersCount:
-          type: integer
-          description: "Total number of transfers, affecting the token balance.  \n**[sortable]**"
-          format: int32
-        firstLevel:
-          type: integer
-          description: "Level of the block where the token balance was first changed.  \n**[sortable]**"
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the token balance was first changed.
-          format: date-time
-        lastLevel:
-          type: integer
-          description: "Level of the block where the token balance was last changed.  \n**[sortable]**"
-          format: int32
-        lastTime:
-          type: string
-          description: Timestamp of the block where the token balance was last changed.
-          format: date-time
-    TokenStandardParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is equal to the specified value.
-
-
-            Example: `?type=fa2`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?type.ne=fa1.2`.'
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: fa1.2,fa2
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -1390,6 +1156,91 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
+    TokenGlobalIdParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is equal to the specified value.
+
+
+            Example: `?type=fa2`.'
+        in:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?type.ne=fa1.2`.'
+    Token:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id (not the same as `tokenId`).  \n**[sortable]**"
+          format: int64
+        contract:
+          description: Contract, created the token.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        tokenId:
+          type: string
+          description: "Token id, unique within the contract.  \n**[sortable]**"
+        standard:
+          type: string
+          description: Token standard (`fa1.2` or `fa2`).
+        firstMinter:
+          description: Account, minted the token first.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        firstLevel:
+          type: integer
+          description: "Level of the block where the token was first seen.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the token was first seen.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the token was last seen.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the token was last seen.
+          format: date-time
+        transfersCount:
+          type: integer
+          description: "Total number of transfers.  \n**[sortable]**"
+          format: int32
+        balancesCount:
+          type: integer
+          description: "Total number of holders ever seen.  \n**[sortable]**"
+          format: int32
+        holdersCount:
+          type: integer
+          description: "Total number of current holders.  \n**[sortable]**"
+          format: int32
+        totalMinted:
+          type: string
+          description: Total number of minted tokens (raw value, not divided by `decimals`).
+        totalBurned:
+          type: string
+          description: Total number of burned tokens (raw value, not divided by `decimals`).
+        totalSupply:
+          type: string
+          description: Total number of existing tokens (raw value, not divided by `decimals`).
+        metadata:
+          description: "Token metadata.  \n**[sortable]**"
     SortParameter:
       type: object
       additionalProperties: false
@@ -1415,19 +1266,7 @@ components:
 
             Example: `?sort.desc=id`.'
       x-tzkt-extension: query-parameter
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
-    Int32Parameter:
+    Int64Parameter:
       type: object
       additionalProperties: false
       properties:
@@ -1441,7 +1280,7 @@ components:
 
 
             Example: `?balance=1234`.'
-          format: int32
+          format: int64
         ne:
           type:
           - integer
@@ -1452,7 +1291,7 @@ components:
 
 
             Example: `?balance.ne=1234`.'
-          format: int32
+          format: int64
         gt:
           type:
           - integer
@@ -1463,7 +1302,7 @@ components:
 
 
             Example: `?balance.gt=1234`.'
-          format: int32
+          format: int64
         ge:
           type:
           - integer
@@ -1474,7 +1313,7 @@ components:
 
 
             Example: `?balance.ge=1234`.'
-          format: int32
+          format: int64
         lt:
           type:
           - integer
@@ -1485,7 +1324,7 @@ components:
 
 
             Example: `?balance.lt=1234`.'
-          format: int32
+          format: int64
         le:
           type:
           - integer
@@ -1496,7 +1335,7 @@ components:
 
 
             Example: `?balance.le=1234`.'
-          format: int32
+          format: int64
         in:
           type:
           - array
@@ -1509,7 +1348,7 @@ components:
             Example: `?level.in=12,14,52,69`.'
           items:
             type: integer
-            format: int32
+            format: int64
         ni:
           type:
           - array
@@ -1522,178 +1361,8 @@ components:
             Example: `?level.ni=12,14,52,69`.'
           items:
             type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
-    TokenTransfer:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int64
-        level:
-          type: integer
-          description: "Level of the block, at which the token transfer was made.  \n**[sortable]**"
-          format: int32
-        timestamp:
-          type: string
-          description: Timestamp of the block, at which the token transfer was made.
-          format: date-time
-        token:
-          description: "Token info.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/TokenInfo'
-        from:
-          description: "Sender account.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        to:
-          description: "Target account.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        amount:
-          type: string
-          description: "Amount of tokens transferred (raw value, not divided by `decimals`).  \n**[sortable]**"
-        transactionId:
-          type:
-          - integer
-          - 'null'
-          description: Internal TzKT id of the transaction operation, caused the token transfer.
-          format: int64
-        originationId:
-          type:
-          - integer
-          - 'null'
-          description: Internal TzKT id of the origination operation, caused the token transfer.
-          format: int64
-        migrationId:
-          type:
-          - integer
-          - 'null'
-          description: Internal TzKT id of the migration operation, caused the token transfer.
-          format: int64
-    AccountParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
+            format: int64
+        empty:
           type: boolean
       x-tzkt-extension: query-parameter
     JsonParameter:
@@ -1854,7 +1523,7 @@ components:
             Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
           x-tzkt-extension: json-parameter
       x-tzkt-extension: json-parameter
-    NatParameter:
+    TokenStandardParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1864,146 +1533,22 @@ components:
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify a `nat` value to get items where the specified field is equal to the specified value.
+            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is equal to the specified value.
 
 
-            Example: `?balance=1234`.'
+            Example: `?type=fa2`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify a `nat` value to get items where the specified field is not equal to the specified value.
+            Specify token standard (`fa1.2` or `fa2`) to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?balance.ne=1234`.'
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of `nat` values to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of `nat` values to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: string
+            Example: `?type.ne=fa1.2`.'
       x-tzkt-extension: query-parameter
-    Token:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id (not the same as `tokenId`).  \n**[sortable]**"
-          format: int64
-        contract:
-          description: Contract, created the token.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        tokenId:
-          type: string
-          description: "Token id, unique within the contract.  \n**[sortable]**"
-        standard:
-          type: string
-          description: Token standard (`fa1.2` or `fa2`).
-        firstMinter:
-          description: Account, minted the token first.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        firstLevel:
-          type: integer
-          description: "Level of the block where the token was first seen.  \n**[sortable]**"
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the token was first seen.
-          format: date-time
-        lastLevel:
-          type: integer
-          description: "Level of the block where the token was last seen.  \n**[sortable]**"
-          format: int32
-        lastTime:
-          type: string
-          description: Timestamp of the block where the token was last seen.
-          format: date-time
-        transfersCount:
-          type: integer
-          description: "Total number of transfers.  \n**[sortable]**"
-          format: int32
-        balancesCount:
-          type: integer
-          description: "Total number of holders ever seen.  \n**[sortable]**"
-          format: int32
-        holdersCount:
-          type: integer
-          description: "Total number of current holders.  \n**[sortable]**"
-          format: int32
-        totalMinted:
-          type: string
-          description: Total number of minted tokens (raw value, not divided by `decimals`).
-        totalBurned:
-          type: string
-          description: Total number of burned tokens (raw value, not divided by `decimals`).
-        totalSupply:
-          type: string
-          description: Total number of existing tokens (raw value, not divided by `decimals`).
-        metadata:
-          description: "Token metadata.  \n**[sortable]**"
+      x-tzkt-query-parameter: fa1.2,fa2
     AnyOfParameter:
       type: object
       additionalProperties: false
@@ -2041,42 +1586,276 @@ components:
 
             Example: `?anyof.from.to.null` or `?anyof.from.to.null=false`.'
       x-tzkt-extension: anyof-parameter
-    SelectionParameter:
+    TokenBalance:
       type: object
       additionalProperties: false
       properties:
-        fields:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        account:
+          description: "Owner account.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        token:
+          description: "Token info.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/TokenInfo'
+        balance:
+          type: string
+          description: "Balance (raw value, not divided by `decimals`).  \n**[sortable]**"
+        balanceValue:
+          type:
+          - string
+          - 'null'
+          description: "Balance value in mutez, based on the current token price.  \n**[sortable]**"
+        transfersCount:
+          type: integer
+          description: "Total number of transfers, affecting the token balance.  \n**[sortable]**"
+          format: int32
+        firstLevel:
+          type: integer
+          description: "Level of the block where the token balance was first changed.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the token balance was first changed.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the token balance was last changed.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the token balance was last changed.
+          format: date-time
+    TokenInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal TzKT id (not the same as `tokenId`).
+          format: int64
+        contract:
+          description: Contract, created the token.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        tokenId:
+          type: string
+          description: Token id, unique within the contract.
+        standard:
+          type: string
+          description: Token standard (either `fa1.2` or `fa2`).
+        totalSupply:
+          type: string
+          description: Total number of existing tokens (raw value, not divided by `decimals`).
+        metadata:
+          description: "Token metadata.  \n**[sortable]**"
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
           type:
           - array
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+          description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of fields to include into response.
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
 
 
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+            Example: `?level.in=12,14,52,69`.'
           items:
-            type: string
-        values:
+            type: integer
+            format: int32
+        ni:
           type:
           - array
           - 'null'
-          description: '**Values** selection mode. \
+          description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of fields to include their values into response.
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
 
 
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
+            Example: `?level.ni=12,14,52,69`.'
           items:
-            type: string
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    Int64NullParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int64
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int64
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int64
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int64
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int64
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int64
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int64
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int64
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?nonce.null` or `?nonce.null=false`.'
       x-tzkt-extension: query-parameter
     Int32NullParameter:
       type: object
@@ -2185,6 +1964,211 @@ components:
 
             Example: `?nonce.null` or `?nonce.null=false`.'
       x-tzkt-extension: query-parameter
+    TokenBalanceShort:
+      type: object
+      additionalProperties: false
+      properties:
+        account:
+          description: "Owner account.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        token:
+          description: "Token info.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/TokenInfoShort'
+        balance:
+          type: string
+          description: "Balance (raw value, not divided by `decimals`).  \n**[sortable]**"
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    TokenTransfer:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        level:
+          type: integer
+          description: "Level of the block, at which the token transfer was made.  \n**[sortable]**"
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block, at which the token transfer was made.
+          format: date-time
+        token:
+          description: "Token info.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/TokenInfo'
+        from:
+          description: "Sender account.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        to:
+          description: "Target account.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        amount:
+          type: string
+          description: "Amount of tokens transferred (raw value, not divided by `decimals`).  \n**[sortable]**"
+        transactionId:
+          type:
+          - integer
+          - 'null'
+          description: Internal TzKT id of the transaction operation, caused the token transfer.
+          format: int64
+        originationId:
+          type:
+          - integer
+          - 'null'
+          description: Internal TzKT id of the origination operation, caused the token transfer.
+          format: int64
+        migrationId:
+          type:
+          - integer
+          - 'null'
+          description: Internal TzKT id of the migration operation, caused the token transfer.
+          format: int64
+    ValueTupleOfStringAndListOfInteger:
+      type: object
+      additionalProperties: false
+    NatParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `nat` value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+        gt:
+          type:
+          - string
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of `nat` values to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of `nat` values to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
     TokenInfoShort:
       type: object
       additionalProperties: false
@@ -2205,102 +2189,74 @@ components:
           description: Token standard (either `fa1.2` or `fa2`).
         metadata:
           description: "Token metadata.  \n**[sortable]**"
-    Int64NullParameter:
+    AccountParameter:
       type: object
       additionalProperties: false
       properties:
         eq:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify an integer number to get items where the specified field is equal to the specified value.
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
 
 
-            Example: `?balance=1234`.'
-          format: int64
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
         ne:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is not equal to the specified value.
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?balance.ne=1234`.'
-          format: int64
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int64
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int64
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int64
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int64
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?level.in=12,14,52,69`.'
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
           items:
-            type: integer
-            format: int64
+            type: string
         ni:
           type:
           - array
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?level.ni=12,14,52,69`.'
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
           items:
-            type: integer
-            format: int64
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
         'null':
           type:
           - boolean
@@ -2310,7 +2266,51 @@ components:
             Use this mode to get items where the specified field is null or not.
 
 
-            Example: `?nonce.null` or `?nonce.null=false`.'
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

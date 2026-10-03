@@ -149,46 +149,6 @@ paths:
                 format: int32
 components:
   schemas:
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
     Commitment:
       type: object
       additionalProperties: false
@@ -219,6 +179,35 @@ components:
           description: Info about activated account. `null` if the account is not activated yet.
           oneOf:
           - $ref: '#/components/schemas/Alias'
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
     Int32NullParameter:
       type: object
       additionalProperties: false
@@ -326,35 +315,18 @@ components:
 
             Example: `?nonce.null` or `?nonce.null=false`.'
       x-tzkt-extension: query-parameter
-    SelectParameter:
+    Alias:
       type: object
       additionalProperties: false
       properties:
-        fields:
+        alias:
           type:
-          - array
+          - string
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
     Int64Parameter:
       type: object
       additionalProperties: false
@@ -479,18 +451,46 @@ components:
 
             Example: `?sort.desc=id`.'
       x-tzkt-extension: query-parameter
-    Alias:
+    OffsetParameter:
       type: object
       additionalProperties: false
       properties:
-        alias:
+        el:
           type:
-          - string
+          - integer
           - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API

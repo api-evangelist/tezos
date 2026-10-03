@@ -214,83 +214,164 @@ paths:
                   $ref: '#/components/schemas/ContractEvent'
 components:
   schemas:
-    OffsetParameter:
+    JsonParameter:
       type: object
       additionalProperties: false
       properties:
-        el:
+        eq:
           type:
-          - integer
+          - string
           - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Skips specified number of elements.
+            Specify a JSON value to get items where the specified field is equal to the specified value.
 
 
-            Example: `?offset=100`.'
-          format: int32
-        pg:
+            Example: `?parameter.from=tz1...` or `?parameter.signatures.[3].[0]=null` or `?parameter.sigs.[*]=null`.'
+          x-tzkt-extension: json-parameter
+        ne:
           type:
-          - integer
+          - string
           - 'null'
-          description: '**Page** offset mode. \
+          description: '**Not equal** filter mode. \
 
-            Skips `page * limit` elements. This is a classic pagination.
+            Specify a JSON value to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
+            Example: `?parameter.ne=true` or `?parameter.amount.ne=0`.'
+          x-tzkt-extension: json-parameter
+        gt:
           type:
-          - integer
+          - string
           - 'null'
-          description: '**Cursor** offset mode. \
+          description: '**Greater than** filter mode. \
 
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+            Specify a string to get items where the specified field is greater than the specified value.
 
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
 
 
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
-    SelectionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
+            Example: `?parameter.balance.gt=1234` or `?parameter.time.gt=2021-02-01`.'
+          x-tzkt-extension: json-parameter
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify a string to get items where the specified field is greater than equal to the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.ge=1234` or `?parameter.time.ge=2021-02-01`.'
+          x-tzkt-extension: json-parameter
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify a string to get items where the specified field is less than the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.lt=1234` or `?parameter.time.lt=2021-02-01`.'
+          x-tzkt-extension: json-parameter
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify a string to get items where the specified field is less than or equal to the specified value.
+
+            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
+
+            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
+
+            Otherwise, result may surprise you.
+
+
+            Example: `?parameter.balance.le=1234` or `?parameter.time.le=2021-02-01`.'
+          x-tzkt-extension: json-parameter
+        as:
+          type:
+          - string
+          - 'null'
+          description: '**Same as** filter mode. \
+
+            Specify a string template to get items where the specified field matches the specified template. \
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameter.as=*mid*` or `?parameter.as=*end`.'
+          x-tzkt-extension: json-parameter
+        un:
+          type:
+          - string
+          - 'null'
+          description: '**Unlike** filter mode. \
+
+            Specify a string template to get items where the specified field doesn''t match the specified template.
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameter.un=*mid*` or `?parameter.un=*end`.'
+          x-tzkt-extension: json-parameter
+        in:
           type:
           - array
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+          description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of fields to include into response.
+            Specify a comma-separated list of strings or JSON array to get items where the specified field is equal to one of the specified values. \
 
 
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+            Example: `?parameter.amount.in=1,2,3` or `?parameter.in=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
           items:
             type: string
-        values:
+          x-tzkt-extension: json-parameter
+        ni:
           type:
           - array
           - 'null'
-          description: '**Values** selection mode. \
+          description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of fields to include their values into response.
+            Specify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \
+
+            Use `\,` as an escape symbol.
 
 
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
+            Example: `?parameter.amount.ni=1,2,3` or `?parameter.ni=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
           items:
             type: string
-      x-tzkt-extension: query-parameter
+          x-tzkt-extension: json-parameter
+        'null':
+          type: boolean
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
+          x-tzkt-extension: json-parameter
+      x-tzkt-extension: json-parameter
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -475,203 +556,80 @@ components:
 
             Example: `?parameters.null` or `?parameters.null=false`.'
       x-tzkt-extension: query-parameter
-    JsonParameter:
+    Alias:
       type: object
       additionalProperties: false
       properties:
-        eq:
+        alias:
           type:
           - string
           - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a JSON value to get items where the specified field is equal to the specified value.
-
-
-            Example: `?parameter.from=tz1...` or `?parameter.signatures.[3].[0]=null` or `?parameter.sigs.[*]=null`.'
-          x-tzkt-extension: json-parameter
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a JSON value to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?parameter.ne=true` or `?parameter.amount.ne=0`.'
-          x-tzkt-extension: json-parameter
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a string to get items where the specified field is greater than the specified value.
-
-            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
-
-            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
-
-            Otherwise, result may surprise you.
-
-
-            Example: `?parameter.balance.gt=1234` or `?parameter.time.gt=2021-02-01`.'
-          x-tzkt-extension: json-parameter
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a string to get items where the specified field is greater than equal to the specified value.
-
-            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
-
-            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
-
-            Otherwise, result may surprise you.
-
-
-            Example: `?parameter.balance.ge=1234` or `?parameter.time.ge=2021-02-01`.'
-          x-tzkt-extension: json-parameter
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a string to get items where the specified field is less than the specified value.
-
-            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
-
-            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
-
-            Otherwise, result may surprise you.
-
-
-            Example: `?parameter.balance.lt=1234` or `?parameter.time.lt=2021-02-01`.'
-          x-tzkt-extension: json-parameter
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a string to get items where the specified field is less than or equal to the specified value.
-
-            Note that all stored JSON values are strings, so this will be a comparison of two strings, so we recommend comparing values of the same type,
-
-            e.g. numeric strings with numeric strings (`parameter.number.gt=123`), datetime strings with datetime strings (`parameter.date.gt=2021-01-01`), etc.
-
-            Otherwise, result may surprise you.
-
-
-            Example: `?parameter.balance.le=1234` or `?parameter.time.le=2021-02-01`.'
-          x-tzkt-extension: json-parameter
-        as:
-          type:
-          - string
-          - 'null'
-          description: '**Same as** filter mode. \
-
-            Specify a string template to get items where the specified field matches the specified template. \
-
-            This mode supports wildcard `*`. Use `\*` as an escape symbol.
-
-
-            Example: `?parameter.as=*mid*` or `?parameter.as=*end`.'
-          x-tzkt-extension: json-parameter
-        un:
-          type:
-          - string
-          - 'null'
-          description: '**Unlike** filter mode. \
-
-            Specify a string template to get items where the specified field doesn''t match the specified template.
-
-            This mode supports wildcard `*`. Use `\*` as an escape symbol.
-
-
-            Example: `?parameter.un=*mid*` or `?parameter.un=*end`.'
-          x-tzkt-extension: json-parameter
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of strings or JSON array to get items where the specified field is equal to one of the specified values. \
-
-
-            Example: `?parameter.amount.in=1,2,3` or `?parameter.in=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
-          items:
-            type: string
-          x-tzkt-extension: json-parameter
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \
-
-            Use `\,` as an escape symbol.
-
-
-            Example: `?parameter.amount.ni=1,2,3` or `?parameter.ni=[{"from":"tz1","to":"tz2"},{"from":"tz2","to":"tz1"}]`.'
-          items:
-            type: string
-          x-tzkt-extension: json-parameter
-        'null':
-          type: boolean
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
-          x-tzkt-extension: json-parameter
-      x-tzkt-extension: json-parameter
-    ContractEvent:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int32
-        level:
-          type: integer
-          description: "Level of the block, at which the event was emitted.  \n**[sortable]**"
-          format: int32
-        timestamp:
+          description: Account alias name (off-chain data).
+        address:
           type: string
-          description: Timestamp of the block, at which the event was emitted.
-          format: date-time
-        contract:
-          description: "Contract emitted the event.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        codeHash:
-          type: integer
-          description: Hash of the contract code.
-          format: int32
-        tag:
+          description: Account address (public key hash).
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
           type:
           - string
           - 'null'
-          description: Event tag.
-        payload:
-          description: "Event payload in human-readable JSON format.  \n**[sortable]**"
-        transactionId:
-          type: integer
-          description: Internal TzKT id of the transaction operation, caused the event.
-          format: int64
-        type:
-          description: "Michelson type of the payload.  \n**Must be explicitly selected**"
-        rawPayload:
-          description: "Payload in raw Micheline format.  \n**Must be explicitly selected**"
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
     Int64Parameter:
       type: object
       additionalProperties: false
@@ -854,43 +812,45 @@ components:
         niHasNull:
           type: boolean
       x-tzkt-extension: query-parameter
-    SortParameter:
+    ContractEvent:
       type: object
       additionalProperties: false
       properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int32
+        level:
+          type: integer
+          description: "Level of the block, at which the event was emitted.  \n**[sortable]**"
+          format: int32
+        timestamp:
           type: string
-          description: Account address (public key hash).
+          description: Timestamp of the block, at which the event was emitted.
+          format: date-time
+        contract:
+          description: "Contract emitted the event.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        codeHash:
+          type: integer
+          description: Hash of the contract code.
+          format: int32
+        tag:
+          type:
+          - string
+          - 'null'
+          description: Event tag.
+        payload:
+          description: "Event payload in human-readable JSON format.  \n**[sortable]**"
+        transactionId:
+          type: integer
+          description: Internal TzKT id of the transaction operation, caused the event.
+          format: int64
+        type:
+          description: "Michelson type of the payload.  \n**Must be explicitly selected**"
+        rawPayload:
+          description: "Payload in raw Micheline format.  \n**Must be explicitly selected**"
     Int32Parameter:
       type: object
       additionalProperties: false
@@ -987,6 +947,46 @@ components:
           items:
             type: integer
             format: int32
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

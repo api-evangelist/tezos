@@ -260,281 +260,6 @@ paths:
                 $ref: '#/components/schemas/Statistics'
 components:
   schemas:
-    Symbols:
-      type: string
-      description: ''
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
-      enum:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
-    DateTimeParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=2020-01-01` is the same as `param=2020-01-01`). \
-
-            Specify a datetime to get items where the specified field is equal to the specified value.
-
-
-            Example: `?timestamp=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a datetime to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
-          format: date-time
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a datetime to get items where the specified field is greater than the specified value.
-
-
-            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a datetime to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a datetime to get items where the specified field is less than the specified value.
-
-
-            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a datetime to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
-          format: date-time
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-      x-tzkt-extension: query-parameter
-    Statistics:
-      type: object
-      additionalProperties: false
-      properties:
-        cycle:
-          type:
-          - integer
-          - 'null'
-          description: Cycle at the end of which the statistics has been calculated. This field is only present in cyclic statistics.
-          format: int32
-        date:
-          type:
-          - string
-          - 'null'
-          description: Day at the end of which the statistics has been calculated. This field is only present in daily statistics.
-          format: date-time
-        level:
-          type: integer
-          description: Level of the block at which the statistics has been calculated
-          format: int32
-        timestamp:
-          type: string
-          description: Timestamp of the block at which the statistics has been calculated (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
-          format: date-time
-        totalSupply:
-          type: integer
-          description: Total supply - all existing tokens (including locked vested funds and frozen funds) plus not yet activated fundraiser tokens
-          format: int64
-        circulatingSupply:
-          type: integer
-          description: Circulating supply - all active tokens which can affect supply and demand (can be spent/transferred)
-          format: int64
-        totalBootstrapped:
-          type: integer
-          description: Total amount of tokens initially created when starting the blockchain
-          format: int64
-        totalCommitments:
-          type: integer
-          description: Total commitment amount (tokens to be activated by fundraisers)
-          format: int64
-        totalActivated:
-          type: integer
-          description: Total amount of tokens activated by fundraisers
-          format: int64
-        totalCreated:
-          type: integer
-          description: Total amount of created/issued tokens
-          format: int64
-        totalBurned:
-          type: integer
-          description: Total amount of burned tokens
-          format: int64
-        totalBanished:
-          type: integer
-          description: Total amount of tokens sent to the null-address, which is equivalent to burning
-          format: int64
-        totalFrozen:
-          type: integer
-          description: Total amount of frozen tokens (frozen security deposits, frozen rewards and frozen fees)
-          format: int64
-        totalRollupBonds:
-          type: integer
-          description: Total amount of tokens locked as rollup bonds
-          format: int64
-        totalSmartRollupBonds:
-          type: integer
-          description: Total amount of tokens locked as smart rollup bonds
-          format: int64
-        totalLost:
-          type: integer
-          description: 'Total amount lost due to inaccuracy of the economic protocol introduced in Oxford.
-
-            This amount is literally lost, because it is no longer available for the account in any mean, but for some reason it is counted as delegated.'
-          format: int64
-        totalOwnStaked:
-          type: integer
-          description: Total active bakers' own staked balance
-          format: int64
-        totalOwnDelegated:
-          type: integer
-          description: Total active bakers' own delegated balance
-          format: int64
-        totalExternalStaked:
-          type: integer
-          description: Total active bakers' external staked balance
-          format: int64
-        totalExternalDelegated:
-          type: integer
-          description: Total active bakers' external delegated balance
-          format: int64
-        totalBakingPower:
-          type: integer
-          description: Total active bakers' baking power
-          format: int64
-        totalVotingPower:
-          type: integer
-          description: Total active bakers' voting power
-          format: int64
-        totalBakers:
-          type: integer
-          description: Total number of active bakers
-          format: int32
-        totalStakers:
-          type: integer
-          description: Total number of active bakers' stakers
-          format: int32
-        totalDelegators:
-          type: integer
-          description: Total number of active bakers' delegators
-          format: int32
-        quote:
-          description: Injected historical quote at the time of the block at which the statistics has been calculated
-          oneOf:
-          - $ref: '#/components/schemas/QuoteShort'
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -632,58 +357,6 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
-    QuoteShort:
-      type: object
-      additionalProperties: false
-      properties:
-        btc:
-          type:
-          - number
-          - 'null'
-          description: XTZ/BTC price
-          format: double
-        eur:
-          type:
-          - number
-          - 'null'
-          description: XTZ/EUR price
-          format: double
-        usd:
-          type:
-          - number
-          - 'null'
-          description: XTZ/USD price
-          format: double
-        cny:
-          type:
-          - number
-          - 'null'
-          description: XTZ/CNY price
-          format: double
-        jpy:
-          type:
-          - number
-          - 'null'
-          description: XTZ/JPY price
-          format: double
-        krw:
-          type:
-          - number
-          - 'null'
-          description: XTZ/KRW price
-          format: double
-        eth:
-          type:
-          - number
-          - 'null'
-          description: XTZ/ETH price
-          format: double
-        gbp:
-          type:
-          - number
-          - 'null'
-          description: XTZ/GBP price
-          format: double
     SelectParameter:
       type: object
       additionalProperties: false
@@ -712,6 +385,127 @@ components:
             Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
           items:
             type: string
+      x-tzkt-extension: query-parameter
+    Symbols:
+      type: string
+      description: ''
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+      enum:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+    DateTimeParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=2020-01-01` is the same as `param=2020-01-01`). \
+
+            Specify a datetime to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+        gt:
+          type:
+          - string
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify a datetime to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
       x-tzkt-extension: query-parameter
     SortParameter:
       type: object
@@ -834,6 +628,212 @@ components:
           items:
             type: integer
             format: int32
+      x-tzkt-extension: query-parameter
+    Statistics:
+      type: object
+      additionalProperties: false
+      properties:
+        cycle:
+          type:
+          - integer
+          - 'null'
+          description: Cycle at the end of which the statistics has been calculated. This field is only present in cyclic statistics.
+          format: int32
+        date:
+          type:
+          - string
+          - 'null'
+          description: Day at the end of which the statistics has been calculated. This field is only present in daily statistics.
+          format: date-time
+        level:
+          type: integer
+          description: Level of the block at which the statistics has been calculated
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block at which the statistics has been calculated (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+          format: date-time
+        totalSupply:
+          type: integer
+          description: Total supply - all existing tokens (including locked vested funds and frozen funds) plus not yet activated fundraiser tokens
+          format: int64
+        circulatingSupply:
+          type: integer
+          description: Circulating supply - all active tokens which can affect supply and demand (can be spent/transferred)
+          format: int64
+        totalBootstrapped:
+          type: integer
+          description: Total amount of tokens initially created when starting the blockchain
+          format: int64
+        totalCommitments:
+          type: integer
+          description: Total commitment amount (tokens to be activated by fundraisers)
+          format: int64
+        totalActivated:
+          type: integer
+          description: Total amount of tokens activated by fundraisers
+          format: int64
+        totalCreated:
+          type: integer
+          description: Total amount of created/issued tokens
+          format: int64
+        totalBurned:
+          type: integer
+          description: Total amount of burned tokens
+          format: int64
+        totalBanished:
+          type: integer
+          description: Total amount of tokens sent to the null-address, which is equivalent to burning
+          format: int64
+        totalFrozen:
+          type: integer
+          description: Total amount of frozen tokens (frozen security deposits, frozen rewards and frozen fees)
+          format: int64
+        totalRollupBonds:
+          type: integer
+          description: Total amount of tokens locked as rollup bonds
+          format: int64
+        totalSmartRollupBonds:
+          type: integer
+          description: Total amount of tokens locked as smart rollup bonds
+          format: int64
+        totalLost:
+          type: integer
+          description: 'Total amount lost due to inaccuracy of the economic protocol introduced in Oxford.
+
+            This amount is literally lost, because it is no longer available for the account in any mean, but for some reason it is counted as delegated.'
+          format: int64
+        totalOwnStaked:
+          type: integer
+          description: Total active bakers' own staked balance
+          format: int64
+        totalOwnDelegated:
+          type: integer
+          description: Total active bakers' own delegated balance
+          format: int64
+        totalExternalStaked:
+          type: integer
+          description: Total active bakers' external staked balance
+          format: int64
+        totalExternalDelegated:
+          type: integer
+          description: Total active bakers' external delegated balance
+          format: int64
+        totalBakingPower:
+          type: integer
+          description: Total active bakers' baking power
+          format: int64
+        totalVotingPower:
+          type: integer
+          description: Total active bakers' voting power
+          format: int64
+        totalBakers:
+          type: integer
+          description: Total number of active bakers
+          format: int32
+        totalStakers:
+          type: integer
+          description: Total number of active bakers' stakers
+          format: int32
+        totalDelegators:
+          type: integer
+          description: Total number of active bakers' delegators
+          format: int32
+        quote:
+          description: Injected historical quote at the time of the block at which the statistics has been calculated
+          oneOf:
+          - $ref: '#/components/schemas/QuoteShort'
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type:
+          - number
+          - 'null'
+          description: XTZ/BTC price
+          format: double
+        eur:
+          type:
+          - number
+          - 'null'
+          description: XTZ/EUR price
+          format: double
+        usd:
+          type:
+          - number
+          - 'null'
+          description: XTZ/USD price
+          format: double
+        cny:
+          type:
+          - number
+          - 'null'
+          description: XTZ/CNY price
+          format: double
+        jpy:
+          type:
+          - number
+          - 'null'
+          description: XTZ/JPY price
+          format: double
+        krw:
+          type:
+          - number
+          - 'null'
+          description: XTZ/KRW price
+          format: double
+        eth:
+          type:
+          - number
+          - 'null'
+          description: XTZ/ETH price
+          format: double
+        gbp:
+          type:
+          - number
+          - 'null'
+          description: XTZ/GBP price
+          format: double
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

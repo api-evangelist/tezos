@@ -716,70 +716,7 @@ paths:
                 format: binary
 components:
   schemas:
-    Activity:
-      type: object
-      discriminator:
-        propertyName: type
-        mapping:
-          ticket_transfer: '#/components/schemas/TicketTransferActivity'
-          token_transfer: '#/components/schemas/TokenTransferActivity'
-          autostaking: '#/components/schemas/AutostakingOperation'
-          baking: '#/components/schemas/BakingOperation'
-          ballot: '#/components/schemas/BallotOperation'
-          dal_attestation_reward: '#/components/schemas/DalAttestationRewardOperation'
-          dal_entrapment_evidence: '#/components/schemas/DalEntrapmentEvidenceOperation'
-          dal_publish_commitment: '#/components/schemas/DalPublishCommitmentOperation'
-          delegation: '#/components/schemas/DelegationOperation'
-          double_baking: '#/components/schemas/DoubleBakingOperation'
-          double_consensus: '#/components/schemas/DoubleConsensusOperation'
-          drain_delegate: '#/components/schemas/DrainDelegateOperation'
-          attestation: '#/components/schemas/AttestationOperation'
-          attestation_reward: '#/components/schemas/AttestationRewardOperation'
-          increase_paid_storage: '#/components/schemas/IncreasePaidStorageOperation'
-          migration: '#/components/schemas/MigrationOperation'
-          nonce_revelation: '#/components/schemas/NonceRevelationOperation'
-          origination: '#/components/schemas/OriginationOperation'
-          preattestation: '#/components/schemas/PreattestationOperation'
-          proposal: '#/components/schemas/ProposalOperation'
-          register_constant: '#/components/schemas/RegisterConstantOperation'
-          reveal: '#/components/schemas/RevealOperation'
-          revelation_penalty: '#/components/schemas/RevelationPenaltyOperation'
-          set_delegate_parameters: '#/components/schemas/SetDelegateParametersOperation'
-          set_deposits_limit: '#/components/schemas/SetDepositsLimitOperation'
-          sr_add_messages: '#/components/schemas/SmartRollupAddMessagesOperation'
-          sr_cement: '#/components/schemas/SmartRollupCementOperation'
-          sr_execute: '#/components/schemas/SmartRollupExecuteOperation'
-          sr_originate: '#/components/schemas/SmartRollupOriginateOperation'
-          sr_publish: '#/components/schemas/SmartRollupPublishOperation'
-          sr_recover_bond: '#/components/schemas/SmartRollupRecoverBondOperation'
-          sr_refute: '#/components/schemas/SmartRollupRefuteOperation'
-          staking: '#/components/schemas/StakingOperation'
-          transaction: '#/components/schemas/TransactionOperation'
-          transfer_ticket: '#/components/schemas/TransferTicketOperation'
-          tx_rollup_commit: '#/components/schemas/TxRollupCommitOperation'
-          tx_rollup_dispatch_tickets: '#/components/schemas/TxRollupDispatchTicketsOperation'
-          tx_rollup_finalize_commitment: '#/components/schemas/TxRollupFinalizeCommitmentOperation'
-          tx_rollup_origination: '#/components/schemas/TxRollupOriginationOperation'
-          tx_rollup_rejection: '#/components/schemas/TxRollupRejectionOperation'
-          tx_rollup_remove_commitment: '#/components/schemas/TxRollupRemoveCommitmentOperation'
-          tx_rollup_return_bond: '#/components/schemas/TxRollupReturnBondOperation'
-          tx_rollup_submit_batch: '#/components/schemas/TxRollupSubmitBatchOperation'
-          update_secondary_key: '#/components/schemas/UpdateSecondaryKeyOperation'
-          vdf_revelation: '#/components/schemas/VdfRevelationOperation'
-          activation: '#/components/schemas/ActivationOperation'
-      x-abstract: true
-      additionalProperties: false
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          description: Type of the activity element
-        id:
-          type: integer
-          description: Internal ID of the activity element
-          format: int64
-    BigIntegerNullableParameter:
+    TimestampParameter:
       type: object
       additionalProperties: false
       properties:
@@ -789,172 +726,130 @@ components:
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify an integer number to get items where the specified field is equal to the specified value.
+            Specify a datetime value to get items where the specified field is equal to the specified value.
 
 
-            Example: `?balance=1234`.'
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is not equal to the specified value.
+            Specify a datetime value to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?balance.ne=1234`.'
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
         gt:
           type:
           - string
           - 'null'
           description: '**Greater than** filter mode. \
 
-            Specify an integer number to get items where the specified field is greater than the specified value.
+            Specify a datetime value to get items where the specified field is greater than the specified value.
 
 
-            Example: `?balance.gt=1234`.'
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
         ge:
           type:
           - string
           - 'null'
           description: '**Greater or equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
 
 
-            Example: `?balance.ge=1234`.'
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
         lt:
           type:
           - string
           - 'null'
           description: '**Less than** filter mode. \
 
-            Specify an integer number to get items where the specified field is less than the specified value.
+            Specify a datetime value to get items where the specified field is less than the specified value.
 
 
-            Example: `?balance.lt=1234`.'
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
         le:
           type:
           - string
           - 'null'
           description: '**Less or equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
 
 
-            Example: `?balance.le=1234`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: string
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?nonce.null` or `?nonce.null=false`.'
-      x-tzkt-extension: query-parameter
-    Delegator:
-      type: object
-      additionalProperties: false
-      properties:
-        type:
-          type: string
-          description: Delegator type ('contract' for KT.. address or 'user' for tz.. address)
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Name of the project behind the account or account description
-        address:
-          type: string
-          description: Public key hash of the account
-        balance:
-          type: integer
-          description: Account balance (micro tez)
-          format: int64
-        delegationLevel:
-          type: integer
-          description: Block height of last delegation operation
-          format: int32
-        delegationTime:
-          type: string
-          description: Block datetime of last delegation operation (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
           format: date-time
-    ContractKindParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a contract kind to get items where the specified field is equal to the specified value.
-
-
-            Example: `?kind=smart_contract`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a contract kind to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?kind.ne=delegator_contract`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of contract kinds to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?kind.in=smart_contract,asset`.'
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
           items:
             type: string
+            format: date-time
         ni:
           type:
           - array
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of contract kinds to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?kind.ni=smart_contract,asset`.'
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
           items:
             type: string
+            format: date-time
       x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: delegator_contract,smart_contract
+    Symbols:
+      type: string
+      description: ''
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+      enum:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+    MichelineFormat:
+      type: string
+      description: ''
+      x-enumNames:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+      enum:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
     SortMode:
       type: string
       description: ''
@@ -964,52 +859,31 @@ components:
       enum:
       - Ascending
       - Descending
-    HistoricalBalance:
+    SortParameter:
       type: object
       additionalProperties: false
       properties:
-        level:
-          type: integer
-          description: Height of the block at which the account balance was calculated
-          format: int32
-        timestamp:
-          type: string
-          description: Timestamp of the block at which the account balance was calculated
-          format: date-time
-        balance:
-          type: integer
-          description: Historical balance
-          format: int64
-        quote:
-          description: Injected historical quote at the time of balance snapshot
-          oneOf:
-          - $ref: '#/components/schemas/QuoteShort'
-    Account:
-      type: object
-      discriminator:
-        propertyName: type
-        mapping:
-          user: '#/components/schemas/User'
-          delegate: '#/components/schemas/Delegate'
-          contract: '#/components/schemas/Contract'
-          ghost: '#/components/schemas/Ghost'
-          rollup: '#/components/schemas/Rollup'
-          smart_rollup: '#/components/schemas/SmartRollup'
-          empty: '#/components/schemas/EmptyAccount'
-      x-abstract: true
-      additionalProperties: false
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          description: 'Type of the account (`user` - simple wallet account, `delegate` - account, registered as a delegate (baker),
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
 
-            `contract` - smart contract programmable account, `ghost` - non-existent contract, `empty` - account hasn''t appeared in the blockchain yet,
+            Specify a field name to sort by.
 
-            `rollup` - transactional optimistic rollup, `smart_rollup` - smart contract optimistic rollup)'
-        address:
-          type: string
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
     Int64Parameter:
       type: object
       additionalProperties: false
@@ -1109,141 +983,6 @@ components:
         empty:
           type: boolean
       x-tzkt-extension: query-parameter
-    TimestampParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a datetime value to get items where the specified field is equal to the specified value.
-
-
-            Example: `?timestamp=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
-          format: date-time
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a datetime value to get items where the specified field is greater than the specified value.
-
-
-            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a datetime value to get items where the specified field is less than the specified value.
-
-
-            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
-          format: date-time
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-      x-tzkt-extension: query-parameter
-    MichelineFormat:
-      type: string
-      description: ''
-      x-enumNames:
-      - Json
-      - JsonString
-      - Raw
-      - RawString
-      enum:
-      - Json
-      - JsonString
-      - Raw
-      - RawString
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
     AccountTypeParameter:
       type: object
       additionalProperties: false
@@ -1270,6 +1009,189 @@ components:
             Example: `?type.ne=contract`.'
       x-tzkt-extension: query-parameter
       x-tzkt-query-parameter: user,contract,delegate
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    RelatedContract:
+      type: object
+      additionalProperties: false
+      properties:
+        kind:
+          type: string
+          description: 'Kind of the contract (`delegator_contract` or `smart_contract`),
+
+            where `delegator_contract` - manager.tz smart contract for delegation purpose only'
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Name of the project behind the contract or contract description
+        address:
+          type: string
+          description: Public key hash of the contract
+        balance:
+          type: integer
+          description: Contract balance (micro tez)
+          format: int64
+        delegate:
+          description: Information about the current delegate of the contract. `null` if it's not delegated
+          oneOf:
+          - $ref: '#/components/schemas/DelegateInfo'
+        creationLevel:
+          type: integer
+          description: Height of the block where the contract was created
+          format: int32
+        creationTime:
+          type:
+          - string
+          - 'null'
+          description: Datetime of the block where the contract was created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+          format: date-time
+    BigIntegerNullableParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+        gt:
+          type:
+          - string
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: string
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?nonce.null` or `?nonce.null=false`.'
+      x-tzkt-extension: query-parameter
+    HistoricalBalance:
+      type: object
+      additionalProperties: false
+      properties:
+        level:
+          type: integer
+          description: Height of the block at which the account balance was calculated
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block at which the account balance was calculated
+          format: date-time
+        balance:
+          type: integer
+          description: Historical balance
+          format: int64
+        quote:
+          description: Injected historical quote at the time of balance snapshot
+          oneOf:
+          - $ref: '#/components/schemas/QuoteShort'
     Int32Parameter:
       type: object
       additionalProperties: false
@@ -1367,70 +1289,56 @@ components:
             type: integer
             format: int32
       x-tzkt-extension: query-parameter
-    Symbols:
-      type: string
-      description: ''
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
-      enum:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
-    OffsetParameter:
+    ContractKindParameter:
       type: object
       additionalProperties: false
       properties:
-        el:
+        eq:
           type:
-          - integer
+          - string
           - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Skips specified number of elements.
+            Specify a contract kind to get items where the specified field is equal to the specified value.
 
 
-            Example: `?offset=100`.'
-          format: int32
-        pg:
+            Example: `?kind=smart_contract`.'
+        ne:
           type:
-          - integer
+          - string
           - 'null'
-          description: '**Page** offset mode. \
+          description: '**Not equal** filter mode. \
 
-            Skips `page * limit` elements. This is a classic pagination.
+            Specify a contract kind to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
+            Example: `?kind.ne=delegator_contract`.'
+        in:
           type:
-          - integer
+          - array
           - 'null'
-          description: '**Cursor** offset mode. \
+          description: '**In list** (any of) filter mode. \
 
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+            Specify a comma-separated list of contract kinds to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?offset.cr=45837`.'
-          format: int64
+            Example: `?kind.in=smart_contract,asset`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of contract kinds to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?kind.ni=smart_contract,asset`.'
+          items:
+            type: string
       x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: delegator_contract,smart_contract
     AddressParameter:
       type: object
       additionalProperties: false
@@ -1480,6 +1388,214 @@ components:
           items:
             type: string
       x-tzkt-extension: query-parameter
+    Account:
+      type: object
+      discriminator:
+        propertyName: type
+        mapping:
+          user: '#/components/schemas/User'
+          delegate: '#/components/schemas/Delegate'
+          contract: '#/components/schemas/Contract'
+          ghost: '#/components/schemas/Ghost'
+          rollup: '#/components/schemas/Rollup'
+          smart_rollup: '#/components/schemas/SmartRollup'
+          empty: '#/components/schemas/EmptyAccount'
+      x-abstract: true
+      additionalProperties: false
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Type of the account (`user` - simple wallet account, `delegate` - account, registered as a delegate (baker),
+
+            `contract` - smart contract programmable account, `ghost` - non-existent contract, `empty` - account hasn''t appeared in the blockchain yet,
+
+            `rollup` - transactional optimistic rollup, `smart_rollup` - smart contract optimistic rollup)'
+        address:
+          type: string
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type:
+          - number
+          - 'null'
+          description: XTZ/BTC price
+          format: double
+        eur:
+          type:
+          - number
+          - 'null'
+          description: XTZ/EUR price
+          format: double
+        usd:
+          type:
+          - number
+          - 'null'
+          description: XTZ/USD price
+          format: double
+        cny:
+          type:
+          - number
+          - 'null'
+          description: XTZ/CNY price
+          format: double
+        jpy:
+          type:
+          - number
+          - 'null'
+          description: XTZ/JPY price
+          format: double
+        krw:
+          type:
+          - number
+          - 'null'
+          description: XTZ/KRW price
+          format: double
+        eth:
+          type:
+          - number
+          - 'null'
+          description: XTZ/ETH price
+          format: double
+        gbp:
+          type:
+          - number
+          - 'null'
+          description: XTZ/GBP price
+          format: double
+    Activity:
+      type: object
+      discriminator:
+        propertyName: type
+        mapping:
+          ticket_transfer: '#/components/schemas/TicketTransferActivity'
+          token_transfer: '#/components/schemas/TokenTransferActivity'
+          autostaking: '#/components/schemas/AutostakingOperation'
+          baking: '#/components/schemas/BakingOperation'
+          ballot: '#/components/schemas/BallotOperation'
+          dal_attestation_reward: '#/components/schemas/DalAttestationRewardOperation'
+          dal_entrapment_evidence: '#/components/schemas/DalEntrapmentEvidenceOperation'
+          dal_publish_commitment: '#/components/schemas/DalPublishCommitmentOperation'
+          delegation: '#/components/schemas/DelegationOperation'
+          double_baking: '#/components/schemas/DoubleBakingOperation'
+          double_consensus: '#/components/schemas/DoubleConsensusOperation'
+          drain_delegate: '#/components/schemas/DrainDelegateOperation'
+          attestation: '#/components/schemas/AttestationOperation'
+          attestation_reward: '#/components/schemas/AttestationRewardOperation'
+          increase_paid_storage: '#/components/schemas/IncreasePaidStorageOperation'
+          migration: '#/components/schemas/MigrationOperation'
+          nonce_revelation: '#/components/schemas/NonceRevelationOperation'
+          origination: '#/components/schemas/OriginationOperation'
+          preattestation: '#/components/schemas/PreattestationOperation'
+          proposal: '#/components/schemas/ProposalOperation'
+          register_constant: '#/components/schemas/RegisterConstantOperation'
+          reveal: '#/components/schemas/RevealOperation'
+          revelation_penalty: '#/components/schemas/RevelationPenaltyOperation'
+          set_delegate_parameters: '#/components/schemas/SetDelegateParametersOperation'
+          set_deposits_limit: '#/components/schemas/SetDepositsLimitOperation'
+          sr_add_messages: '#/components/schemas/SmartRollupAddMessagesOperation'
+          sr_cement: '#/components/schemas/SmartRollupCementOperation'
+          sr_execute: '#/components/schemas/SmartRollupExecuteOperation'
+          sr_originate: '#/components/schemas/SmartRollupOriginateOperation'
+          sr_publish: '#/components/schemas/SmartRollupPublishOperation'
+          sr_recover_bond: '#/components/schemas/SmartRollupRecoverBondOperation'
+          sr_refute: '#/components/schemas/SmartRollupRefuteOperation'
+          staking: '#/components/schemas/StakingOperation'
+          transaction: '#/components/schemas/TransactionOperation'
+          transfer_ticket: '#/components/schemas/TransferTicketOperation'
+          tx_rollup_commit: '#/components/schemas/TxRollupCommitOperation'
+          tx_rollup_dispatch_tickets: '#/components/schemas/TxRollupDispatchTicketsOperation'
+          tx_rollup_finalize_commitment: '#/components/schemas/TxRollupFinalizeCommitmentOperation'
+          tx_rollup_origination: '#/components/schemas/TxRollupOriginationOperation'
+          tx_rollup_rejection: '#/components/schemas/TxRollupRejectionOperation'
+          tx_rollup_remove_commitment: '#/components/schemas/TxRollupRemoveCommitmentOperation'
+          tx_rollup_return_bond: '#/components/schemas/TxRollupReturnBondOperation'
+          tx_rollup_submit_batch: '#/components/schemas/TxRollupSubmitBatchOperation'
+          update_secondary_key: '#/components/schemas/UpdateSecondaryKeyOperation'
+          vdf_revelation: '#/components/schemas/VdfRevelationOperation'
+          activation: '#/components/schemas/ActivationOperation'
+      x-abstract: true
+      additionalProperties: false
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: Type of the activity element
+        id:
+          type: integer
+          description: Internal ID of the activity element
+          format: int64
+    DelegateInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Name of the baking service
+        address:
+          type: string
+          description: Public key hash of the delegate (baker)
+        active:
+          type: boolean
+          description: Delegation status (`true` - active, `false` - deactivated)
+    BoolParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - boolean
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \
+
+            Specify a bool flag to get items where the specified field is equal to the specified value.
+
+
+            Example: `?active=true` or `?active=1` or `?active`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?active.null` or `?active.null=false`.'
+      x-tzkt-extension: query-parameter
+    Delegator:
+      type: object
+      additionalProperties: false
+      properties:
+        type:
+          type: string
+          description: Delegator type ('contract' for KT.. address or 'user' for tz.. address)
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Name of the project behind the account or account description
+        address:
+          type: string
+          description: Public key hash of the account
+        balance:
+          type: integer
+          description: Account balance (micro tez)
+          format: int64
+        delegationLevel:
+          type: integer
+          description: Block height of last delegation operation
+          format: int32
+        delegationTime:
+          type: string
+          description: Block datetime of last delegation operation (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+          format: date-time
     AccountParameter:
       type: object
       additionalProperties: false
@@ -1563,162 +1679,46 @@ components:
         niHasNull:
           type: boolean
       x-tzkt-extension: query-parameter
-    SelectParameter:
+    OffsetParameter:
       type: object
       additionalProperties: false
       properties:
-        fields:
+        el:
           type:
-          - array
+          - integer
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
 
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
+            Skips specified number of elements.
 
 
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    BoolParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - boolean
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \
-
-            Specify a bool flag to get items where the specified field is equal to the specified value.
-
-
-            Example: `?active=true` or `?active=1` or `?active`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?active.null` or `?active.null=false`.'
-      x-tzkt-extension: query-parameter
-    RelatedContract:
-      type: object
-      additionalProperties: false
-      properties:
-        kind:
-          type: string
-          description: 'Kind of the contract (`delegator_contract` or `smart_contract`),
-
-            where `delegator_contract` - manager.tz smart contract for delegation purpose only'
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Name of the project behind the contract or contract description
-        address:
-          type: string
-          description: Public key hash of the contract
-        balance:
-          type: integer
-          description: Contract balance (micro tez)
-          format: int64
-        delegate:
-          description: Information about the current delegate of the contract. `null` if it's not delegated
-          oneOf:
-          - $ref: '#/components/schemas/DelegateInfo'
-        creationLevel:
-          type: integer
-          description: Height of the block where the contract was created
+            Example: `?offset=100`.'
           format: int32
-        creationTime:
+        pg:
           type:
-          - string
+          - integer
           - 'null'
-          description: Datetime of the block where the contract was created (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
-          format: date-time
-    QuoteShort:
-      type: object
-      additionalProperties: false
-      properties:
-        btc:
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
           type:
-          - number
+          - integer
           - 'null'
-          description: XTZ/BTC price
-          format: double
-        eur:
-          type:
-          - number
-          - 'null'
-          description: XTZ/EUR price
-          format: double
-        usd:
-          type:
-          - number
-          - 'null'
-          description: XTZ/USD price
-          format: double
-        cny:
-          type:
-          - number
-          - 'null'
-          description: XTZ/CNY price
-          format: double
-        jpy:
-          type:
-          - number
-          - 'null'
-          description: XTZ/JPY price
-          format: double
-        krw:
-          type:
-          - number
-          - 'null'
-          description: XTZ/KRW price
-          format: double
-        eth:
-          type:
-          - number
-          - 'null'
-          description: XTZ/ETH price
-          format: double
-        gbp:
-          type:
-          - number
-          - 'null'
-          description: XTZ/GBP price
-          format: double
-    DelegateInfo:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Name of the baking service
-        address:
-          type: string
-          description: Public key hash of the delegate (baker)
-        active:
-          type: boolean
-          description: Delegation status (`true` - active, `false` - deactivated)
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API

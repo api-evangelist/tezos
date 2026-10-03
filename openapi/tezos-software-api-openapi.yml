@@ -86,35 +86,31 @@ paths:
                 format: int32
 components:
   schemas:
-    Software:
+    SortParameter:
       type: object
       additionalProperties: false
       properties:
-        shortHash:
-          type: string
-          description: Software ID (short commit hash)
-        firstLevel:
-          type: integer
-          description: Level of the first block baked with this software
-          format: int32
-        firstTime:
-          type: string
-          description: Datetime of the first block baked with this software
-          format: date-time
-        lastLevel:
-          type: integer
-          description: Level of the last block baked with this software
-          format: int32
-        lastTime:
-          type: string
-          description: Datetime of the last block baked with this software
-          format: date-time
-        blocksCount:
-          type: integer
-          description: Total number of blocks baked with this software
-          format: int32
-        extras:
-          description: Off-chain extras
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
     SelectParameter:
       type: object
       additionalProperties: false
@@ -144,31 +140,35 @@ components:
           items:
             type: string
       x-tzkt-extension: query-parameter
-    SortParameter:
+    Software:
       type: object
       additionalProperties: false
       properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
+        shortHash:
+          type: string
+          description: Software ID (short commit hash)
+        firstLevel:
+          type: integer
+          description: Level of the first block baked with this software
+          format: int32
+        firstTime:
+          type: string
+          description: Datetime of the first block baked with this software
+          format: date-time
+        lastLevel:
+          type: integer
+          description: Level of the last block baked with this software
+          format: int32
+        lastTime:
+          type: string
+          description: Datetime of the last block baked with this software
+          format: date-time
+        blocksCount:
+          type: integer
+          description: Total number of blocks baked with this software
+          format: int32
+        extras:
+          description: Off-chain extras
     OffsetParameter:
       type: object
       additionalProperties: false

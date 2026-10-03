@@ -133,56 +133,71 @@ paths:
                 $ref: '#/components/schemas/Delegate'
 components:
   schemas:
-    SoftwareAlias:
+    SelectParameter:
       type: object
       additionalProperties: false
       properties:
-        version:
-          type: string
-          description: Software version (commit tag)
-        date:
-          type: string
-          description: Date of the commit or when the software was first seen
-          format: date-time
-    OffsetParameter:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    Alias:
       type: object
       additionalProperties: false
       properties:
-        el:
+        alias:
           type:
-          - integer
+          - string
           - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    BoolParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
           type:
-          - integer
+          - boolean
           - 'null'
-          description: '**Page** offset mode. \
+          description: '**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \
 
-            Skips `page * limit` elements. This is a classic pagination.
+            Specify a bool flag to get items where the specified field is equal to the specified value.
 
 
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
+            Example: `?active=true` or `?active=1` or `?active`.'
+        'null':
           type:
-          - integer
+          - boolean
           - 'null'
-          description: '**Cursor** offset mode. \
+          description: '**Is null** filter mode. \
 
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+            Use this mode to get items where the specified field is null or not.
 
 
-            Example: `?offset.cr=45837`.'
-          format: int64
+            Example: `?active.null` or `?active.null=false`.'
       x-tzkt-extension: query-parameter
     Delegate:
       allOf:
@@ -638,35 +653,6 @@ components:
             type: integer
             description: '**DEPRECATED**'
             format: int32
-    SelectParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
     SortParameter:
       type: object
       additionalProperties: false
@@ -691,43 +677,6 @@ components:
 
 
             Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
-    BoolParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - boolean
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \
-
-            Specify a bool flag to get items where the specified field is equal to the specified value.
-
-
-            Example: `?active=true` or `?active=1` or `?active`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?active.null` or `?active.null=false`.'
       x-tzkt-extension: query-parameter
     Int32Parameter:
       type: object
@@ -825,6 +774,57 @@ components:
           items:
             type: integer
             format: int32
+      x-tzkt-extension: query-parameter
+    SoftwareAlias:
+      type: object
+      additionalProperties: false
+      properties:
+        version:
+          type: string
+          description: Software version (commit tag)
+        date:
+          type: string
+          description: Date of the commit or when the software was first seen
+          format: date-time
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

@@ -116,89 +116,34 @@ paths:
                   $ref: '#/components/schemas/Quote'
 components:
   schemas:
-    Quote:
+    SelectParameter:
       type: object
       additionalProperties: false
       properties:
-        level:
-          type: integer
-          description: The level of the block at which the quote has been saved
-          format: int32
-        timestamp:
-          type: string
-          description: The datetime at which the quote has been saved (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
-          format: date-time
-        btc:
-          type: number
-          description: XTZ/BTC price
-          format: double
-        eur:
-          type: number
-          description: XTZ/EUR price
-          format: double
-        usd:
-          type: number
-          description: XTZ/USD price
-          format: double
-        cny:
-          type: number
-          description: XTZ/CNY price
-          format: double
-        jpy:
-          type: number
-          description: XTZ/JPY price
-          format: double
-        krw:
-          type: number
-          description: XTZ/KRW price
-          format: double
-        eth:
-          type: number
-          description: XTZ/ETH price
-          format: double
-        gbp:
-          type: number
-          description: XTZ/GBP price
-          format: double
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
+        fields:
           type:
-          - integer
+          - array
           - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
 
-            Skips specified number of elements.
+            Specify a comma-separated list of fields to include into response.
 
 
-            Example: `?offset=100`.'
-          format: int32
-        pg:
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
           type:
-          - integer
+          - array
           - 'null'
-          description: '**Page** offset mode. \
+          description: '**Values** selection mode. \
 
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+            Specify a comma-separated list of fields to include their values into response.
 
 
-            Example: `?offset.cr=45837`.'
-          format: int64
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
       x-tzkt-extension: query-parameter
     DateTimeParameter:
       type: object
@@ -296,35 +241,6 @@ components:
           items:
             type: string
             format: date-time
-      x-tzkt-extension: query-parameter
-    SelectParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
       x-tzkt-extension: query-parameter
     SortParameter:
       type: object
@@ -447,6 +363,90 @@ components:
           items:
             type: integer
             format: int32
+      x-tzkt-extension: query-parameter
+    Quote:
+      type: object
+      additionalProperties: false
+      properties:
+        level:
+          type: integer
+          description: The level of the block at which the quote has been saved
+          format: int32
+        timestamp:
+          type: string
+          description: The datetime at which the quote has been saved (ISO 8601, e.g. `2020-02-20T02:40:57Z`)
+          format: date-time
+        btc:
+          type: number
+          description: XTZ/BTC price
+          format: double
+        eur:
+          type: number
+          description: XTZ/EUR price
+          format: double
+        usd:
+          type: number
+          description: XTZ/USD price
+          format: double
+        cny:
+          type: number
+          description: XTZ/CNY price
+          format: double
+        jpy:
+          type: number
+          description: XTZ/JPY price
+          format: double
+        krw:
+          type: number
+          description: XTZ/KRW price
+          format: double
+        eth:
+          type: number
+          description: XTZ/ETH price
+          format: double
+        gbp:
+          type: number
+          description: XTZ/GBP price
+          format: double
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

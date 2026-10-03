@@ -1056,6 +1056,103 @@ paths:
                   $ref: '#/components/schemas/TicketBalanceShort'
 components:
   schemas:
+    TimestampParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a datetime value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+        gt:
+          type:
+          - string
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
+      x-tzkt-extension: query-parameter
     IMicheline:
       type: object
       x-abstract: true
@@ -1063,45 +1160,31 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/MichelineType'
-    TicketBalance:
+    SortParameter:
       type: object
       additionalProperties: false
       properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int64
-        ticket:
-          description: "Ticket info.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/TicketInfo'
-        account:
-          description: "Owner account.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        balance:
-          type: string
-          description: "Balance.  \n**[sortable]**"
-        transfersCount:
-          type: integer
-          description: "Total number of transfers, affecting the ticket balance.  \n**[sortable]**"
-          format: int32
-        firstLevel:
-          type: integer
-          description: "Level of the block where the ticket balance was first changed.  \n**[sortable]**"
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the ticket balance was first changed.
-          format: date-time
-        lastLevel:
-          type: integer
-          description: "Level of the block where the ticket balance was last changed.  \n**[sortable]**"
-          format: int32
-        lastTime:
-          type: string
-          description: Timestamp of the block where the ticket balance was last changed.
-          format: date-time
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
     Int64Parameter:
       type: object
       additionalProperties: false
@@ -1201,321 +1284,6 @@ components:
         empty:
           type: boolean
       x-tzkt-extension: query-parameter
-    MichelineType:
-      type: integer
-      description: ''
-      x-enumNames:
-      - Int
-      - Bytes
-      - String
-      - Array
-      - Prim
-      enum:
-      - 0
-      - 32
-      - 64
-      - 96
-      - 128
-    ValueTupleOfStringAndListOfInteger:
-      type: object
-      additionalProperties: false
-    TicketBalanceShort:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int64
-        ticket:
-          description: "Ticket info.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/TicketInfoShort'
-        account:
-          description: "Owner account.  \nClick on the field to expand more details."
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        balance:
-          type: string
-          description: 'Balance.  '
-    TimestampParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a datetime value to get items where the specified field is equal to the specified value.
-
-
-            Example: `?timestamp=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
-          format: date-time
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a datetime value to get items where the specified field is greater than the specified value.
-
-
-            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a datetime value to get items where the specified field is less than the specified value.
-
-
-            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
-          format: date-time
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-      x-tzkt-extension: query-parameter
-    MichelineParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify Micheline JSON value to get items where the specified field is equal to the specified value.
-
-
-            Example: `?type={"prim":"string"}`.'
-          oneOf:
-          - $ref: '#/components/schemas/IMicheline'
-        ne:
-          description: '**Not equal** filter mode. \
-
-            Specify Micheline JSON value to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne={"prim":"string"}`.'
-          oneOf:
-          - $ref: '#/components/schemas/IMicheline'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of Micheline JSON values where the specified field is equal to one of the specified values.
-
-
-            Example: `?type.in={"prim":"string"},{"prim":"nat"}`.'
-          items:
-            $ref: '#/components/schemas/IMicheline'
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of Micheline JSON values where the specified field is not equal to all the specified values.
-
-
-            Example: `?type.ni={"prim":"string"},{"prim":"nat"}`.'
-          items:
-            $ref: '#/components/schemas/IMicheline'
-      x-tzkt-extension: query-parameter
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
-    Int32Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int32
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
     TicketTransfer:
       type: object
       additionalProperties: false
@@ -1565,129 +1333,6 @@ components:
           - 'null'
           description: Internal TzKT id of the smart_rollup_execute operation, caused the ticket transfer.
           format: int64
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
-    AccountParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
-          type: boolean
-      x-tzkt-extension: query-parameter
     JsonParameter:
       type: object
       additionalProperties: false
@@ -1846,7 +1491,7 @@ components:
             Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
           x-tzkt-extension: json-parameter
       x-tzkt-extension: json-parameter
-    NatParameter:
+    AnyOfParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1856,118 +1501,33 @@ components:
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify a `nat` value to get items where the specified field is equal to the specified value.
+            Specify a value to get items where any of the specified fields is equal to the specified value.
 
 
-            Example: `?balance=1234`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a `nat` value to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
+            Example: `?anyof.sender.target=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of `nat` values to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of values to get items where any of the specified fields is equal to one of the specified values.
 
 
-            Example: `?level.in=12,14,52,69`.'
+            Example: `?anyof.sender.target.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M,null`.'
           items:
             type: string
-        ni:
+        'null':
           type:
-          - array
+          - boolean
           - 'null'
-          description: '**Not in list** (none of) filter mode. \
+          description: '**Is null** filter mode. \
 
-            Specify a comma-separated list of `nat` values to get items where the specified field is not equal to all the specified values.
+            Use this mode to get items where any of the specified fields is null or not.
 
 
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    TicketInfo:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: Internal TzKT id.
-          format: int64
-        ticketer:
-          description: Contract, issued the ticket.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        rawType:
-          description: Ticket content type in Micheline format.
-          oneOf:
-          - $ref: '#/components/schemas/IMicheline'
-        rawContent:
-          description: Ticket content in Micheline format.
-          oneOf:
-          - $ref: '#/components/schemas/IMicheline'
-        content:
-          description: Ticket content in JSON format.
-        typeHash:
-          type: integer
-          description: 32-bit hash of the ticket content type.
-          format: int32
-        contentHash:
-          type: integer
-          description: 32-bit hash of the ticket content.
-          format: int32
-        totalSupply:
-          type: string
-          description: Total amount exists.
+            Example: `?anyof.from.to.null` or `?anyof.from.to.null=false`.'
+      x-tzkt-extension: anyof-parameter
     TicketInfoShort:
       type: object
       additionalProperties: false
@@ -2002,6 +1562,21 @@ components:
 
             This field can be used for searching same tickets (which have the same content).'
           format: int32
+    MichelineType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Int
+      - Bytes
+      - String
+      - Array
+      - Prim
+      enum:
+      - 0
+      - 32
+      - 64
+      - 96
+      - 128
     Ticket:
       type: object
       additionalProperties: false
@@ -2073,79 +1648,102 @@ components:
         totalSupply:
           type: string
           description: Total amount exists.
-    AnyOfParameter:
+    Int32Parameter:
       type: object
       additionalProperties: false
       properties:
         eq:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify a value to get items where any of the specified fields is equal to the specified value.
+            Specify an integer number to get items where the specified field is equal to the specified value.
 
 
-            Example: `?anyof.sender.target=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of values to get items where any of the specified fields is equal to one of the specified values.
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?anyof.sender.target.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M,null`.'
+            Example: `?level.in=12,14,52,69`.'
           items:
-            type: string
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where any of the specified fields is null or not.
-
-
-            Example: `?anyof.from.to.null` or `?anyof.from.to.null=false`.'
-      x-tzkt-extension: anyof-parameter
-    SelectionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
+            type: integer
+            format: int32
+        ni:
           type:
           - array
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+          description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of fields to include into response.
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
 
 
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+            Example: `?level.ni=12,14,52,69`.'
           items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
-          items:
-            type: string
+            type: integer
+            format: int32
       x-tzkt-extension: query-parameter
     Int64NullParameter:
       type: object
@@ -2253,6 +1851,408 @@ components:
 
 
             Example: `?nonce.null` or `?nonce.null=false`.'
+      x-tzkt-extension: query-parameter
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    TicketBalanceShort:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        ticket:
+          description: "Ticket info.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/TicketInfoShort'
+        account:
+          description: "Owner account.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        balance:
+          type: string
+          description: 'Balance.  '
+    TicketInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal TzKT id.
+          format: int64
+        ticketer:
+          description: Contract, issued the ticket.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        rawType:
+          description: Ticket content type in Micheline format.
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        rawContent:
+          description: Ticket content in Micheline format.
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        content:
+          description: Ticket content in JSON format.
+        typeHash:
+          type: integer
+          description: 32-bit hash of the ticket content type.
+          format: int32
+        contentHash:
+          type: integer
+          description: 32-bit hash of the ticket content.
+          format: int32
+        totalSupply:
+          type: string
+          description: Total amount exists.
+    MichelineParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify Micheline JSON value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?type={"prim":"string"}`.'
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        ne:
+          description: '**Not equal** filter mode. \
+
+            Specify Micheline JSON value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne={"prim":"string"}`.'
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of Micheline JSON values where the specified field is equal to one of the specified values.
+
+
+            Example: `?type.in={"prim":"string"},{"prim":"nat"}`.'
+          items:
+            $ref: '#/components/schemas/IMicheline'
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of Micheline JSON values where the specified field is not equal to all the specified values.
+
+
+            Example: `?type.ni={"prim":"string"},{"prim":"nat"}`.'
+          items:
+            $ref: '#/components/schemas/IMicheline'
+      x-tzkt-extension: query-parameter
+    ValueTupleOfStringAndListOfInteger:
+      type: object
+      additionalProperties: false
+    TicketBalance:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        ticket:
+          description: "Ticket info.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/TicketInfo'
+        account:
+          description: "Owner account.  \nClick on the field to expand more details."
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        balance:
+          type: string
+          description: "Balance.  \n**[sortable]**"
+        transfersCount:
+          type: integer
+          description: "Total number of transfers, affecting the ticket balance.  \n**[sortable]**"
+          format: int32
+        firstLevel:
+          type: integer
+          description: "Level of the block where the ticket balance was first changed.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the ticket balance was first changed.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the ticket balance was last changed.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the ticket balance was last changed.
+          format: date-time
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    NatParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `nat` value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+        gt:
+          type:
+          - string
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify a `nat` value to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of `nat` values to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of `nat` values to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

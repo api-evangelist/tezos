@@ -1025,79 +1025,7 @@ paths:
                   $ref: '#/components/schemas/SrMessage'
 components:
   schemas:
-    IMicheline:
-      type: object
-      x-abstract: true
-      additionalProperties: false
-      properties:
-        type:
-          $ref: '#/components/schemas/MichelineType'
-    SrCommitment:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int64
-        rollup:
-          description: Smart rollup.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        initiator:
-          description: Account that published the commitment first.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        inboxLevel:
-          type: integer
-          description: "Inbox level.  \n**[sortable]**"
-          format: int32
-        state:
-          type: string
-          description: State hash.
-        hash:
-          type: string
-          description: Commitment hash.
-        ticks:
-          type: integer
-          description: Number of ticks.
-          format: int64
-        firstLevel:
-          type: integer
-          description: "Level of the block where the commitment was first published.  \n**[sortable]**"
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the commitment was first published.
-          format: date-time
-        lastLevel:
-          type: integer
-          description: "Level of the block where the commitment was last updated.  \n**[sortable]**"
-          format: int32
-        lastTime:
-          type: string
-          description: Timestamp of the block where the commitment was last updated.
-          format: date-time
-        stakers:
-          type: integer
-          description: "Number of stakers, published this commitment.  \n**[sortable]**"
-          format: int32
-        activeStakers:
-          type: integer
-          description: "Number of active (not refuted) stakers.  \n**[sortable]**"
-          format: int32
-        successors:
-          type: integer
-          description: "Number of successor commitments.  \n**[sortable]**"
-          format: int32
-        status:
-          type: string
-          description: Commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).
-        predecessor:
-          description: Predecessor commitment.
-          oneOf:
-          - $ref: '#/components/schemas/SrCommitmentInfo'
-    SrCommitmentStatusParameter:
+    Src1HashParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1107,30 +1035,30 @@ components:
           - 'null'
           description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
 
-            Specify an sr commitment status to get items where the specified field is equal to the specified value.
+            Specify an src1-hash to get items where the specified field is equal to the specified value.
 
 
-            Example: `?status=pending`.'
+            Example: `?hash=src1qwe...`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an sr commitment status to get items where the specified field is not equal to the specified value.
+            Specify an src1-hash to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?status.ne=cemented`.'
+            Example: `?hash.ne=src1qwe...`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of sr commitment statuses to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of src1-hashes to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?status.in=cemented,executed`.'
+            Example: `?hash.in=hash1,hash2,hash3`.'
           items:
             type: string
         ni:
@@ -1139,54 +1067,13 @@ components:
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of sr commitment statuses to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of src1-hashes to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?status.ni=cemented,executed`.'
+            Example: `?hash.ni=hash1,hash2,hash3`.'
           items:
             type: string
       x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: orphan,refuted,pending,cemented,executed
-    MichelineType:
-      type: integer
-      description: ''
-      x-enumNames:
-      - Int
-      - Bytes
-      - String
-      - Array
-      - Prim
-      enum:
-      - 0
-      - 32
-      - 64
-      - 96
-      - 128
-    Entrypoint:
-      type: object
-      additionalProperties: false
-      properties:
-        name:
-          type: string
-          description: Entrypoint name
-        jsonParameters:
-          description: A kind of JSON schema, describing how parameters will look like in a human-readable JSON format
-        michelineParameters:
-          description: Parameters schema in micheline format
-          oneOf:
-          - $ref: '#/components/schemas/IMicheline'
-        michelsonParameters:
-          type:
-          - string
-          - 'null'
-          description: Parameters schema in michelson format
-        unused:
-          type: boolean
-          description: 'Unused means that the entrypoint can be normalized to a more specific one.
-
-            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint
-
-            because it can be normalized to `%entry2` or `%entry3`'
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -1284,6 +1171,13 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
+    IMicheline:
+      type: object
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/MichelineType'
     MichelineFormat:
       type: string
       description: ''
@@ -1297,31 +1191,6 @@ components:
       - JsonString
       - Raw
       - RawString
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
     SmartRollup:
       allOf:
       - type: object
@@ -1473,18 +1342,246 @@ components:
             format: date-time
           extras:
             description: Off-chain extras
-    Alias:
+    SrMessageTypeParameter:
       type: object
       additionalProperties: false
       properties:
-        alias:
+        eq:
           type:
           - string
           - 'null'
-          description: Account alias name (off-chain data).
-        address:
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an inbox message type to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=external`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an inbox message type to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=transfer`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of inbox message types to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?status.in=transfer,external`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of inbox message types to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?status.ni=transfer,external`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: level_start,level_info,level_end,transfer,external,migration
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    SrGameMove:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Unique ID of the operation, stored in the TzKT indexer database.
+          format: int64
+        level:
+          type: integer
+          description: The height of the block from the genesis block, in which the operation was included.
+          format: int32
+        timestamp:
           type: string
-          description: Account address (public key hash).
+          description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`).
+          format: date-time
+        sender:
+          description: Information about the account who has sent the operation.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        move:
+          type: string
+          description: Player's move (`start`, `dissection`, `proof`, `timeout`).
+        gameStatus:
+          type: string
+          description: 'Game status after the move
+
+            (`ongoing` - game in progress, `loser` - one of the players lost, `draw` - both players lost).'
+    SrGame:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        rollup:
+          description: Smart rollup, in which's scope the refutation game was started.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initiator:
+          description: Initiator, who found a wrong commitment and started the refutation game.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initiatorCommitment:
+          description: Initiator's version of a valid commitment
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+        opponent:
+          description: Opponent, who was accused in publishing a wrong commitment.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        opponentCommitment:
+          description: Opponent's version of a valid commitment
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+        lastMove:
+          description: The most recent move (`sr_refute` operation).
+          oneOf:
+          - $ref: '#/components/schemas/SrGameMove'
+        firstLevel:
+          type: integer
+          description: "Level of the block where the refutation game was started.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the refutation game was started.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the refutation game was last updated.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the refutation game was last updated.
+          format: date-time
+        initiatorReward:
+          type:
+          - integer
+          - 'null'
+          description: In case the initiator won, this field will contain the reward amount (in mutez).
+          format: int64
+        initiatorLoss:
+          type:
+          - integer
+          - 'null'
+          description: In case the initiator lost (including a `draw`), this field will contain the loss amount (in mutez).
+          format: int64
+        opponentReward:
+          type:
+          - integer
+          - 'null'
+          description: In case the opponent won, this field will contain the reward amount (in mutez).
+          format: int64
+        opponentLoss:
+          type:
+          - integer
+          - 'null'
+          description: In case the opponent lost (including a `draw`), this field will contain the loss amount (in mutez).
+          format: int64
+    SrCommitmentStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an sr commitment status to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=pending`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an sr commitment status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=cemented`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of sr commitment statuses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?status.in=cemented,executed`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of sr commitment statuses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?status.ni=cemented,executed`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: orphan,refuted,pending,cemented,executed
+    MichelineType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Int
+      - Bytes
+      - String
+      - Array
+      - Prim
+      enum:
+      - 0
+      - 32
+      - 64
+      - 96
+      - 128
     SrStaker:
       allOf:
       - $ref: '#/components/schemas/Alias'
@@ -1603,80 +1700,6 @@ components:
             type: integer
             format: int32
       x-tzkt-extension: query-parameter
-    SrCommitmentInfo:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: Internal TzKT id.
-          format: int64
-        initiator:
-          description: Account that published the commitment first.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        inboxLevel:
-          type: integer
-          description: Inbox level
-          format: int32
-        state:
-          type: string
-          description: State hash
-        hash:
-          type: string
-          description: Commitment hash
-        ticks:
-          type: integer
-          description: Number of ticks
-          format: int64
-        firstLevel:
-          type: integer
-          description: Level of the block where the commitment was first published.
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the commitment was first published.
-          format: date-time
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
     AddressParameter:
       type: object
       additionalProperties: false
@@ -1726,7 +1749,108 @@ components:
           items:
             type: string
       x-tzkt-extension: query-parameter
-    SrGame:
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    SrMessage:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        level:
+          type: integer
+          description: "Level of the block where the message was pushed.  \n**[sortable]**"
+          format: int32
+        index:
+          type: integer
+          description: 'Index of the inbox message within the block.  '
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block where the message was pushed.
+          format: date-time
+        type:
+          type: string
+          description: Type of the message (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).
+        predecessorHash:
+          type:
+          - string
+          - 'null'
+          description: For `level_info` messages only. Hash of the predecessor block.
+        predecessorTimestamp:
+          type:
+          - string
+          - 'null'
+          description: For `level_info` messages only. Timestamp of the predecessor block.
+          format: date-time
+        initiator:
+          description: For `transfer` messages only. Account, initiated the operation.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        sender:
+          description: For `transfer` messages only. Smart contract, sent the internal transaction.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        target:
+          description: For `transfer` messages only. Smart rollup to which the internal transaction was sent.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        entrypoint:
+          type:
+          - string
+          - 'null'
+          description: For `transfer` messages only. Entrypoint called in the target rollup
+        parameter:
+          description: 'For `transfer` messages only. Value passed to the called entrypoint. Note: you can configure parameters format by setting `micheline` query parameter.'
+        payload:
+          type:
+          - string
+          - 'null'
+          description: For `external` messages only. Payload bytes (in base64).
+          format: byte
+        protocol:
+          type:
+          - string
+          - 'null'
+          description: For `migration` messages only. Version of the new protocol (e.g. 'nairobi_017').
+    SrCommitment:
       type: object
       additionalProperties: false
       properties:
@@ -1735,118 +1859,87 @@ components:
           description: "Internal TzKT id.  \n**[sortable]**"
           format: int64
         rollup:
-          description: Smart rollup, in which's scope the refutation game was started.
+          description: Smart rollup.
           oneOf:
           - $ref: '#/components/schemas/Alias'
         initiator:
-          description: Initiator, who found a wrong commitment and started the refutation game.
+          description: Account that published the commitment first.
           oneOf:
           - $ref: '#/components/schemas/Alias'
-        initiatorCommitment:
-          description: Initiator's version of a valid commitment
-          oneOf:
-          - $ref: '#/components/schemas/SrCommitmentInfo'
-        opponent:
-          description: Opponent, who was accused in publishing a wrong commitment.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        opponentCommitment:
-          description: Opponent's version of a valid commitment
-          oneOf:
-          - $ref: '#/components/schemas/SrCommitmentInfo'
-        lastMove:
-          description: The most recent move (`sr_refute` operation).
-          oneOf:
-          - $ref: '#/components/schemas/SrGameMove'
+        inboxLevel:
+          type: integer
+          description: "Inbox level.  \n**[sortable]**"
+          format: int32
+        state:
+          type: string
+          description: State hash.
+        hash:
+          type: string
+          description: Commitment hash.
+        ticks:
+          type: integer
+          description: Number of ticks.
+          format: int64
         firstLevel:
           type: integer
-          description: "Level of the block where the refutation game was started.  \n**[sortable]**"
+          description: "Level of the block where the commitment was first published.  \n**[sortable]**"
           format: int32
         firstTime:
           type: string
-          description: Timestamp of the block where the refutation game was started.
+          description: Timestamp of the block where the commitment was first published.
           format: date-time
         lastLevel:
           type: integer
-          description: "Level of the block where the refutation game was last updated.  \n**[sortable]**"
+          description: "Level of the block where the commitment was last updated.  \n**[sortable]**"
           format: int32
         lastTime:
           type: string
-          description: Timestamp of the block where the refutation game was last updated.
+          description: Timestamp of the block where the commitment was last updated.
           format: date-time
-        initiatorReward:
-          type:
-          - integer
-          - 'null'
-          description: In case the initiator won, this field will contain the reward amount (in mutez).
-          format: int64
-        initiatorLoss:
-          type:
-          - integer
-          - 'null'
-          description: In case the initiator lost (including a `draw`), this field will contain the loss amount (in mutez).
-          format: int64
-        opponentReward:
-          type:
-          - integer
-          - 'null'
-          description: In case the opponent won, this field will contain the reward amount (in mutez).
-          format: int64
-        opponentLoss:
-          type:
-          - integer
-          - 'null'
-          description: In case the opponent lost (including a `draw`), this field will contain the loss amount (in mutez).
-          format: int64
-    Src1HashParameter:
+        stakers:
+          type: integer
+          description: "Number of stakers, published this commitment.  \n**[sortable]**"
+          format: int32
+        activeStakers:
+          type: integer
+          description: "Number of active (not refuted) stakers.  \n**[sortable]**"
+          format: int32
+        successors:
+          type: integer
+          description: "Number of successor commitments.  \n**[sortable]**"
+          format: int32
+        status:
+          type: string
+          description: Commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).
+        predecessor:
+          description: Predecessor commitment.
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+    Entrypoint:
       type: object
       additionalProperties: false
       properties:
-        eq:
+        name:
+          type: string
+          description: Entrypoint name
+        jsonParameters:
+          description: A kind of JSON schema, describing how parameters will look like in a human-readable JSON format
+        michelineParameters:
+          description: Parameters schema in micheline format
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        michelsonParameters:
           type:
           - string
           - 'null'
-          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+          description: Parameters schema in michelson format
+        unused:
+          type: boolean
+          description: 'Unused means that the entrypoint can be normalized to a more specific one.
 
-            Specify an src1-hash to get items where the specified field is equal to the specified value.
+            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint
 
-
-            Example: `?hash=src1qwe...`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an src1-hash to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?hash.ne=src1qwe...`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of src1-hashes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?hash.in=hash1,hash2,hash3`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of src1-hashes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?hash.ni=hash1,hash2,hash3`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
+            because it can be normalized to `%entry2` or `%entry3`'
     SrBondStatusParameter:
       type: object
       additionalProperties: false
@@ -1897,34 +1990,52 @@ components:
             type: string
       x-tzkt-extension: query-parameter
       x-tzkt-query-parameter: active,returned,lost
-    SrGameMove:
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    SrCommitmentInfo:
       type: object
       additionalProperties: false
       properties:
         id:
           type: integer
-          description: Unique ID of the operation, stored in the TzKT indexer database.
+          description: Internal TzKT id.
           format: int64
-        level:
-          type: integer
-          description: The height of the block from the genesis block, in which the operation was included.
-          format: int32
-        timestamp:
-          type: string
-          description: Datetime of the block, in which the operation was included (ISO 8601, e.g. `2020-02-20T02:40:57Z`).
-          format: date-time
-        sender:
-          description: Information about the account who has sent the operation.
+        initiator:
+          description: Account that published the commitment first.
           oneOf:
           - $ref: '#/components/schemas/Alias'
-        move:
+        inboxLevel:
+          type: integer
+          description: Inbox level
+          format: int32
+        state:
           type: string
-          description: Player's move (`start`, `dissection`, `proof`, `timeout`).
-        gameStatus:
+          description: State hash
+        hash:
           type: string
-          description: 'Game status after the move
-
-            (`ongoing` - game in progress, `loser` - one of the players lost, `draw` - both players lost).'
+          description: Commitment hash
+        ticks:
+          type: integer
+          description: Number of ticks
+          format: int64
+        firstLevel:
+          type: integer
+          description: Level of the block where the commitment was first published.
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the commitment was first published.
+          format: date-time
     AccountParameter:
       type: object
       additionalProperties: false
@@ -2008,156 +2119,45 @@ components:
         niHasNull:
           type: boolean
       x-tzkt-extension: query-parameter
-    SrMessage:
+    OffsetParameter:
       type: object
       additionalProperties: false
       properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
           format: int64
-        level:
-          type: integer
-          description: "Level of the block where the message was pushed.  \n**[sortable]**"
-          format: int32
-        index:
-          type: integer
-          description: 'Index of the inbox message within the block.  '
-          format: int32
-        timestamp:
-          type: string
-          description: Timestamp of the block where the message was pushed.
-          format: date-time
-        type:
-          type: string
-          description: Type of the message (`level_start`, `level_info`, `level_end`, `transfer`, `external`, `migration`).
-        predecessorHash:
-          type:
-          - string
-          - 'null'
-          description: For `level_info` messages only. Hash of the predecessor block.
-        predecessorTimestamp:
-          type:
-          - string
-          - 'null'
-          description: For `level_info` messages only. Timestamp of the predecessor block.
-          format: date-time
-        initiator:
-          description: For `transfer` messages only. Account, initiated the operation.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        sender:
-          description: For `transfer` messages only. Smart contract, sent the internal transaction.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        target:
-          description: For `transfer` messages only. Smart rollup to which the internal transaction was sent.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        entrypoint:
-          type:
-          - string
-          - 'null'
-          description: For `transfer` messages only. Entrypoint called in the target rollup
-        parameter:
-          description: 'For `transfer` messages only. Value passed to the called entrypoint. Note: you can configure parameters format by setting `micheline` query parameter.'
-        payload:
-          type:
-          - string
-          - 'null'
-          description: For `external` messages only. Payload bytes (in base64).
-          format: byte
-        protocol:
-          type:
-          - string
-          - 'null'
-          description: For `migration` messages only. Version of the new protocol (e.g. 'nairobi_017').
-    SrMessageTypeParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
-
-            Specify an inbox message type to get items where the specified field is equal to the specified value.
-
-
-            Example: `?status=external`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an inbox message type to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?status.ne=transfer`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of inbox message types to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?status.in=transfer,external`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of inbox message types to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?status.ni=transfer,external`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: level_start,level_info,level_end,transfer,external,migration
-    SelectionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
-          items:
-            type: string
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

@@ -395,6 +395,68 @@ paths:
                 $ref: '#/components/schemas/SplitMember'
 components:
   schemas:
+    SplitStaker:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Address of the staker
+        stakedPseudotokens:
+          type:
+          - string
+          - 'null'
+          description: Amount of staked pseudotokens at the snapshot time, representing staker's share within the baker's `externalStakedBalance`.
+        stakedBalance:
+          type: integer
+          description: 'Estimated amount staked to the baker at the snapshot time (micro tez).
+
+            It''s computed on-the-fly as `externalStakedBalance * stakedPseudotokens / issuedPseudotokens`.'
+          format: int64
+    StakerRewards:
+      type: object
+      additionalProperties: false
+      properties:
+        cycle:
+          type: integer
+          description: "Cycle in which the rewards were earned.  \n**[sortable]**"
+          format: int32
+        baker:
+          description: Staker's baker.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initialStake:
+          type: integer
+          description: Staked balance at the beginning of the cycle (micro tez).
+          format: int64
+        addedStake:
+          type: integer
+          description: Amount added (staked) during the cycle (micro tez).
+          format: int64
+        removedStake:
+          type: integer
+          description: Amount removed (unstaked) during the cycle (micro tez).
+          format: int64
+        finalStake:
+          type: integer
+          description: Staked balance at the end of the cycle (micro tez).
+          format: int64
+        avgStake:
+          type: integer
+          description: Average (per-block) staked balance (micro tez).
+          format: int64
+        rewards:
+          type: integer
+          description: Staking rewards (or losses if negative) earned during the cycle (micro tez).
+          format: int64
+        bakerRewards:
+          description: Rewards of the staker's baker, from which the staker can understand the source of the rewards/losses.
+          oneOf:
+          - $ref: '#/components/schemas/BakerRewards'
+        quote:
+          description: Injected historical quote at the end of the cycle
+          oneOf:
+          - $ref: '#/components/schemas/QuoteShort'
     SplitMember:
       type: object
       additionalProperties: false
@@ -424,30 +486,50 @@ components:
           description: 'Indicates whether the delegator is emptied (at the moment, not at the snapshot time).
 
             Emptied accounts (users with zero balance) should be re-allocated, so if you make payment to the emptied account you will pay allocation fee.'
-    Symbols:
-      type: string
-      description: ''
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
-      enum:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
+    SplitActualStaker:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Address of the delegator
+        initialStake:
+          type: integer
+          description: Staked balance at the beginning of the cycle (micro tez).
+          format: int64
+        finalStake:
+          type: integer
+          description: Staked balance at the end of the cycle (micro tez).
+          format: int64
+        rewards:
+          type: integer
+          description: Staking rewards (or losses if negative) earned during the cycle (micro tez).
+          format: int64
+    RewardSplit:
+      allOf:
+      - $ref: '#/components/schemas/BakerRewards'
+      - type: object
+        additionalProperties: false
+        properties:
+          delegators:
+            type: array
+            description: 'List of delegators, forming baker''s baking power.
+
+              This list includes "unstakers" (delegators who left the baker, but still had locked unstaked balance delegated to the baker),
+
+              therefore its length shouldn''t necessarily match the `delegatorsCount` value.'
+            items:
+              $ref: '#/components/schemas/SplitDelegator'
+          stakers:
+            type: array
+            description: List of stakers, forming baker's baking power.
+            items:
+              $ref: '#/components/schemas/SplitStaker'
+          actualStakers:
+            type: array
+            description: List of actual stakers, receiving staking rewards regardless of contribution to the baker's baking power.
+            items:
+              $ref: '#/components/schemas/SplitActualStaker'
     DelegatorRewards:
       type: object
       additionalProperties: false
@@ -723,284 +805,6 @@ components:
           type: integer
           description: '**DEPRECATED**'
           format: int64
-    SplitDelegator:
-      type: object
-      additionalProperties: false
-      properties:
-        address:
-          type: string
-          description: Address of the delegator
-        delegatedBalance:
-          type: integer
-          description: 'Amount delegated to the baker at the snapshot time (micro tez).
-
-            This amount doesn''t include staked amount.'
-          format: int64
-        emptied:
-          type: boolean
-          description: 'Indicates whether the delegator is emptied (at the moment, not at the snapshot time).
-
-            Emptied accounts (users with zero balance) should be re-allocated, so if you make payment to the emptied account you will pay allocation fee.'
-    SplitStaker:
-      type: object
-      additionalProperties: false
-      properties:
-        address:
-          type: string
-          description: Address of the staker
-        stakedPseudotokens:
-          type:
-          - string
-          - 'null'
-          description: Amount of staked pseudotokens at the snapshot time, representing staker's share within the baker's `externalStakedBalance`.
-        stakedBalance:
-          type: integer
-          description: 'Estimated amount staked to the baker at the snapshot time (micro tez).
-
-            It''s computed on-the-fly as `externalStakedBalance * stakedPseudotokens / issuedPseudotokens`.'
-          format: int64
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
-    SelectionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    StakerRewards:
-      type: object
-      additionalProperties: false
-      properties:
-        cycle:
-          type: integer
-          description: "Cycle in which the rewards were earned.  \n**[sortable]**"
-          format: int32
-        baker:
-          description: Staker's baker.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        initialStake:
-          type: integer
-          description: Staked balance at the beginning of the cycle (micro tez).
-          format: int64
-        addedStake:
-          type: integer
-          description: Amount added (staked) during the cycle (micro tez).
-          format: int64
-        removedStake:
-          type: integer
-          description: Amount removed (unstaked) during the cycle (micro tez).
-          format: int64
-        finalStake:
-          type: integer
-          description: Staked balance at the end of the cycle (micro tez).
-          format: int64
-        avgStake:
-          type: integer
-          description: Average (per-block) staked balance (micro tez).
-          format: int64
-        rewards:
-          type: integer
-          description: Staking rewards (or losses if negative) earned during the cycle (micro tez).
-          format: int64
-        bakerRewards:
-          description: Rewards of the staker's baker, from which the staker can understand the source of the rewards/losses.
-          oneOf:
-          - $ref: '#/components/schemas/BakerRewards'
-        quote:
-          description: Injected historical quote at the end of the cycle
-          oneOf:
-          - $ref: '#/components/schemas/QuoteShort'
-    SplitActualStaker:
-      type: object
-      additionalProperties: false
-      properties:
-        address:
-          type: string
-          description: Address of the delegator
-        initialStake:
-          type: integer
-          description: Staked balance at the beginning of the cycle (micro tez).
-          format: int64
-        finalStake:
-          type: integer
-          description: Staked balance at the end of the cycle (micro tez).
-          format: int64
-        rewards:
-          type: integer
-          description: Staking rewards (or losses if negative) earned during the cycle (micro tez).
-          format: int64
-    QuoteShort:
-      type: object
-      additionalProperties: false
-      properties:
-        btc:
-          type:
-          - number
-          - 'null'
-          description: XTZ/BTC price
-          format: double
-        eur:
-          type:
-          - number
-          - 'null'
-          description: XTZ/EUR price
-          format: double
-        usd:
-          type:
-          - number
-          - 'null'
-          description: XTZ/USD price
-          format: double
-        cny:
-          type:
-          - number
-          - 'null'
-          description: XTZ/CNY price
-          format: double
-        jpy:
-          type:
-          - number
-          - 'null'
-          description: XTZ/JPY price
-          format: double
-        krw:
-          type:
-          - number
-          - 'null'
-          description: XTZ/KRW price
-          format: double
-        eth:
-          type:
-          - number
-          - 'null'
-          description: XTZ/ETH price
-          format: double
-        gbp:
-          type:
-          - number
-          - 'null'
-          description: XTZ/GBP price
-          format: double
-    RewardSplit:
-      allOf:
-      - $ref: '#/components/schemas/BakerRewards'
-      - type: object
-        additionalProperties: false
-        properties:
-          delegators:
-            type: array
-            description: 'List of delegators, forming baker''s baking power.
-
-              This list includes "unstakers" (delegators who left the baker, but still had locked unstaked balance delegated to the baker),
-
-              therefore its length shouldn''t necessarily match the `delegatorsCount` value.'
-            items:
-              $ref: '#/components/schemas/SplitDelegator'
-          stakers:
-            type: array
-            description: List of stakers, forming baker's baking power.
-            items:
-              $ref: '#/components/schemas/SplitStaker'
-          actualStakers:
-            type: array
-            description: List of actual stakers, receiving staking rewards regardless of contribution to the baker's baking power.
-            items:
-              $ref: '#/components/schemas/SplitActualStaker'
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
     Alias:
       type: object
       additionalProperties: false
@@ -1013,103 +817,6 @@ components:
         address:
           type: string
           description: Account address (public key hash).
-    Int32Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int32
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
     BakerRewards:
       type: object
       additionalProperties: false
@@ -1481,6 +1188,299 @@ components:
           type: integer
           description: '**DEPRECATED**'
           format: int64
+    SplitDelegator:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Address of the delegator
+        delegatedBalance:
+          type: integer
+          description: 'Amount delegated to the baker at the snapshot time (micro tez).
+
+            This amount doesn''t include staked amount.'
+          format: int64
+        emptied:
+          type: boolean
+          description: 'Indicates whether the delegator is emptied (at the moment, not at the snapshot time).
+
+            Emptied accounts (users with zero balance) should be re-allocated, so if you make payment to the emptied account you will pay allocation fee.'
+    Symbols:
+      type: string
+      description: ''
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+      enum:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type:
+          - number
+          - 'null'
+          description: XTZ/BTC price
+          format: double
+        eur:
+          type:
+          - number
+          - 'null'
+          description: XTZ/EUR price
+          format: double
+        usd:
+          type:
+          - number
+          - 'null'
+          description: XTZ/USD price
+          format: double
+        cny:
+          type:
+          - number
+          - 'null'
+          description: XTZ/CNY price
+          format: double
+        jpy:
+          type:
+          - number
+          - 'null'
+          description: XTZ/JPY price
+          format: double
+        krw:
+          type:
+          - number
+          - 'null'
+          description: XTZ/KRW price
+          format: double
+        eth:
+          type:
+          - number
+          - 'null'
+          description: XTZ/ETH price
+          format: double
+        gbp:
+          type:
+          - number
+          - 'null'
+          description: XTZ/GBP price
+          format: double
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API
