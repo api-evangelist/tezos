@@ -300,6 +300,128 @@ paths:
                 $ref: '#/components/schemas/Domain'
 components:
   schemas:
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
     JsonParameter:
       type: object
       additionalProperties: false
@@ -458,6 +580,328 @@ components:
             Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
           x-tzkt-extension: json-parameter
       x-tzkt-extension: json-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
+    AddressNullParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=` is the same as `param=`). \
+
+            Specify an account address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?address=tz123..`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an account address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?address.ne=tz123..`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of account addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?address.in=tz123..,tz345..`.'
+          items:
+            type:
+            - string
+            - 'null'
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of account addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?address.ni=tz123..,tz345..`.'
+          items:
+            type:
+            - string
+            - 'null'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?address.null` or `?address.null=false`.'
+      x-tzkt-extension: query-parameter
+    DateTimeParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=2020-01-01` is the same as `param=2020-01-01`). \
+
+            Specify a datetime to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+        gt:
+          type:
+          - string
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify a datetime to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
+      x-tzkt-extension: query-parameter
+    Domain:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int32
+        level:
+          type: integer
+          description: Domain level (i.e. tez has level=1, domain.tez has level=2, subdomain.domain.tez has level=3, etc.).
+          format: int32
+        name:
+          type: string
+          description: "Domain record name.  \n**[sortable]**"
+        owner:
+          description: Owner of the domain.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        address:
+          description: Address the domain points to.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        reverse:
+          type: boolean
+          description: Whether or not the domain is on the reverse records list
+        expiration:
+          type: string
+          description: Expiration datetime
+          format: date-time
+        data:
+          description: Arbitrary data bound to the domain.
+        firstLevel:
+          type: integer
+          description: "Level of the block where the domain was first seen.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the domain was first seen.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the domain was last seen.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the domain was last seen.
+          format: date-time
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    BoolParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - boolean
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \
+
+            Specify a bool flag to get items where the specified field is equal to the specified value.
+
+
+            Example: `?active=true` or `?active=1` or `?active`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?active.null` or `?active.null=false`.'
+      x-tzkt-extension: query-parameter
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -641,450 +1085,6 @@ components:
 
 
             Example: `?parameters.null` or `?parameters.null=false`.'
-      x-tzkt-extension: query-parameter
-    Domain:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int32
-        level:
-          type: integer
-          description: Domain level (i.e. tez has level=1, domain.tez has level=2, subdomain.domain.tez has level=3, etc.).
-          format: int32
-        name:
-          type: string
-          description: "Domain record name.  \n**[sortable]**"
-        owner:
-          description: Owner of the domain.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        address:
-          description: Address the domain points to.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        reverse:
-          type: boolean
-          description: Whether or not the domain is on the reverse records list
-        expiration:
-          type: string
-          description: Expiration datetime
-          format: date-time
-        data:
-          description: Arbitrary data bound to the domain.
-        firstLevel:
-          type: integer
-          description: "Level of the block where the domain was first seen.  \n**[sortable]**"
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the domain was first seen.
-          format: date-time
-        lastLevel:
-          type: integer
-          description: "Level of the block where the domain was last seen.  \n**[sortable]**"
-          format: int32
-        lastTime:
-          type: string
-          description: Timestamp of the block where the domain was last seen.
-          format: date-time
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
-    DateTimeParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=2020-01-01` is the same as `param=2020-01-01`). \
-
-            Specify a datetime to get items where the specified field is equal to the specified value.
-
-
-            Example: `?timestamp=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a datetime to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
-          format: date-time
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a datetime to get items where the specified field is greater than the specified value.
-
-
-            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a datetime to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a datetime to get items where the specified field is less than the specified value.
-
-
-            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a datetime to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
-          format: date-time
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-      x-tzkt-extension: query-parameter
-    BoolParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - boolean
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=true` is the same as `param=true`). \
-
-            Specify a bool flag to get items where the specified field is equal to the specified value.
-
-
-            Example: `?active=true` or `?active=1` or `?active`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?active.null` or `?active.null=false`.'
-      x-tzkt-extension: query-parameter
-    SelectionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    AddressNullParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=` is the same as `param=`). \
-
-            Specify an account address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?address=tz123..`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an account address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?address.ne=tz123..`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of account addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?address.in=tz123..,tz345..`.'
-          items:
-            type:
-            - string
-            - 'null'
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of account addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?address.ni=tz123..,tz345..`.'
-          items:
-            type:
-            - string
-            - 'null'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?address.null` or `?address.null=false`.'
-      x-tzkt-extension: query-parameter
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Int32Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int32
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

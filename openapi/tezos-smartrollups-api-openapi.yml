@@ -1025,7 +1025,317 @@ paths:
                   $ref: '#/components/schemas/SrMessage'
 components:
   schemas:
-    Src1HashParameter:
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    IMicheline:
+      type: object
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/MichelineType'
+    SelectionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SrStaker:
+      allOf:
+      - $ref: '#/components/schemas/Alias'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: integer
+            description: "Internal TzKT id.  \n**[sortable]**"
+            format: int32
+          bondStatus:
+            type: string
+            description: Bond status (`active`, `returned`, or `lost`).
+          bondLevel:
+            type: integer
+            description: "Level of the block where the staker published his first commitment.  \n**[sortable]**"
+            format: int32
+          bondTime:
+            type: string
+            description: Timestamp of the block where the staker published his first commitment.
+            format: date-time
+    SrBondStatusParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1035,30 +1345,30 @@ components:
           - 'null'
           description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
 
-            Specify an src1-hash to get items where the specified field is equal to the specified value.
+            Specify an sr bond status to get items where the specified field is equal to the specified value.
 
 
-            Example: `?hash=src1qwe...`.'
+            Example: `?status=active`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an src1-hash to get items where the specified field is not equal to the specified value.
+            Specify an sr bond status to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?hash.ne=src1qwe...`.'
+            Example: `?status.ne=active`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of src1-hashes to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of sr bond statuses to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?hash.in=hash1,hash2,hash3`.'
+            Example: `?status.in=returned,lost`.'
           items:
             type: string
         ni:
@@ -1067,13 +1377,29 @@ components:
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of src1-hashes to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of sr bond statuses to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?hash.ni=hash1,hash2,hash3`.'
+            Example: `?status.ni=returned,lost`.'
           items:
             type: string
       x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: active,returned,lost
+    MichelineType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Int
+      - Bytes
+      - String
+      - Array
+      - Prim
+      enum:
+      - 0
+      - 32
+      - 64
+      - 96
+      - 128
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -1171,26 +1497,6 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
-    IMicheline:
-      type: object
-      x-abstract: true
-      additionalProperties: false
-      properties:
-        type:
-          $ref: '#/components/schemas/MichelineType'
-    MichelineFormat:
-      type: string
-      description: ''
-      x-enumNames:
-      - Json
-      - JsonString
-      - Raw
-      - RawString
-      enum:
-      - Json
-      - JsonString
-      - Raw
-      - RawString
     SmartRollup:
       allOf:
       - type: object
@@ -1342,7 +1648,32 @@ components:
             format: date-time
           extras:
             description: Off-chain extras
-    SrMessageTypeParameter:
+    Entrypoint:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Entrypoint name
+        jsonParameters:
+          description: A kind of JSON schema, describing how parameters will look like in a human-readable JSON format
+        michelineParameters:
+          description: Parameters schema in micheline format
+          oneOf:
+          - $ref: '#/components/schemas/IMicheline'
+        michelsonParameters:
+          type:
+          - string
+          - 'null'
+          description: Parameters schema in michelson format
+        unused:
+          type: boolean
+          description: 'Unused means that the entrypoint can be normalized to a more specific one.
+
+            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint
+
+            because it can be normalized to `%entry2` or `%entry3`'
+    SrCommitmentStatusParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1352,30 +1683,30 @@ components:
           - 'null'
           description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
 
-            Specify an inbox message type to get items where the specified field is equal to the specified value.
+            Specify an sr commitment status to get items where the specified field is equal to the specified value.
 
 
-            Example: `?status=external`.'
+            Example: `?status=pending`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an inbox message type to get items where the specified field is not equal to the specified value.
+            Specify an sr commitment status to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?status.ne=transfer`.'
+            Example: `?status.ne=cemented`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of inbox message types to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of sr commitment statuses to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?status.in=transfer,external`.'
+            Example: `?status.in=cemented,executed`.'
           items:
             type: string
         ni:
@@ -1384,39 +1715,14 @@ components:
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of inbox message types to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of sr commitment statuses to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?status.ni=transfer,external`.'
+            Example: `?status.ni=cemented,executed`.'
           items:
             type: string
       x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: level_start,level_info,level_end,transfer,external,migration
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: orphan,refuted,pending,cemented,executed
     SrGameMove:
       type: object
       additionalProperties: false
@@ -1445,6 +1751,117 @@ components:
           description: 'Game status after the move
 
             (`ongoing` - game in progress, `loser` - one of the players lost, `draw` - both players lost).'
+    SrCommitmentInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal TzKT id.
+          format: int64
+        initiator:
+          description: Account that published the commitment first.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        inboxLevel:
+          type: integer
+          description: Inbox level
+          format: int32
+        state:
+          type: string
+          description: State hash
+        hash:
+          type: string
+          description: Commitment hash
+        ticks:
+          type: integer
+          description: Number of ticks
+          format: int64
+        firstLevel:
+          type: integer
+          description: Level of the block where the commitment was first published.
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the commitment was first published.
+          format: date-time
+    SrCommitment:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: "Internal TzKT id.  \n**[sortable]**"
+          format: int64
+        rollup:
+          description: Smart rollup.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        initiator:
+          description: Account that published the commitment first.
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        inboxLevel:
+          type: integer
+          description: "Inbox level.  \n**[sortable]**"
+          format: int32
+        state:
+          type: string
+          description: State hash.
+        hash:
+          type: string
+          description: Commitment hash.
+        ticks:
+          type: integer
+          description: Number of ticks.
+          format: int64
+        firstLevel:
+          type: integer
+          description: "Level of the block where the commitment was first published.  \n**[sortable]**"
+          format: int32
+        firstTime:
+          type: string
+          description: Timestamp of the block where the commitment was first published.
+          format: date-time
+        lastLevel:
+          type: integer
+          description: "Level of the block where the commitment was last updated.  \n**[sortable]**"
+          format: int32
+        lastTime:
+          type: string
+          description: Timestamp of the block where the commitment was last updated.
+          format: date-time
+        stakers:
+          type: integer
+          description: "Number of stakers, published this commitment.  \n**[sortable]**"
+          format: int32
+        activeStakers:
+          type: integer
+          description: "Number of active (not refuted) stakers.  \n**[sortable]**"
+          format: int32
+        successors:
+          type: integer
+          description: "Number of successor commitments.  \n**[sortable]**"
+          format: int32
+        status:
+          type: string
+          description: Commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).
+        predecessor:
+          description: Predecessor commitment.
+          oneOf:
+          - $ref: '#/components/schemas/SrCommitmentInfo'
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
     SrGame:
       type: object
       additionalProperties: false
@@ -1517,189 +1934,6 @@ components:
           - 'null'
           description: In case the opponent lost (including a `draw`), this field will contain the loss amount (in mutez).
           format: int64
-    SrCommitmentStatusParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
-
-            Specify an sr commitment status to get items where the specified field is equal to the specified value.
-
-
-            Example: `?status=pending`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an sr commitment status to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?status.ne=cemented`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of sr commitment statuses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?status.in=cemented,executed`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of sr commitment statuses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?status.ni=cemented,executed`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: orphan,refuted,pending,cemented,executed
-    MichelineType:
-      type: integer
-      description: ''
-      x-enumNames:
-      - Int
-      - Bytes
-      - String
-      - Array
-      - Prim
-      enum:
-      - 0
-      - 32
-      - 64
-      - 96
-      - 128
-    SrStaker:
-      allOf:
-      - $ref: '#/components/schemas/Alias'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: integer
-            description: "Internal TzKT id.  \n**[sortable]**"
-            format: int32
-          bondStatus:
-            type: string
-            description: Bond status (`active`, `returned`, or `lost`).
-          bondLevel:
-            type: integer
-            description: "Level of the block where the staker published his first commitment.  \n**[sortable]**"
-            format: int32
-          bondTime:
-            type: string
-            description: Timestamp of the block where the staker published his first commitment.
-            format: date-time
-    Int32Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int32
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
     AddressParameter:
       type: object
       additionalProperties: false
@@ -1749,43 +1983,69 @@ components:
           items:
             type: string
       x-tzkt-extension: query-parameter
-    SelectionParameter:
+    SrMessageTypeParameter:
       type: object
       additionalProperties: false
       properties:
-        fields:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
+
+            Specify an inbox message type to get items where the specified field is equal to the specified value.
+
+
+            Example: `?status=external`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an inbox message type to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?status.ne=transfer`.'
+        in:
           type:
           - array
           - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+          description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of fields to include into response.
+            Specify a comma-separated list of inbox message types to get items where the specified field is equal to one of the specified values.
 
 
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
+            Example: `?status.in=transfer,external`.'
           items:
             type: string
-        values:
+        ni:
           type:
           - array
           - 'null'
-          description: '**Values** selection mode. \
+          description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of fields to include their values into response.
+            Specify a comma-separated list of inbox message types to get items where the specified field is not equal to all the specified values.
 
 
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
+            Example: `?status.ni=transfer,external`.'
           items:
             type: string
       x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: level_start,level_info,level_end,transfer,external,migration
+    MichelineFormat:
+      type: string
+      description: ''
+      x-enumNames:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+      enum:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
     SrMessage:
       type: object
       additionalProperties: false
@@ -1850,97 +2110,7 @@ components:
           - string
           - 'null'
           description: For `migration` messages only. Version of the new protocol (e.g. 'nairobi_017').
-    SrCommitment:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: "Internal TzKT id.  \n**[sortable]**"
-          format: int64
-        rollup:
-          description: Smart rollup.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        initiator:
-          description: Account that published the commitment first.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        inboxLevel:
-          type: integer
-          description: "Inbox level.  \n**[sortable]**"
-          format: int32
-        state:
-          type: string
-          description: State hash.
-        hash:
-          type: string
-          description: Commitment hash.
-        ticks:
-          type: integer
-          description: Number of ticks.
-          format: int64
-        firstLevel:
-          type: integer
-          description: "Level of the block where the commitment was first published.  \n**[sortable]**"
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the commitment was first published.
-          format: date-time
-        lastLevel:
-          type: integer
-          description: "Level of the block where the commitment was last updated.  \n**[sortable]**"
-          format: int32
-        lastTime:
-          type: string
-          description: Timestamp of the block where the commitment was last updated.
-          format: date-time
-        stakers:
-          type: integer
-          description: "Number of stakers, published this commitment.  \n**[sortable]**"
-          format: int32
-        activeStakers:
-          type: integer
-          description: "Number of active (not refuted) stakers.  \n**[sortable]**"
-          format: int32
-        successors:
-          type: integer
-          description: "Number of successor commitments.  \n**[sortable]**"
-          format: int32
-        status:
-          type: string
-          description: Commitment status (`pending`, `cemented`, `executed`, `refuted`, or `orphan`).
-        predecessor:
-          description: Predecessor commitment.
-          oneOf:
-          - $ref: '#/components/schemas/SrCommitmentInfo'
-    Entrypoint:
-      type: object
-      additionalProperties: false
-      properties:
-        name:
-          type: string
-          description: Entrypoint name
-        jsonParameters:
-          description: A kind of JSON schema, describing how parameters will look like in a human-readable JSON format
-        michelineParameters:
-          description: Parameters schema in micheline format
-          oneOf:
-          - $ref: '#/components/schemas/IMicheline'
-        michelsonParameters:
-          type:
-          - string
-          - 'null'
-          description: Parameters schema in michelson format
-        unused:
-          type: boolean
-          description: 'Unused means that the entrypoint can be normalized to a more specific one.
-
-            For example here `(or %entry1 (unit %entry2) (nat %entry3))` the `%entry1` is unused entrypoint
-
-            because it can be normalized to `%entry2` or `%entry3`'
-    SrBondStatusParameter:
+    Src1HashParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1950,30 +2120,30 @@ components:
           - 'null'
           description: '**Equal** filter mode (`.eq` suffix can be omitted, i.e. `?param=...` is the same as `?param.eq=...`). \
 
-            Specify an sr bond status to get items where the specified field is equal to the specified value.
+            Specify an src1-hash to get items where the specified field is equal to the specified value.
 
 
-            Example: `?status=active`.'
+            Example: `?hash=src1qwe...`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an sr bond status to get items where the specified field is not equal to the specified value.
+            Specify an src1-hash to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?status.ne=active`.'
+            Example: `?hash.ne=src1qwe...`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of sr bond statuses to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of src1-hashes to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?status.in=returned,lost`.'
+            Example: `?hash.in=hash1,hash2,hash3`.'
           items:
             type: string
         ni:
@@ -1982,182 +2152,12 @@ components:
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of sr bond statuses to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of src1-hashes to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?status.ni=returned,lost`.'
+            Example: `?hash.ni=hash1,hash2,hash3`.'
           items:
             type: string
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: active,returned,lost
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
-    SrCommitmentInfo:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: Internal TzKT id.
-          format: int64
-        initiator:
-          description: Account that published the commitment first.
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        inboxLevel:
-          type: integer
-          description: Inbox level
-          format: int32
-        state:
-          type: string
-          description: State hash
-        hash:
-          type: string
-          description: Commitment hash
-        ticks:
-          type: integer
-          description: Number of ticks
-          format: int64
-        firstLevel:
-          type: integer
-          description: Level of the block where the commitment was first published.
-          format: int32
-        firstTime:
-          type: string
-          description: Timestamp of the block where the commitment was first published.
-          format: date-time
-    AccountParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
-          type: boolean
-      x-tzkt-extension: query-parameter
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

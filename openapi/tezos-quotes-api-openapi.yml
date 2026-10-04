@@ -116,6 +116,128 @@ paths:
                   $ref: '#/components/schemas/Quote'
 components:
   schemas:
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
     SelectParameter:
       type: object
       additionalProperties: false
@@ -144,6 +266,46 @@ components:
             Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
           items:
             type: string
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
     DateTimeParameter:
       type: object
@@ -242,128 +404,6 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Int32Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int32
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
     Quote:
       type: object
       additionalProperties: false
@@ -408,46 +448,6 @@ components:
           type: number
           description: XTZ/GBP price
           format: double
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API

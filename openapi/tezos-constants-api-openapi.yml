@@ -185,301 +185,6 @@ paths:
                 format: int32
 components:
   schemas:
-    TimestampParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a datetime value to get items where the specified field is equal to the specified value.
-
-
-            Example: `?timestamp=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
-          format: date-time
-        gt:
-          type:
-          - string
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify a datetime value to get items where the specified field is greater than the specified value.
-
-
-            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify a datetime value to get items where the specified field is less than the specified value.
-
-
-            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
-          format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
-          format: date-time
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
-          items:
-            type: string
-            format: date-time
-      x-tzkt-extension: query-parameter
-    SelectParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    ExpressionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an expression hash to get items where the specified field is equal to the specified value.
-
-
-            Example: `?address=expr...`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an expression hash to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?address.ne=expr...`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of expression hashes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?address.in=expr1,expr2`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of expression hashes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?address.ni=expr1,expr2`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    AccountParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
-          type: boolean
-      x-tzkt-extension: query-parameter
     Int32Parameter:
       type: object
       additionalProperties: false
@@ -577,37 +282,60 @@ components:
             type: integer
             format: int32
       x-tzkt-extension: query-parameter
-    Constant:
+    SortParameter:
       type: object
       additionalProperties: false
       properties:
-        address:
-          type: string
-          description: Global address (expression hash)
-        value:
-          description: Constant value (either micheline, michelson or bytes, depending on the `format` parameter)
-        size:
-          type: integer
-          description: Constant size in bytes
-          format: int32
-        refs:
-          type: integer
-          description: Number of contracts referencing this constant
-          format: int32
-        creator:
-          description: Account registered this constant
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        creationLevel:
-          type: integer
-          description: Level of the first block baked with this software
-          format: int32
-        creationTime:
-          type: string
-          description: Datetime of the first block baked with this software
-          format: date-time
-        extras:
-          description: Off-chain extras
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
     OffsetParameter:
       type: object
       additionalProperties: false
@@ -647,6 +375,278 @@ components:
 
             Example: `?offset.cr=45837`.'
           format: int64
+      x-tzkt-extension: query-parameter
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    Constant:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Global address (expression hash)
+        value:
+          description: Constant value (either micheline, michelson or bytes, depending on the `format` parameter)
+        size:
+          type: integer
+          description: Constant size in bytes
+          format: int32
+        refs:
+          type: integer
+          description: Number of contracts referencing this constant
+          format: int32
+        creator:
+          description: Account registered this constant
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        creationLevel:
+          type: integer
+          description: Level of the first block baked with this software
+          format: int32
+        creationTime:
+          type: string
+          description: Datetime of the first block baked with this software
+          format: date-time
+        extras:
+          description: Off-chain extras
+    ExpressionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an expression hash to get items where the specified field is equal to the specified value.
+
+
+            Example: `?address=expr...`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an expression hash to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?address.ne=expr...`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of expression hashes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?address.in=expr1,expr2`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of expression hashes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?address.ni=expr1,expr2`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    TimestampParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a datetime value to get items where the specified field is equal to the specified value.
+
+
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
+        gt:
+          type:
+          - string
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than the specified value.
+
+
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        ge:
+          type:
+          - string
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
+        lt:
+          type:
+          - string
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than the specified value.
+
+
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
+        le:
+          type:
+          - string
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+          items:
+            type: string
+            format: date-time
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

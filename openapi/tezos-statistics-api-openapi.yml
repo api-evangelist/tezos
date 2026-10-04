@@ -260,103 +260,180 @@ paths:
                 $ref: '#/components/schemas/Statistics'
 components:
   schemas:
-    TimestampParameter:
+    Int32Parameter:
       type: object
       additionalProperties: false
       properties:
         eq:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify a datetime value to get items where the specified field is equal to the specified value.
+            Specify an integer number to get items where the specified field is equal to the specified value.
 
 
-            Example: `?timestamp=2020-02-20T02:40:57Z`.'
-          format: date-time
+            Example: `?balance=1234`.'
+          format: int32
         ne:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify a datetime value to get items where the specified field is not equal to the specified value.
+            Specify an integer number to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
-          format: date-time
+            Example: `?balance.ne=1234`.'
+          format: int32
         gt:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Greater than** filter mode. \
 
-            Specify a datetime value to get items where the specified field is greater than the specified value.
+            Specify an integer number to get items where the specified field is greater than the specified value.
 
 
-            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
-          format: date-time
+            Example: `?balance.gt=1234`.'
+          format: int32
         ge:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Greater or equal** filter mode. \
 
-            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
 
 
-            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
-          format: date-time
+            Example: `?balance.ge=1234`.'
+          format: int32
         lt:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Less than** filter mode. \
 
-            Specify a datetime value to get items where the specified field is less than the specified value.
+            Specify an integer number to get items where the specified field is less than the specified value.
 
 
-            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
-          format: date-time
+            Example: `?balance.lt=1234`.'
+          format: int32
         le:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Less or equal** filter mode. \
 
-            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
 
 
-            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
-          format: date-time
+            Example: `?balance.le=1234`.'
+          format: int32
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
+            Example: `?level.in=12,14,52,69`.'
           items:
-            type: string
-            format: date-time
+            type: integer
+            format: int32
         ni:
           type:
           - array
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
+            Example: `?level.ni=12,14,52,69`.'
           items:
-            type: string
-            format: date-time
+            type: integer
+            format: int32
       x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    QuoteShort:
+      type: object
+      additionalProperties: false
+      properties:
+        btc:
+          type:
+          - number
+          - 'null'
+          description: XTZ/BTC price
+          format: double
+        eur:
+          type:
+          - number
+          - 'null'
+          description: XTZ/EUR price
+          format: double
+        usd:
+          type:
+          - number
+          - 'null'
+          description: XTZ/USD price
+          format: double
+        cny:
+          type:
+          - number
+          - 'null'
+          description: XTZ/CNY price
+          format: double
+        jpy:
+          type:
+          - number
+          - 'null'
+          description: XTZ/JPY price
+          format: double
+        krw:
+          type:
+          - number
+          - 'null'
+          description: XTZ/KRW price
+          format: double
+        eth:
+          type:
+          - number
+          - 'null'
+          description: XTZ/ETH price
+          format: double
+        gbp:
+          type:
+          - number
+          - 'null'
+          description: XTZ/GBP price
+          format: double
     SelectParameter:
       type: object
       additionalProperties: false
@@ -386,30 +463,6 @@ components:
           items:
             type: string
       x-tzkt-extension: query-parameter
-    Symbols:
-      type: string
-      description: ''
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
-      enum:
-      - None
-      - Btc
-      - Eur
-      - Usd
-      - Cny
-      - Jpy
-      - Krw
-      - Eth
-      - Gbp
     DateTimeParameter:
       type: object
       additionalProperties: false
@@ -507,127 +560,166 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
-    SortParameter:
+    OffsetParameter:
       type: object
       additionalProperties: false
       properties:
-        asc:
+        el:
           type:
-          - string
+          - integer
           - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
 
-            Specify a field name to sort by.
+            Skips specified number of elements.
 
 
-            Example: `?sort=balance`.'
-        desc:
+            Example: `?offset=100`.'
+          format: int32
+        pg:
           type:
-          - string
+          - integer
           - 'null'
-          description: '**Descending** sort mode. \
+          description: '**Page** offset mode. \
 
-            Specify a field name to sort by descending.
+            Skips `page * limit` elements. This is a classic pagination.
 
 
-            Example: `?sort.desc=id`.'
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
       x-tzkt-extension: query-parameter
-    Int32Parameter:
+    Symbols:
+      type: string
+      description: ''
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+      enum:
+      - None
+      - Btc
+      - Eur
+      - Usd
+      - Cny
+      - Jpy
+      - Krw
+      - Eth
+      - Gbp
+    TimestampParameter:
       type: object
       additionalProperties: false
       properties:
         eq:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify an integer number to get items where the specified field is equal to the specified value.
+            Specify a datetime value to get items where the specified field is equal to the specified value.
 
 
-            Example: `?balance=1234`.'
-          format: int32
+            Example: `?timestamp=2020-02-20T02:40:57Z`.'
+          format: date-time
         ne:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is not equal to the specified value.
+            Specify a datetime value to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?balance.ne=1234`.'
-          format: int32
+            Example: `?timestamp.ne=2020-02-20T02:40:57Z`.'
+          format: date-time
         gt:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Greater than** filter mode. \
 
-            Specify an integer number to get items where the specified field is greater than the specified value.
+            Specify a datetime value to get items where the specified field is greater than the specified value.
 
 
-            Example: `?balance.gt=1234`.'
-          format: int32
+            Example: `?timestamp.gt=2020-02-20T02:40:57Z`.'
+          format: date-time
         ge:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Greater or equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+            Specify a datetime value to get items where the specified field is greater than equal to the specified value.
 
 
-            Example: `?balance.ge=1234`.'
-          format: int32
+            Example: `?timestamp.ge=2020-02-20T02:40:57Z`.'
+          format: date-time
         lt:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Less than** filter mode. \
 
-            Specify an integer number to get items where the specified field is less than the specified value.
+            Specify a datetime value to get items where the specified field is less than the specified value.
 
 
-            Example: `?balance.lt=1234`.'
-          format: int32
+            Example: `?timestamp.lt=2020-02-20T02:40:57Z`.'
+          format: date-time
         le:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Less or equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+            Specify a datetime value to get items where the specified field is less than or equal to the specified value.
 
 
-            Example: `?balance.le=1234`.'
-          format: int32
+            Example: `?timestamp.le=2020-02-20T02:40:57Z`.'
+          format: date-time
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of datetimes to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?level.in=12,14,52,69`.'
+            Example: `?timestamp.in=2020-02-20,2020-02-21`.'
           items:
-            type: integer
-            format: int32
+            type: string
+            format: date-time
         ni:
           type:
           - array
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of datetimes to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?level.ni=12,14,52,69`.'
+            Example: `?timestamp.ni=2020-02-20,2020-02-21`.'
           items:
-            type: integer
-            format: int32
+            type: string
+            format: date-time
       x-tzkt-extension: query-parameter
     Statistics:
       type: object
@@ -743,98 +835,6 @@ components:
           description: Injected historical quote at the time of the block at which the statistics has been calculated
           oneOf:
           - $ref: '#/components/schemas/QuoteShort'
-    QuoteShort:
-      type: object
-      additionalProperties: false
-      properties:
-        btc:
-          type:
-          - number
-          - 'null'
-          description: XTZ/BTC price
-          format: double
-        eur:
-          type:
-          - number
-          - 'null'
-          description: XTZ/EUR price
-          format: double
-        usd:
-          type:
-          - number
-          - 'null'
-          description: XTZ/USD price
-          format: double
-        cny:
-          type:
-          - number
-          - 'null'
-          description: XTZ/CNY price
-          format: double
-        jpy:
-          type:
-          - number
-          - 'null'
-          description: XTZ/JPY price
-          format: double
-        krw:
-          type:
-          - number
-          - 'null'
-          description: XTZ/KRW price
-          format: double
-        eth:
-          type:
-          - number
-          - 'null'
-          description: XTZ/ETH price
-          format: double
-        gbp:
-          type:
-          - number
-          - 'null'
-          description: XTZ/GBP price
-          format: double
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API

@@ -203,32 +203,128 @@ paths:
                   $ref: '#/components/schemas/BakingRight'
 components:
   schemas:
-    BakingRightTypeParameter:
+    Int32Parameter:
       type: object
       additionalProperties: false
       properties:
         eq:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify baking right type to get items where the specified field is equal to the specified value.
+            Specify an integer number to get items where the specified field is equal to the specified value.
 
 
-            Example: `?type=baking`.'
+            Example: `?balance=1234`.'
+          format: int32
         ne:
           type:
-          - string
+          - integer
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify baking right type to get items where the specified field is not equal to the specified value.
+            Specify an integer number to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?type.ne=attestation`.'
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
       x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: baking,attestation
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
     SelectParameter:
       type: object
       additionalProperties: false
@@ -258,7 +354,7 @@ components:
           items:
             type: string
       x-tzkt-extension: query-parameter
-    BakingRightStatusParameter:
+    BakingRightTypeParameter:
       type: object
       additionalProperties: false
       properties:
@@ -268,34 +364,145 @@ components:
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify baking right status to get items where the specified field is equal to the specified value.
+            Specify baking right type to get items where the specified field is equal to the specified value.
 
 
-            Example: `?type=future`.'
+            Example: `?type=baking`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify baking right status to get items where the specified field is not equal to the specified value.
+            Specify baking right type to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?type.ne=missed`.'
+            Example: `?type.ne=attestation`.'
       x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: future,realized,uncovered,missed
-    Alias:
+      x-tzkt-query-parameter: baking,attestation
+    OffsetParameter:
       type: object
       additionalProperties: false
       properties:
-        alias:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
+    AccountParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
           type:
           - string
           - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
+
+
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
     Int32NullParameter:
       type: object
       additionalProperties: false
@@ -403,31 +610,44 @@ components:
 
             Example: `?nonce.null` or `?nonce.null=false`.'
       x-tzkt-extension: query-parameter
-    SortParameter:
+    Alias:
       type: object
       additionalProperties: false
       properties:
-        asc:
+        alias:
           type:
           - string
           - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    BakingRightStatusParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
           type:
           - string
           - 'null'
-          description: '**Descending** sort mode. \
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify a field name to sort by descending.
+            Specify baking right status to get items where the specified field is equal to the specified value.
 
 
-            Example: `?sort.desc=id`.'
+            Example: `?type=future`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify baking right status to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?type.ne=missed`.'
       x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: future,realized,uncovered,missed
     BakingRight:
       type: object
       additionalProperties: false
@@ -480,226 +700,6 @@ components:
             - `realized` - the right was successfully realized;
 
             - `missed` - the right was not realized.'
-    AccountParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
-          type: boolean
-      x-tzkt-extension: query-parameter
-    Int32Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int32
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API

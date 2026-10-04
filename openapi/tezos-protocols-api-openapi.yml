@@ -160,70 +160,6 @@ paths:
                 $ref: '#/components/schemas/Protocol'
 components:
   schemas:
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Protocol:
-      type: object
-      additionalProperties: false
-      properties:
-        code:
-          type: integer
-          description: Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)
-          format: int32
-        hash:
-          type: string
-          description: Hash of the protocol
-        version:
-          type: integer
-          description: Global version number
-          format: int32
-        firstLevel:
-          type: integer
-          description: Block height where the protocol was applied
-          format: int32
-        firstCycle:
-          type: integer
-          description: Index of the first cycle started with the protocol
-          format: int32
-        firstCycleLevel:
-          type: integer
-          description: Level of the first block of the first cycle started with the protocol
-          format: int32
-        lastLevel:
-          type:
-          - integer
-          - 'null'
-          description: Block height where the protocol ends. `null` if the protocol is active
-          format: int32
-        constants:
-          description: Information about the protocol constants
-          oneOf:
-          - $ref: '#/components/schemas/ProtocolConstants'
-        extras:
-          description: Off-chain extras
     ProtocolConstants:
       type: object
       additionalProperties: false
@@ -407,6 +343,70 @@ components:
           items:
             type: integer
             format: int64
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    Protocol:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          type: integer
+          description: Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)
+          format: int32
+        hash:
+          type: string
+          description: Hash of the protocol
+        version:
+          type: integer
+          description: Global version number
+          format: int32
+        firstLevel:
+          type: integer
+          description: Block height where the protocol was applied
+          format: int32
+        firstCycle:
+          type: integer
+          description: Index of the first cycle started with the protocol
+          format: int32
+        firstCycleLevel:
+          type: integer
+          description: Level of the first block of the first cycle started with the protocol
+          format: int32
+        lastLevel:
+          type:
+          - integer
+          - 'null'
+          description: Block height where the protocol ends. `null` if the protocol is active
+          format: int32
+        constants:
+          description: Information about the protocol constants
+          oneOf:
+          - $ref: '#/components/schemas/ProtocolConstants'
+        extras:
+          description: Off-chain extras
     OffsetParameter:
       type: object
       additionalProperties: false
