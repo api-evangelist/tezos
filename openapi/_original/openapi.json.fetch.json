@@ -1,0 +1,12 @@
+{
+ "url": "https://api.tzkt.io/v1/swagger.json",
+ "requested_url": "https://api.tzkt.io/v1/swagger.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 1624201,
+ "sha256": "a2e2aba5e534b4195f0d5c6f59cc22d9234c1dceb1c7e6d2bca404091c7659b0",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
