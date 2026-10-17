@@ -160,6 +160,85 @@ paths:
                 $ref: '#/components/schemas/Protocol'
 components:
   schemas:
+    Protocol:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          type: integer
+          description: Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)
+          format: int32
+        hash:
+          type: string
+          description: Hash of the protocol
+        version:
+          type: integer
+          description: Global version number
+          format: int32
+        firstLevel:
+          type: integer
+          description: Block height where the protocol was applied
+          format: int32
+        firstCycle:
+          type: integer
+          description: Index of the first cycle started with the protocol
+          format: int32
+        firstCycleLevel:
+          type: integer
+          description: Level of the first block of the first cycle started with the protocol
+          format: int32
+        lastLevel:
+          type:
+          - integer
+          - 'null'
+          description: Block height where the protocol ends. `null` if the protocol is active
+          format: int32
+        constants:
+          description: Information about the protocol constants
+          oneOf:
+          - $ref: '#/components/schemas/ProtocolConstants'
+        extras:
+          description: Off-chain extras
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
     ProtocolConstants:
       type: object
       additionalProperties: false
@@ -367,85 +446,6 @@ components:
 
 
             Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    Protocol:
-      type: object
-      additionalProperties: false
-      properties:
-        code:
-          type: integer
-          description: Protocol code, representing a number of protocol changes since genesis (mod 256, but `-1` for the genesis block)
-          format: int32
-        hash:
-          type: string
-          description: Hash of the protocol
-        version:
-          type: integer
-          description: Global version number
-          format: int32
-        firstLevel:
-          type: integer
-          description: Block height where the protocol was applied
-          format: int32
-        firstCycle:
-          type: integer
-          description: Index of the first cycle started with the protocol
-          format: int32
-        firstCycleLevel:
-          type: integer
-          description: Level of the first block of the first cycle started with the protocol
-          format: int32
-        lastLevel:
-          type:
-          - integer
-          - 'null'
-          description: Block height where the protocol ends. `null` if the protocol is active
-          format: int32
-        constants:
-          description: Information about the protocol constants
-          oneOf:
-          - $ref: '#/components/schemas/ProtocolConstants'
-        extras:
-          description: Off-chain extras
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
       x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:

@@ -503,128 +503,170 @@ paths:
                 $ref: '#/components/schemas/VotingEpoch'
 components:
   schemas:
-    Int32Parameter:
+    Proposal:
+      type: object
+      additionalProperties: false
+      properties:
+        hash:
+          type: string
+          description: Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files
+        initiator:
+          description: Information about the baker (delegate) submitted the proposal
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        firstPeriod:
+          type: integer
+          description: The first voting period where the proposal was active
+          format: int32
+        lastPeriod:
+          type: integer
+          description: The last voting period where the proposal was active
+          format: int32
+        epoch:
+          type: integer
+          description: The voting epoch where the proposal was active
+          format: int32
+        upvotes:
+          type: integer
+          description: The total number of upvotes (proposal operations)
+          format: int32
+        votingPower:
+          type: integer
+          description: The total voting power of bakers, upvoted the proposal
+          format: int64
+        status:
+          type: string
+          description: 'Status of the proposal
+
+            `active` - the proposal in the active state
+
+            `accepted` - the proposal was accepted
+
+            `rejected` - the proposal was rejected due to too many "nay" ballots
+
+            `skipped` - the proposal was skipped due to the quorum was not reached'
+        extras:
+          description: Off-chain extras
+    VotingEpoch:
+      type: object
+      additionalProperties: false
+      properties:
+        index:
+          type: integer
+          description: Index of the voting epoch, starting from zero
+          format: int32
+        firstLevel:
+          type: integer
+          description: The height of the block in which the epoch starts
+          format: int32
+        startTime:
+          type: string
+          description: The timestamp of the block in which the epoch starts
+          format: date-time
+        lastLevel:
+          type: integer
+          description: The height of the block in which the epoch ends
+          format: int32
+        endTime:
+          type: string
+          description: The timestamp of the block in which the epoch ends
+          format: date-time
+        status:
+          type: string
+          description: 'Status of the voting epoch:
+
+            `no_proposals` - there were no proposals proposed
+
+            `voting` - there was at least one proposal and the voting is in progress
+
+            `completed` - voting successfully completed and the proposal was accepted
+
+            `failed` - voting was not completed due to either quorum or supermajority was not reached'
+        periods:
+          type: array
+          description: Voting periods in the epoch
+          items:
+            $ref: '#/components/schemas/VotingPeriod'
+        proposals:
+          type: array
+          description: Proposals pushed during the voting epoch (null, if there were no proposals).
+          items:
+            $ref: '#/components/schemas/Proposal'
+    VoterStatusParameter:
       type: object
       additionalProperties: false
       properties:
         eq:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify an integer number to get items where the specified field is equal to the specified value.
+            Specify a voter status to get items where the specified field is equal to the specified value.
 
 
-            Example: `?balance=1234`.'
-          format: int32
+            Example: `?status=none`.'
         ne:
           type:
-          - integer
+          - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify an integer number to get items where the specified field is not equal to the specified value.
+            Specify a voter status to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
+            Example: `?status.ne=none`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of voter statuses to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?level.in=12,14,52,69`.'
+            Example: `?status.in=voted_yay,voted_nay`.'
           items:
-            type: integer
-            format: int32
+            type: string
         ni:
           type:
           - array
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of voter statuses to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?level.ni=12,14,52,69`.'
+            Example: `?status.ni=none,upvoted`.'
           items:
-            type: integer
-            format: int32
+            type: string
       x-tzkt-extension: query-parameter
-    SortParameter:
+      x-tzkt-query-parameter: none,upvoted,voted_yay,voted_nay,voted_pass
+    VoterSnapshot:
       type: object
       additionalProperties: false
       properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+        delegate:
+          description: Voter identity
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        votingPower:
+          type: integer
+          description: Baker's voting power
+          format: int64
+        status:
+          type: string
+          description: 'Voter''s status:
 
-            Specify a field name to sort by.
+            `none` - the voter did nothing
 
+            `upvoted` - the voter upvoted at least one proposal
 
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
+            `voted_yay` - the voter voted "yay"
 
-            Specify a field name to sort by descending.
+            `voted_nay` - the voter voted "nay"
 
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
+            `voted_pass` - the voter voted "pass"'
     SelectParameter:
       type: object
       additionalProperties: false
@@ -704,107 +746,6 @@ components:
             type: string
       x-tzkt-extension: query-parameter
       x-tzkt-query-parameter: no_proposals,voting,completed,failed
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
-    ProtocolParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a protocol hash to get items where the specified field is equal to the specified value.
-
-
-            Example: `?protocol=PsCARTHAGaz...`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a protocol hash to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=PsBabyM1eUX...`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of protocol hashes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=PsCARTHAGaz,PsBabyM1eUX`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of protocol hashes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=PsCARTHAGaz,PsBabyM1eUX`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
     VotingPeriod:
       type: object
       additionalProperties: false
@@ -944,121 +885,7 @@ components:
           - 'null'
           description: Total voting power of the ballots with "pass" vote (only for exploration and promotion periods)
           format: int64
-    VoterSnapshot:
-      type: object
-      additionalProperties: false
-      properties:
-        delegate:
-          description: Voter identity
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        votingPower:
-          type: integer
-          description: Baker's voting power
-          format: int64
-        status:
-          type: string
-          description: 'Voter''s status:
-
-            `none` - the voter did nothing
-
-            `upvoted` - the voter upvoted at least one proposal
-
-            `voted_yay` - the voter voted "yay"
-
-            `voted_nay` - the voter voted "nay"
-
-            `voted_pass` - the voter voted "pass"'
-    VotingEpoch:
-      type: object
-      additionalProperties: false
-      properties:
-        index:
-          type: integer
-          description: Index of the voting epoch, starting from zero
-          format: int32
-        firstLevel:
-          type: integer
-          description: The height of the block in which the epoch starts
-          format: int32
-        startTime:
-          type: string
-          description: The timestamp of the block in which the epoch starts
-          format: date-time
-        lastLevel:
-          type: integer
-          description: The height of the block in which the epoch ends
-          format: int32
-        endTime:
-          type: string
-          description: The timestamp of the block in which the epoch ends
-          format: date-time
-        status:
-          type: string
-          description: 'Status of the voting epoch:
-
-            `no_proposals` - there were no proposals proposed
-
-            `voting` - there was at least one proposal and the voting is in progress
-
-            `completed` - voting successfully completed and the proposal was accepted
-
-            `failed` - voting was not completed due to either quorum or supermajority was not reached'
-        periods:
-          type: array
-          description: Voting periods in the epoch
-          items:
-            $ref: '#/components/schemas/VotingPeriod'
-        proposals:
-          type: array
-          description: Proposals pushed during the voting epoch (null, if there were no proposals).
-          items:
-            $ref: '#/components/schemas/Proposal'
-    Proposal:
-      type: object
-      additionalProperties: false
-      properties:
-        hash:
-          type: string
-          description: Hash of the proposal, which representing a tarball of concatenated .ml/.mli source files
-        initiator:
-          description: Information about the baker (delegate) submitted the proposal
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        firstPeriod:
-          type: integer
-          description: The first voting period where the proposal was active
-          format: int32
-        lastPeriod:
-          type: integer
-          description: The last voting period where the proposal was active
-          format: int32
-        epoch:
-          type: integer
-          description: The voting epoch where the proposal was active
-          format: int32
-        upvotes:
-          type: integer
-          description: The total number of upvotes (proposal operations)
-          format: int32
-        votingPower:
-          type: integer
-          description: The total voting power of bakers, upvoted the proposal
-          format: int64
-        status:
-          type: string
-          description: 'Status of the proposal
-
-            `active` - the proposal in the active state
-
-            `accepted` - the proposal was accepted
-
-            `rejected` - the proposal was rejected due to too many "nay" ballots
-
-            `skipped` - the proposal was skipped due to the quorum was not reached'
-        extras:
-          description: Off-chain extras
-    VoterStatusParameter:
+    ProtocolParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1068,30 +895,30 @@ components:
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify a voter status to get items where the specified field is equal to the specified value.
+            Specify a protocol hash to get items where the specified field is equal to the specified value.
 
 
-            Example: `?status=none`.'
+            Example: `?protocol=PsCARTHAGaz...`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify a voter status to get items where the specified field is not equal to the specified value.
+            Specify a protocol hash to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?status.ne=none`.'
+            Example: `?sender.ne=PsBabyM1eUX...`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of voter statuses to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of protocol hashes to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?status.in=voted_yay,voted_nay`.'
+            Example: `?sender.in=PsCARTHAGaz,PsBabyM1eUX`.'
           items:
             type: string
         ni:
@@ -1100,14 +927,187 @@ components:
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of voter statuses to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of protocol hashes to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?status.ni=none,upvoted`.'
+            Example: `?sender.ni=PsCARTHAGaz,PsBabyM1eUX`.'
           items:
             type: string
       x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: none,upvoted,voted_yay,voted_nay,voted_pass
+    Alias:
+      type: object
+      additionalProperties: false
+      properties:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
+          type: string
+          description: Account address (public key hash).
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API

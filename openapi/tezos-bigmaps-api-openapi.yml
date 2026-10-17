@@ -892,373 +892,6 @@ components:
           $ref: '#/components/schemas/AnnotationType'
         value:
           type: string
-    SortParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        asc:
-          type:
-          - string
-          - 'null'
-          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
-
-            Specify a field name to sort by.
-
-
-            Example: `?sort=balance`.'
-        desc:
-          type:
-          - string
-          - 'null'
-          description: '**Descending** sort mode. \
-
-            Specify a field name to sort by descending.
-
-
-            Example: `?sort.desc=id`.'
-      x-tzkt-extension: query-parameter
-    OffsetParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        el:
-          type:
-          - integer
-          - 'null'
-          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
-
-            Skips specified number of elements.
-
-
-            Example: `?offset=100`.'
-          format: int32
-        pg:
-          type:
-          - integer
-          - 'null'
-          description: '**Page** offset mode. \
-
-            Skips `page * limit` elements. This is a classic pagination.
-
-
-            Example: `?offset.pg=1`.'
-          format: int32
-        cr:
-          type:
-          - integer
-          - 'null'
-          description: '**Cursor** offset mode. \
-
-            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
-
-            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
-
-
-            Example: `?offset.cr=45837`.'
-          format: int64
-      x-tzkt-extension: query-parameter
-    AccountParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
-
-
-            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
-          items:
-            type: string
-        eqx:
-          type:
-          - string
-          - 'null'
-          description: '**Equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are equal.
-
-
-            Example: `?sender.eqx=target`.'
-        nex:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal to another field** filter mode. \
-
-            Specify a field name to get items where the specified fields are not equal.
-
-
-            Example: `?sender.nex=initiator`.'
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?initiator.null` or `?initiator.null=false`.'
-        inHasNull:
-          type: boolean
-        niHasNull:
-          type: boolean
-      x-tzkt-extension: query-parameter
-    ExpressionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an expression hash to get items where the specified field is equal to the specified value.
-
-
-            Example: `?address=expr...`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an expression hash to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?address.ne=expr...`.'
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of expression hashes to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?address.in=expr1,expr2`.'
-          items:
-            type: string
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of expression hashes to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?address.ni=expr1,expr2`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    IMicheline:
-      type: object
-      x-abstract: true
-      additionalProperties: false
-      properties:
-        type:
-          $ref: '#/components/schemas/MichelineType'
-    SelectionParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example:
-
-            `?select=address,balance as b,metadata.name as meta_name` will result in
-
-            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example:
-
-            `?select.values=address,balance,metadata.name`  will result in
-
-            `[ [ "asd", 10, "qwe" ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-    Int32Parameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - integer
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify an integer number to get items where the specified field is equal to the specified value.
-
-
-            Example: `?balance=1234`.'
-          format: int32
-        ne:
-          type:
-          - integer
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?balance.ne=1234`.'
-          format: int32
-        gt:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater than** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than the specified value.
-
-
-            Example: `?balance.gt=1234`.'
-          format: int32
-        ge:
-          type:
-          - integer
-          - 'null'
-          description: '**Greater or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is greater than equal to the specified value.
-
-
-            Example: `?balance.ge=1234`.'
-          format: int32
-        lt:
-          type:
-          - integer
-          - 'null'
-          description: '**Less than** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than the specified value.
-
-
-            Example: `?balance.lt=1234`.'
-          format: int32
-        le:
-          type:
-          - integer
-          - 'null'
-          description: '**Less or equal** filter mode. \
-
-            Specify an integer number to get items where the specified field is less than or equal to the specified value.
-
-
-            Example: `?balance.le=1234`.'
-          format: int32
-        in:
-          type:
-          - array
-          - 'null'
-          description: '**In list** (any of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
-
-
-            Example: `?level.in=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-        ni:
-          type:
-          - array
-          - 'null'
-          description: '**Not in list** (none of) filter mode. \
-
-            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
-
-
-            Example: `?level.ni=12,14,52,69`.'
-          items:
-            type: integer
-            format: int32
-      x-tzkt-extension: query-parameter
-    SelectParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        fields:
-          type:
-          - array
-          - 'null'
-          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
-
-            Specify a comma-separated list of fields to include into response.
-
-
-            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
-          items:
-            type: string
-        values:
-          type:
-          - array
-          - 'null'
-          description: '**Values** selection mode. \
-
-            Specify a comma-separated list of fields to include their values into response.
-
-
-            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
     JsonParameter:
       type: object
       additionalProperties: false
@@ -1417,6 +1050,257 @@ components:
             Example: `?parameter.null` or `?parameter.null=false` or `?parameter.sigs.[0].null=false`.'
           x-tzkt-extension: json-parameter
       x-tzkt-extension: json-parameter
+    BigMapUpdate:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        level:
+          type: integer
+          description: Level of the block where the bigmap was updated
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block where the bigmap was updated
+          format: date-time
+        bigmap:
+          type: integer
+          description: Bigmap ptr
+          format: int32
+        contract:
+          description: Smart contract in which's storage the bigmap is allocated
+          oneOf:
+          - $ref: '#/components/schemas/Alias'
+        path:
+          type: string
+          description: Path to the bigmap in the contract storage
+        action:
+          type: string
+          description: Action with the bigmap (`allocate`, `add_key`, `update_key`, `remove_key`, `remove`)
+        content:
+          description: 'Updated key.
+
+            If the action is `allocate` or `remove` the content will be `null`.'
+          oneOf:
+          - $ref: '#/components/schemas/BigMapKeyShort'
+    SelectParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        fields:
+          type:
+          - array
+          - 'null'
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
+
+            Specify a comma-separated list of fields to include into response.
+
+
+            Example: `?select=address,balance` => `[ { "address": "asd", "balance": 10 } ]`.'
+          items:
+            type: string
+        values:
+          type:
+          - array
+          - 'null'
+          description: '**Values** selection mode. \
+
+            Specify a comma-separated list of fields to include their values into response.
+
+
+            Example: `?select.values=address,balance` => `[ [ "asd", 10 ] ]`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    ExpressionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an expression hash to get items where the specified field is equal to the specified value.
+
+
+            Example: `?address=expr...`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an expression hash to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?address.ne=expr...`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of expression hashes to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?address.in=expr1,expr2`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of expression hashes to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?address.ni=expr1,expr2`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+    StringParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a string to get items where the specified field is equal to the specified value.
+
+
+            Example: `?parameters=abc`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a string to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?parameters.ne=abc`.'
+        as:
+          type:
+          - string
+          - 'null'
+          description: '**Same as** filter mode. \
+
+            Specify a string template to get items where the specified field matches the specified template. \
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameters.as=*mid*` or `?parameters.as=*end`.'
+        un:
+          type:
+          - string
+          - 'null'
+          description: '**Unlike** filter mode. \
+
+            Specify a string template to get items where the specified field doesn''t match the specified template.
+
+            This mode supports wildcard `*`. Use `\*` as an escape symbol.
+
+
+            Example: `?parameters.un=*mid*` or `?parameters.un=*end`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of strings to get items where the specified field is equal to one of the specified values. \
+
+            Use `\,` as an escape symbol.
+
+
+            Example: `?errors.in=bla,bal,abl`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \
+
+            Use `\,` as an escape symbol.
+
+
+            Example: `?errors.ni=bla,bal,abl`.'
+          items:
+            type: string
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?parameters.null` or `?parameters.null=false`.'
+      x-tzkt-extension: query-parameter
+    BigMapActionParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a contract kind to get items where the specified field is equal to the specified value.
+
+
+            Example: `?kind=smart_contract`.'
+        ne:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify a contract kind to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?kind.ne=delegator_contract`.'
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of contract kinds to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?kind.in=smart_contract,asset`.'
+          items:
+            type: string
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of contract kinds to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?kind.ni=smart_contract,asset`.'
+          items:
+            type: string
+      x-tzkt-extension: query-parameter
+      x-tzkt-query-parameter: allocate,add_key,update_key,remove_key,remove
     BigMapKeyFull:
       type: object
       additionalProperties: false
@@ -1459,21 +1343,6 @@ components:
           type: integer
           description: "Total number of actions with the key.  \n**[sortable]**"
           format: int32
-    MichelineType:
-      type: integer
-      description: ''
-      x-enumNames:
-      - Int
-      - Bytes
-      - String
-      - Array
-      - Prim
-      enum:
-      - 0
-      - 32
-      - 64
-      - 96
-      - 128
     TimestampParameter:
       type: object
       additionalProperties: false
@@ -1571,63 +1440,44 @@ components:
             type: string
             format: date-time
       x-tzkt-extension: query-parameter
-    AnnotationType:
-      type: integer
-      description: ''
-      x-enumNames:
-      - Unsafe
-      - Field
-      - Type
-      - Variable
-      enum:
-      - 0
-      - 64
-      - 128
-      - 192
-    BigMapTagsParameter:
+    BigMapKeyUpdate:
       type: object
       additionalProperties: false
       properties:
-        eq:
-          type:
-          - array
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+        id:
+          type: integer
+          description: Internal Id, can be used for pagination
+          format: int32
+        level:
+          type: integer
+          description: Level of the block where the bigmap key was updated
+          format: int32
+        timestamp:
+          type: string
+          description: Timestamp of the block where the bigmap key was updated
+          format: date-time
+        action:
+          type: string
+          description: Action with the key (`add_key`, `update_key`, `remove_key`)
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
 
-            Specify a comma-separated list of bigmap tags to get bigmaps with exactly the same set of tags.
-
-            Avoid using this mode and use `.any` or `.all` instead, because it may not work as expected due to internal ''hidden'' tags.
-
-
-            Example: `?tags=metadata` or `?tags=token_metadata,metadata`.'
-          items:
-            type: string
-        any:
-          type:
-          - array
-          - 'null'
-          description: '**Has any** filter mode. \
-
-            Specify a comma-separated list of bigmap tags to get bigmaps where at least one of the specified tags is presented.
-
-
-            Example: `?tags.any=metadata` or `?tags.any=token_metadata,metadata`.'
-          items:
-            type: string
-        all:
-          type:
-          - array
-          - 'null'
-          description: '**Has all** filter mode. \
-
-            Specify a comma-separated list of bigmap tags to get bigmaps where all of the specified tags are presented.
-
-
-            Example: `?tags.all=metadata` or `?tags.all=token_metadata,metadata`.'
-          items:
-            type: string
-      x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: metadata,token_metadata,ledger
+            Note, if the action is `remove_key` it will contain the last non-null value.'
+    MichelineType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Int
+      - Bytes
+      - String
+      - Array
+      - Prim
+      enum:
+      - 0
+      - 32
+      - 64
+      - 96
+      - 128
     PrimType:
       type: integer
       description: ''
@@ -1955,7 +1805,7 @@ components:
       - 158
       - 159
       - 160
-    BigMapActionParameter:
+    AccountParameter:
       type: object
       additionalProperties: false
       properties:
@@ -1965,30 +1815,30 @@ components:
           - 'null'
           description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
 
-            Specify a contract kind to get items where the specified field is equal to the specified value.
+            Specify a `tz` or `KT` address to get items where the specified field is equal to the specified value.
 
 
-            Example: `?kind=smart_contract`.'
+            Example: `?sender=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
         ne:
           type:
           - string
           - 'null'
           description: '**Not equal** filter mode. \
 
-            Specify a contract kind to get items where the specified field is not equal to the specified value.
+            Specify a `tz` or `KT` address to get items where the specified field is not equal to the specified value.
 
 
-            Example: `?kind.ne=delegator_contract`.'
+            Example: `?sender.ne=tz1WnfXMPaNTBmH7DBPwqCWs9cPDJdkGBTZ8`.'
         in:
           type:
           - array
           - 'null'
           description: '**In list** (any of) filter mode. \
 
-            Specify a comma-separated list of contract kinds to get items where the specified field is equal to one of the specified values.
+            Specify a comma-separated list of addresses to get items where the specified field is equal to one of the specified values.
 
 
-            Example: `?kind.in=smart_contract,asset`.'
+            Example: `?sender.in=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
           items:
             type: string
         ni:
@@ -1997,14 +1847,122 @@ components:
           - 'null'
           description: '**Not in list** (none of) filter mode. \
 
-            Specify a comma-separated list of contract kinds to get items where the specified field is not equal to all the specified values.
+            Specify a comma-separated list of addresses to get items where the specified field is not equal to all the specified values.
 
 
-            Example: `?kind.ni=smart_contract,asset`.'
+            Example: `?sender.ni=tz1WnfXMPaNTBWnfXMPaNTBWnfXMPaNTBNTB,tz1SiPXX4MYGNJNDSiPXX4MYGNJNDSiPXX4M`.'
+          items:
+            type: string
+        eqx:
+          type:
+          - string
+          - 'null'
+          description: '**Equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are equal.
+
+
+            Example: `?sender.eqx=target`.'
+        nex:
+          type:
+          - string
+          - 'null'
+          description: '**Not equal to another field** filter mode. \
+
+            Specify a field name to get items where the specified fields are not equal.
+
+
+            Example: `?sender.nex=initiator`.'
+        'null':
+          type:
+          - boolean
+          - 'null'
+          description: '**Is null** filter mode. \
+
+            Use this mode to get items where the specified field is null or not.
+
+
+            Example: `?initiator.null` or `?initiator.null=false`.'
+        inHasNull:
+          type: boolean
+        niHasNull:
+          type: boolean
+      x-tzkt-extension: query-parameter
+    BigMapTagsParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - array
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps with exactly the same set of tags.
+
+            Avoid using this mode and use `.any` or `.all` instead, because it may not work as expected due to internal ''hidden'' tags.
+
+
+            Example: `?tags=metadata` or `?tags=token_metadata,metadata`.'
+          items:
+            type: string
+        any:
+          type:
+          - array
+          - 'null'
+          description: '**Has any** filter mode. \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps where at least one of the specified tags is presented.
+
+
+            Example: `?tags.any=metadata` or `?tags.any=token_metadata,metadata`.'
+          items:
+            type: string
+        all:
+          type:
+          - array
+          - 'null'
+          description: '**Has all** filter mode. \
+
+            Specify a comma-separated list of bigmap tags to get bigmaps where all of the specified tags are presented.
+
+
+            Example: `?tags.all=metadata` or `?tags.all=token_metadata,metadata`.'
           items:
             type: string
       x-tzkt-extension: query-parameter
-      x-tzkt-query-parameter: allocate,add_key,update_key,remove_key,remove
+      x-tzkt-query-parameter: metadata,token_metadata,ledger
+    MichelinePrim:
+      type: object
+      additionalProperties: false
+      properties:
+        prim:
+          $ref: '#/components/schemas/PrimType'
+        args:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IMicheline'
+        annots:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IAnnotation'
+    BigMapKeyShort:
+      type: object
+      additionalProperties: false
+      properties:
+        hash:
+          type: string
+          description: Key hash
+        key:
+          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
+        value:
+          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
+
+            Note, if the action is `remove_key` it will contain the last non-null value.'
     BigMapKey:
       type: object
       additionalProperties: false
@@ -2037,72 +1995,6 @@ components:
           type: integer
           description: Total number of actions with the bigmap key
           format: int32
-    MichelinePrim:
-      type: object
-      additionalProperties: false
-      properties:
-        prim:
-          $ref: '#/components/schemas/PrimType'
-        args:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/IMicheline'
-        annots:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/IAnnotation'
-    Alias:
-      type: object
-      additionalProperties: false
-      properties:
-        alias:
-          type:
-          - string
-          - 'null'
-          description: Account alias name (off-chain data).
-        address:
-          type: string
-          description: Account address (public key hash).
-    BigMapUpdate:
-      type: object
-      additionalProperties: false
-      properties:
-        id:
-          type: integer
-          description: Internal Id, can be used for pagination
-          format: int32
-        level:
-          type: integer
-          description: Level of the block where the bigmap was updated
-          format: int32
-        timestamp:
-          type: string
-          description: Timestamp of the block where the bigmap was updated
-          format: date-time
-        bigmap:
-          type: integer
-          description: Bigmap ptr
-          format: int32
-        contract:
-          description: Smart contract in which's storage the bigmap is allocated
-          oneOf:
-          - $ref: '#/components/schemas/Alias'
-        path:
-          type: string
-          description: Path to the bigmap in the contract storage
-        action:
-          type: string
-          description: Action with the bigmap (`allocate`, `add_key`, `update_key`, `remove_key`, `remove`)
-        content:
-          description: 'Updated key.
-
-            If the action is `allocate` or `remove` the content will be `null`.'
-          oneOf:
-          - $ref: '#/components/schemas/BigMapKeyShort'
     BigMap:
       type: object
       additionalProperties: false
@@ -2152,19 +2044,175 @@ components:
           description: Bigmap key type as JSON schema or Micheline, depending on the `micheline` query parameter.
         valueType:
           description: Bigmap value type as JSON schema or Micheline, depending on the `micheline` query parameter.
-    MichelineFormat:
-      type: string
-      description: ''
-      x-enumNames:
-      - Json
-      - JsonString
-      - Raw
-      - RawString
-      enum:
-      - Json
-      - JsonString
-      - Raw
-      - RawString
+    Int32Parameter:
+      type: object
+      additionalProperties: false
+      properties:
+        eq:
+          type:
+          - integer
+          - 'null'
+          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
+
+            Specify an integer number to get items where the specified field is equal to the specified value.
+
+
+            Example: `?balance=1234`.'
+          format: int32
+        ne:
+          type:
+          - integer
+          - 'null'
+          description: '**Not equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is not equal to the specified value.
+
+
+            Example: `?balance.ne=1234`.'
+          format: int32
+        gt:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater than** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than the specified value.
+
+
+            Example: `?balance.gt=1234`.'
+          format: int32
+        ge:
+          type:
+          - integer
+          - 'null'
+          description: '**Greater or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is greater than equal to the specified value.
+
+
+            Example: `?balance.ge=1234`.'
+          format: int32
+        lt:
+          type:
+          - integer
+          - 'null'
+          description: '**Less than** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than the specified value.
+
+
+            Example: `?balance.lt=1234`.'
+          format: int32
+        le:
+          type:
+          - integer
+          - 'null'
+          description: '**Less or equal** filter mode. \
+
+            Specify an integer number to get items where the specified field is less than or equal to the specified value.
+
+
+            Example: `?balance.le=1234`.'
+          format: int32
+        in:
+          type:
+          - array
+          - 'null'
+          description: '**In list** (any of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is equal to one of the specified values.
+
+
+            Example: `?level.in=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+        ni:
+          type:
+          - array
+          - 'null'
+          description: '**Not in list** (none of) filter mode. \
+
+            Specify a comma-separated list of integers to get items where the specified field is not equal to all the specified values.
+
+
+            Example: `?level.ni=12,14,52,69`.'
+          items:
+            type: integer
+            format: int32
+      x-tzkt-extension: query-parameter
+    SortParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        asc:
+          type:
+          - string
+          - 'null'
+          description: '**Ascending** sort mode (optional, i.e. `sort.asc=id` is the same as `sort=id`). \
+
+            Specify a field name to sort by.
+
+
+            Example: `?sort=balance`.'
+        desc:
+          type:
+          - string
+          - 'null'
+          description: '**Descending** sort mode. \
+
+            Specify a field name to sort by descending.
+
+
+            Example: `?sort.desc=id`.'
+      x-tzkt-extension: query-parameter
+    IMicheline:
+      type: object
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/MichelineType'
+    OffsetParameter:
+      type: object
+      additionalProperties: false
+      properties:
+        el:
+          type:
+          - integer
+          - 'null'
+          description: '**Elements** offset mode (optional, i.e. `offset.el=123` is the same as `offset=123`). \
+
+            Skips specified number of elements.
+
+
+            Example: `?offset=100`.'
+          format: int32
+        pg:
+          type:
+          - integer
+          - 'null'
+          description: '**Page** offset mode. \
+
+            Skips `page * limit` elements. This is a classic pagination.
+
+
+            Example: `?offset.pg=1`.'
+          format: int32
+        cr:
+          type:
+          - integer
+          - 'null'
+          description: '**Cursor** offset mode. \
+
+            Skips all elements with the `cursor` before (including) the specified value. Cursor is a field used for sorting, e.g. `id`.
+
+            Avoid using this offset mode with non-unique or non-sequential cursors such as `amount`, `balance`, etc.
+
+
+            Example: `?offset.cr=45837`.'
+          format: int64
+      x-tzkt-extension: query-parameter
     BigMapKeyHistorical:
       type: object
       additionalProperties: false
@@ -2185,129 +2233,81 @@ components:
           description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
 
             Note, if the key is inactive (removed) it will contain the last non-null value.'
-    BigMapKeyShort:
+    AnnotationType:
+      type: integer
+      description: ''
+      x-enumNames:
+      - Unsafe
+      - Field
+      - Type
+      - Variable
+      enum:
+      - 0
+      - 64
+      - 128
+      - 192
+    Alias:
       type: object
       additionalProperties: false
       properties:
-        hash:
+        alias:
+          type:
+          - string
+          - 'null'
+          description: Account alias name (off-chain data).
+        address:
           type: string
-          description: Key hash
-        key:
-          description: Key in JSON or Micheline format, depending on the `micheline` query parameter.
-        value:
-          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
-
-            Note, if the action is `remove_key` it will contain the last non-null value.'
-    BigMapKeyUpdate:
+          description: Account address (public key hash).
+    SelectionParameter:
       type: object
       additionalProperties: false
       properties:
-        id:
-          type: integer
-          description: Internal Id, can be used for pagination
-          format: int32
-        level:
-          type: integer
-          description: Level of the block where the bigmap key was updated
-          format: int32
-        timestamp:
-          type: string
-          description: Timestamp of the block where the bigmap key was updated
-          format: date-time
-        action:
-          type: string
-          description: Action with the key (`add_key`, `update_key`, `remove_key`)
-        value:
-          description: 'Value in JSON or Micheline format, depending on the `micheline` query parameter.
-
-            Note, if the action is `remove_key` it will contain the last non-null value.'
-    StringParameter:
-      type: object
-      additionalProperties: false
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-          description: '**Equal** filter mode (optional, i.e. `param.eq=123` is the same as `param=123`). \
-
-            Specify a string to get items where the specified field is equal to the specified value.
-
-
-            Example: `?parameters=abc`.'
-        ne:
-          type:
-          - string
-          - 'null'
-          description: '**Not equal** filter mode. \
-
-            Specify a string to get items where the specified field is not equal to the specified value.
-
-
-            Example: `?parameters.ne=abc`.'
-        as:
-          type:
-          - string
-          - 'null'
-          description: '**Same as** filter mode. \
-
-            Specify a string template to get items where the specified field matches the specified template. \
-
-            This mode supports wildcard `*`. Use `\*` as an escape symbol.
-
-
-            Example: `?parameters.as=*mid*` or `?parameters.as=*end`.'
-        un:
-          type:
-          - string
-          - 'null'
-          description: '**Unlike** filter mode. \
-
-            Specify a string template to get items where the specified field doesn''t match the specified template.
-
-            This mode supports wildcard `*`. Use `\*` as an escape symbol.
-
-
-            Example: `?parameters.un=*mid*` or `?parameters.un=*end`.'
-        in:
+        fields:
           type:
           - array
           - 'null'
-          description: '**In list** (any of) filter mode. \
+          description: '**Fields** selection mode (optional, i.e. `select.fields=balance` is the same as `select=balance`). \
 
-            Specify a comma-separated list of strings to get items where the specified field is equal to one of the specified values. \
-
-            Use `\,` as an escape symbol.
+            Specify a comma-separated list of fields to include into response.
 
 
-            Example: `?errors.in=bla,bal,abl`.'
+            Example:
+
+            `?select=address,balance as b,metadata.name as meta_name` will result in
+
+            `[ { "address": "asd", "b": 10, "meta_name": "qwe" } ]`.'
           items:
             type: string
-        ni:
+        values:
           type:
           - array
           - 'null'
-          description: '**Not in list** (none of) filter mode. \
+          description: '**Values** selection mode. \
 
-            Specify a comma-separated list of strings to get items where the specified field is not equal to all the specified values. \
-
-            Use `\,` as an escape symbol.
+            Specify a comma-separated list of fields to include their values into response.
 
 
-            Example: `?errors.ni=bla,bal,abl`.'
+            Example:
+
+            `?select.values=address,balance,metadata.name`  will result in
+
+            `[ [ "asd", 10, "qwe" ] ]`.'
           items:
             type: string
-        'null':
-          type:
-          - boolean
-          - 'null'
-          description: '**Is null** filter mode. \
-
-            Use this mode to get items where the specified field is null or not.
-
-
-            Example: `?parameters.null` or `?parameters.null=false`.'
       x-tzkt-extension: query-parameter
+    MichelineFormat:
+      type: string
+      description: ''
+      x-enumNames:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
+      enum:
+      - Json
+      - JsonString
+      - Raw
+      - RawString
 x-generator: NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))
 x-tagGroups:
 - name: REST API
