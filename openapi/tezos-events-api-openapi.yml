@@ -1025,3 +1025,9 @@ x-tagGroups:
   tags:
   - Typescript SDK
   - Taquito extension
+x-provenance:
+  method: harvested
+  publisher: Tezos
+  source: https://api.tzkt.io/v1/swagger.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
